@@ -15,7 +15,10 @@
 
 // не скомпилится, потому что я поменял функцию mx_printstr()
 
-int main(int argc, char **argv) {
-    if (argc && argv)
-        mx_printstr("Hello World!\n");
+int main(int argc, char *argv[]) {
+    if (argc) {};
+    mx_uls(argv[1]);
+
+    return 1;
 }
+
