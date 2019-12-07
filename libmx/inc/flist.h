@@ -66,7 +66,7 @@ void mx_fpush_index(t_flist *list, void *data, t_ll pos);
 * applies function f to every element in the container
 */
 
-t_flist *mx_fsort_flist(t_flist *list, int (*cmp)(const void *, const void *));
+t_flist *mx_fsort_list(t_flist *list, int (*cmp)(const void *, const void *));
 void **mx_flist_to_array(t_flist *list);
 void mx_fforeach_list(t_flist *list, void (*f)(t_flist_node *));
 

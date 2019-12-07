@@ -39,7 +39,7 @@ void mx_delete_list(t_list **list);
 * delete all elements from list
 */
 
-t_list_node *mx_create_node(void *data, t_list_node *next);
+t_list_node *mx_create_node(void *data, t_list_node *prev, t_list_node *next);
 void mx_clear_list(t_list *list);
 
 /*
@@ -65,11 +65,13 @@ void mx_push_index(t_list *list, void *data, t_ll pos);
 /*
 * sorts elements in list
 * returns null-terminated array of data pointers
-* applies function f to every element in the container
+* applies function f to every element in the container in ascending order
+* applies function f to every element in the container in descending order
 */
 
 t_list *mx_sort_list(t_list *list, int (*cmp)(const void *, const void *));
 void **mx_list_to_array(t_list *list);
 void mx_foreach_list(t_list *list, void (*f)(t_list_node *));
+void mx_foreach_list_reverse(t_list *list, void (*f)(t_list_node *));
 
 #endif

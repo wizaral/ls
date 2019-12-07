@@ -1,7 +1,7 @@
 #include "libmx.h"
 
-void mx_clear_list(t_list *list) {
-    t_list_node *temp = list ? list->head : NULL;
+void mx_fclear_list(t_flist *list) {
+    t_flist_node *temp = list ? list->head : NULL;
 
     if (list) {
         while (temp) {

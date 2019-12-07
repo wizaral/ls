@@ -11,8 +11,8 @@ void mx_push_index(t_list *list, void *data, t_ll index) {
             mx_push_back(list, data);
         else {
             for (t_ll pos = 0; ++pos < index; prev_node = prev_node->next);
-            if ((new_node = mx_create_node(data, prev_node->next)) != NULL)
-                prev_node->next = new_node;
+            if ((new_node = mx_create_node(data, prev_node, prev_node->next)))
+                prev_node->next = new_node, new_node->next->prev = new_node;
         }
     }
 }

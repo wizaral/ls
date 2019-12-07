@@ -1,14 +1,14 @@
 #include "libmx.h"
 
-void mx_pop_index(t_list *list, t_ll index) {
-    t_list_node *del_node = NULL;
-    t_list_node *prev_node = list ? list->head : NULL;
+void mx_fpop_index(t_flist *list, t_ll index) {
+    t_flist_node *del_node = NULL;
+    t_flist_node *prev_node = list ? list->head : NULL;
 
     if (list && list->head) {
         if (index <= 0)
-            mx_pop_front(list);
+            mx_fpop_front(list);
         else if (index >= list->size - 1)
-            mx_pop_back(list);
+            mx_fpop_back(list);
         else {
             for (t_ll pos = 0; ++pos < index; prev_node = prev_node->next);
 

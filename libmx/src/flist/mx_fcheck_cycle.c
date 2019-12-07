@@ -1,9 +1,9 @@
 #include "libmx.h"
 
-void mx_check_cycle(t_list *list) {
-    t_list_node *slow = list ? list->head : NULL;
-    t_list_node *fast = list ? list->head->next : NULL;
-    t_list_node *finder = list ? list->head : NULL;
+void mx_fcheck_cycle(t_flist *list) {
+    t_flist_node *slow = list ? list->head : NULL;
+    t_flist_node *fast = list ? list->head->next : NULL;
+    t_flist_node *finder = list ? list->head : NULL;
 
     if (list->head && list->tail) {
         if (list->head == list->tail) {
@@ -20,5 +20,5 @@ void mx_check_cycle(t_list *list) {
             slow->next = NULL;
         }
     }
-    mx_check_size(list);
+    mx_fcheck_size(list);
 }
