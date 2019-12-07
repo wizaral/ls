@@ -1,12 +1,12 @@
 #include "uls.h"
 
 int mx_file_list_size(t_file *list) {
-	int size = 0;
+    int size = 0;
 
-	if (list)
-		for (t_file *temp = list; temp; temp = temp->next, size++);
+    if (list)
+        for (t_file *temp = list; temp; temp = temp->next, size++);
 
-	return size;
+    return size;
 }
 
 t_file *mx_create_file_node(struct dirent *ent) {

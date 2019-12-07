@@ -18,50 +18,45 @@ LFLAGS = -Iinc -Ilibmx/inc
 OFLAGS = -Ofast -march=native
 DFLAGS = -g -fsanitize=address
 
-# по дефолту вызывает компиляцию с флагами оптимизации
-opt: optimize clean
 all: install clean
-dbg: debug clean
-fff: full clean
 
 # в задаче с дебагом нет клина папки *.dSYM, т.к. она нужна для дебага (неждан)
 # но у нас этого флага не будет при пуше
 # сама папка в игноре, так шо не бзди))
 
-optimize: olib oname
-install: ilib iname
-debug: dlib dname
-full: flib fname
-
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
+$(LIB):
+	@make -sC $(LIB_DIR) -f Makefile install
+
+# чтобы нормально переключаться между типами компиляции нужно коментить одно
+# и раскоментить другое. другого варианта как это красиво сделать я не придумал
+# всё равно приходится копировать команды. те же действия в либе сделай!
+# советую пока что работать на install сборке, потом будет оптимизации трогать
+
+# install
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
 
-ilib:
-	@make -sC $(LIB_DIR) -f Makefile install
-
-iname: $(OBJ_DIR) $(OBJ)
+$(NAME): $(OBJ_DIR) $(OBJ)
 	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
-dlib:
-	@make -sC $(LIB_DIR) -f Makefile debug
+# optimize
+# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+# 	@$(CC) $(CFLAGS) $(LFLAGS) $(OFLAGS) -o $@ -c $<
 
-dname: $(OBJ_DIR) $(OBJ)
-	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+# $(NAME): $(OBJ_DIR) $(OBJ)
+# 	@$(CC) $(CFLAGS) $(LFLAGS) $(OFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
-olib:
-	@make -sC $(LIB_DIR) -f Makefile optimize
+# debug
+# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+# 	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
-oname: $(OBJ_DIR) $(OBJ)
-	@$(CC) $(CFLAGS) $(LFLAGS) $(OFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+# $(NAME): $(OBJ_DIR) $(OBJ)
+# 	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
-flib:
-	@make -sC $(LIB_DIR) -f Makefile full
-
-fname: $(OBJ_DIR) $(OBJ)
-	@$(CC) $(CFLAGS) $(LFLAGS) $(OFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+install: $(LIB) $(NAME)
 
 clean:
 	@make -sC $(LIB_DIR) -f Makefile clean

@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_uls(char arg[]) {
+void mx_uls(char *arg) {
     DIR *dir;
     struct dirent *ent;
     t_file *file_list = NULL;

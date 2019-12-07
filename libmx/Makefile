@@ -35,14 +35,23 @@ OBJ = $(addprefix $(OBJ_DIR), $(addprefix mx_, $(addsuffix .o, $(RAW))))
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -Weverything
 LFLAGS = -Iinc -Ilibmx/inc
-# OFLAGS = -Ofast -march=native
-# DFLAGS = -g -fsanitize=address
+OFLAGS = -Ofast -march=native
+DFLAGS = -g -fsanitize=address
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
+# install
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+
+# optimize
+# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+# 	@$(CC) $(CFLAGS) $(LFLAGS) $(OFLAGS) -o $@ -c $<
+
+# debug
+# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+# 	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
 install: $(OBJ_DIR) $(OBJ)
 	@ar rc $(NAME) $(OBJ)
