@@ -34,7 +34,7 @@ SRC = $(addprefix $(SRC_DIR), $(addprefix mx_, $(addsuffix .c, $(RAW))))
 OBJ = $(addprefix $(OBJ_DIR), $(addprefix mx_, $(addsuffix .o, $(RAW))))
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -Weverything
-LFLAGS = -Iinc -Ilibmx/inc
+LFLAGS = -Iinc
 OFLAGS = -Ofast -march=native
 DFLAGS = -g -fsanitize=address
 
