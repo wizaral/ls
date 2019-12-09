@@ -11,7 +11,7 @@ void mx_clear_list(t_list *list) {
 
             if (list->head != list->tail)
                 free(list->head);
-            free(list->tail)
+            free(list->tail);
 
             list->head = temp1;
             list->tail = temp2;

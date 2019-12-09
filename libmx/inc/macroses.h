@@ -10,5 +10,6 @@
 #define MX_MAX(x, y) ((x) > (y) ? (x) : (y))
 
 #define MX_ABS(x) ((x) < 0 ? -(x) : (x))
+#define MX_ODD(x) ((x) % 2)
 
 #endif

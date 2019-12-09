@@ -49,13 +49,13 @@ void *mx_realloc(void *ptr, size_t size);
 * print
 */
 
-void mx_print_strarr(char **arr, const char *delim);
-void mx_print_unicode(wchar_t c);
+void mx_print_strarr(const char **arr, const char *delim, const int fd);
+void mx_print_unicode(wchar_t c, const int fd);
 
-void mx_printchar(char c);
-void mx_printerr(const char *s);
-void mx_printint(int n);
-void mx_printstr(const char *s);
+void mx_printchar(char c, const int fd);
+void mx_printnum(t_ll n, const int fd);
+void mx_printstr(const char *s, const int fd);
+void mx_printunum(t_ull n, const int fd);
 
 /*
 * string
@@ -124,7 +124,6 @@ t_ull mx_factorial(t_ull n);
 void mx_foreach(void *arr, t_ull size, size_t bytes, void(*f)(void *));
 
 int mx_get_num_length(t_ll num, unsigned base);
-bool mx_isodd(t_ll value);
 bool mx_isprime(t_ull num);
 
 double mx_pow(double n, unsigned pow);

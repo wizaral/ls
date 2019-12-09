@@ -5,27 +5,39 @@ CC = clang
 # если сильно приспичит что-то скомпилить, то вставляй свою либу
 # желательно не трогая этот проект
 
-algorithm = binary_search bubblesort quicksort
+algorithm = binary_search bubblesort checksort linear_search quicksort
+#mergesort
 
 file = get_file_length file_to_str read_line
 
-list = clear_list create_node foreach_list list_size pop_back pop_front \
-	pop_index push_back push_front push_index sort_list
+flist = fcheck_cycle fcheck_size fcheck_tail fclear_list fcreate_list \
+	fcreate_node fdelete_list fforeach_list flist_to_array fpop_back \
+	fpop_front fpop_index fpush_back fpush_front fpush_index fsort_list
 
-memory = memccpy memchr memcmp memcpy memmem memmove memrchr memset realloc
+list = clear_list create_list create_node delete_list foreach_list_reverse \
+	foreach_list list_to_array pop_back pop_front pop_index push_back \
+	push_front push_index sort_list
 
-print = print_strarr print_unicode printchar printerr printint printstr
+memory = memccpy memchr memcmp memcpy memdup memmem memmove memrchr memset \
+	realloc
+
+print = print_strarr print_unicode printchar printnum printstr printunum
+
+queue = create_queue delete_queue dequeue enqueue foreach_queue front rear
+
+stack = create_stack delete_stack foreach_stack pop push top
 
 string = atoi count_substr count_words del_extra_spaces del_strarr \
-	get_char_index get_num_length get_substr_index hex_to_nbr itoa nbr_to_hex \
-	replace_substr str_reverse strcat strchr strcmp strcpy strdel strdup \
-	strjoin strlen strncmp strncpy strndup strnew strsplit strstr strtrim \
-	tolower toupper
+	get_char_index get_substr_index hex_to_nbr itoa nbr_to_hex replace_substr \
+	str_reverse strcat strchr strcmp strcpy strdel strdup strjoin strlen \
+	strncmp strncpy strndup strnew strsplit strstr strtrim tolower toupper
+
+#tree = 
 
 type = isalpha isdigit ishex islower isspace isupper
 
-utils = factorial foreach isodd isprime sum_digits max_ll min_ll max_ull
-	min_ull pow sqrt swap_char swap_int swap_str swap_void
+utils = factorial foreach get_num_length isprime pow sqrt_natural sqrt \
+	sum_digits swap
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
@@ -33,7 +45,7 @@ OBJ_DIR = ./obj/
 SRC = $(addprefix $(SRC_DIR), $(addprefix mx_, $(addsuffix .c, $(RAW))))
 OBJ = $(addprefix $(OBJ_DIR), $(addprefix mx_, $(addsuffix .o, $(RAW))))
 
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -Weverything
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc
 OFLAGS = -Ofast -march=native
 DFLAGS = -g -fsanitize=address
