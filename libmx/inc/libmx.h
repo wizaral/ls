@@ -8,6 +8,7 @@
 #include <malloc/malloc.h>
 
 #include "structs.h"
+#include "macroses.h"
 
 /*
 * algorithm
@@ -123,11 +124,6 @@ void mx_foreach(int *arr, int size, void(*f)(int));
 int mx_get_num_length(t_ll num, unsigned base);
 bool mx_isodd(t_ll value);
 bool mx_isprime(t_ull num);
-
-t_ll mx_max_ll(t_ll a, t_ll b);
-t_ull mx_max_ull(t_ull a, t_ull b);
-t_ll mx_min_ll(t_ll a, t_ll b);
-t_ull mx_min_ull(t_ull a, t_ull b);
 
 double mx_pow(double n, unsigned int pow);
 int mx_sqrt(int x);
