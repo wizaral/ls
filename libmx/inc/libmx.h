@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include <malloc/malloc.h>
 
+#include "types.h"
 #include "structs.h"
 #include "macroses.h"
 
@@ -110,6 +111,7 @@ int mx_toupper(int c);
 bool mx_isalpha(int c);
 bool mx_isdigit(int c);
 bool mx_ishex(int c);
+
 bool mx_islower(int c);
 bool mx_isspace(int c);
 bool mx_isupper(int c);
@@ -119,13 +121,13 @@ bool mx_isupper(int c);
 */
 
 t_ull mx_factorial(t_ull n);
-void mx_foreach(int *arr, int size, void(*f)(int));
+void mx_foreach(void *arr, t_ull size, size_t bytes, void(*f)(void *));
 
 int mx_get_num_length(t_ll num, unsigned base);
 bool mx_isodd(t_ll value);
 bool mx_isprime(t_ull num);
 
-double mx_pow(double n, unsigned int pow);
+double mx_pow(double n, unsigned pow);
 int mx_sqrt(int x);
 int mx_sum_digits(int num);
 

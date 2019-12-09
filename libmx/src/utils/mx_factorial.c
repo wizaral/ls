@@ -1,9 +1,12 @@
 #include "libmx.h"
 
-static unsigned long long fact(unsigned long long n, unsigned long long acc) {
-    return n == 0 ? acc : fact(n - 1, acc * n);
-}
+t_ull mx_factorial(t_ull n) {
+    t_ull result = 1;
 
-unsigned long long mx_factorial(unsigned long long n) {
-    return n > 20 ? 0 : (n < 2 ? 1 : fact(n, 1));
+    if (n > 20)
+        return 0;
+
+    for (t_ull i = 1; i <= n; ++i)
+        result *= i;
+    return result;
 }
