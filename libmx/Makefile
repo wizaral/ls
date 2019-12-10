@@ -39,11 +39,18 @@ type = isalpha isdigit ishex islower isspace isupper
 utils = factorial foreach get_num_length isprime pow sqrt_natural sqrt \
 	sum_digits swap
 
+RAW = $(addprefix algorithm/mx_, $(algorithm)) $(addprefix file/mx_, $(file)) \
+	$(addprefix flist/mx_, $(flist)) $(addprefix list/mx_, $(list)) \
+	$(addprefix memory/mx_, $(memory)) $(addprefix print/mx_, $(print)) \
+	$(addprefix queue/mx_, $(queue)) $(addprefix stack/mx_, $(stack)) \
+	$(addprefix string/mx_, $(string)) \
+	$(addprefix type/mx_, $(type)) $(addprefix utils/mx_, $(utils))
+
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
 
-SRC = $(addprefix $(SRC_DIR), $(addprefix mx_, $(addsuffix .c, $(RAW))))
-OBJ = $(addprefix $(OBJ_DIR), $(addprefix mx_, $(addsuffix .o, $(RAW))))
+SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(RAW)))
+OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(RAW)))
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc
