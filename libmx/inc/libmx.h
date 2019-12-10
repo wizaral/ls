@@ -16,7 +16,7 @@
 */
 
 t_ll mx_linear_search(const void *key, const t_vector *v, int (*cmp)(const void *, const void *));
-t_ll mx_binary_search(const void *key, const t_vector *v, int (*cmp)(const void *, const void *));
+t_ll mx_binary_search(t_cv *key, t_vector *v, int (*cmp)(const void *, const void *));
 
 void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
 void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
@@ -127,7 +127,7 @@ int mx_get_num_length(t_ll num, unsigned base);
 bool mx_isprime(t_ull num);
 
 double mx_pow(double n, unsigned pow);
-int mx_sqrt(int x);
+double mx_sqrt(double x);
 int mx_sum_digits(int num);
 
 void mx_swap(void *v1, void *v2, size_t size);
