@@ -1,9 +1,12 @@
 #include "libmx.h"
 
-static unsigned long long sigma(unsigned long long n, unsigned long long acc) {
-    return n == 1 ? acc + 1 : sigma(n - 1, acc + n);
-}
+t_ull mx_sigma(t_ull n) {
+    t_ull result = 0;
 
-unsigned long long mx_sigma(unsigned long long n) {
-    return n > 6074000999 ? 0 : sigma(n, 0);
+    if (n > 6074000999)
+        return 0;
+
+    for (t_ull i = 1; i <= n; ++i)
+        result += i;
+    return result;
 }

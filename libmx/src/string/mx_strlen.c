@@ -1,7 +1,7 @@
 #include "libmx.h"
 
-int mx_strlen(const char *s) {
-    int len = 0;
+t_ull mx_strlen(t_cc *s) {
+    t_ull len = 0;
 
     for (; s[len]; ++len);
     return len;

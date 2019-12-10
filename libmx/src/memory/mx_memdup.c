@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-void *mx_memdup(const void *src, const size_t n) {
+void *mx_memdup(const void *src, size_t n) {
     t_uc *udst = (t_uc *)malloc(n);
     const t_uc *usrc = src;
 

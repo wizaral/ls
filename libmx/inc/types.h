@@ -9,7 +9,6 @@ typedef unsigned long long t_ull;
 
 typedef const void t_cv;
 typedef const char t_cc;
-typedef const size_t t_cs;
 typedef const unsigned t_cu;
 typedef const long long t_cll;
 typedef const unsigned char t_cuc;

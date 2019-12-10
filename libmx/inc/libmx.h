@@ -15,32 +15,33 @@
 * algorithm
 */
 
-t_ll mx_linear_search(const void *key, const t_vector *v, int (*cmp)(const void *, const void *));
-t_ll mx_binary_search(t_cv *key, t_vector *v, int (*cmp)(const void *, const void *));
+t_ll mx_linear_search(t_cv *key, const t_vector *v, int (*cmp)(t_cv *, t_cv *));
+t_ll mx_binary_search(t_cv *key, const t_vector *v, int (*cmp)(t_cv *, t_cv *));
 
-void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
-void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
-void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
+void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
+void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
+void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
 
 /*
 * file
 */
 
-char *mx_file_to_str(const char *file);
-int mx_get_file_length(const char *filename);
+char *mx_file_to_str(t_cc *file);
+int mx_get_file_length(t_cc *filename);
 int mx_read_line(char **lineptr, char delim, const int fd);
 
 /*
 * memory
 */
 
-void *mx_memccpy(void *restrict dst, const void *restrict src, int c, size_t n);
-void *mx_memchr(const void *s, int c, size_t n);
-int mx_memcmp(const void *s1, const void *s2, size_t n);
-void *mx_memcpy(void *restrict dst, const void *restrict src, size_t n);
-void *mx_memmem(const void *big, size_t big_len, const void *little, size_t little_len);
-void *mx_memmove(void *dst, const void *src, size_t len);
-void *mx_memrchr(const void *s, int c, size_t n);
+void *mx_memccpy(void *restrict dst, t_cv *restrict src, int c, size_t n);
+void *mx_memchr(t_cv *s, int c, size_t n);
+int mx_memcmp(t_cv *s1, t_cv *s2, size_t n);
+void *mx_memcpy(void *restrict dst, t_cv *restrict src, size_t n);
+void *mx_memdup(t_cv *src, size_t n)
+void *mx_memmem(t_cv *big, size_t big_len, t_cv *little, size_t little_len);
+void *mx_memmove(void *dst, t_cv *src, size_t len);
+void *mx_memrchr(t_cv *s, int c, size_t n);
 void *mx_memset(void *b, int c, size_t len);
 
 void *mx_realloc(void *ptr, size_t size);
@@ -49,57 +50,57 @@ void *mx_realloc(void *ptr, size_t size);
 * print
 */
 
-void mx_print_strarr(const char **arr, const char *delim, const int fd);
+void mx_print_strarr(t_cc **arr, t_cc *delim, const int fd);
 void mx_print_unicode(wchar_t c, const int fd);
 
 void mx_printchar(char c, const int fd);
 void mx_printnum(t_ll n, const int fd);
-void mx_printstr(const char *s, const int fd);
+void mx_printstr(t_cc *s, const int fd);
 void mx_printunum(t_ull n, const int fd);
 
 /*
 * string
 */
 
-int mx_atoi(const char *str);
+int mx_atoi(t_cc *str);
 
-int mx_count_substr(const char *str, const char *sub);
-int mx_count_words(const char *str, char c);
+int mx_count_substr(t_cc *str, t_cc *sub);
+int mx_count_words(t_cc *str, char c);
 
-char *mx_del_extra_spaces(const char *str);
+char *mx_del_extra_spaces(t_cc *str);
 void mx_del_strarr(char ***arr);
 
-int mx_get_char_index(const char *str, char c);
-int mx_get_substr_index(const char *str, const char *sub);
+int mx_get_char_index(t_cc *str, char c);
+int mx_get_substr_index(t_cc *str, t_cc *sub);
 
-unsigned long mx_hex_to_nbr(const char *hex);
+t_ull mx_hex_to_nbr(t_cc *hex);
 char *mx_itoa(int number);
-char *mx_nbr_to_hex(unsigned long nbr);
+char *mx_nbr_to_hex(t_ull nbr);
 
-char *mx_replace_substr(const char *str, const char *sub, const char *replace);
+char *mx_replace_substr(t_cc *str, t_cc *sub, t_cc *replace);
 void mx_str_reverse(char *s);
 
-char *mx_strcat(char *restrict s1, const char *restrict s2);
-char *mx_strchr(const char *s, int c);
+char *mx_strcat(char *restrict s1, t_cc *restrict s2);
+char *mx_strchr(t_cc *s, int c);
 
-int mx_strcmp(const char *s1, const char *s2);
-char *mx_strcpy(char *dst, const char *src);
+int mx_strcmp(t_cc *s1, t_cc *s2);
+char *mx_strcpy(char *dst, t_cc *src);
 
 void mx_strdel(char **str);
-char *mx_strdup(const char *str);
+char *mx_strdup(t_cc *str);
 
-char *mx_strjoin(char const *s1, char const *s2);
-int mx_strlen(const char *s);
+char *mx_strjoin(t_cc *s1, t_cc *s2);
+t_ull mx_strlen(t_cc *s);
 
-int mx_strncmp(const char *s1, const char *s2, int n);
-char *mx_strncpy(char *dst, const char *src, int len);
-char *mx_strndup(const char *str, size_t n);
+int mx_strncmp(t_cc *s1, t_cc *s2, int n);
+char *mx_strncpy(char *dst, t_cc *src, int len);
+char *mx_strndup(t_cc *str, size_t n);
 
 char *mx_strnew(const int size);
-char **mx_strsplit(const char *s, char c);
+char **mx_strsplit(t_cc *s, char c);
 
-char *mx_strstr(const char *haystack, const char *needle);
-char *mx_strtrim(const char *str);
+char *mx_strstr(t_cc *haystack, t_cc *needle);
+char *mx_strtrim(t_cc *str);
 
 int mx_tolower(int c);
 int mx_toupper(int c);
@@ -127,8 +128,11 @@ int mx_get_num_length(t_ll num, unsigned base);
 bool mx_isprime(t_ull num);
 
 double mx_pow(double n, unsigned pow);
+t_ull mx_sigma(t_ull n);
+
+t_ull mx_sqrt_natural(t_ull x);
 double mx_sqrt(double x);
-int mx_sum_digits(int num);
+int mx_sum_digits(t_ull num);
 
 void mx_swap(void *v1, void *v2, size_t size);
 

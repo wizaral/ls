@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-static char *make_hex(unsigned long nbr, unsigned length) {
+static char *make_hex(t_ull nbr, t_ull length) {
     char *hex = mx_strnew(length);
 
     for (int j = length - 1; j >= 0; --j, nbr >>= 4)
@@ -9,6 +9,6 @@ static char *make_hex(unsigned long nbr, unsigned length) {
     return hex;
 }
 
-char *mx_nbr_to_hex(unsigned long nbr) {
+char *mx_nbr_to_hex(t_ull nbr) {
     return nbr ? make_hex(nbr, mx_get_num_length(nbr, 16)) : mx_strdup("0");
 }
