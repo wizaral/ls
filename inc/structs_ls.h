@@ -1,5 +1,5 @@
-#ifndef STRUCTS_H
-#define STRUCTS_H
+#ifndef STRUCTS_LS_H
+#define STRUCTS_LS_H
 
 typedef struct s_data {
     struct dirent *ent;

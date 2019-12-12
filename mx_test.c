@@ -1,4 +1,4 @@
-#include "ls/libmx/inc/libmx.h"
+#include "libmx.h"
 
 #include <stdio.h>
 

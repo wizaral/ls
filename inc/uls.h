@@ -2,10 +2,10 @@
 #define ULS_H
 
 #include "libmx.h"
-#include "defines.h"
-#include "errors.h"
-#include "macroses.h"
-#include "structs.h"
+#include "defines_ls.h"
+#include "errors_ls.h"
+#include "macroses_ls.h"
+#include "structs_ls.h"
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>

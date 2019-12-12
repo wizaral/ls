@@ -1,5 +1,5 @@
-#ifndef ERRORS_H
-#define ERRORS_H
+#ifndef ERRORS_LS_H
+#define ERRORS_LS_H
 
 #define USAGE "usage: uls [-l] [file ...]\n"
 
