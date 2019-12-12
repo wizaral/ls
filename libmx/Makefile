@@ -64,7 +64,37 @@ $(OBJ_DIR):
 	$(OBJ_DIR)/utils
 
 # install
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+$(OBJ_DIR)/algorithm%.o: $(SRC_DIR)/algorithm%.c
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+
+$(OBJ_DIR)/file%.o: $(SRC_DIR)/file%.c
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+
+$(OBJ_DIR)/flist%.o: $(SRC_DIR)/flist%.c
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+
+$(OBJ_DIR)/list%.o: $(SRC_DIR)/list%.c
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+
+$(OBJ_DIR)/memory%.o: $(SRC_DIR)/memory%.c
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+
+$(OBJ_DIR)/print%.o: $(SRC_DIR)/print%.c
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+
+$(OBJ_DIR)/queue%.o: $(SRC_DIR)/queue%.c
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+
+$(OBJ_DIR)/stack%.o: $(SRC_DIR)/stack%.c
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+
+$(OBJ_DIR)/string%.o: $(SRC_DIR)/string%.c
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+
+$(OBJ_DIR)/type%.o: $(SRC_DIR)/type%.c
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+
+$(OBJ_DIR)/utils%.o: $(SRC_DIR)/utils%.c
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
 
 # optimize
