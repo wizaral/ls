@@ -62,39 +62,12 @@ $(OBJ_DIR):
 	$(OBJ_DIR)/flist $(OBJ_DIR)/list $(OBJ_DIR)/memory $(OBJ_DIR)/print \
 	$(OBJ_DIR)/queue $(OBJ_DIR)/stack $(OBJ_DIR)/string $(OBJ_DIR)/type \
 	$(OBJ_DIR)/utils
+	@echo $(RAW)
+	@echo $(SRC)
+	@echo $(OBJ)
 
 # install
-$(OBJ_DIR)/algorithm%.o: $(SRC_DIR)/algorithm%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
-
-$(OBJ_DIR)/file%.o: $(SRC_DIR)/file%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
-
-$(OBJ_DIR)/flist%.o: $(SRC_DIR)/flist%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
-
-$(OBJ_DIR)/list%.o: $(SRC_DIR)/list%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
-
-$(OBJ_DIR)/memory%.o: $(SRC_DIR)/memory%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
-
-$(OBJ_DIR)/print%.o: $(SRC_DIR)/print%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
-
-$(OBJ_DIR)/queue%.o: $(SRC_DIR)/queue%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
-
-$(OBJ_DIR)/stack%.o: $(SRC_DIR)/stack%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
-
-$(OBJ_DIR)/string%.o: $(SRC_DIR)/string%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
-
-$(OBJ_DIR)/type%.o: $(SRC_DIR)/type%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
-
-$(OBJ_DIR)/utils%.o: $(SRC_DIR)/utils%.c
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
 
 # optimize
