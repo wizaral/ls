@@ -1,6 +1,7 @@
 #include "libmx.h"
 
-void mx_quicksort(void *arr, t_cs size, t_cs bytes, int (*cmp)(t_cv *, t_cv *))
+void mx_quicksort(void *arr, size_t size, size_t bytes,
+    int (*cmp)(t_cv *, t_cv *))
 {
     t_ull i = 0;
     t_ull j = (size - 1) * bytes;
@@ -8,6 +9,7 @@ void mx_quicksort(void *arr, t_cs size, t_cs bytes, int (*cmp)(t_cv *, t_cv *))
 
     if (arr && size > 0 && bytes > 0 && cmp) {
         mx_memcpy(x, ((t_uc *)arr + (size / 2) * bytes), bytes);
+
         while (i < j) {
             for (; cmp((t_uc *)arr + i, x) < 0; i += bytes);
             for (; cmp((t_uc *)arr + j, x) > 0; j -= bytes);

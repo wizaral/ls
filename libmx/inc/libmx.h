@@ -15,8 +15,8 @@
 * algorithm
 */
 
-t_ll mx_linear_search(t_cv *key, const t_vector *v, int (*cmp)(t_cv *, t_cv *));
 t_ll mx_binary_search(t_cv *key, const t_vector *v, int (*cmp)(t_cv *, t_cv *));
+t_ll mx_linear_search(t_cv *key, const t_vector *v, int (*cmp)(t_cv *, t_cv *));
 
 void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
 void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
@@ -27,8 +27,8 @@ void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv 
 */
 
 char *mx_file_to_str(t_cc *file);
-int mx_get_file_length(t_cc *filename);
-int mx_read_line(char **lineptr, char delim, const int fd);
+t_ll mx_get_file_length(t_cc *filename);
+t_ll mx_read_line(char **lineptr, char delim, const int fd);
 
 /*
 * memory
@@ -62,7 +62,7 @@ void mx_printunum(t_ull n, const int fd);
 * string
 */
 
-int mx_atoi(t_cc *str);
+t_ll mx_atoll(t_cc *str);
 
 int mx_count_substr(t_cc *str, t_cc *sub);
 int mx_count_words(t_cc *str, char c);

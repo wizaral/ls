@@ -6,7 +6,6 @@
 #include "errors.h"
 #include "macroses.h"
 #include "structs.h"
-// #include <stdio.h>
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>

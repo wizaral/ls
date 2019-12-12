@@ -2,10 +2,10 @@
 
 void mx_fcheck_cycle(t_flist *list) {
     t_flist_node *slow = list ? list->head : NULL;
-    t_flist_node *fast = list ? list->head->next : NULL;
+    t_flist_node *fast = list && list->head ? list->head->next : NULL;
     t_flist_node *finder = list ? list->head : NULL;
 
-    if (list->head && list->tail) {
+    if (list && list->head && list->tail) {
         if (list->head == list->tail) {
             list->head->next = list->tail->next = NULL;
             return;
