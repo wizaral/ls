@@ -38,7 +38,7 @@ void *mx_memccpy(void *restrict dst, t_cv *restrict src, int c, size_t n);
 void *mx_memchr(t_cv *s, int c, size_t n);
 int mx_memcmp(t_cv *s1, t_cv *s2, size_t n);
 void *mx_memcpy(void *restrict dst, t_cv *restrict src, size_t n);
-void *mx_memdup(t_cv *src, size_t n)
+void *mx_memdup(t_cv *src, size_t n);
 void *mx_memmem(t_cv *big, size_t big_len, t_cv *little, size_t little_len);
 void *mx_memmove(void *dst, t_cv *src, size_t len);
 void *mx_memrchr(t_cv *s, int c, size_t n);
