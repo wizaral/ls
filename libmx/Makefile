@@ -62,9 +62,9 @@ $(OBJ_DIR):
 	$(OBJ_DIR)/flist $(OBJ_DIR)/list $(OBJ_DIR)/memory $(OBJ_DIR)/print \
 	$(OBJ_DIR)/queue $(OBJ_DIR)/stack $(OBJ_DIR)/string $(OBJ_DIR)/type \
 	$(OBJ_DIR)/utils
-	@echo $(RAW)
-	@echo $(SRC)
-	@echo $(OBJ)
+	# @echo $(RAW)
+	# @echo $(SRC)
+	# @echo $(OBJ)
 
 # install
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c

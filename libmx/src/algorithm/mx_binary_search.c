@@ -1,6 +1,8 @@
 #include "libmx.h"
 
-t_ll mx_binary_search(t_cv *key, t_vector *v, int (*cmp)(t_cv *, t_cv *)) {
+t_ll mx_binary_search(t_cv *key, const t_vector *v,
+    int (*cmp)(t_cv *, t_cv *))
+{
     t_ull left = 0;
     t_ull right = v ? v->size - 1 : 0;
     t_ull middle = 0;
