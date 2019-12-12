@@ -3,7 +3,7 @@ LIB = libmx.a
 NAME = uls
 
 # тут перечень файлов в src без расширения, но с префиксом mx_ !
-RAW = mx_main
+RAW = mx_main mx_num_of_cols mx_print mx_uls mx_ulsl
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
@@ -13,7 +13,7 @@ SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(RAW)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(RAW)))
 LIB_PATH = $(addprefix $(LIB_DIR), $(LIB))
 
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -Weverything
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc -Ilibmx/inc
 OFLAGS = -Ofast -march=native
 DFLAGS = -g -fsanitize=address

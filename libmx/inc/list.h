@@ -31,7 +31,7 @@ t_list_node *mx_check_tail(t_list *list);
 * deletes base struct and all elements
 */
 
-t_list *mx_create_list();
+t_list *mx_create_list(void);
 void mx_delete_list(t_list **list);
 
 /*

@@ -11,4 +11,11 @@ typedef struct s_file {
     struct s_file *next;
 } t_file;
 
+typedef struct s_info {
+    t_ull max_len;
+    t_ull cols;
+    t_ull lines;
+    t_ull num_of_sub;
+} t_info;
+
 #endif

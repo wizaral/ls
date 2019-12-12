@@ -1,18 +1,34 @@
 #include "uls.h"
 
-int mx_num_of_cols(t_file *list) {
-    struct winsize w;
-    int max_len = 0;
-    int cols = 0;
-    int lines = 0;
+// int mx_num_of_cols(t_file *list, t_info info) {
+//     struct winsize w;
 
-    for (t_file *tmp = list; tmp; tmp = tmp->next)
-        if (max_len < mx_strlen(tmp->data))
-            max_len = mx_strlen(tmp->data);
+//     for (t_file *tmp = list; tmp; tmp = tmp->next)
+//         if (info.max_len < mx_strlen(tmp->data))
+//             info.max_len = mx_strlen(tmp->data);
+//     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+//     info.cols = (w.ws_col / ((8 - (info.max_len % 8)) + info.max_len));
+//     info.lines = list_size(list) / info.cols;
+//         if (info.lines == 0 || ((list_size(list) % cols) != 0))
+//             info.lines++;
+//     return info.lines;
+// }
+
+void mx_num_of_cols(t_vector *file_vect, t_info *info) {
+    struct winsize w;
+    t_dir *files = file_vect->arr;
+
+    info->max_len = 0;
+    info->cols = 0;
+    info->lines = 0;
+    info->num_of_sub = file_vect->size;
+
+    for (t_ull i = 0; i < file_vect->size; ++i)
+        if (info->max_len < mx_strlen(files[i].d_name))
+            info->max_len = mx_strlen(files[i].d_name);
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    cols = (w.ws_col / ((8 - (max_len % 8)) + max_len));
-    lines = list_size(list) / cols;
-        if (lines == 0 || ((list_size(list) % cols) != 0))
-            lines++;
-    return lines;
+    info->cols = (w.ws_col / ((8 - (info->max_len % 8)) + info->max_len));
+    info->lines = file_vect->size / info->cols;
+        if (info->lines == 0 || ((file_vect->size % info->cols) != 0))
+            info->lines++;
 }

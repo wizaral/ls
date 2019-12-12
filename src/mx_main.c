@@ -14,7 +14,14 @@
 // ========================================================================= //
 
 int main(int argc, char **argv) {
-    if (argc)
-        mx_uls(argv[1]);
+    if (argc) {
+        t_info *info = (t_info *)malloc(sizeof(t_info));
+        info->cols = 0;
+        info->lines = 0;
+        info->max_len = 0;
+        info->num_of_sub = 0;
+
+        mx_uls(argv[1], info);
+    }
     return 0;
 }

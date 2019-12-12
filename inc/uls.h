@@ -6,6 +6,7 @@
 #include "errors_ls.h"
 #include "macroses_ls.h"
 #include "structs_ls.h"
+#include "types_ls.h"
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
@@ -21,18 +22,20 @@
 * FILE LIST
 */
 
+void mx_uls(char *arg, t_info *info);
 t_file *mx_create_file_node(struct dirent *ent);
-void mx_push_file_back(t_file **file_list, struct dirent *ent);
-void mx_push_file_front(t_file **file_list, struct dirent *ent);
-void mx_sort_file_list(t_file *lst);
-void mx_pop_file_list_back(t_file **head);
-void mx_clear_file_list(t_file *list);
-int mx_file_list_size(t_file *list);
 
 /*
 * PRINT FUNC
 */
 
-void mx_print_w_flags(t_file *file_list);
+//void mx_print_w_flags(t_vector *file_vect);
+void basic_print(t_vector *file_vect, t_info *info);
+
+/*
+*   PRINT CALC
+*/
+
+void mx_num_of_cols(t_vector *file_vect, t_info *info);
 
 #endif
