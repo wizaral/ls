@@ -39,12 +39,17 @@ type = isalpha isdigit ishex islower isspace isupper
 utils = factorial foreach get_num_length isprime pow sqrt_natural sqrt \
 	sum_digits swap
 
+vector = assign_vector at clear_vector create_vector delete_vector erase \
+	foreach_vector get_back get_front insert pop_backward push_backward \
+	reverse_vector
+
 RAW = $(addprefix algorithm/mx_, $(algorithm)) $(addprefix file/mx_, $(file)) \
 	$(addprefix flist/mx_, $(flist)) $(addprefix list/mx_, $(list)) \
 	$(addprefix memory/mx_, $(memory)) $(addprefix print/mx_, $(print)) \
 	$(addprefix queue/mx_, $(queue)) $(addprefix stack/mx_, $(stack)) \
 	$(addprefix string/mx_, $(string)) \
-	$(addprefix type/mx_, $(type)) $(addprefix utils/mx_, $(utils))
+	$(addprefix type/mx_, $(type)) $(addprefix utils/mx_, $(utils)) \
+	$(addprefix vector/mx_, $(vector))
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
@@ -63,7 +68,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR) $(OBJ_DIR)/algorithm $(OBJ_DIR)/file \
 	$(OBJ_DIR)/flist $(OBJ_DIR)/list $(OBJ_DIR)/memory $(OBJ_DIR)/print \
 	$(OBJ_DIR)/queue $(OBJ_DIR)/stack $(OBJ_DIR)/string $(OBJ_DIR)/type \
-	$(OBJ_DIR)/utils
+	$(OBJ_DIR)/utils $(OBJ_DIR)/vector
 #	@echo $(RAW)
 #	@echo $(SRC)
 #	@echo $(OBJ)
