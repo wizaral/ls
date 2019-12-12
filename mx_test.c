@@ -1,5 +1,4 @@
 #include "libmx.h"
-
 #include <stdio.h>
 
 static inline void print(void *item) {
@@ -8,6 +7,13 @@ static inline void print(void *item) {
 
 static void fprint(t_flist_node *node) {
     print(node->data);
+}
+
+static void print2(t_queue *q) {
+    printf("PRINT2!\n");
+    for (t_ull i = 0; i < q->size; ++i)
+        printf("%i, ", *(int *)((t_uc *)q->arr + i * q->bytes));
+    printf("\n");
 }
 
 static void vector_case() {
@@ -28,7 +34,7 @@ static void vector_case() {
     mx_insert(v, 2, &item);
     mx_foreach_vector(v, print);
     printf("\nINSERTED\n");
-    
+
     mx_erase(v, 0);
     mx_foreach_vector(v, print);
     printf("\nERASED\n");
@@ -59,25 +65,45 @@ static void vector_case() {
 
 static void queue_case() {
     t_queue *q = mx_create_queue(sizeof(int));
+    int item = 777;
 
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < 16; i++) {
         mx_enqueue(q, &i);
         mx_foreach_queue(q, print);
-        printf("\n");
+        printf("\n1 head: %llu %i\ntail: %llu %i\n", q->head, *(int *)mx_front(q), q->tail, *(int *)mx_rear(q));
     }
+    printf("\n");
+    print2(q);
 
-    int *item = mx_dequeue(q);
-    printf("%d\n", *item);
+    for (int i = 300; i < 305; i++) {
+        mx_dequeue(q);
+        mx_enqueue(q, &i);
+        printf("2 head: %llu %i\ntail: %llu %i\n", q->head, *(int *)mx_front(q), q->tail, *(int *)mx_rear(q));
+    }
+    printf("\n");
+    print2(q);
+
+    mx_dequeue(q);
+    mx_enqueue(q, &item);
+    print2(q);
+
+    mx_enqueue(q, &item);
+    print2(q);
+
     mx_foreach_queue(q, print);
 
     int *front = mx_front(q);
     int *rear = mx_rear(q);
-
-    printf("\nFront: %d\nRear: %d\n", *front, *rear);
+    printf("\nFront: %d\nRear: %d\nSize: %lld\n", *front, *rear, q->size);
 
     mx_foreach_queue(q, print);
+    printf("\n");
 
-    mx_delete_queue(&q);
+    mx_delete_queue(q);
+    printf("\nDELETED\n");
+
+    // mx_foreach_queue(q, print);
+    // printf("\n");
 }
 
 static void stack_case() {
@@ -89,7 +115,9 @@ static void stack_case() {
         printf("\n");
     }
 
-    int *top = mx_pop(s);
+    int *top = mx_top(s);
+    mx_pop(s);
+
     printf("\nPop: %d\n", *top);
     mx_foreach_stack(s, print);
     printf("\n");
@@ -98,11 +126,12 @@ static void stack_case() {
     printf("Top: %d\n", *top);
     mx_foreach_stack(s, print);
     printf("\n");
-    
-    mx_delete_stack(&s);
 
-    mx_foreach_stack(s, print);
-    printf("\n");
+    mx_delete_stack(s);
+    printf("\nDELETED\n");
+
+    // mx_foreach_stack(s, print);
+    // printf("\n");
 }
 
 static void flist_case() {
@@ -145,7 +174,7 @@ static void flist_case() {
     printf("\nDELETED\n");
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char **argv) {
     if (argc > 1) {
         switch (mx_atoll(argv[1])) {
             case 1:

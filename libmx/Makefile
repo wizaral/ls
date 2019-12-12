@@ -23,9 +23,10 @@ memory = memccpy memchr memcmp memcpy memdup memmem memmove memrchr memset \
 
 print = print_strarr print_unicode printchar printnum printstr printunum
 
-queue = create_queue delete_queue dequeue enqueue foreach_queue front rear
+queue = clear_queue create_queue delete_queue dequeue enqueue foreach_queue \
+	front rear
 
-stack = create_stack delete_stack foreach_stack pop push top
+stack = clear_stack create_stack delete_stack foreach_stack pop push top
 
 string = atoi count_substr count_words del_extra_spaces del_strarr \
 	get_char_index get_substr_index hex_to_nbr itoa nbr_to_hex replace_substr \
@@ -69,9 +70,6 @@ $(OBJ_DIR):
 	$(OBJ_DIR)/flist $(OBJ_DIR)/list $(OBJ_DIR)/memory $(OBJ_DIR)/print \
 	$(OBJ_DIR)/queue $(OBJ_DIR)/stack $(OBJ_DIR)/string $(OBJ_DIR)/type \
 	$(OBJ_DIR)/utils $(OBJ_DIR)/vector
-#	@echo $(RAW)
-#	@echo $(SRC)
-#	@echo $(OBJ)
 
 # install
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c

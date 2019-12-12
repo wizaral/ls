@@ -11,7 +11,7 @@ void mx_erase(t_vector *v, t_ull pos) {
 
         if ((float)v->cap / v->size > 4 && v->cap > VECTOR_DEFAULT_SIZE) {
             v->cap /= 2;
-            v->arr = mx_realloc(v->arr, v->cap);
+            v->arr = mx_realloc(v->arr, v->bytes * v->cap);
         }
     }
 }

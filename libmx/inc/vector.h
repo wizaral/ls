@@ -14,7 +14,7 @@ typedef struct s_vector {
 
 /*
 * creates base struct
-* deletes base struc
+* deletes base struct
 */
 
 t_vector *mx_create_vector(size_t bytes);
