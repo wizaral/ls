@@ -16,7 +16,7 @@
 //         print_unicode(c, 0x07, 0xF0, 3);
 // }
 
-static void print_large(wchar_t c, char *cc, const int fd) {
+static void print_large(wchar_t c, char *cc) {
     cc[0] = (c >> 18 & 0x07) | 0xF0;
     cc[1] = (c >> 12 & 0x3F) | 0x80;
     cc[2] = (c >> 6 & 0x3F) | 0x80;
@@ -39,7 +39,7 @@ void mx_print_unicode(wchar_t c, const int fd) {
             cc[2] = (c & 0x3F) | 0x80;
         }
         else
-            print_large(c, cc, fd);
-        write(1, cc, mx_strlen(cc));
+            print_large(c, cc);
+        write(fd, cc, mx_strlen(cc));
     }
 }

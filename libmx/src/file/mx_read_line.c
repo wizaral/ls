@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-int mx_read_line(char **lineptr, char delim, const int fd) {
+t_ll mx_read_line(char **lineptr, char delim, const int fd) {
     size_t len = 0;
     size_t lim = 16;
     int write_bytes = 1;
