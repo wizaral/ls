@@ -1,7 +1,7 @@
 #include "libmx.h"
 
 void *mx_memrchr(const void *s, int c, size_t n) {
-    unsigned char *us = (void *)s;
+    const unsigned char *us = s;
 
     if (!us || !n)
         return NULL;

@@ -30,7 +30,7 @@ t_flist_node *mx_fcheck_tail(t_flist *list);
 */
 
 t_flist *mx_fcreate_list(void);
-void mx_fdelete_list(t_flist **list);
+void mx_fdelete_list(t_flist *list);
 
 /*
 * creates node struct and assigns next element

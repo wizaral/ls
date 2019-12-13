@@ -1,9 +1,9 @@
 #include "libmx.h"
 
-void mx_delete_list(t_list **list) {
-    if (list && *list) {
-        mx_clear_list(*list);
-        free(*list);
-        *list = NULL;
+void mx_delete_list(t_list *list) {
+    if (list) {
+        mx_clear_list(list);
+        if (malloc_size(list))
+            free(list);
     }
 }

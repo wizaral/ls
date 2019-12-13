@@ -1,8 +1,17 @@
 #include "libmx.h"
 
-// static void print_unicode(int c, int and, int or, int length) {
-//     for (int j = length * 6, s = 0; j >= 0; write(1, &s, 1), j -= 6, s = 0)
-//         s = j == length * 6 ? (c >> j & and) | or : (c >> j & 0x3F) | 0x80;
+// typedef struct s_unicode {
+//     int a;  // and
+//     int c;  // symbol
+//     int l;  // length
+//     int o;  // or
+// } t_unicode;
+
+// static void print_unicode(t_unicode *u, const int fd) {
+//     char s = 0;
+
+//     for (int j = u->l * 6; j >= 0; write(fd, &s, 1), j -= 6, s = 0)
+//         s = j == u->l * 6 ? (u->c >> j & u->a) | u->o : (u->c >> j & 63) | 128;
 // }
 
 // void mx_print_unicode(wchar_t c) {
@@ -24,9 +33,9 @@ static void print_large(wchar_t c, char *cc) {
 }
 
 void mx_print_unicode(wchar_t c, const int fd) {
-    char cc[5] = {0};
-
     if (fd >= 0) {
+        char cc[5] = {0};
+
         if (c < 0x80) 
             cc[0] = c & 0x7F;
         else if (c < 0x0800) {

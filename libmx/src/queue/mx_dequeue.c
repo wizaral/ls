@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-static void reduce_queue(t_queue *q) {
+static inline void reduce_queue(t_queue *q) {
     void *temp_arr = q && q->arr ? malloc(q->bytes * q->cap / 2) : NULL;
 
     if (temp_arr) {

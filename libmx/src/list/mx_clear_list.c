@@ -1,10 +1,10 @@
 #include "libmx.h"
 
 void mx_clear_list(t_list *list) {
-    t_list_node *temp1 = list ? list->head : NULL;
-    t_list_node *temp2 = list ? list->head : NULL;
-
     if (list) {
+        t_list_node *temp1 = list->head;
+        t_list_node *temp2 = list->tail;
+
         while (temp1 && temp2) {
             temp1 = list->head->next;
             temp1 = list->tail->prev;

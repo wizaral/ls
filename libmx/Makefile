@@ -1,12 +1,8 @@
 NAME = libmx.a
 CC = clang
 
-# я сюда ещё не добавил все src файлы библиотеки
-# если сильно приспичит что-то скомпилить, то вставляй свою либу
-# желательно не трогая этот проект
-
 algorithm = binary_search bubblesort checksort linear_search quicksort
-#mergesort
+#	mergesort
 
 file = get_file_length file_to_str read_line
 
@@ -33,7 +29,8 @@ string = atoi count_substr count_words del_extra_spaces del_strarr \
 	str_reverse strcat strchr strcmp strcpy strdel strdup strjoin strlen \
 	strncmp strncpy strndup strnew strsplit strstr strtrim tolower toupper
 
-#tree = 
+# tree = clear_tree create_tree delete_tree get_max get_min \
+#	обходы 4 шт, вставка, удаление, поиск
 
 type = isalpha isdigit ishex islower isspace isupper
 

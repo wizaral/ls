@@ -2,8 +2,9 @@
 
 static double precision(double x, double middle) {
     double stop = 16 - mx_get_num_length(middle, 10);
+    double prec = 0.1;
 
-    for (double i = 0, prec = 0.1; i < stop; ++i, prec /= 10) {
+    for (double i = 0; i < stop; ++i, prec /= 10) {
         while (middle * middle > x)
             middle -= prec;
         while (middle * middle < x)

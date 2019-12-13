@@ -2,10 +2,8 @@
 
 char *mx_strtrim(const char *str) {
     int start = 0;
-    int end = str ? mx_strlen(str) : 0;
+    int end = str ? mx_strlen(str) - 1: 0;
     char *new_str = NULL;
-
-    end = end == 0 ? 0 : end - 1;
 
     if (str) {
         for (; mx_isspace(str[start]); ++start);
