@@ -1,13 +1,13 @@
 #include "libmx.h"
 
-static int get_length(const char *s, char c) {
+static int get_length(t_cc *s, char c) {
     int len = 0;
 
     for (; s[len] && s[len] != c; ++len);
     return len;
 }
 
-char **mx_strsplit(const char *s, char c) {
+char **mx_strsplit(t_cc *s, char c) {
     int words = mx_count_words(s, c);
     char **result = s ? (char **)malloc(sizeof(char *) * (words + 1)) : NULL;
 

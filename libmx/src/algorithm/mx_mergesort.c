@@ -1,7 +1,7 @@
 #include "libmx.h"
 
 // void mx_mergesort(void *arr, size_t size, size_t bytes,
-//     int (*cmp)(const void *, const void *))
+//     int (*cmp)(t_cuc *, t_cuc *))
 // {
 
 // }
@@ -18,7 +18,7 @@
 
 // #include <stdio.h>
 
-// static inline void merge(void *l, void *m, void *r, void *buf, size_t bytes, int (*cmp)(const void *, const void *)) {
+// static inline void merge(void *l, void *m, void *r, void *buf, size_t bytes, int (*cmp)(t_cuc *, t_cuc *)) {
 //     t_uc *cl = l, *cr = m;
 //     t_ull cur = 0;
 
@@ -46,7 +46,7 @@
 //     mx_memcpy(l, buf, (t_uc *)r - (t_uc *)l);
 // }
 
-// static void _mergesort(void *left, void *right, void *buf, size_t bytes, int (*cmp)(const void *, const void *)) {
+// static void _mergesort(void *left, void *right, void *buf, size_t bytes, int (*cmp)(t_cuc *, t_cuc *)) {
 //     void *mid = (t_uc *)left + ((t_uc *)right - (t_uc *)left) / 2;
 //     // printf("%i\n", *(int *)mid);
 
@@ -57,7 +57,7 @@
 //     }
 // }
 
-// void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *)) {
+// void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cuc *, t_cuc *)) {
 //     t_uc buf[size * bytes];
 //     // t_vector v;  ...................................................
 //     _mergesort(arr, (t_uc *)arr + size * bytes, buf, bytes, cmp);
@@ -65,7 +65,7 @@
 
 // #include <time.h>
 
-// int compare(const void *a, const void *b) {
+// int compare(t_cuc *a, t_cuc *b) {
 //     return *(int *)a - *(int *)b;
 // }
 

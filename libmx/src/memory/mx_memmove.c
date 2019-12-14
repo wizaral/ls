@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-void *mx_memmove(void *dst, const void *src, size_t len) {
+void *mx_memmove(void *dst, t_cv *src, size_t len) {
     // void *temp = malloc(len);
     t_uc temp[len];
 

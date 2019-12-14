@@ -14,7 +14,7 @@ typedef struct s_tree_node {
 typedef struct s_tree {
     t_ll size;
     t_tree_node *root;
-    int (*cmp)(const void *, const void *);
+    int (*cmp)(t_cv *, t_cv *);
 } t_tree;
 
 

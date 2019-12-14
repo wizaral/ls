@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-t_ll mx_get_file_length(const char *filename) {
+t_ll mx_get_file_length(t_cc *filename) {
     int stream = open(filename, 0);
     t_ll length = 0;
 

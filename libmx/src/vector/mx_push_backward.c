@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-void mx_push_backward(t_vector *v, const void *item) {
+void mx_push_backward(t_vector *v, t_cv *item) {
     if (v && v->arr && item) {
         if (v->size == v->cap) {
             v->cap *= 2;

@@ -69,7 +69,7 @@ void mx_push_index(t_list *list, void *data, t_ll pos);
 * applies function f to every element in the container in descending order
 */
 
-t_list *mx_sort_list(t_list *list, int (*cmp)(const void *, const void *));
+t_list *mx_sort_list(t_list *list, int (*cmp)(t_cv *, t_cv *));
 void **mx_list_to_array(t_list *list);
 void mx_foreach_list(t_list *list, void (*f)(t_list_node *));
 void mx_foreach_list_reverse(t_list *list, void (*f)(t_list_node *));

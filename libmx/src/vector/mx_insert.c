@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-void mx_insert(t_vector *v, t_ull pos, const void *item) {
+void mx_insert(t_vector *v, t_ull pos, t_cv *item) {
     if (v && item && pos <= v->size) {
         t_ull b = v->bytes;
 

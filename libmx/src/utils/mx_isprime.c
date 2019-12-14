@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-bool mx_isprime(unsigned long long num) {
+bool mx_isprime(t_ull num) {
     if (num < 4)
         return num > 1;
 
