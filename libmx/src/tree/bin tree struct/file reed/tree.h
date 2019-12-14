@@ -1,25 +1,22 @@
 #ifndef tree_h
 #define tree_h
 
-typedef struct element
-{
-	int value, level;
-	struct element *left;
-	struct element *right;
-	struct element *parent;
-}node;
+typedef struct element {
+    int value, level;
+    struct element *left;
+    struct element *right;
+    struct element *parent;
+} node;
 
-typedef struct a_tree
-{
-	int count;
-	node *root;
-}tree;
+typedef struct a_tree {
+    int count;
+    node *root;
+} tree;
 
-typedef struct a_queue
-{
-	node *save_node;
-	struct a_queue *next;
-}queue;
+typedef struct a_queue {
+    node *save_node;
+    struct a_queue *next;
+} queue;
 
 void push(queue **head, node *a_node);
 node *pop(queue **head);
