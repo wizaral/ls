@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-static void printnum(t_ull n, const in fd) {
+static void printnum(t_ull n, const int fd) {
     if (n > 9)
         printunum(n / 10, fd);
     mx_printchar(n % 10 + 48, fd);

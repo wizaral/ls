@@ -6,7 +6,6 @@ void mx_push_front(t_list *list, void *data) {
     if (list && (node = mx_create_node(data, NULL, list->head)) != NULL) {
         list->head = node;
         ++list->size;
-
         if (list->tail == NULL)
             list->tail = node;
     }

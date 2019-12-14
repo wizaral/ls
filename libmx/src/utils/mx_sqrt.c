@@ -22,7 +22,6 @@ double mx_sqrt(double x) {
     while (left <= right) {
         middle = left + (right - left) / 2;
         power = middle * middle;
-
         if (power < x)
             left = middle + 1;
         else if (power > x)

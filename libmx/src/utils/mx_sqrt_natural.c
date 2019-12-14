@@ -9,7 +9,6 @@ t_ull mx_sqrt_natural(t_ull x) {
     while (left <= right) {
         middle = left + (right - left) / 2;
         power = middle * middle;
-
         if (power > x)
             right = middle - 1;
         else if (power < x)

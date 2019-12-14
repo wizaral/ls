@@ -7,7 +7,6 @@ void mx_fpop_back(t_flist *list) {
 
             while (temp->next->next)
                 temp = temp->next;
-
             free(temp->next);
             temp->next = NULL;
             list->tail = temp;

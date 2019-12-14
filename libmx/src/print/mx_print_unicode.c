@@ -25,7 +25,7 @@
 //         print_unicode(c, 0x07, 0xF0, 3);
 // }
 
-static void print_large(wchar_t c, char *cc) {
+static inline void print_large(wchar_t c, char *cc) {
     cc[0] = (c >> 18 & 0x07) | 0xF0;
     cc[1] = (c >> 12 & 0x3F) | 0x80;
     cc[2] = (c >> 6 & 0x3F) | 0x80;

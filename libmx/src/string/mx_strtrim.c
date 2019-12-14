@@ -8,7 +8,6 @@ char *mx_strtrim(t_cc *str) {
     if (str) {
         for (; mx_isspace(str[start]); ++start);
         for (; mx_isspace(str[end]) && end > start; --end);
-
         new_str = mx_strnew(end > start ? end - start + 1 : 0);
         mx_strncpy(new_str, str + start, end - start + 1);
     }

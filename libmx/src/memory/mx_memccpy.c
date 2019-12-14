@@ -7,7 +7,6 @@ void *mx_memccpy(void *restrict dst, t_cv *restrict src, int c, size_t n) {
 
         for (size_t i = 0; i < n; ++i) {
             udst[i] = usrc[i];
-
             if (usrc[i] == c)
                 return (void *)(udst + i + 1);
         }

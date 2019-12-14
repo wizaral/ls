@@ -6,7 +6,6 @@ static char *make_dec(int num, int length) {
     *dec = num < 0 ? '-' : '\0';
     for (int j = length - 1; j >= (num <= 0); --j, num /= 10)
         dec[j] = MX_ABS(num % 10) + 48;
-
     return dec;
 }
 

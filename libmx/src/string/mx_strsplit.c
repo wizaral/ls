@@ -16,7 +16,6 @@ char **mx_strsplit(t_cc *s, char c) {
             if (s[j] != c) {
                 len = get_length(s + j, c);
                 result[i++] = mx_strndup(s + j, len);
-
                 j += len;
             }
         }

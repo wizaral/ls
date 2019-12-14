@@ -14,7 +14,6 @@ static inline void increase_queue(t_queue *q) {
             mx_memcpy(temp_arr, q->arr, q->cap * q->bytes);
         if (malloc_size(q->arr))
             free(q->arr);
-
         q->arr = temp_arr;
         q->cap *= 2;
         q->head = 0;
@@ -26,7 +25,6 @@ void mx_enqueue(t_queue *q, void *item) {
     if (q && q->arr && item && q->size) {
         if (q->size == q->cap)
             increase_queue(q);
-
         if (q->tail + 1 == q->cap) {
             mx_memcpy(q->arr, item, q->bytes);
             q->tail = 0;

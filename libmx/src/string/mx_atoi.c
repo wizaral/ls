@@ -7,7 +7,6 @@ t_ll mx_atoll(t_cc *str) {
     for (; mx_isspace(*str); ++str);
     if (*str == '+' || *str == '-')
         sign = *str++ == '-';
-
     for (; *str && mx_isdigit(*str); ++str)
         sum = sum * 10 + *str - 48;
     return sign ? -sum : sum;

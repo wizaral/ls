@@ -7,7 +7,6 @@ void mx_fpop_front(t_flist *list) {
         list->head = list->head->next;
         --list->size;
         free(temp);
-
         if (list->head == NULL)
             list->tail = NULL;
     }

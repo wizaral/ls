@@ -5,7 +5,6 @@ static char *make_hex(t_ull nbr, t_ull length) {
 
     for (int j = length - 1; j >= 0; --j, nbr >>= 4)
         hex[j] = nbr % 16 < 10 ? nbr % 16 + 48 : nbr % 16 + 87;
-
     return hex;
 }
 

@@ -14,4 +14,6 @@ typedef const long long t_cll;
 typedef const unsigned char t_cuc;
 typedef const unsigned long long t_cull;
 
+typedef const t_vector t_cvector;
+
 #endif

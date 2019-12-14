@@ -14,7 +14,6 @@ static inline void reduce_queue(t_queue *q) {
             mx_memcpy(temp_arr, q->arr, q->cap * q->bytes);
         if (malloc_size(q->arr))
             free(q->arr);
-
         q->arr = temp_arr;
         q->cap /= 2;
         q->head = 0;
@@ -26,7 +25,6 @@ void mx_dequeue(t_queue *q) {
     if (q && q->arr) {
         q->head = q->head + 1 == q->cap ? 0 : q->head + 1;
         --q->size;
-
         if ((float)q->cap / q->size > 4 && q->cap > QUEUE_DEFAULT_SIZE)
             reduce_queue(q);
     }
