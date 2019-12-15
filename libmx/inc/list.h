@@ -65,8 +65,8 @@ void mx_push_index(t_list *list, void *data, t_ll pos);
 /*
 * sorts elements in list
 * returns null-terminated array of data pointers
-* applies function f to every element in the container in ascending order
-* applies function f to every element in the container in descending order
+* applies function to every element in the container in ascending order
+* applies function to every element in the container in descending order
 */
 
 t_list *mx_sort_list(t_list *list, int (*cmp)(t_cv *, t_cv *));
