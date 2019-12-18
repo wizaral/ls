@@ -2,10 +2,10 @@
 #define LIBMX_H
 
 #include <fcntl.h>
-// #include <unistd.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
-// #include <malloc/malloc.h>
+#include <malloc/malloc.h>
 
 #include "types.h"
 #include "structs.h"
@@ -20,7 +20,6 @@ t_ll mx_linear_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *));
 
 void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
 void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
-void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
 
 /*
 * file

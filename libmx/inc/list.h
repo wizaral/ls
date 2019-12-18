@@ -32,7 +32,7 @@ t_list_node *mx_check_tail(t_list *list);
 */
 
 t_list *mx_create_list(void);
-void mx_delete_list(t_list **list);
+void mx_delete_list(t_list *list);
 
 /*
 * creates node struct and assigns next element
