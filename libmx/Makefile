@@ -90,4 +90,4 @@ uninstall:
 	@rm -rf $(NAME)
 	@rm -rf $(OBJ_DIR)
 
-reinstall: uninstall all
+reinstall: uninstall install
