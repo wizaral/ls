@@ -12,6 +12,8 @@ typedef struct s_vector {
     void *arr;      // array of items
 } t_vector;
 
+typedef const struct s_vector t_cvector;
+
 /*
 * creates base struct
 * deletes base struct

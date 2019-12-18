@@ -15,8 +15,8 @@
 * algorithm
 */
 
-t_ll mx_binary_search(t_cv *key, const t_vector *v, int (*cmp)(t_cv *, t_cv *));
-t_ll mx_linear_search(t_cv *key, const t_vector *v, int (*cmp)(t_cv *, t_cv *));
+t_ll mx_binary_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *));
+t_ll mx_linear_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *));
 
 void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
 void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
