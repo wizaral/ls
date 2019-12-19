@@ -16,8 +16,8 @@ void mx_sort(void *arr, size_t size, size_t bytes, int (*f)(t_cv *, t_cv *)) {
             }
         }
         if (i / bytes < size - 1)
-            mx_quicksort((t_uc *)arr + i, size - i / bytes, bytes, f);
+            mx_sort((t_uc *)arr + i, size - i / bytes, bytes, f);
         if (0 < j / bytes)
-            mx_quicksort(arr, j / bytes + 1, bytes, f);
+            mx_sort(arr, j / bytes + 1, bytes, f);
     }
 }
