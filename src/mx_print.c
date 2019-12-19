@@ -49,24 +49,33 @@ static void print_tabs(int n) {
 }
 
 void basic_print(t_vector *file_vect, t_info *info) {
-    int j = 0;
-    int sub_r;
-    int tab_len = 0;
+    t_data *data;
 
-    for (t_ull i = 0; i < info->lines; ++i) {
-        j = 0;
-        sub_r = 0;
-        for (t_ull t = 0; t < file_vect->size; ++t) {
-            ++j;
-            if ((j + info->lines - i) % info->lines == 0) {
-                mx_printstr(((t_dir *)file_vect->arr)[t].d_name, 1);
-                if (sub_r + info->lines < info->num_of_sub) {
-                    tab_len = info->max_len - mx_strlen(((t_dir *)file_vect->arr)[t].d_name);
-                    print_tabs(tab_len + (8 - (info->max_len % 8)));
-                }
-            }
-            ++sub_r;
-        }
-        mx_printchar('\n', 1);
+    for (t_ull i = 0; i < file_vect->size; i++) {
+        data = mx_at(file_vect, i);
+        printf("%s %s\n", data->access, data->ent->d_name); 
     }
 }
+
+// void basic_print(t_vector *file_vect, t_info *info) {
+//     int j = 0;
+//     int sub_r;
+//     int tab_len = 0;
+
+//     for (t_ull i = 0; i < info->lines; ++i) {
+//         j = 0;
+//         sub_r = 0;
+//         for (t_ull t = 0; t < file_vect->size; ++t) {
+//             ++j;
+//             if ((j + info->lines - i) % info->lines == 0) {
+//                 mx_printstr(((t_dir *)file_vect->arr)[t].d_name, 1);
+//                 if (sub_r + info->lines < info->num_of_sub) {
+//                     tab_len = info->max_len - mx_strlen(((t_dir *)file_vect->arr)[t].d_name);
+//                     print_tabs(tab_len + (8 - (info->max_len % 8)));
+//                 }
+//             }
+//             ++sub_r;
+//         }
+//         mx_printchar('\n', 1);
+//     }
+// }

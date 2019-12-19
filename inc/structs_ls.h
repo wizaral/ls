@@ -4,6 +4,8 @@
 typedef struct s_data {
     struct dirent *ent;
     struct stat *st;
+    struct lstat *lst;
+    char *access;
 } t_data;
 
 typedef struct s_file {

@@ -38,4 +38,12 @@ void basic_print(t_vector *file_vect, t_info *info);
 
 void mx_num_of_cols(t_vector *file_vect, t_info *info);
 
+/*
+*   FLAG
+*/
+
+void mx_advanced_permissions_check(t_vector *vec);
+void mx_basic_permissions(t_vector *vec);
+void mx_l_flag(t_vector *info);
+
 #endif

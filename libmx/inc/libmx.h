@@ -20,8 +20,8 @@
 * check first item in container
 */
 
-t_ll mx_binary_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *));
-t_ll mx_linear_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *));
+t_ull mx_binary_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *));
+t_ull mx_linear_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *));
 
 /*
 * sort needs comparator for two argumants
