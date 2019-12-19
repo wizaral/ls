@@ -64,6 +64,12 @@ static void vector_case() {
         printf("\n");
     }
     printf("\nPUSHED\n");
+
+    for (int i = 0; i < 40; i++) {
+        r = rand() % v->size;
+        int *i =  (int *)mx_at(v, r);
+        printf("%d: %d\n", r, *i);
+    }
     // int *front = mx_get_front(v);
     // int *back = mx_get_back(v);
     // printf("Front: %d\nBack: %d\n", *front, *back);

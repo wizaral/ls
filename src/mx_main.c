@@ -18,6 +18,7 @@ int main(int argc, char **argv) {
         info->lines = 0;
         info->max_len = 0;
         info->num_of_sub = 0;
+        info->total = 0;
 
         mx_uls(argv[1], info);
     }

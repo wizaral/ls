@@ -43,17 +43,18 @@
 // 	}
 // }
 
-static void print_tabs(int n) {
-	for (int i = 0; i < n; i++)
-		write(1, " ", 1);
-}
+// static void print_tabs(int n) {
+// 	for (int i = 0; i < n; i++)
+// 		write(1, " ", 1);
+// }
 
 void basic_print(t_vector *file_vect, t_info *info) {
     t_data *data;
-
+    if (info) {};
+    printf("total %llu\n", info->total);
     for (t_ull i = 0; i < file_vect->size; i++) {
         data = mx_at(file_vect, i);
-        printf("%s %s\n", data->access, data->ent->d_name); 
+        printf("%s %s %s %s %s %s %s\n", data->access, data->links, data->login, data->grp, data->size, data->time, data->ent->d_name); 
     }
 }
 

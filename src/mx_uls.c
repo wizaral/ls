@@ -12,12 +12,12 @@ void mx_uls(char *arg, t_info *info) {
 
     if ((dir = opendir(arg)) != NULL) {
         while ((data->ent = readdir(dir)) != NULL) {
-            stat(data->ent->d_name, data->st);
-            lstat(data->ent->d_name, data->st);
+            data->path = mx_strnew(512);
+            mx_strcat(mx_strcat(mx_strcat(data->path, arg), "/"), data->ent->d_name);
             mx_push_backward(file_vect, data);
         }
-        mx_l_flag(file_vect);
-        mx_quicksort(file_vect->arr, file_vect->size, file_vect->bytes, cmp);
+        mx_l_flag(file_vect, info);
+        mx_sort(file_vect->arr, file_vect->size, file_vect->bytes, cmp);
         mx_num_of_cols(file_vect, info);
         basic_print(file_vect, info);
         closedir(dir);

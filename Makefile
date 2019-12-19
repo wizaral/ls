@@ -3,7 +3,8 @@ LIB = libmx.a
 NAME = uls
 
 # тут перечень файлов в src без расширения, но с префиксом mx_ !
-RAW = mx_main mx_num_of_cols mx_print mx_uls mx_ulsl
+RAW = mx_main mx_num_of_cols mx_print mx_uls mx_lflag mx_ladvanced_data \
+	mx_lflag_linksnum
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
@@ -36,11 +37,11 @@ $(LIB):
 # советую пока что работать на install сборке, потом будет оптимизации трогать
 
 # install
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+# 	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
 
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+# $(NAME): $(OBJ_DIR) $(OBJ)
+# 	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 # optimize
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -50,11 +51,11 @@ $(NAME): $(OBJ_DIR) $(OBJ)
 # 	@$(CC) $(CFLAGS) $(LFLAGS) $(OFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 # debug
-# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
-# $(NAME): $(OBJ_DIR) $(OBJ)
-# 	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+$(NAME): $(OBJ_DIR) $(OBJ)
+	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 install: $(LIB) $(NAME)
 
