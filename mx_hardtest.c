@@ -10,12 +10,12 @@ static void fprint(t_flist_node *node) {
     print(node->data);
 }
 
-static void print2(t_queue *q) {
-    printf("PRINT2!\n");
-    for (t_ull i = 0; i < q->size; ++i)
-        printf("%i, ", *(int *)((t_uc *)q->arr + i * q->bytes));
-    printf("\n");
-}
+// static void print2(t_queue *q) {
+//     printf("PRINT2!\n");
+//     for (t_ull i = 0; i < q->size; ++i)
+//         printf("%i, ", *(int *)((t_uc *)q->arr + i * q->bytes));
+//     printf("\n");
+// }
 
 static void vector_case() {
     t_vector *v = mx_create_vector(sizeof(int));
@@ -88,34 +88,32 @@ static void queue_case() {
         r = rand() % 10;
         mx_enqueue(q, &r);
         mx_foreach_queue(q, print);
-        printf("\n1 head: %llu %i\ntail: %llu %i\n", q->head, *(int *)mx_front(q), q->tail, *(int *)mx_rear(q));
+        printf("\n");
     }
-    printf("\n");
-    print2(q);
-
-    for (int i = 300; i < 305; i++) {
-        mx_dequeue(q);
-        mx_enqueue(q, &i);
-        //printf("2 head: %llu %i\ntail: %llu %i\n", q->head, *(int *)mx_front(q), q->tail, *(int *)mx_rear(q));
-    }
-    printf("\n");
-    print2(q);
-
-    r = rand() % 10;
-
-    mx_dequeue(q);
-    mx_enqueue(q, &r);
-    print2(q);
-
-    r = rand() % 10;
-
-    mx_enqueue(q, &r);
-    print2(q);
-
-    mx_foreach_queue(q, print);
-
+    printf("ENQUEU\n");
+    // print2(q);
     int *front = mx_front(q);
     int *rear = mx_rear(q);
+    printf("\nFront: %d\nRear: %d\nSize: %lld\n", *front, *rear, q->size);
+
+    for (int i = 0; i < 25; i++) {
+        mx_dequeue(q);
+        mx_foreach_queue(q, print);
+        printf("\n");
+    }
+    printf("DEQ MORE THAN IN QUEUE\n");
+    front = mx_front(q);
+    rear = mx_rear(q);
+    printf("\nFront: %d\nRear: %d\nSize: %lld\n", *front, *rear, q->size);
+    for (int i = 0; i < 32; i++) {
+        r = rand() % 10;
+        mx_enqueue(q, &r);
+        mx_foreach_queue(q, print);
+        printf("\n");
+    }
+    printf("ENQUEUE AGIAN\n");
+    front = mx_front(q);
+    rear = mx_rear(q);
     printf("\nFront: %d\nRear: %d\nSize: %lld\n", *front, *rear, q->size);
 
     mx_foreach_queue(q, print);
@@ -131,11 +129,11 @@ static void queue_case() {
 static void stack_case() {
     t_stack *s = mx_create_stack(sizeof(int));
     int *top;
-    int r;
 
     for (int i = 0; i < 40; i++) {
-        r = rand() % 10;
-        mx_push(s, &r);
+        int *r = (int *)malloc(sizeof(int));
+        *r = rand() % 10;
+        mx_push(s, r);
         mx_foreach_stack(s, print);
         printf("\n");
     }
@@ -156,23 +154,27 @@ static void stack_case() {
 
 static void flist_case() {
     t_flist *l = mx_fcreate_list();
-    int r;
+    //int r;
 
     for (int i = 0; i < 16; ++i) {
-        mx_fpush_back(l, &i);
+        int *r = (int *)malloc(sizeof(int));
+        *r = rand() % 10;
+        mx_fpush_back(l, r);
         mx_fforeach_list(l, fprint);
         printf("\n");
     }
     printf("\nCREATED\n");
     for (int i = 0; i < 25; i++) {
-        r = rand() % 10;
-        mx_fpush_index(l, &r, i);
+        int *r = (int *)malloc(sizeof(int));
+        *r = rand() % 10;
+        mx_fpush_index(l, r, i);
         mx_fforeach_list(l, fprint);
         printf("\n");
     }
     printf("\nFPUSH_INDEX\n");
 
     for (int i = 0; i < 40; i++) {
+        int r;
         r = rand() % 50;
         mx_fpop_index(l, r);
         mx_fforeach_list(l, fprint);
@@ -181,8 +183,9 @@ static void flist_case() {
     printf("\nFPOP_INDEX\n");
 
     for (int i = 0; i < 40; i++) {
-        r = rand() % 10;
-        mx_fpush_front(l, &r);
+        int *r = (int *)malloc(sizeof(int));
+        *r = rand() % 10;
+        mx_fpush_front(l, r);
         mx_fforeach_list(l, fprint);
         printf("\n");
     }
