@@ -2,7 +2,7 @@
 
 t_ull mx_sqrt_natural(t_ull x) {
     t_ull left = 0;
-    t_ull right = x;
+    t_ull right = 4294967295;
     t_ull middle = 0;
     t_ull power;
 

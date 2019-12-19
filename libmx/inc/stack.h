@@ -12,6 +12,8 @@ typedef struct s_stack {
     void *arr;      // array of items
 } t_stack;
 
+typedef const t_stack t_сstack;
+
 /*
 * creates base struct
 * deletes base struct

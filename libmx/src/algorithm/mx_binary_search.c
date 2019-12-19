@@ -1,10 +1,10 @@
 #include "libmx.h"
 
-t_ll mx_binary_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *)) {
+t_ull mx_binary_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *)) {
     t_ull left = 0;
     t_ull right = v ? v->size - 1 : 0;
     t_ull middle = 0;
-    t_ll result;
+    t_ull result;
 
     if (v && v->size && v->arr && key && cmp) {
         while (left <= right) {
@@ -18,5 +18,5 @@ t_ll mx_binary_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *)) {
                 return middle;
         }
     }
-    return -1;
+    return 0;
 }

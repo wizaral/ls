@@ -16,6 +16,8 @@ typedef struct s_queue {
     void *arr;      // array of items
 } t_queue;
 
+typedef const t_queue t_сqueue;
+
 /*
 * creates base struct
 * deletes base struct

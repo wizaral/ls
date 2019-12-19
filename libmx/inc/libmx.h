@@ -15,11 +15,21 @@
 * algorithm
 */
 
+/*
+* bsearch and lsearch return 0 if have not found item, so you need to
+* check first item in container
+*/
+
 t_ll mx_binary_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *));
 t_ll mx_linear_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *));
 
-void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
-void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(t_cv *, t_cv *));
+/*
+* sort needs comparator for two argumants
+* quicksort needs weight func for one element
+*/
+
+void mx_sort(void *arr, size_t size, size_t bytes, int (*f)(t_cv *, t_cv *));
+void mx_quicksort(void *arr, size_t size, size_t bytes, t_ull (*w)(t_cv *));
 
 /*
 * file
@@ -62,6 +72,7 @@ void mx_printunum(t_ull n, const int fd);
 */
 
 t_ll mx_atoll(t_cc *str);
+t_ull mx_atoull(t_cc *str);
 
 int mx_count_substr(t_cc *str, t_cc *sub);
 int mx_count_words(t_cc *str, char c);

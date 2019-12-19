@@ -7,7 +7,7 @@
 //     int o;  // or
 // } t_unicode;
 
-// static void print_unicode(t_unicode *u, const int fd) {
+// static inline void print_unicode(t_unicode *u, const int fd) {
 //     char s = 0;
 
 //     for (int j = u->l * 6; j >= 0; write(fd, &s, 1), j -= 6, s = 0)
