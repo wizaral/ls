@@ -8,4 +8,7 @@ t_ull mx_factorial(t_ull n) {
     for (t_ull i = 1; i <= n; ++i)
         result *= i;
     return result;
+
 }
+
+
