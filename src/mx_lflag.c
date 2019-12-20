@@ -44,14 +44,18 @@ void mx_advanced_permissions_check(t_vector *vec, t_info *info) {
         data->time = mx_strndup(((ctime)(&st.st_mtimespec.tv_sec) + 4), 12);
         data->size = mx_sym_num(data->access[0], st); // Simple -l flag realization
         // float buf = mx_atoll(mx_sym_num(data->access[0], st));
+        // int temp = 0;
         // int unit = 0;
-        // while (buf > 1) {
+        //printf("%f\n", buf);
+        // while (buf / 1024 > 1) {
         //     buf /= 1024;
+        //     temp = (int)buf % 1024;
+        //     printf("%f\n", buf);
         //     ++unit;
         // }
         // char *buff = mx_itoa(buf);
-        // printf("%s", buff);
-        // mx_strcat(data->size, mx_strcat(buff, "K"));
+        // mx_strcat(buff, temp ? mx_strjoin(".", mx_itoa(temp)) : "");
+        //data->size = mx_strjoin(buff, "K");
         info->total += st.st_blocks;
     }
 }

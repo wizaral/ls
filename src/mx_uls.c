@@ -12,7 +12,7 @@ void mx_uls(char *arg, t_info *info) {
 
     if ((dir = opendir(arg)) != NULL) {
         while ((data->ent = readdir(dir)) != NULL) {
-            data->path = mx_strnew(512);
+            data->path = mx_strnew(__DARWIN_MAXPATHLEN);
             mx_strcat(mx_strcat(mx_strcat(data->path, arg), "/"), data->ent->d_name);
             mx_push_backward(file_vect, data);
         }
@@ -23,7 +23,7 @@ void mx_uls(char *arg, t_info *info) {
         closedir(dir);
     }
     else {
-        perror("");
+        perror(mx_strjoin("uls: ", arg));
         return;
     }
 }

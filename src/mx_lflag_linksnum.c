@@ -19,25 +19,20 @@ static char *check_minor(unsigned int rdev) {
     return minor;
 }
 
-static char *get_major (unsigned int rdev) {
-    char *major;
+static char *get_major(unsigned int rdev) {
+    char *major = mx_itoa((rdev >> 24) & 0xff);
 
-    major = mx_itoa((rdev >> 24) & 0xff);
     while (mx_strlen(major) < 3) {
-        char *tmp_str = NULL;
-
-        tmp_str = mx_strjoin(" ", major);
+        char *tmp_str = mx_strjoin(" ", major);
         free(major);
-        major = mx_strdup(tmp_str);
-        free(tmp_str);
+        major = tmp_str;
     }
     return major;
 }
 
-static char *get_minor (unsigned int rdev) {
-    char *minor;
+static char *get_minor(unsigned int rdev) {
+    char *minor = check_minor(rdev);
 
-    minor = check_minor(rdev);
     while (mx_strlen(minor) < 3) {
         char *tmp_str = NULL;
 
