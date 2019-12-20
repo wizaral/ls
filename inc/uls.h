@@ -30,7 +30,7 @@ t_file *mx_create_file_node(struct dirent *ent);
 */
 
 //void mx_print_w_flags(t_vector *file_vect);
-void basic_print(t_vector *file_vect, t_info *info);
+
 
 /*
 *   PRINT CALC
@@ -45,7 +45,8 @@ void mx_num_of_cols(t_vector *file_vect, t_info *info);
 void mx_advanced_permissions_check(t_vector *vec, t_info *info);
 void mx_basic_permissions(t_vector *vec);
 void mx_l_flag(t_vector *vec, t_info *info);
-char *get_login(uid_t st_uid);
 char *mx_sym_num(char access, struct stat buff);
+void mx_set_longest_fields(t_vector *vect, t_info *info);
+void mx_print_l_flag(t_vector *file_vect, t_info *info);
 
 #endif

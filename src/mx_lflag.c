@@ -1,9 +1,32 @@
 #include "uls.h"
 
+static char *get_login(uid_t st_uid) {
+    char *user = (char *)malloc(256);
+    struct passwd *pw = getpwuid(st_uid);
+
+    if (pw == NULL)
+        user = mx_itoa(st_uid);
+    else
+        mx_strcpy(user, pw->pw_name);
+    return user;
+}
+
+static char *get_gname(gid_t st_gid) {
+    char *grpname = (char *)malloc(256);
+    struct group *grp = getgrgid(st_gid);
+
+    if (grp == NULL)
+        grpname = mx_itoa(st_gid);
+    else
+        mx_strcpy(grpname, grp->gr_name);
+    return grpname;
+}
+
 void mx_advanced_permissions_check(t_vector *vec, t_info *info) {
     acl_t acl;
     t_data *data = NULL;
     struct stat st;
+    
 
     for (t_ull i = 0; i < vec->size; i++) {
         data = (t_data *)mx_at(vec, i);
@@ -17,9 +40,18 @@ void mx_advanced_permissions_check(t_vector *vec, t_info *info) {
         }
         data->login = get_login(st.st_uid);
         data->links = mx_itoa(st.st_nlink);
-        data->grp = mx_itoa(st.st_gid);
+        data->grp = get_gname(st.st_gid);
         data->time = mx_strndup(((ctime)(&st.st_mtimespec.tv_sec) + 4), 12);
-        data->size = mx_sym_num(data->access[0], st);
+        data->size = mx_sym_num(data->access[0], st); // Simple -l flag realization
+        // float buf = mx_atoll(mx_sym_num(data->access[0], st));
+        // int unit = 0;
+        // while (buf > 1) {
+        //     buf /= 1024;
+        //     ++unit;
+        // }
+        // char *buff = mx_itoa(buf);
+        // printf("%s", buff);
+        // mx_strcat(data->size, mx_strcat(buff, "K"));
         info->total += st.st_blocks;
     }
 }

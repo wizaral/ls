@@ -3,8 +3,8 @@ LIB = libmx.a
 NAME = uls
 
 # тут перечень файлов в src без расширения, но с префиксом mx_ !
-RAW = mx_main mx_num_of_cols mx_print mx_uls mx_lflag mx_ladvanced_data \
-	mx_lflag_linksnum
+RAW = mx_main mx_num_of_cols mx_print mx_uls mx_lflag mx_lflag_linksnum \
+	mx_l_flag_spaces mx_printlflag 
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/

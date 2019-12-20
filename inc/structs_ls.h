@@ -9,6 +9,7 @@ typedef struct s_data {
     struct dirent *ent;
     char *path;
 
+//  Fields for -l flag
     char *access;
     char *links;
     char *login;
@@ -27,6 +28,13 @@ typedef struct s_info {
     t_ull cols;
     t_ull lines;
     t_ull num_of_sub;
+
+    // Fields for -lflag print
+    t_ull laccess;
+    t_ull llinks;
+    t_ull llogin;
+    t_ull lgrp;
+    t_ull lsize;
 
     t_ull total;
 } t_info;

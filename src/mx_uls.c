@@ -19,7 +19,7 @@ void mx_uls(char *arg, t_info *info) {
         mx_l_flag(file_vect, info);
         mx_sort(file_vect->arr, file_vect->size, file_vect->bytes, cmp);
         mx_num_of_cols(file_vect, info);
-        basic_print(file_vect, info);
+        mx_print_l_flag(file_vect, info);
         closedir(dir);
     }
     else {
