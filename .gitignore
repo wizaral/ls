@@ -20,6 +20,9 @@
 *.out
 *.exe
 
+main
+uls
+
 # lol why not
 *.txt
 *.pdf
