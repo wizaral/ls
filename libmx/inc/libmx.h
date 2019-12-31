@@ -7,29 +7,8 @@
 #include <stdbool.h>
 #include <malloc/malloc.h>
 
-#include "types.h"
-#include "structs.h"
+#include "algorithm.h"
 #include "macroses.h"
-
-/*
-* algorithm
-*/
-
-/*
-* bsearch and lsearch return 0 if have not found item, so you need to
-* check first item in container
-*/
-
-t_ull mx_binary_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *));
-t_ull mx_linear_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *));
-
-/*
-* sort needs comparator for two argumants
-* quicksort needs weight func for one element
-*/
-
-void mx_sort(void *arr, size_t size, size_t bytes, int (*f)(t_cv *, t_cv *));
-void mx_quicksort(void *arr, size_t size, size_t bytes, t_ull (*w)(t_cv *));
 
 /*
 * file
