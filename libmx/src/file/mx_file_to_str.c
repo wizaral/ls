@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-char *mx_file_to_str(t_cc *file) {
+char *mx_file_to_str(const char *file) {
     char *string = NULL;
     int length = file ? mx_get_file_length(file) : 0;
     int stream;

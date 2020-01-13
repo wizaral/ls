@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-int mx_strcmp(t_cc *s1, t_cc *s2) {
+int mx_strcmp(const char *s1, const char *s2) {
     if (s1 != s2) {
         int i = 0;
 

@@ -10,21 +10,10 @@ typedef struct s_list_node {
 } t_list_node;
 
 typedef struct s_list {
-    t_ll size;          // amount of elements
-    void *data;         // pointer to special data if you need it
+    size_t size;        // amount of elements
     t_list_node *head;  // first element
     t_list_node *tail;  // last element
 } t_list;
-
-/*
-* deletes cycle
-* counts elements in list and rewrite size
-* checks every element and rewrite tail
-*/
-
-void mx_check_cycle(t_list *list);
-t_ll mx_check_size(t_list *list);
-t_list_node *mx_check_tail(t_list *list);
 
 /*
 * creates base struct
@@ -50,7 +39,7 @@ void mx_clear_list(t_list *list);
 
 void mx_pop_back(t_list *list);
 void mx_pop_front(t_list *list);
-void mx_pop_index(t_list *list, t_ll pos);
+void mx_pop_index(t_list *list, size_t pos);
 
 /*
 * adds first element
@@ -60,7 +49,7 @@ void mx_pop_index(t_list *list, t_ll pos);
 
 void mx_push_back(t_list *list, void *data);
 void mx_push_front(t_list *list, void *data);
-void mx_push_index(t_list *list, void *data, t_ll pos);
+void mx_push_index(t_list *list, void *data, size_t pos);
 
 /*
 * sorts elements in list
@@ -69,7 +58,7 @@ void mx_push_index(t_list *list, void *data, t_ll pos);
 * applies function to every element in the container in descending order
 */
 
-t_list *mx_sort_list(t_list *list, int (*cmp)(t_cv *, t_cv *));
+t_list *mx_sort_list(t_list *list, int (*cmp)(const void *, const void *));
 void **mx_list_to_array(t_list *list);
 void mx_foreach_list(t_list *list, void (*f)(t_list_node *));
 void mx_foreach_list_reverse(t_list *list, void (*f)(t_list_node *));

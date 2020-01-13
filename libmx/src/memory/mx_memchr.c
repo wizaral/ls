@@ -1,8 +1,8 @@
 #include "libmx.h"
 
-void *mx_memchr(t_cv *s, int c, size_t n) {
+void *mx_memchr(const void *s, int c, size_t n) {
     if (s && n) {
-        t_cuc *us = s;
+        const t_byte *us = s;
 
         for (size_t i = 0; i < n; ++i)
             if (us[i] == c)

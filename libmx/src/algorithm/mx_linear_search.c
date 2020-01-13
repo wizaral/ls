@@ -1,11 +1,11 @@
 #include "libmx.h"
 
-t_ull mx_linear_search(t_cv *key, t_cvector *v, int (*cmp)(t_cv *, t_cv *)) {
-    t_ull bytes = v->bytes;
-    t_ull end = (v->size - 1) * bytes;
+t_byte *mx_linear_search(const void *key, t_vector *v,
+    int (*cmp)(const void *, const void *)) {
+    t_byte *end = v->arr + (v->size - 1) * v->bytes;
 
-    for (t_ull i = 0; i < end; i += bytes)
-        if (cmp(key, (t_uc *)v->arr + i) == 0)
+    for (t_byte *i = v->arr; i < end; i += v->bytes)
+        if (cmp(key, i) == 0)
             return i;
-    return 0;
+    return NULL;
 }

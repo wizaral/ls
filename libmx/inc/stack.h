@@ -6,13 +6,11 @@
 #define STACK_DEFAULT_SIZE 16
 
 typedef struct s_stack {
-    t_ull cap;      // capacity
-    t_ull size;     // current size
+    size_t cap;     // capacity
+    size_t size;    // current size
     size_t bytes;   // size of item
-    void *arr;      // array of items
+    t_byte *arr;    // array of items
 } t_stack;
-
-typedef const t_stack t_сstack;
 
 /*
 * creates base struct
@@ -29,7 +27,7 @@ void mx_delete_stack(t_stack *st);
 */
 
 void mx_push(t_stack *st, void *item);
-void mx_pop(t_stack *st);
+void *mx_pop(t_stack *st);
 void *mx_top(t_stack *st);
 
 /*

@@ -1,7 +1,7 @@
 #include "libmx.h"
 
-void *mx_memrchr(t_cv *s, int c, size_t n) {
-    t_cuc *us = s;
+void *mx_memrchr(const void *s, int c, size_t n) {
+    const t_byte *us = s;
 
     if (!us || !n)
         return NULL;

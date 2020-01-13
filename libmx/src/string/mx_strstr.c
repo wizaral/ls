@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-char *mx_strstr(t_cc *haystack, t_cc *needle) {
+char *mx_strstr(const char *haystack, const char *needle) {
     int len1 = mx_strlen(haystack);
     int len2 = mx_strlen(needle);
 

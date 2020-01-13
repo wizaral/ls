@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-int mx_count_words(t_cc *str, char c) {
+int mx_count_words(const char *str, char c) {
     int words = 0;
 
     if (str) {

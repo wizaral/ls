@@ -5,7 +5,7 @@ void **mx_flist_to_array(t_flist *list) {
     void **array = NULL;
 
     if (node && (array = (void **)malloc(sizeof(void *) * list->size)))
-        for (int i = 0; node; ++i, node = node->next)
+        for (size_t i = 0; node; ++i, node = node->next)
             array[i] = node->data;
     return array;
 }

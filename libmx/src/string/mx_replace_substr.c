@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-char *mx_replace_substr(t_cc *str, t_cc *sub, t_cc *replace) {
+char *mx_replace_substr(const char *str, const char *sub, const char *replace) {
     if (str && sub && replace) {
         int len1 = mx_strlen(sub);
         int len2 = mx_strlen(replace);

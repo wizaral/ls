@@ -1,10 +1,10 @@
 #include "libmx.h"
 
-void mx_foreach(void *arr, t_ull size, size_t bytes, void(*f)(void *)) {
+void mx_foreach(void *arr, size_t size, size_t bytes, void(*f)(void *)) {
     if (arr && f && size && bytes) {
-        t_ull end = size * bytes;
+        t_byte *end = (t_byte *)arr + size * bytes;
 
-        for (t_ull i = 0; i < end; i += bytes)
-            f((t_uc *)arr + i);
+        for (t_byte *i = arr; i < end; i += bytes)
+            f(i);
     }
 }
