@@ -2,10 +2,10 @@
 
 static void set_longest_links_num_and_access(t_vector *vect, t_info *info) {
     t_data *data = NULL;
-    t_ull longest = 0;
-    t_ull longestaccess = 0;
+    size_t longest = 0;
+    size_t longestaccess = 0;
 
-    for (t_ull i = 0; i < vect->size; i++) {
+    for (size_t i = 0; i < vect->size; i++) {
         data = mx_at(vect, i);
 
         if (mx_strlen(data->links) > longest)
@@ -19,9 +19,9 @@ static void set_longest_links_num_and_access(t_vector *vect, t_info *info) {
 
 static void set_longest_login(t_vector *vect, t_info *info) {
     t_data *data = NULL;
-    t_ull longest = 0;
+    size_t longest = 0;
 
-    for (t_ull i = 0; i < vect->size; i++) {
+    for (size_t i = 0; i < vect->size; i++) {
         data = mx_at(vect, i);
 
         if (mx_strlen(data->login) > longest)
@@ -32,9 +32,9 @@ static void set_longest_login(t_vector *vect, t_info *info) {
 
 static void set_longest_grp(t_vector *vect, t_info *info) {
     t_data *data = NULL;
-    t_ull longest = 0;
+    size_t longest = 0;
 
-    for (t_ull i = 0; i < vect->size; i++) {
+    for (size_t i = 0; i < vect->size; i++) {
         data = mx_at(vect, i);
 
         if (mx_strlen(data->grp) > longest)
@@ -45,9 +45,9 @@ static void set_longest_grp(t_vector *vect, t_info *info) {
 
 static void set_longest_size(t_vector *vect, t_info *info) {
     t_data *data = NULL;
-    t_ull longest = 0;
+    size_t longest = 0;
 
-    for (t_ull i = 0; i < vect->size; i++) {
+    for (size_t i = 0; i < vect->size; i++) {
         data = mx_at(vect, i);
 
         if (mx_strlen(data->size) > longest && mx_get_substr_index(data->size, "0x") == -1)

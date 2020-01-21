@@ -24,19 +24,19 @@ typedef struct s_file {
 } t_file;
 
 typedef struct s_info {
-    t_ull max_len;
-    t_ull cols;
-    t_ull lines;
-    t_ull num_of_sub;
+    uint64_t max_len;
+    int64_t cols;
+    int64_t lines;
+    int64_t num_of_sub;
 
     // Fields for -lflag print
-    t_ull laccess;
-    t_ull llinks;
-    t_ull llogin;
-    t_ull lgrp;
-    t_ull lsize;
+    int64_t laccess;
+    int64_t llinks;
+    int64_t llogin;
+    int64_t lgrp;
+    int64_t lsize;
 
-    t_ull total;
+    int64_t total;
 } t_info;
 
 #endif

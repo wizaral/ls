@@ -4,7 +4,7 @@
 //     int count = 0;
 //     t_dir *file = file_vect->arr;
 
-//     for (t_ull i = 0; i < file_vect->size; i++) {
+//     for (t_i64 i = 0; i < file_vect->size; i++) {
 //         if (mx_strncmp(file[i].d_name, ".", 1) != 0) {
 //             if (count != 4) {
 //                 if (count > 0)
@@ -53,10 +53,10 @@
 //     int sub_r;
 //     int tab_len = 0;
 
-//     for (t_ull i = 0; i < info->lines; ++i) {
+//     for (t_i64 i = 0; i < info->lines; ++i) {
 //         j = 0;
 //         sub_r = 0;
-//         for (t_ull t = 0; t < file_vect->size; ++t) {
+//         for (t_i64 t = 0; t < file_vect->size; ++t) {
 //             ++j;
 //             if ((j + info->lines - i) % info->lines == 0) {
 //                 mx_printstr(((t_dir *)file_vect->arr)[t].d_name, 1);

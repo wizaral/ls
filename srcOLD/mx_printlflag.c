@@ -1,27 +1,27 @@
 #include "uls.h"
 
 static void inline print_tabs_links(t_data *data ,t_info *info, char **str) {
-    for (t_ull i = 0; i < info->laccess - mx_strlen(data->access) + info->llinks - mx_strlen(data->links) + 1; i++) {
+    for (uint64_t i = 0; i < info->laccess - mx_strlen(data->access) + info->llinks - mx_strlen(data->links) + 1; i++) {
         mx_strcat(*str, " ");
     }
 }
 
 static void inline print_tabs_size(t_data *data ,t_info *info, char **str) {
-    t_ull buf = mx_strlen(data->size);
+    int64_t buf = mx_strlen(data->size);
 
     if (mx_get_substr_index(data->size, "0x") != -1)
         buf = info->lsize;
 
-    for (t_ull i = 0; i < info->lsize - buf + info->lgrp - mx_strlen(data->grp) + 2; i++) {
+    for (uint64_t i = 0; i < info->lsize - buf + info->lgrp - mx_strlen(data->grp) + 2; i++) {
         mx_strcat(*str, " ");
     }
 }
 
 static void inline print_tabs_grp(t_data *data ,t_info *info, char **str) {
-    if (mx_strlen(data->login) == info->llogin)
+    if ((int64_t)mx_strlen(data->login) == info->llogin)
             mx_strcat(*str, "  ");
     else 
-        for (t_ull i = 0; i < info->llogin - mx_strlen(data->login) + 2; i++)
+        for (uint64_t i = 0; i < info->llogin - mx_strlen(data->login) + 2; i++)
             mx_strcat(*str, " ");
 }
 
@@ -50,7 +50,7 @@ void mx_print_l_flag(t_vector *file_vect, t_info *info) {
     mx_set_longest_fields(file_vect, info);
 
     printf("total %llu\n", info->total);
-    for (t_ull i = 0; i < file_vect->size; i++) {
+    for (size_t i = 0; i < file_vect->size; i++) {
         data = mx_at(file_vect, i);
         str = create_string(data, info);
         mx_printstr(str, 1);

@@ -23,7 +23,7 @@ void mx_num_of_cols(t_vector *file_vect, t_info *info) {
     info->lines = 0;
     info->num_of_sub = file_vect->size;
 
-    for (t_ull i = 0; i < file_vect->size; ++i) {
+    for (size_t i = 0; i < file_vect->size; ++i) {
         data = mx_at(file_vect, i);
         if (info->max_len < mx_strlen(data->ent->d_name))
             info->max_len = mx_strlen(data->ent->d_name);

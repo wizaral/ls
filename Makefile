@@ -2,8 +2,9 @@ CC = clang
 LIB = libmx.a
 NAME = uls
 
-RAW = mx_main mx_num_of_cols mx_print mx_uls mx_lflag mx_lflag_linksnum \
-	mx_l_flag_spaces mx_printlflag 
+# RAW = mx_main mx_num_of_cols mx_print mx_uls mx_lflag mx_lflag_linksnum \
+# 	mx_l_flag_spaces mx_printlflag 
+RAW = mx_main mx_parse mx_errors \
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
@@ -18,7 +19,7 @@ LFLAGS = -Iinc -Ilibmx/inc
 CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer -flto
 DFLAGS = -O0 -g3 -glldb -fsanitize=address
 
-all: install clean
+all: install
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)

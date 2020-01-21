@@ -28,7 +28,7 @@ void mx_advanced_permissions_check(t_vector *vec, t_info *info) {
     struct stat st;
     
 
-    for (t_ull i = 0; i < vec->size; i++) {
+    for (size_t i = 0; i < vec->size; i++) {
         data = (t_data *)mx_at(vec, i);
         stat(data->path, &st);
         acl = acl_get_file(data->path, ACL_TYPE_EXTENDED);
@@ -86,7 +86,7 @@ void mx_basic_permissions(t_vector *vec) {
     t_data *data = NULL;
     struct stat buff;
 
-    for (t_ull i = 0; i < vec->size; i++) {
+    for (size_t i = 0; i < vec->size; i++) {
         data = (t_data *)mx_at(vec, i);
         lstat(data->path, &buff);
         basic_perm(data, buff);

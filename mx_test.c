@@ -1,5 +1,6 @@
-#include "libmx.h"
+#include "libmx/inc/libmx.h"
 #include <stdio.h>
+#include <time.h>
 
 static inline void print(void *item) {
     printf("%i, ", *(int *)item);
@@ -11,49 +12,65 @@ static void fprint(t_flist_node *node) {
 
 static void print2(t_queue *q) {
     printf("PRINT2!\n");
-    for (t_ull i = 0; i < q->size; ++i)
+    for (t_i64 i = 0; i < q->size; ++i)
         printf("%i, ", *(int *)((t_uc *)q->arr + i * q->bytes));
     printf("\n");
 }
 
 static void vector_case() {
     t_vector *v = mx_create_vector(sizeof(int));
+    int r;
     printf("%llu %llu %lu %zu\n", v->cap, v->size, v->bytes, malloc_size(v->arr));
 
-    for (int i = 0; i < 32; ++i) {
-        mx_push_backward(v, &i);
+    for (int i = 0; i < 25; ++i) {
+        r = rand() % 10;
+        mx_push_backward(v, &r);
         mx_foreach_vector(v, print);
         printf("\n");
     }
+    printf("CREATED\n");
 
     mx_reverse_vector(v);
     mx_foreach_vector(v, print);
-    printf("\n");
+    printf("\nREVERSED\n");
 
-    int item = 0;
-    mx_insert(v, 2, &item);
-    mx_foreach_vector(v, print);
+    for (int i = 0; i < 25; i++) {
+        r = rand() % 10;
+        mx_insert(v, i, &r);
+        mx_foreach_vector(v, print);
+        printf("INSERTED: %d\n", r);
+    }
     printf("\nINSERTED\n");
 
-    mx_erase(v, 0);
-    mx_foreach_vector(v, print);
+    for (int i = 0; i < 25; i++){
+        r = rand() % v->size;
+        mx_erase(v, r);
+        mx_foreach_vector(v, print);
+        printf("ERASED: %d\n", r);
+    }
     printf("\nERASED\n");
 
-    mx_pop_backward(v);
-    mx_foreach_vector(v, print);
+    for (int i = 0; i < 15; i++) {
+        mx_pop_backward(v);
+        mx_foreach_vector(v, print);
+        printf("\n");
+    }
     printf("\nPOPED BACK\n");
 
-    mx_push_backward(v, &item);
-    mx_foreach_vector(v, print);
+    for (int i = 0; i < 45; i++) {
+        r = rand() % 10;
+        mx_push_backward(v, &r);
+        mx_foreach_vector(v, print);
+        printf("\n");
+    }
     printf("\nPUSHED\n");
+    // int *front = mx_get_front(v);
+    // int *back = mx_get_back(v);
+    // printf("Front: %d\nBack: %d\n", *front, *back);
 
-    int *front = mx_get_front(v);
-    int *back = mx_get_back(v);
-    printf("Front: %d\nBack: %d\n", *front, *back);
-
-    mx_assign_vector(v, 16, &item);
-    mx_foreach_vector(v, print);
-    printf("\nASSIGNED\n");
+    // mx_assign_vector(v, 16, &r);
+    // mx_foreach_vector(v, print);
+    // printf("\nASSIGNED\n");
 
     mx_clear_vector(v);
     mx_foreach_vector(v, print);
@@ -65,10 +82,11 @@ static void vector_case() {
 
 static void queue_case() {
     t_queue *q = mx_create_queue(sizeof(int));
-    int item = 777;
+    int r;
 
-    for (int i = 0; i < 16; i++) {
-        mx_enqueue(q, &i);
+    for (int i = 0; i < 24; i++) {
+        r = rand() % 10;
+        mx_enqueue(q, &r);
         mx_foreach_queue(q, print);
         printf("\n1 head: %llu %i\ntail: %llu %i\n", q->head, *(int *)mx_front(q), q->tail, *(int *)mx_rear(q));
     }
@@ -78,16 +96,20 @@ static void queue_case() {
     for (int i = 300; i < 305; i++) {
         mx_dequeue(q);
         mx_enqueue(q, &i);
-        printf("2 head: %llu %i\ntail: %llu %i\n", q->head, *(int *)mx_front(q), q->tail, *(int *)mx_rear(q));
+        //printf("2 head: %llu %i\ntail: %llu %i\n", q->head, *(int *)mx_front(q), q->tail, *(int *)mx_rear(q));
     }
     printf("\n");
     print2(q);
 
+    r = rand() % 10;
+
     mx_dequeue(q);
-    mx_enqueue(q, &item);
+    mx_enqueue(q, &r);
     print2(q);
 
-    mx_enqueue(q, &item);
+    r = rand() % 10;
+
+    mx_enqueue(q, &r);
     print2(q);
 
     mx_foreach_queue(q, print);
@@ -108,24 +130,22 @@ static void queue_case() {
 
 static void stack_case() {
     t_stack *s = mx_create_stack(sizeof(int));
+    int *top;
+    int r;
 
     for (int i = 0; i < 40; i++) {
-        mx_push(s, &i);
+        r = rand() % 10;
+        mx_push(s, &r);
         mx_foreach_stack(s, print);
         printf("\n");
     }
 
-    int *top = mx_top(s);
-    mx_pop(s);
-
-    printf("\nPop: %d\n", *top);
-    mx_foreach_stack(s, print);
-    printf("\n");
-
-    top = mx_top(s);
-    printf("Top: %d\n", *top);
-    mx_foreach_stack(s, print);
-    printf("\n");
+    for (int i = 0; i < 41; i++) {
+        top = mx_top(s);
+        mx_foreach_stack(s, print);
+        mx_pop(s);
+        printf("TOP WAS: %d\n", *top);
+    }
 
     mx_delete_stack(s);
     printf("\nDELETED\n");
@@ -136,27 +156,40 @@ static void stack_case() {
 
 static void flist_case() {
     t_flist *l = mx_fcreate_list();
+    int r;
 
     for (int i = 0; i < 16; ++i) {
         mx_fpush_back(l, &i);
         mx_fforeach_list(l, fprint);
         printf("\n");
     }
-    int item = 69;
-    mx_fpush_index(l, &item, 1);
-    mx_fforeach_list(l, fprint);
+    printf("\nCREATED\n");
+    for (int i = 0; i < 25; i++) {
+        r = rand() % 10;
+        mx_fpush_index(l, &r, i);
+        mx_fforeach_list(l, fprint);
+        printf("\n");
+    }
     printf("\nFPUSH_INDEX\n");
 
-    mx_fpop_index(l, 1);
-    mx_fforeach_list(l, fprint);
+    for (int i = 0; i < 40; i++) {
+        r = rand() % 50;
+        mx_fpop_index(l, r);
+        mx_fforeach_list(l, fprint);
+        printf("POS: %d\n", r);
+    }
     printf("\nFPOP_INDEX\n");
 
-    mx_fpush_front(l, &item);
-    mx_fforeach_list(l, fprint);
+    for (int i = 0; i < 40; i++) {
+        r = rand() % 10;
+        mx_fpush_front(l, &r);
+        mx_fforeach_list(l, fprint);
+        printf("\n");
+    }
     printf("\nFPUSH_FRONT\n");
 
     int **arr = (int **)mx_flist_to_array(l);
-    for (int i = 0; i < 16; ++i)
+    for (int i = 0; i < l->size; ++i)
         printf("%d, ", *arr[i]);
     printf("\nARRAY\n");
 
@@ -170,11 +203,12 @@ static void flist_case() {
     mx_fforeach_list(l, fprint);
     printf("\nCLEARED\n");
 
-    mx_fdelete_list(&l);
+    mx_fdelete_list(l);
     printf("\nDELETED\n");
 }
 
 int main(int argc, char **argv) {
+    srand(time(NULL));
     if (argc > 1) {
         switch (mx_atoll(argv[1])) {
             case 1:
