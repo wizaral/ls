@@ -1,10 +1,10 @@
 #include "libmx.h"
 
-t_i64 mx_sigma(t_i64 n) {
-    t_i64 result = 0;
+uint64_t mx_sigma(uint64_t n) {
+    uint64_t result = 0;
 
     if (n < 6074001000)
-        for (t_i64 i = 1; i <= n; ++i)
+        for (uint64_t i = 1; i <= n; ++i)
             result += i;
     return result;
 }

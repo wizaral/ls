@@ -1,8 +1,7 @@
 NAME = libmx.a
 CC = clang
 
-algorithm = binary_search checksort linear_search quicksort_rec quicksort     \
-	sort_rec sort
+algorithm = bsearch checksort lsearch quicksort sort
 
 file = get_file_length file_to_str read_line
 
@@ -54,13 +53,10 @@ OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(RAW)))
 
 WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc
-CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer -flto                \
-	-ffunction-sections -fdata-sections
-# check -Wl, --gc-sections flags !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer -flto
+DFLAGS = -O0 -g3 -glldb -fsanitize=address
 
-DFLAGS = -O0 -g -fsanitize=address
-
-all: install clean
+all: install
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR) $(OBJ_DIR)/algorithm $(OBJ_DIR)/file                 \
@@ -90,4 +86,4 @@ uninstall:
 	@rm -rf $(NAME)
 	@rm -rf $(OBJ_DIR)
 
-reinstall: uninstall all
+reinstall: uninstall install

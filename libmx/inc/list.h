@@ -1,7 +1,4 @@
-#ifndef LIST_H
-#define LIST_H
-
-#include "types.h"
+#pragma once
 
 typedef struct s_list_node {
     void *data;
@@ -62,5 +59,3 @@ t_list *mx_sort_list(t_list *list, int (*cmp)(const void *, const void *));
 void **mx_list_to_array(t_list *list);
 void mx_foreach_list(t_list *list, void (*f)(t_list_node *));
 void mx_foreach_list_reverse(t_list *list, void (*f)(t_list_node *));
-
-#endif

@@ -1,10 +1,10 @@
 #include "libmx.h"
 
-t_i64 mx_sqrt_natural(t_i64 x) {
-    t_i64 left = 0;
-    t_i64 right = 4294967295;
-    t_i64 middle = 0;
-    t_i64 power;
+uint64_t mx_sqrt_natural(uint64_t x) {
+    uint64_t left = 0;
+    uint64_t right = 4294967295;
+    uint64_t middle = 0;
+    uint64_t power;
 
     while (left <= right) {
         middle = left + (right - left) / 2;

@@ -9,10 +9,8 @@
 *.sw*
 *.vscode
 
-# preprocessing, assembly, object, debug
-*.i
-*.s
-*.o
+# preprocessing, object, assembly, debug
+*.[ios]
 *.dSYM
 
 # lib, out, exe
@@ -20,9 +18,8 @@
 *.out
 *.exe
 
-main
-uls
-
-# lol why not
+# text files
 *.txt
 *.pdf
+
+uls

@@ -1,7 +1,4 @@
-#ifndef QUEUE_H
-#define QUEUE_H
-
-#include "types.h"
+#pragma once
 
 #define QUEUE_DEFAULT_SIZE 16
 
@@ -13,7 +10,7 @@ typedef struct s_queue {
     size_t tail;    // position of last element // rear
 
     size_t bytes;   // sie of item
-    t_byte *arr;    // array of items
+    uint8_t *arr;    // array of items
 } t_queue;
 
 /*
@@ -47,5 +44,3 @@ void *mx_rear(t_queue *q);
 
 void mx_clear_queue(t_queue *q);
 void mx_foreach_queue(t_queue *q, void (*f)(void *));
-
-#endif

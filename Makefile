@@ -2,7 +2,6 @@ CC = clang
 LIB = libmx.a
 NAME = uls
 
-# тут перечень файлов в src без расширения, но с префиксом mx_ !
 RAW = mx_main mx_num_of_cols mx_print mx_uls mx_lflag mx_lflag_linksnum \
 	mx_l_flag_spaces mx_printlflag 
 
@@ -14,16 +13,12 @@ SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(RAW)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(RAW)))
 LIB_PATH = $(addprefix $(LIB_DIR), $(LIB))
 
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
+WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc -Ilibmx/inc
-OFLAGS = -Ofast -march=native
-DFLAGS = -g -fsanitize=address
+CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer -flto
+DFLAGS = -O0 -g3 -glldb -fsanitize=address
 
 all: install clean
-
-# в задаче с дебагом нет клина папки *.dSYM, т.к. она нужна для дебага
-# (неждан) но у нас этого флага не будет при пуше
-# сама папка в игноре, так шо не бзди))
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -31,32 +26,26 @@ $(OBJ_DIR):
 $(LIB):
 	@make -sC $(LIB_DIR) -f Makefile install
 
-# чтобы нормально переключаться между типами компиляции нужно коментить 
-# одно и раскоментить другое. другого варианта как это красиво сделать я
-# не придумал всё равно приходится копировать команды. те же действия в
-# либе сделай! советую пока что работать на install сборке, потом будет
-# оптимизации трогать
-
 # install
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+# 	@$(CC) $(WFLAGS) $(LFLAGS) -o $@ -c $<
 
 # $(NAME): $(OBJ_DIR) $(OBJ)
-# 	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 # optimize
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(CFLAGS) $(LFLAGS) $(OFLAGS) -o $@ -c $<
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 # $(NAME): $(OBJ_DIR) $(OBJ)
-# 	@$(CC) $(CFLAGS) $(LFLAGS) $(OFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 # debug
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 install: $(LIB) $(NAME)
 

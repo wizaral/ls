@@ -1,7 +1,4 @@
-#ifndef STACK_H
-#define STACK_H
-
-#include "types.h"
+#pragma once
 
 #define STACK_DEFAULT_SIZE 16
 
@@ -9,7 +6,7 @@ typedef struct s_stack {
     size_t cap;     // capacity
     size_t size;    // current size
     size_t bytes;   // size of item
-    t_byte *arr;    // array of items
+    uint8_t *arr;    // array of items
 } t_stack;
 
 /*
@@ -37,5 +34,3 @@ void *mx_top(t_stack *st);
 
 void mx_clear_stack(t_stack *st);
 void mx_foreach_stack(t_stack *st, void (*f)(void *));
-
-#endif

@@ -1,7 +1,4 @@
-#ifndef VECTOR_H
-#define VECTOR_H
-
-#include "types.h"
+#pragma once
 
 #define VECTOR_DEFAULT_SIZE 16
 
@@ -9,7 +6,7 @@ typedef struct s_vector {
     size_t cap;     // capacity
     size_t size;    // current size
     size_t bytes;   // size of item
-    t_byte *arr;    // array of items
+    uint8_t *arr;    // array of items
 } t_vector;
 
 /*
@@ -59,5 +56,3 @@ void *mx_get_back(t_vector *v);
 
 void mx_foreach_vector(t_vector *v, void (*f)(void *));
 void mx_reverse_vector(t_vector *v);
-
-#endif

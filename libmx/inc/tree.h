@@ -1,7 +1,4 @@
-#ifndef TREE_H
-#define TREE_H
-
-#include "types.h"
+#pragma once
 
 #define TREE_DEFAULT_SIZE 16
 
@@ -18,5 +15,3 @@ typedef struct s_tree {
 } t_tree;
 
 
-
-#endif
