@@ -1,25 +1,15 @@
 #include "uls.h"
 
 static char *get_login(uid_t st_uid) {
-    char *user = (char *)malloc(256);
     struct passwd *pw = getpwuid(st_uid);
 
-    if (pw == NULL)
-        user = mx_itoa(st_uid);
-    else
-        mx_strcpy(user, pw->pw_name);
-    return user;
+    return pw ? mx_strdup(pw->pw_name) : mx_itoa(pw->pw_uid);
 }
 
 static char *get_gname(gid_t st_gid) {
-    char *grpname = (char *)malloc(256);
     struct group *grp = getgrgid(st_gid);
 
-    if (grp == NULL)
-        grpname = mx_itoa(st_gid);
-    else
-        mx_strcpy(grpname, grp->gr_name);
-    return grpname;
+    return grp ? mx_strdup(grp->gr_name) : mx_itoa(grp->gr_gid);
 }
 
 void mx_advanced_permissions_check(t_vector *vec, t_info *info) {

@@ -6,32 +6,29 @@ static bool is_flag_exist(char flag) {
     return false;
 }
 
+static bool is_flag_valid(bool doubleminus, bool dirprsd, char *argum) {
+    if (doubleminus && !dirprsd  && argum[0] != ' '
+     && mx_get_char_index(argum, '-') != -1
+     && mx_count_substr(argum, "-") == 1
+     && mx_strlen(argum) != 1)
+        return true;
+    return false;
+}
+
 static void mx_parse_dir(char *argum) {
     if (opendir(argum) != NULL)
         return;
     else if (access(argum, F_OK) != -1) {
         // Бахнуть флажок шо эт файл чтобы не пытаться его открыть а просто вывести его доступы допустим в л флаге
         // Или не бахать флажок и сделать такую же проверку уже когда передаем юлсу его
-        // И запушить это в лист(или другую структуру данных) файлов(директорий) для вывода
+        // Не кикать из вектора arg_dir эта папка вполе себе папка
         return;
     }
     else
         // Вывести ошибку шо ебанько и uls: [name]: No such file or directory
+        // И кикнуть нахер с вектора arg_dir это неправильная папка и её открывать потом ненадо
         mx_error_nodir(argum);
 }
-
-// static void mx_parse_long_flag(char *argum) {
-//     char **long_flags_name_arr;
-
-//     for (int i = 0; long_flags_name_arr[i]; ++i) {
-//         if (mx_strcmp(argum+2, long_flags_name_arr[i]) == 0)
-//          // Заебись отмечаем шо флаг написан
-//             return;
-//     }
-//     mx_error_usage(); // Выкидываем ошибку на эррор юзейджа
-//     //mx_free_memory(); // Чистим всё и ливаем из программы
-//     exit(0);
-// }
 
 static void mx_parse_flag(char *argum) {
     int j = 0;
@@ -47,13 +44,19 @@ static void mx_parse_flag(char *argum) {
 
 void mx_parse(int argnum, char *argum[]) {
     bool doubleminus = false;
+    bool dirparsed = false;
     // ебашим по всем аргументам
     for (int i = 1; i < argnum; i++) {
-        if (!doubleminus && mx_get_char_index(argum[i], '-') != -1 && mx_count_substr(argum[i], "-") == 1 && mx_strlen(argum[i]) != 1)
+        if (is_flag_valid(doubleminus, dirparsed, argum[i]))
             mx_parse_flag(argum[i]);
         else if (mx_count_substr(argum[i], "-") == 2)
-            doubleminus = true;
-        else
+            if (dirparsed == true)
+                mx_parse_dir(argum[i]);
+            else
+                doubleminus = true;
+        else {
             mx_parse_dir(argum[i]);
+            dirparsed = true;
+        }
     }
 }
