@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ls -la /dev >> lsOutput.log
+ls -la /dev > lsOutput.log
