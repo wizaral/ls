@@ -14,4 +14,4 @@ ls:
 	@make -sC LS -f Makefile uls
 
 go:
-	@./LS/uls text.txt
+	@./LS/uls

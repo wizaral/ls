@@ -1,4 +1,4 @@
-#ifndef DEFINES_LS_H
-#define DEFINES_LS_H
+#pragma once
 
-#endif
+#define MX_USAGE "usage: uls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"
+#define MX_FLAGS "ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1@"

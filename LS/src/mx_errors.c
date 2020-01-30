@@ -7,7 +7,7 @@ void mx_error_nodir(char *argum) {
 }
 
 void mx_error_usage() {
-    mx_printstr(USAGE, 2);
+    mx_printstr(MX_USAGE, 2);
     mx_printchar('\n', 2);
     exit(0);
 }

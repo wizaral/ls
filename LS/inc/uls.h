@@ -1,5 +1,4 @@
-#ifndef ULS_H
-#define ULS_H
+#pragma once
 
 #include "libmx.h"
 #include "defines_ls.h"
@@ -58,5 +57,3 @@ void mx_nelegal(char flag);
 // char *mx_sym_num(char access, struct stat buff);
 // void mx_set_longest_fields(t_vector *vect, t_info *info);
 // void mx_print_l_flag(t_vector *file_vect, t_info *info);
-
-#endif
