@@ -1,21 +1,20 @@
 #pragma once
 
+#include "defines.h"
+#include "errors.h"
 #include "libmx.h"
-#include "defines_ls.h"
-#include "errors_ls.h"
-#include "macroses_ls.h"
-#include "structs_ls.h"
-#include "types_ls.h"
+#include "macro.h"
+#include "structs.h"
+
 #include <dirent.h>
-#include <sys/stat.h>
+#include <grp.h>
+#include <pwd.h>
+#include <sys/acl.h>
 #include <sys/ioctl.h>
-#include <sys/acl.h>
+#include <sys/stat.h>
 #include <sys/types.h>
-#include <sys/acl.h>
 #include <sys/xattr.h>
 #include <wchar.h>
-#include <pwd.h>
-#include <grp.h>
 
 /*
 * FILE LIST
@@ -39,7 +38,6 @@ void mx_nelegal(char flag);
 */
 
 //void mx_print_w_flags(t_vector *file_vect);
-
 
 /*
 *   PRINT CALC

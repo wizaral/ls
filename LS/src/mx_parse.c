@@ -7,8 +7,8 @@ static inline bool is_flag_exist(char flag) {
 static char *get_file_name(char *av) {
     char *str = av;
 
-    while (mx_get_char_index(str, '/') != -1)
-        str += mx_get_char_index(str, '/') + 1;
+    for (char *temp = mx_strchr(str, '/'); temp; temp = mx_strchr(str, '/'))
+        str = temp + 1;
     return str;
 }
 
@@ -23,7 +23,8 @@ static void mx_parse_dir(char *av) {
         // Или не бахать флажок и сделать такую же проверку уже когда передаем юлсу его
         // Не кикать из вектора arg_dir эта папка вполе себе папка
         return;
-    } else
+    }
+    else
         // Вывести ошибку шо ебанько и uls: [name]: No such file or directory
         // И кикнуть нахер с вектора arg_dir это неправильная папка и её открывать потом ненадо
         mx_error_nodir(av);
