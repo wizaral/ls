@@ -31,13 +31,11 @@ int main() {
 
     while (file) {
         name = strjoin("/", file->d_name);
-        printf(":%s:", name);
         stat(name, &_stat);
         // printf("%s:%u:\n", fflagstostr(_stat.st_flags), _stat.st_flags);
-        printf("%llu:\n", _stat.st_ino);
+        printf("%s\t:\t%llu\n", name, _stat.st_ino);
         file = readdir(dir);
         free(name);
-        name = NULL;
     }
     closedir(dir);
 }

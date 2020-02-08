@@ -4,7 +4,7 @@ NAME = uls
 
 # RAW = mx_main mx_num_of_cols mx_print mx_uls mx_lflag mx_lflag_linksnum \
 # 	mx_l_flag_spaces mx_printlflag 
-RAW = mx_main mx_parse mx_errors \
+RAW = mx_main mx_parse mx_errors
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
@@ -60,3 +60,12 @@ uninstall:
 	@rm -rf $(OBJ_DIR)
 
 reinstall: uninstall install
+
+.PHONY: $(LIBP) $(NAMEP)
+
+LIBP:
+	@make -sC $(LIB_DIR) -f Makefile install
+	@printf "\x1b[32;1mLIBMX created\x1b[0m\n"
+
+NAMEP: $(OBJ_DIR) $(OBJ)
+	@printf "\x1b[32;1mULS created\x1b[0m\n"
