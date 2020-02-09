@@ -1,6 +1,6 @@
 cp ../LS/uls .
 
-sh compare.sh "'ls -l' $1" "'./uls -l' $1"
+sh compare.sh <ls -l $1 <./uls -l $1
 
 # sh compare.sh 'ls -l --' './uls -l --'
 # sh compare.sh 'ls -l -- .' './uls -l -- .'
