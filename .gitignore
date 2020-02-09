@@ -22,6 +22,7 @@
 *.txt
 *.pdf
 
+# current project
 uls
 !cases.txt
 !flags.txt

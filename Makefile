@@ -1,5 +1,5 @@
-all: install go
-lls: ls go
+lls: ls
+all: install
 
 install:
 	@make -sC LS -f Makefile all
@@ -12,6 +12,3 @@ reinstall:
 
 ls:
 	@make -sC LS -f Makefile uls
-
-go:
-	@./LS/uls
