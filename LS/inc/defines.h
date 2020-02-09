@@ -1,4 +1,5 @@
 #pragma once
+#include "uls.h"
 
 #define MX_USAGE "usage: uls [-ABCFGORSTU@abcdefghiklmnopqrstuvwx1] [file ...]"
 #define MX_FLAGS "ABCFGORSTUabcdefghiklmnopqrstuvwx1@"
