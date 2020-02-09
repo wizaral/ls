@@ -1,7 +1,7 @@
 diff $1 $2 &> /dev/null
 
-if [[ $? == 1 ]]; then
-    echo -e "\[\033[1;31m\]error\[\033[0m\]"
+if [ $? != 0 ]; then
+	echo "\033[1;31merror\033[0m"
 else
-    echo -e "\[\033[1;32m\]same\[\033[0m\]"
+	echo "\033[1;32msame\033[0m"
 fi

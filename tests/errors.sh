@@ -1,6 +1,7 @@
 cp ../LS/uls .
 
-sh compare.sh <($(ls --l)) <($(./uls --l))
+zsh compare.sh <($(ls --l)) <($(./uls --l))
+
 # sh compare.sh 'ls " -l"' './uls " -l"'
 # sh compare.sh 'ls -- " ."' './uls -- " ."'
 
