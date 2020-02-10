@@ -1,6 +1,6 @@
 #pragma once
 
-#define VECTOR_DEFAULT_SIZE 16
+#define MX_VECTOR_DEFAULT_SIZE 16
 
 typedef struct s_vector {
     size_t cap;     // capacity

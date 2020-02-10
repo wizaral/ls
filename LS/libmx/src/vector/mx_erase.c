@@ -10,7 +10,7 @@ void mx_erase(t_vector *v, size_t pos) {
                 mx_memcpy(start - v->bytes, start, v->bytes);
         }
         --v->size;
-        if ((float)v->cap / v->size > 4.0f && v->cap > VECTOR_DEFAULT_SIZE) {
+        if ((float)v->cap / v->size > 4.0f && v->cap > MX_VECTOR_DEFAULT_SIZE) {
             v->cap /= 2;
             v->arr = mx_realloc(v->arr, v->bytes * v->cap);
         }
