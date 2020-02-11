@@ -8,12 +8,8 @@ void mx_insert(t_vector *v, size_t pos, const void *item) {
             v->cap *= 2;
             v->arr = mx_realloc(v->arr, v->bytes * v->cap);
         }
-        if (pos < v->size) {
-            uint8_t *start = v->arr + v->size * v->bytes;
-
-            for (; start > ppos; start -= v->bytes)
-                mx_memcpy(start, start - v->bytes, v->bytes);
-        }
+        if (pos < v->size)
+            mx_memmove(v->arr + pos + 1, v->arr + pos, (v->size - pos - 1) * v->bytes);
         mx_memcpy(ppos, item, v->bytes);
         ++v->size;
     }
