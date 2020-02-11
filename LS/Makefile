@@ -60,12 +60,3 @@ uninstall:
 	@rm -rf $(OBJ_DIR)
 
 reinstall: uninstall install
-
-.PHONY: $(LIBP) $(NAMEP)
-
-LIBP:
-	@make -sC $(LIB_DIR) -f Makefile install
-	@printf "\x1b[32;1mLIBMX created\x1b[0m\n"
-
-NAMEP: $(OBJ_DIR) $(OBJ)
-	@printf "\x1b[32;1mULS created\x1b[0m\n"
