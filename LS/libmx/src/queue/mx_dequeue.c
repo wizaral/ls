@@ -27,7 +27,7 @@ void *mx_dequeue(t_queue *q) {
     if (q && q->arr && q->size) {
         q->head = q->head + 1 == q->cap ? 0 : q->head + 1;
         --q->size;
-        if ((float)q->cap / q->size > 4 && q->cap > QUEUE_DEFAULT_SIZE)
+        if ((float)q->cap / q->size > 4 && q->cap > MX_QUEUE_DEFAULT_SIZE)
             reduce_queue(q);
     }
     return item;
