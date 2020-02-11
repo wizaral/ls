@@ -1,6 +1,6 @@
 #pragma once
 
-#define QUEUE_DEFAULT_SIZE 16
+#define MX_QUEUE_DEFAULT_SIZE 16
 
 typedef struct s_queue {
     size_t cap;     // capacity
@@ -10,7 +10,7 @@ typedef struct s_queue {
     size_t tail;    // position of last element // rear
 
     size_t bytes;   // sie of item
-    uint8_t *arr;    // array of items
+    uint8_t *arr;   // array of items
 } t_queue;
 
 /*
