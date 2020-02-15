@@ -1,7 +1,7 @@
-lls: ls
-all: install
+ls:
+	@make -sC LS -f Makefile uls
 
-install:
+all:
 	@make -sC LS -f Makefile all
 
 uninstall:
@@ -9,6 +9,3 @@ uninstall:
 
 reinstall:
 	@make -sC LS -f Makefile reinstall
-
-ls:
-	@make -sC LS -f Makefile uls

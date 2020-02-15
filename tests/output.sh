@@ -1,23 +1,23 @@
 cp ../LS/uls .
 
-zsh compare.sh <(ls -l $1) <(./uls -l $1) <(echo -n "'./uls -l' $1")
+zsh compare.sh <(ls -l 2>&1) <(./uls -l 2>&1) 'ls -l'
 
-# sh compare.sh 'ls -l --' './uls -l --'
-# sh compare.sh 'ls -l -- .' './uls -l -- .'
-# sh compare.sh 'ls -l -- ..' './uls -l -- ..'
+zsh compare.sh <(ls -l -- 2>&1) <(./uls -l -- 2>&1) 'ls -l --'
+zsh compare.sh <(ls -l -- . 2>&1) <(./uls -l -- . 2>&1) 'ls -l -- .'
+zsh compare.sh <(ls -l -- .. 2>&1) <(./uls -l -- .. 2>&1) 'ls -l -- ..'
 
-# sh compare.sh 'ls -al --' './uls -al --'
-# sh compare.sh 'ls -la --' './uls -la --'
-# sh compare.sh 'ls -al -- .' './uls -al -- .'
-# sh compare.sh 'ls -la -- .' './uls -la -- .'
-# sh compare.sh 'ls -al -- ..' './uls -al -- ..'
-# sh compare.sh 'ls -la -- ..' './uls -la -- ..'
+zsh compare.sh <(ls -al -- 2>&1) <(./uls -al -- 2>&1) 'ls -al --'
+zsh compare.sh <(ls -la -- 2>&1) <(./uls -la -- 2>&1) 'ls -la --'
+zsh compare.sh <(ls -al -- . 2>&1) <(./uls -al -- . 2>&1) 'ls -al -- .'
+zsh compare.sh <(ls -la -- . 2>&1) <(./uls -la -- . 2>&1) 'ls -la -- .'
+zsh compare.sh <(ls -al -- .. 2>&1) <(./uls -al -- .. 2>&1) 'ls -al -- ..'
+zsh compare.sh <(ls -la -- .. 2>&1) <(./uls -la -- .. 2>&1) 'ls -la -- ..'
 
-# sh compare.sh 'ls -Al --' './uls -Al --'
-# sh compare.sh 'ls -Al -- ..' './uls -Al -- ..'
+zsh compare.sh <(ls -Al -- 2>&1) <(./uls -Al -- 2>&1) 'ls -Al --'
+zsh compare.sh <(ls -Al -- .. 2>&1) <(./uls -Al -- .. 2>&1) 'ls -Al -- ..'
 
-# sh compare.sh 'ls -aA -- ' './uls -aA -- '
-# sh compare.sh 'ls -Aa -- ' './uls -Aa -- '
+zsh compare.sh <(ls -aA --  2>&1) <(./uls -aA --  2>&1) 'ls -aA -- '
+zsh compare.sh <(ls -Aa --  2>&1) <(./uls -Aa --  2>&1) 'ls -Aa -- '
 
-# sh compare.sh 'ls -f -- ' './uls -f -- '
-# sh compare.sh 'ls -fA -- ' './uls -fA -- '
+zsh compare.sh <(ls -f --  2>&1) <(./uls -f --  2>&1) 'ls -f -- '
+zsh compare.sh <(ls -fA --  2>&1) <(./uls -fA --  2>&1) 'ls -fA -- '
