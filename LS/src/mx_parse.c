@@ -17,7 +17,9 @@ static void mx_parse_dir(char *av) {
         return;
     else if (access(av, F_OK) != -1) {
         if (access(av, R_OK) != 0) {
-            fprintf(stderr, "uls: %s: Permission denied\n", get_file_name(av));
+            mx_printstr("uls: ", 2);
+            mx_printstr(get_file_name(av), 2);
+            mx_printstr(": Permission denied\n", 2);
         }
         // Бахнуть флажок шо эт файл чтобы не пытаться его открыть а просто вывести его доступы допустим в л флаге
         // Или не бахать флажок и сделать такую же проверку уже когда передаем юлсу его

@@ -26,9 +26,9 @@ typedef struct s_file {
 
 typedef enum e_time_type {
     last_access = 0,
-    modification = 0,//sizeof(struct timespec),
-    change = 0,//sizeof(struct timespec) * 2,
-    creation = 0,//sizeof(struct timespec) * 3,
+    modification = sizeof(struct timespec),
+    change = sizeof(struct timespec) * 2,
+    creation = sizeof(struct timespec) * 3,
 } t_time_type;
 
 typedef struct s_print t_print;

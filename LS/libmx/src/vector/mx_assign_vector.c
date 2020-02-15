@@ -10,7 +10,7 @@ void mx_assign_vector(t_vector *v, size_t count, const void *item) {
         else {
             uint8_t *end = v->arr + count * v->bytes;
 
-            for (int8_t *i = v->arr; i < end; i += v->bytes)
+            for (uint8_t *i = v->arr; i < end; i += v->bytes)
                 mx_memcpy(i, item, v->bytes);
         }
     }
