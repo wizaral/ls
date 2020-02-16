@@ -30,8 +30,8 @@ string = atoll atoull count_substr count_words del_extra_spaces del_strarr    \
 
 type = isalpha isdigit ishex islower isspace isupper
 
-utils = factorial foreach get_num_length isprime pow sigma sqrt_natural sqrt  \
-	sum_digits swap
+utils = factorial foreach get_num_length get_unum_length isprime pow sigma    \
+	sqrt_natural sqrt sum_digits swap
 
 vector = assign_vector at clear_vector copy_vector create_vector              \
 	delete_vector erase foreach_vector get_back get_front insert pop_backward \
