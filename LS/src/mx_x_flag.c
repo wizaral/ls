@@ -1,4 +1,4 @@
-#include <uls.h>
+#include "uls.h"
 
 // ДОДЕЛАТЬ СТРУКТУРЫ ТОГДА ИЗИ ЭТО ПЕРЕПИШУ ПОД НИХ ЕЩЁ СДЕЛАТЬ ПОДДЕРЖКУ АЙНДОВ И ТД
 
@@ -6,18 +6,16 @@
 // ПОЛУЧИТЬ КОЛИЧЕСТВО ТАБОВ В САМОМ ДЛИННОМ СЛОВЕ
 static int get_tabsin_word(size_t lword) {
     int count = 0;
-    int ilword = (int)lword;
 
-    while (ilword >= 8) {
-        count++;
-        ilword -= 8;
-    }
+    for (int ilword = lword; ilword >= 8; ilword -= 8)
+        ++count;
     return count;
 }
+
 // НАЗВАНИ ГОВОРЯЩЕЕ ЗА СЕБЯ
 static void print_n_tabs(int tabs) {
     for (int i = 0; i < tabs; ++i)
-        printf("\t");
+        mx_printstr("\t", 1);
 }
 
 static void print_tabs(size_t lword, size_t cword, t_offsets *of) {
@@ -26,22 +24,20 @@ static void print_tabs(size_t lword, size_t cword, t_offsets *of) {
 
     if (of->cnum >= of->cursize + tabs_inlword * 16) {
         of->cursize += tabs_inlword * 8;
-        if (lword - cword != 0)
-            print_n_tabs(tabs_inlword - tabs_cword);
-        else 
-            print_n_tabs(1);
+        print_n_tabs(lword - cword ? tabs_inlword - tabs_cword : 1);
     }
     else {
-        printf("\n");
+        mx_print_str("\n", 1);
         of->cursize = 0;
     }
 }
 
 void print_x(t_info *info) {
+    t_file **dt = NULL;
+
     for (size_t i = 0; i < info->array->size; ++i) {
-        t_file **dt = mx_at(info->array, i);
-        
-        printf("%s", (*dt)->name);
+        dt = mx_at(info->array, i);
+        mx_printstr((*dt)->name, 1);
         if (i + 1 != info->array->size)
             print_spaces_tolword(offsets->longest_word, mx_strlen((*dt)->name), offsets);
     }
