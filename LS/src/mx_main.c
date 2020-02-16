@@ -1,5 +1,5 @@
 #include "uls.h"
-#include <stdio.h>
+// #include <stdio.h>
 
 // struct s_info {
     // t_vector arg_dir; // Вектор куда закидываются папки которые явлсяются аргументами
@@ -59,20 +59,20 @@ t_vector *get_files(char *direct) {
 // }s
 
 int main(int argc, char **argv) {
-    if (argc) {}
-    t_vector *v = get_files(argv[1]);
-    t_offsets *offsets = malloc(sizeof(t_offsets));
-    get_wsize(offsets);
-    get_lword(v, offsets);
-    offsets->cursize = 0;
+    if (argc) {
+        t_vector *v = get_files(argv[1]);
+        t_offsets *offsets = malloc(sizeof(t_offsets));
+        get_wsize(offsets);
+        get_lword(v, offsets);
+        offsets->cursize = 0;
 
-    for (size_t i = 0; i < v->size; ++i) {
-        t_data **dt = mx_at(v, i);
-        
-        printf("%s", (*dt)->dr->d_name);
+        for (size_t i = 0; i < v->size; ++i) {
+            t_data **dt = mx_at(v, i);
+            
+            printf("%s", (*dt)->dr->d_name);
+        }
     }
 }
-
 
 // старое
 
