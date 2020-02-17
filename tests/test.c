@@ -1,10 +1,17 @@
-#include <stdlib.h>
-#include <unistd.h>
 #include <dirent.h>
+#include <errno.h>
+#include <grp.h>
+#include <pwd.h>
 #include <stdio.h>
-#include <sys/stat.h>
-#include <time.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/acl.h>
+#include <sys/ioctl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/xattr.h>
+#include <time.h>
+#include <unistd.h>
 
 char *strnew(const int size) {
     char *ptr = NULL;
@@ -24,16 +31,13 @@ char *strjoin(char const *s1, char const *s2) {
 }
 
 int main() {
-    DIR *dir = opendir("/");
+    DIR *dir = opendir("//////////////");
     char *name;
-    struct stat _stat;
     struct dirent *file = readdir(dir);
 
     while (file) {
-        name = strjoin("/", file->d_name);
-        stat(name, &_stat);
-        // printf("%s:%u:\n", fflagstostr(_stat.st_flags), _stat.st_flags);
-        printf("%s\t:\t%llu\n", name, _stat.st_ino);
+        name = strjoin("//////////////", file->d_name);
+        printf("%s\n", name);
         file = readdir(dir);
         free(name);
     }

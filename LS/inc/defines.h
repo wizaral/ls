@@ -1,8 +1,8 @@
 #pragma once
 #include "uls.h"
 
-#define MX_USAGE "usage: uls [-ABCFGORSTU@abcdefghiklmnopqrstuvwx1] [file ...]"
-#define MX_FLAGS "ABCFGORSTUabcdefghiklmnopqrstuvwx1@"
+#define MX_USAGE "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"
+#define MX_FLAGS "ABCFGORSTU@abcdefghiklmnopqrstuvwx1"
 
 #define MX_DEFAULT      "\033[0m"           // NO COLOR
 #define MX_EXECUTE      "\033[0;31m"        // --x--x--x 3
@@ -10,7 +10,7 @@
 #define MX_PIPE         "\033[0;33m"        // PIPE
 #define MX_DIRECTORY    "\033[0;34m"        // DIR (d3)
 #define MX_LINK         "\033[0;35m"        // LINK
-#define MX_BLOK         "\033[34;46m"       // BLOK
+#define MX_BLOCK        "\033[34;46m"       // BLOCK
 #define MX_CHARACTER    "\033[34;43m"       // CHARACTER
 #define MX_UIDBIT       "\033[30;41m"       // --s------ 1
 #define MX_GIDBIT       "\033[30;46m"       // -----s--- 2

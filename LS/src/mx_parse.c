@@ -53,7 +53,7 @@ static void mx_parse_flag(char *av, bool *dirparsed) {
 
     for (int i = 1; av[i]; ++i) {
         if (is_flag_exist(av[i])) // Проверяем флаг с [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] если есть добавляем
-            mx_printstr("Zaebumba!", 1);
+            mx_printstr("Zaebumba!\n", 2);
         else
             mx_nelegal(av[i]); // Выводи ошибку причём две illegal option а потом usage_error и ливаем с катки
     }
