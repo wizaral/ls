@@ -4,7 +4,7 @@
 // -rw-r--r--  1        abalabin  4242   2268 Dec 19 15:38 Makefile
 // ACCESS      LINKS    LOGIN     GROUP  SIZE   TIME        ent->d_name
 
-typedef struct s_file {
+typedef struct s_printable {
     char *inode;
     char *blocksize;
     char *access;
@@ -15,7 +15,17 @@ typedef struct s_file {
     char *size;
     char *time;
     char *name;
+} t_printable;
+
+typedef struct s_file {
+    uint64_t inode;
+    // ...
+    t_printable fields;
 } t_file;
+
+typedef struct s_offset {
+    // ...
+} t_offset;
 
 /*
  * st_atimespec;        time of last access
@@ -39,6 +49,7 @@ struct s_info {
     t_file *files;          // pointer to colection of files in next var
     t_vector array;         // struct for manage array of files
     t_time_type time_type;  // data/time type for -[tlgno]
+    t_offset off;           // offsets in current directory
 
     struct s_print {
         void (*inode)(t_info *info);        // print.inode()
@@ -52,7 +63,7 @@ struct s_info {
         void (*name)(t_info *info);         // print.name()
         void (*name_add)(t_info *info);     // print.name_add()
         void (*arrow)(t_info *info);        // print.arrow()
-        void (*access_add)(t_info *info);   // print.access_add()
+        void (*attr)(t_info *info);         // print.attr()
         void (*acl)(t_info *info);          // print.acl()
     } print;
 
