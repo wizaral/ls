@@ -4,7 +4,7 @@
 #define MX_USAGE "usage: uls [-ABCFGORSTU@abcdefghiklmnopqrstuvwx1] [file ...]"
 #define MX_FLAGS "ABCFGORSTUabcdefghiklmnopqrstuvwx1@"
 
-#define MX_NOCOL        "\033[0m"           // NO COLOR
+#define MX_DEFAULT      "\033[0m"           // NO COLOR
 #define MX_EXECUTE      "\033[0;31m"        // --x--x--x 3
 #define MX_SOCKET       "\033[0;32m"        // SOCKET
 #define MX_PIPE         "\033[0;33m"        // PIPE
