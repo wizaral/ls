@@ -25,6 +25,9 @@ typedef struct s_file {
 
 typedef struct s_offset {
     // ...
+    size_t lword_size;
+    int term_width;
+    int curpos;
 } t_offset;
 
 /*
