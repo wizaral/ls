@@ -1,6 +1,3 @@
-ls:
-	@make -sC LS -f Makefile uls
-
 all:
 	@make -sC LS -f Makefile all
 

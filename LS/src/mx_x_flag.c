@@ -39,6 +39,6 @@ void print_x(t_info *info) {
         dt = mx_at(info->array, i);
         mx_printstr((*dt)->name, 1);
         if (i + 1 != info->array->size)
-            print_spaces_tolword(offsets->longest_word, mx_strlen((*dt)->name), offsets);
+            print_tabs(offsets->longest_word, mx_strlen((*dt)->name), offsets);
     }
 }

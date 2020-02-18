@@ -1,12 +1,13 @@
 #pragma once
 
+#include <dirent.h>
+
 #include "defines.h"
 #include "errors.h"
 #include "libmx.h"
 #include "macro.h"
 #include "structs.h"
 
-#include <dirent.h>
 #include <grp.h>
 #include <pwd.h>
 #include <sys/acl.h>
