@@ -28,20 +28,22 @@ string = atoll atoull count_substr count_words del_extra_spaces del_strarr    \
 	str_reverse strcat strchr strcmp strcpy strdel strdup strjoin strlen      \
 	strncmp strncpy strndup strnew strsplit strstr strtrim tolower toupper
 
-type = isalpha isdigit ishex islower isspace isupper
+tree = create_tree
+
+type = isalpha isdigit ishex islower isprint isspace isupper
 
 utils = factorial foreach get_num_length get_unum_length isprime pow sigma    \
 	sqrt_natural sqrt sum_digits swap
 
 vector = assign_vector at clear_vector copy_vector create_vector              \
-	delete_vector erase foreach_vector get_back get_front insert pop_backward \
-	push_backward reverse_vector
+	delete_vector erase foreach_vector foreach_vector_reverse get_back        \
+	get_front insert pop_backward push_backward reverse_vector
 
 RAW = $(addprefix algorithm/mx_, $(algorithm)) $(addprefix file/mx_, $(file)) \
 	$(addprefix flist/mx_, $(flist)) $(addprefix list/mx_, $(list))           \
 	$(addprefix memory/mx_, $(memory)) $(addprefix print/mx_, $(print))       \
 	$(addprefix queue/mx_, $(queue)) $(addprefix stack/mx_, $(stack))         \
-	$(addprefix string/mx_, $(string))                                        \
+	$(addprefix string/mx_, $(string)) $(addprefix type/mx_, $(tree))         \
 	$(addprefix type/mx_, $(type)) $(addprefix utils/mx_, $(utils))           \
 	$(addprefix vector/mx_, $(vector))
 

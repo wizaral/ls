@@ -1,14 +1,14 @@
 #pragma once
 
 #if defined(__APPLE__)
-    #include <malloc/malloc.h>
-    #define MX_MALLOC_SIZE(x) malloc_size(x)
+#include <malloc/malloc.h>
+#define MX_MALLOC_SIZE(x) malloc_size(x)
 #elif defined(_WIN64) || defined(_WIN32)
-    #include <malloc.h>
-    #define MX_MALLOC_SIZE(x) _msize(x)
+#include <malloc.h>
+#define MX_MALLOC_SIZE(x) _msize(x)
 #elif defined(__linux__)
-    #include <malloc.h>
-    #define MX_MALLOC_SIZE(x) malloc_usable_size(x)
+#include <malloc.h>
+#define MX_MALLOC_SIZE(x) malloc_usable_size(x)
 #endif
 
 #include <fcntl.h>
@@ -20,13 +20,13 @@
 
 #include "macroses.h"
 
+#include "algorithm.h"
 #include "flist.h"
 #include "list.h"
 #include "queue.h"
 #include "stack.h"
 #include "tree.h"
 #include "vector.h"
-#include "algorithm.h"
 
 /*
  * file
@@ -40,12 +40,14 @@ int64_t mx_read_line(char **lineptr, char delim, const int fd);
  * memory
  */
 
-void *mx_memccpy(void *restrict dst, const void *restrict src, int c, size_t n);
+void *mx_memccpy(void *restrict dst,
+                 const void *restrict src, int c, size_t n);
 void *mx_memchr(const void *s, int c, size_t n);
 int mx_memcmp(const void *s1, const void *s2, size_t n);
 void *mx_memcpy(void *restrict dst, const void *restrict src, size_t n);
 void *mx_memdup(const void *src, size_t n);
-void *mx_memmem(const void *big, size_t big_len, const void *little, size_t little_len);
+void *mx_memmem(const void *big, size_t big_len,
+                const void *little, size_t little_len);
 void *mx_memmove(void *dst, const void *src, size_t len);
 void *mx_memrchr(const void *s, int c, size_t n);
 void *mx_memset(void *b, int c, size_t len);
@@ -116,6 +118,7 @@ int mx_toupper(int c);
  * type
  */
 
+bool mx_isprint(int c);
 bool mx_isalpha(int c);
 bool mx_isdigit(int c);
 bool mx_ishex(int c);

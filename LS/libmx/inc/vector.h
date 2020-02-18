@@ -55,4 +55,5 @@ void *mx_get_back(t_vector *v);
  */
 
 void mx_foreach_vector(t_vector *v, void (*f)(void *));
+void mx_foreach_vector_reverse(t_vector *v, void (*f)(void *));
 void mx_reverse_vector(t_vector *v);
