@@ -29,16 +29,16 @@
 #include "algorithm.h"
 
 /*
-* file
-*/
+ * file
+ */
 
 char *mx_file_to_str(const char *file);
 int64_t mx_get_file_length(const char *filename);
 int64_t mx_read_line(char **lineptr, char delim, const int fd);
 
 /*
-* memory
-*/
+ * memory
+ */
 
 void *mx_memccpy(void *restrict dst, const void *restrict src, int c, size_t n);
 void *mx_memchr(const void *s, int c, size_t n);
@@ -53,8 +53,8 @@ void *mx_memset(void *b, int c, size_t len);
 void *mx_realloc(void *ptr, size_t size);
 
 /*
-* print
-*/
+ * print
+ */
 
 void mx_print_strarr(const char **arr, const char *delim, const int fd);
 void mx_print_unicode(wchar_t c, const int fd);
@@ -65,8 +65,8 @@ void mx_printstr(const char *s, const int fd);
 void mx_printunum(uint64_t n, const int fd);
 
 /*
-* string
-*/
+ * string
+ */
 
 int64_t mx_atoll(const char *str);
 uint64_t mx_atoull(const char *str);
@@ -113,8 +113,8 @@ int mx_tolower(int c);
 int mx_toupper(int c);
 
 /*
-* type
-*/
+ * type
+ */
 
 bool mx_isalpha(int c);
 bool mx_isdigit(int c);
@@ -125,8 +125,8 @@ bool mx_isspace(int c);
 bool mx_isupper(int c);
 
 /*
-* utils
-*/
+ * utils
+ */
 
 uint64_t mx_factorial(uint64_t n);
 void mx_foreach(void *arr, size_t size, size_t bytes, void (*f)(void *));
