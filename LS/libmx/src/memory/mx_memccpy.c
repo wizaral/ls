@@ -1,6 +1,7 @@
 #include "libmx.h"
 
-void *mx_memccpy(void *restrict dst, const void *restrict src, int c, size_t n) {
+void *mx_memccpy(void *restrict dst,
+                 const void *restrict src, int c, size_t n) {
     if (dst && src && n) {
         uint8_t *udst = dst;
         const uint8_t *usrc = src;

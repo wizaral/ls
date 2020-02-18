@@ -1,7 +1,7 @@
 #include "libmx.h"
 
 void **mx_list_to_array(t_list *list) {
-    t_list_node *node = list ? list->head : NULL;
+    t_list_node *node = list && list->size ? list->head : NULL;
     void **array = NULL;
 
     if (node && (array = (void **)malloc(sizeof(void *) * list->size)))

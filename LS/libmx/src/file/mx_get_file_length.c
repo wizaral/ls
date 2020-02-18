@@ -5,13 +5,11 @@ int64_t mx_get_file_length(const char *filename) {
 
     if (stream > -1) {
         int64_t length = 0;
-        int64_t delta = 1;
         char buffer[1024];
 
-        while (delta) {
+        for (int64_t delta = 1; delta; delta -= length) {
             delta = length;
             length += read(stream, buffer, 1024);
-            delta -= length;
         }
         close(stream);
         return length;
