@@ -32,14 +32,30 @@ char *strjoin(char const *s1, char const *s2) {
 
 int main() {
     DIR *dir = opendir("//////////////");
-    char *name;
     struct dirent *file = readdir(dir);
 
     while (file) {
-        name = strjoin("//////////////", file->d_name);
-        printf("%s\n", name);
+        printf("%s\n", file->d_name);
         file = readdir(dir);
-        free(name);
     }
     closedir(dir);
 }
+
+// int main() {
+//     char *name = "/tmp";
+
+//     struct stat st1;
+//     struct stat st2;
+
+//     stat(name, &st1);
+//     lstat(name, &st2);
+
+//     if (S_ISDIR(st1.st_mode))
+//         printf("d1\n");
+//     if (S_ISDIR(st2.st_mode))
+//         printf("d2\n");
+//     if (S_ISLNK(st1.st_mode))
+//         printf("l1\n");
+//     if (S_ISLNK(st2.st_mode))
+//         printf("l2\n");
+// }
