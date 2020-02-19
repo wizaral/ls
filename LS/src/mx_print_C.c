@@ -29,15 +29,15 @@ void mx_print_c(t_dir *dir) {
     int tabs_in_cword = 0;
 
     init_data(dir);                                                              // init data needef for output
-    for (size_t i = 0; i < (size_t)dir->off.rownums; ++i) {                     // walk through every row
-        for (size_t j = i; j < dir->array.size; j += dir->off.rownums) {       // walk of all elements of i row
-            dt = mx_at(&dir->array, j);                                           // take data from vector
+    for (size_t i = 0; i < (size_t)dir->off.rownums; ++i) {                      // walk through every row
+        for (size_t j = i; j < dir->array.size; j += dir->off.rownums) {         // walk of all elements of i row
+            dt = mx_at(&dir->array, j);                                          // take data from vector
             tabs_in_cword = 0;                                                   // init tabs_in_cword;
-            if (j < dir->array.size) {                                          // check if we are out of vector or not
+            if (j < dir->array.size) {                                           // check if we are out of vector or not
                 tabs_in_cword = get_tabsin_word(mx_strlen((*dt)->fields.name));  // get tabs in cword (current word)
                 mx_printstr((*dt)->fields.name, 1);                              // print name
-                if (j + dir->off.rownums != dir->array.size)                   // check if this is last file in row so we dont print tabs
-                    print_n_tabs(dir->off.tabs_in_lword - tabs_in_cword ?       // print tabs depending on numb of tabs in lword and cword;
+                if (j + dir->off.rownums != dir->array.size)                     // check if this is last file in row so we dont print tabs
+                    print_n_tabs(dir->off.tabs_in_lword - tabs_in_cword ?        // print tabs depending on numb of tabs in lword and cword;
                                  dir->off.tabs_in_lword - tabs_in_cword
                                   : 1);
             }
