@@ -20,12 +20,12 @@ static void print_n_tabs(int tabs) {
         printf("\t");
 }
 
-static void print_tabs(size_t lword, size_t cword, t_offsets *of) {
+static void print_tabs(size_t lword, size_t cword, t_offset *of) {
     int tabs_inlword = get_tabsin_word(lword) + 1; // убрать в t_offsets надо будет и вызывать один раз
     int tabs_cword = get_tabsin_word(cword);
 
-    if (of->cnum >= of->cursize + tabs_inlword * 16) {
-        of->cursize += tabs_inlword * 8;
+    if (of->colnums >= of->curpos + tabs_inlword * 16) {
+        of->curpos += tabs_inlword * 8;
         if (lword - cword != 0)
             print_n_tabs(tabs_inlword - tabs_cword);
         else 
@@ -33,16 +33,17 @@ static void print_tabs(size_t lword, size_t cword, t_offsets *of) {
     }
     else {
         printf("\n");
-        of->cursize = 0;
+        of->curpos = 0;
     }
 }
 
-void mx_print_x(t_info *info) {
-    for (size_t i = 0; i < info->array->size; ++i) {
-        t_file **dt = mx_at(info->array, i);
+void mx_print_x(t_dir *dir) {
+    for (size_t i = 0; i < dir->array.size; ++i) {
+        t_file **dt = mx_at(&dir->array, i);
         
-        printf("%s", (*dt)->name);
-        if (i + 1 != info->array->size)
-            print_spaces_tolword(offsets->longest_word, mx_strlen((*dt)->name), offsets);
+        mx_printstr((*dt)->fields.name);
+        if (i + 1 != dir->array.size)
+            print_spaces_tolword(dir->off.lword_size,
+                                 mx_strlen((*dt)->fields.name), &dir->off);
     }
 }
