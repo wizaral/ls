@@ -25,9 +25,12 @@ typedef struct s_file {
 
 typedef struct s_offset {
     // ...
-    size_t lword_size;      // size of longest work in file vector
-    int term_width;         // terminal x;
-    int curpos;             // current position in x;
+    size_t lword_size;         // size of longest work in file vectors
+    int tabs_in_lword;         // tabs in lword;
+    int colnums;               // number of columns in C out
+    int rownums;               // number of rows in C out
+    int term_width;            // terminal x;
+    int curpos;                // current position in x;
 } t_offset;
 
 /*

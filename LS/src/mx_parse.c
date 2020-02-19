@@ -12,9 +12,13 @@ static char *get_file_name(char *av) {
     return str;
 }
 
-static void mx_parse_dir(char *av) {
-    if (opendir(av) != NULL)
+static void mx_parse_dir(char *av) {                                    // АХТУНГ НОТ ПО АУДИТОР
+    DIR *dir = NULL;
+
+    if ((dir = opendir(av)) != NULL) {
+        closedir(dir);
         return;
+    }
     else if (access(av, F_OK) != -1) {
         if (access(av, R_OK) != 0) {
             mx_printstr("uls: ", 2);
