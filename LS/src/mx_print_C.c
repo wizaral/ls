@@ -36,7 +36,7 @@ void mx_print_c(t_info *info) {
             if (j < info->array->size) {                                         // check if we are out of vector or not
                 tabs_in_cword = get_tabsin_word(mx_strlen((*dt)->fields.name));  // get tabs in cword (current word)
                 mx_printstr((*dt)->fields.name, 1);                              // print name
-                if (j + info->off->rownums != info->array->size)                 // check if this is last file in row so we dont print \n
+                if (j + info->off->rownums != info->array->size)                 // check if this is last file in row so we dont print tabs
                     print_n_tabs(info->off->tabs_in_lword - tabs_in_cword ?      // print tabs depending on numb of tabs in lword and cword;
                                  info->off->tabs_in_lword - tabs_in_cword
                                   : 1);
