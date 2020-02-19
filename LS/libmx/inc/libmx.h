@@ -20,13 +20,13 @@
 
 #include "macroses.h"
 
-#include "algorithm.h"
 #include "flist.h"
 #include "list.h"
 #include "queue.h"
 #include "stack.h"
 #include "tree.h"
 #include "vector.h"
+#include "algorithm.h"
 
 /*
  * file

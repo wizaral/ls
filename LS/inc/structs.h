@@ -6,7 +6,7 @@
 
 typedef struct s_printable {
     char *inode;
-    char *blocksize;
+    char *bsize;
     char *access;
     char *links;
     char *user;
@@ -15,6 +15,10 @@ typedef struct s_printable {
     char *size;
     char *time;
     char *name;
+    char suffix;
+    char *arrow;
+    char *attr;
+    char *acl;
 } t_printable;
 
 typedef struct s_file {
@@ -48,33 +52,53 @@ typedef enum e_time_type {
 } t_time_type;
 
 typedef struct s_info t_info;
+typedef struct s_dir t_dir;
 
 typedef struct s_print {
-    void (*inode)(t_info *info);    // print.inode()
-    void (*bsize)(t_info *info);    // print.bsize()
-    void (*access)(t_info *info);   // print.access()
-    void (*user)(t_info *info);     // print.user()
-    void (*grp)(t_info *info);      // print.grp()
-    void (*flags)(t_info *info);    // print.flags()
-    void (*size)(t_info *info);     // print.size()
-    void (*time)(t_info *info);     // print.time()
-    void (*name)(t_info *info);     // print.name()
-    void (*suffix)(t_info *info);   // print.suffix()
-    void (*arrow)(t_info *info);    // print.arrow()
-    void (*attr)(t_info *info);     // print.attr()
-    void (*acl)(t_info *info);      // print.acl()
+    void (*inode)(t_dir *dir, size_t file);     // print.inode()
+    void (*bsize)(t_dir *dir, size_t file);     // print.bsize()
+    void (*access)(t_dir *dir, size_t file);    // print.access()
+    void (*links)(t_dir *dir, size_t file);     // print.links()
+    void (*user)(t_dir *dir, size_t file);      // print.user()
+    void (*grp)(t_dir *dir, size_t file);       // print.grp()
+    void (*flags)(t_dir *dir, size_t file);     // print.flags()
+    void (*size)(t_dir *dir, size_t file);      // print.size()
+    void (*time)(t_dir *dir, size_t file);      // print.time()
+    void (*name)(t_dir *dir, size_t file);      // print.name()
+    void (*suffix)(t_dir *dir, size_t file);    // print.suffix()
+    void (*arrow)(t_dir *dir, size_t file);     // print.arrow()
+    void (*attr)(t_dir *dir, size_t file);      // print.attr()
+    void (*acl)(t_dir *dir, size_t file);       // print.acl()
 } t_print;
 
-typedef struct s_dir {
+typedef struct s_get {
+    void (*inode)(t_dir *dir, size_t file);     // get.inode()
+    void (*bsize)(t_dir *dir, size_t file);     // get.bsize()
+    void (*access)(t_dir *dir, size_t file);    // get.access()
+    void (*links)(t_dir *dir, size_t file);     // get.links()
+    void (*user)(t_dir *dir, size_t file);      // get.user()
+    void (*grp)(t_dir *dir, size_t file);       // get.grp()
+    void (*flags)(t_dir *dir, size_t file);     // get.flags()
+    void (*size)(t_dir *dir, size_t file);      // get.size()
+    void (*time)(t_dir *dir, size_t file);      // get.time()
+    void (*name)(t_dir *dir, size_t file);      // get.name()
+    void (*suffix)(t_dir *dir, size_t file);    // get.suffix()
+    void (*arrow)(t_dir *dir, size_t file);     // get.arrow()
+    void (*attr)(t_dir *dir, size_t file);      // get.attr()
+    void (*acl)(t_dir *dir, size_t file);       // get.acl()
+} t_get;
+
+struct s_dir {
     t_file *files;      // pointer to colection of files in next var
     t_vector array;     // struct for manage array of files
     t_offset off;       // offsets in current directory
     t_info *info;       // access for other parametrs
     bool has_bc;        // true if char/block file (device) in dir
     DIR *dir;           // pointer to opened directory
-} t_dir;
+};
 
 struct s_info {
+    t_get get;
     t_print print;
     void (*out)(t_dir *dir);                // determines type of print
     void (*read)(t_dir *dir);               // filter of hiden files
