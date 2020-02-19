@@ -20,7 +20,7 @@ void mx_print_m(t_dir *dir) {
             mx_printstr("\n", 1);
             mx_printstr((*dt)->fields.name, 1);
             mx_printstr(", ", 1);
-            dir->off.curpos = 0;
+            dir->off.curpos = mx_strlen((*dt)->fields.name) + 2;
         }
     }
 }
