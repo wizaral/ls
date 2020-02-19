@@ -41,7 +41,7 @@ void mx_print_x(t_dir *dir) {
     for (size_t i = 0; i < dir->array.size; ++i) {
         t_file **dt = mx_at(&dir->array, i);
         
-        mx_printstr((*dt)->fields.name);
+        mx_printstr((*dt)->fields.name, 1);
         if (i + 1 != dir->array.size)
             print_spaces_tolword(dir->off.lword_size,
                                  mx_strlen((*dt)->fields.name), &dir->off);
