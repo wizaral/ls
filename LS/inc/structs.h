@@ -7,18 +7,11 @@
 typedef struct s_lengths {
     uint8_t inode;
     uint8_t bsize;
-    uint8_t access;
     uint8_t links;
     uint8_t user;
     uint8_t grp;
     uint8_t flags;
     uint8_t size;
-    uint8_t time;
-    uint8_t name;
-    uint8_t suffix;
-    uint8_t arrow;
-    uint8_t attr;
-    uint8_t acl;
 } t_lengths;
 
 typedef struct s_printable {
@@ -31,16 +24,14 @@ typedef struct s_printable {
     char *flags;
     char *size;
     char *time;
-    char *name;
     char *arrow;
     char *attr;
     char *acl;
     t_lengths lengths;
-    char suffix;
 } t_printable;
 
 typedef struct s_file {
-    uint64_t inode;
+    struct dirent *drnt;
     struct timespec time;
     // ...
     t_printable fields;
@@ -73,23 +64,6 @@ typedef enum e_time_type {
 typedef struct s_info t_info;
 typedef struct s_dir t_dir;
 
-typedef struct s_print {
-    void (*inode)(t_dir *dir, size_t file);     // print.inode()
-    void (*bsize)(t_dir *dir, size_t file);     // print.bsize()
-    void (*access)(t_dir *dir, size_t file);    // print.access()
-    void (*links)(t_dir *dir, size_t file);     // print.links()
-    void (*user)(t_dir *dir, size_t file);      // print.user()
-    void (*grp)(t_dir *dir, size_t file);       // print.grp()
-    void (*flags)(t_dir *dir, size_t file);     // print.flags()
-    void (*size)(t_dir *dir, size_t file);      // print.size()
-    void (*time)(t_dir *dir, size_t file);      // print.time()
-    void (*name)(t_dir *dir, size_t file);      // print.name()
-    void (*suffix)(t_dir *dir, size_t file);    // print.suffix()
-    void (*arrow)(t_dir *dir, size_t file);     // print.arrow()
-    void (*attr)(t_dir *dir, size_t file);      // print.attr()
-    void (*acl)(t_dir *dir, size_t file);       // print.acl()
-} t_print;
-
 typedef struct s_get {
     void (*inode)(t_dir *dir, size_t file);     // get.inode()
     void (*bsize)(t_dir *dir, size_t file);     // get.bsize()
@@ -106,6 +80,23 @@ typedef struct s_get {
     void (*attr)(t_dir *dir, size_t file);      // get.attr()
     void (*acl)(t_dir *dir, size_t file);       // get.acl()
 } t_get;
+
+typedef struct s_print {
+    void (*inode)(t_dir *dir, size_t file);     // print.inode()
+    void (*bsize)(t_dir *dir, size_t file);     // print.bsize()
+    void (*access)(t_dir *dir, size_t file);    // print.access()
+    void (*links)(t_dir *dir, size_t file);     // print.links()
+    void (*user)(t_dir *dir, size_t file);      // print.user()
+    void (*grp)(t_dir *dir, size_t file);       // print.grp()
+    void (*flags)(t_dir *dir, size_t file);     // print.flags()
+    void (*size)(t_dir *dir, size_t file);      // print.size()
+    void (*time)(t_dir *dir, size_t file);      // print.time()
+    void (*name)(t_dir *dir, size_t file);      // print.name()
+    void (*suffix)(t_dir *dir, size_t file);    // print.suffix()
+    void (*arrow)(t_dir *dir, size_t file);     // print.arrow()
+    void (*attr)(t_dir *dir, size_t file);      // print.attr()
+    void (*acl)(t_dir *dir, size_t file);       // print.acl()
+} t_print;
 
 struct s_dir {
     t_file *files;      // pointer to colection of files in next var

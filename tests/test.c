@@ -1,44 +1,51 @@
-#include <dirent.h>
-#include <errno.h>
-#include <grp.h>
-#include <pwd.h>
+#include "uls.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/acl.h>
-#include <sys/ioctl.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <sys/xattr.h>
-#include <time.h>
-#include <unistd.h>
-
-char *strnew(const int size) {
-    char *ptr = NULL;
-
-    if (size >= 0 && (ptr = (char *)malloc(size + 1)))
-        for (int i = 0; i <= size; ++i)
-            ptr[i] = '\0';
-    return ptr;
-}
-
-char *strjoin(char const *s1, char const *s2) {
-    if (s1 && s2) {
-        char *str = strnew(strlen(s1) + strlen(s2));
-        return str ? strcat(strcat(str, s1), s2) : NULL;
-    }
-    return (s1 || s2) ? (s1 ? strdup(s1) : strdup(s2)) : NULL;
-}
 
 int main() {
-    DIR *dir = opendir("//////////////");
-    struct dirent *file = readdir(dir);
+    t_vector *v = mx_create_vector(0, sizeof(struct passwd *));
+    char *cdir = "/Users/oafanasiev/Desktop/lsgit/tests/";
+    DIR *dir = opendir(cdir);
 
-    while (file) {
-        printf("%s\n", file->d_name);
-        file = readdir(dir);
+    struct dirent *file = NULL;
+    struct passwd *pass = NULL;
+    struct group *grp = NULL;
+    struct stat ___stat;
+    char *name = NULL;
+
+    if (v && dir) {
+        for (file = readdir(dir); file; file = readdir(dir)) {
+            printf(":%s: ", file->d_name);
+            name = mx_strjoin(cdir, file->d_name);
+            lstat(name, &___stat);
+
+            pass = getpwuid(___stat.st_uid);
+            grp = getgrgid(___stat.st_gid);
+
+            if (pass)
+                printf(":%s: ", pass->pw_name);
+
+            if (grp)
+                printf(":%s:\n", grp->gr_name);
+            else
+                printf(":%i:\n", ___stat.st_gid);
+            // mx_push_backward(v, &pass);
+
+            free(name);
+        }
+        closedir(dir);
+
+        printf("==========================================================\n");
+
+        // for (size_t i = 0; i < v->size; ++i) {
+        //     pass = *(struct passwd **)mx_at(v, i);
+        //     printf(":%s:%s:\n", pass->pw_name, pass->pw_class);
+        // }
     }
-    closedir(dir);
+    else {
+        perror(NULL);
+    }
+    mx_delete_vector(v);
+    system("leaks -q a.out");
 }
 
 // int main() {
