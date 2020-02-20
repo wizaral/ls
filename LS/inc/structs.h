@@ -4,6 +4,23 @@
 // -rw-r--r--  1        abalabin  4242   2268 Dec 19 15:38 Makefile
 // ACCESS      LINKS    LOGIN     GROUP  SIZE   TIME        ent->d_name
 
+typedef struct s_lengths {
+    uint8_t inode;
+    uint8_t bsize;
+    uint8_t access;
+    uint8_t links;
+    uint8_t user;
+    uint8_t grp;
+    uint8_t flags;
+    uint8_t size;
+    uint8_t time;
+    uint8_t name;
+    uint8_t suffix;
+    uint8_t arrow;
+    uint8_t attr;
+    uint8_t acl;
+} t_lengths;
+
 typedef struct s_printable {
     char *inode;
     char *bsize;
@@ -15,26 +32,28 @@ typedef struct s_printable {
     char *size;
     char *time;
     char *name;
-    char suffix;
     char *arrow;
     char *attr;
     char *acl;
+    t_lengths lengths;
+    char suffix;
 } t_printable;
 
 typedef struct s_file {
     uint64_t inode;
+    struct timespec time;
     // ...
     t_printable fields;
 } t_file;
 
 typedef struct s_offset {
     // ...
-    size_t lword_size;         // size of longest work in file vectors
-    int tabs_in_lword;         // tabs in lword;
-    int colnums;               // number of columns in C out
-    int rownums;               // number of rows in C out
-    int term_width;            // terminal x;
-    int curpos;                // current position in x;
+    size_t lword_size;      // size of longest work in file vectors
+    int tabs_in_lword;      // tabs in lword;
+    int colnums;            // number of columns in C out
+    int rownums;            // number of rows in C out
+    int term_width;         // terminal x;
+    int curpos;             // current position in x;
 } t_offset;
 
 /*
@@ -100,7 +119,7 @@ struct s_dir {
 struct s_info {
     t_get get;
     t_print print;
-    void (*out)(t_dir *dir);                // determines type of print
+    void (*write)(t_dir *dir);              // determines type of print
     void (*read)(t_dir *dir);               // filter of hiden files
     int (*cmp)(const void *, const void *); // compare function in sort
 

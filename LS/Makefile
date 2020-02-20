@@ -2,9 +2,24 @@ CC = clang
 LIB = libmx.a
 NAME = uls
 
-# RAW = mx_main mx_num_of_cols mx_print mx_uls mx_lflag mx_lflag_linksnum \
-# 	mx_l_flag_spaces mx_printlflag 
-RAW = mx_main mx_parse mx_errors
+base = errors main parse
+
+get = access acl arrow attr bsize flags grp inode links name size suffix time \
+	user
+
+print = access acl arrow attr bsize flags grp inode links name size suffix    \
+	time user
+
+read = full hidden standart
+
+sort = $(addprefix compare_, access ascii change creation modification size)
+
+write = $(addprefix write_, 1 C l m x)
+
+RAW = $(addprefix base/, $(base)) $(addprefix get/, $(get)) \
+	$(addprefix print/, $(print)) $(addprefix read/, $(read)) \
+	$(addprefix sort/, $(sort)) $(addprefix write/, $(write))
+
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
@@ -22,7 +37,8 @@ DFLAGS = -O0 -g3 -glldb -fsanitize=address
 all: install
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR) $(OBJ_DIR)/base $(OBJ_DIR)/get $(OBJ_DIR)/print      \
+	$(OBJ_DIR)/read $(OBJ_DIR)/sort $(OBJ_DIR)/write
 
 $(LIB):
 	@make -sC $(LIB_DIR) -f Makefile install

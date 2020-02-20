@@ -16,7 +16,8 @@ list = clear_list create_list create_node delete_list foreach_list_reverse    \
 memory = memccpy memchr memcmp memcpy memdup memmem memmove memrchr memset    \
 	realloc
 
-print = print_strarr print_unicode printchar printnum printstr printunum
+print = print_strarr print_unicode printchar printnum printstr printstrlen    \
+	printunum
 
 queue = clear_queue create_queue delete_queue dequeue enqueue foreach_queue   \
 	front rear
@@ -63,8 +64,8 @@ all: install
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR) $(OBJ_DIR)/algorithm $(OBJ_DIR)/file                 \
 	$(OBJ_DIR)/flist $(OBJ_DIR)/list $(OBJ_DIR)/memory $(OBJ_DIR)/print       \
-	$(OBJ_DIR)/queue $(OBJ_DIR)/stack $(OBJ_DIR)/string $(OBJ_DIR)/type       \
-	$(OBJ_DIR)/utils $(OBJ_DIR)/vector
+	$(OBJ_DIR)/queue $(OBJ_DIR)/stack $(OBJ_DIR)/string $(OBJ_DIR)/tree       \
+	$(OBJ_DIR)/type $(OBJ_DIR)/utils $(OBJ_DIR)/vector
 
 # install
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c

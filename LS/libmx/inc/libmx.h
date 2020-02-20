@@ -64,6 +64,7 @@ void mx_print_unicode(wchar_t c, const int fd);
 void mx_printchar(char c, const int fd);
 void mx_printnum(int64_t n, const int fd);
 void mx_printstr(const char *s, const int fd);
+void mx_printstrlen(const char *s, size_t len, const int fd);
 void mx_printunum(uint64_t n, const int fd);
 
 /*

@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-static inline void print_unicode(wchar_t c, const int fd) {
+void mx_print_unicode(wchar_t c, const int fd) {
     char parts[5] = {0};
 
     if (c < 0x80) 
@@ -21,9 +21,4 @@ static inline void print_unicode(wchar_t c, const int fd) {
         parts[3] = (c & 0x3F) | 0x80;
     }
     write(fd, parts, mx_strlen(parts));
-}
-
-void mx_print_unicode(wchar_t c, const int fd) {
-    if (fd >= 0)
-        print_unicode(c, fd);
 }
