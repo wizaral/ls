@@ -19,18 +19,19 @@ typedef struct s_lengths {
 typedef struct s_printable {
     char *inode;
     char *bsize;
-    char access[11];
     char *links;
     char *user;
     char *grp;
     char *flags;
     char *size;
     char *time;
-    char name[256];
     char *arrow;
     char *attr;
     char *acl;
     t_lengths lengths;
+    char suffix;
+    char access[11];
+    char name[255];
 } t_printable;
 
 typedef struct s_file {
@@ -41,12 +42,12 @@ typedef struct s_file {
 
 typedef struct s_offset {
     // ...
-    size_t lname_len;       // size of longest work in file vectors
-    int tabs_in_lname_len;  // tabs in lword;
-    int colnums;            // number of columns in C out
-    int rownums;            // number of rows in C out
-    int term_width;         // terminal x;
-    int curpos_in_term;     // current position in x;
+    size_t file_name;   // size of longest word in file vectors
+    int file_name_tabs; // tabs in longest word
+    int columns;        // number of columns in C out
+    int rows;           // number of rows in C out
+    int width;          // terminal width
+    int x;              // current position in x
 } t_offset;
 
 /*
@@ -67,38 +68,39 @@ typedef struct s_info t_info;
 typedef struct s_dir t_dir;
 
 typedef struct s_get {
-    void (*inode)(t_dir *dir, size_t file);     // get.inode()
-    void (*bsize)(t_dir *dir, size_t file);     // get.bsize()
-    void (*access)(t_dir *dir, size_t file);    // get.access()
-    void (*links)(t_dir *dir, size_t file);     // get.links()
-    void (*user)(t_dir *dir, size_t file);      // get.user()
-    void (*grp)(t_dir *dir, size_t file);       // get.grp()
-    void (*flags)(t_dir *dir, size_t file);     // get.flags()
-    void (*size)(t_dir *dir, size_t file);      // get.size()
-    void (*time)(t_dir *dir, size_t file);      // get.time()
-    void (*name)(t_dir *dir, size_t file);      // get.name()
-    void (*suffix)(t_dir *dir, size_t file);    // get.suffix()
-    void (*arrow)(t_dir *dir, size_t file);     // get.arrow()
-    void (*attr)(t_dir *dir, size_t file);      // get.attr()
-    void (*acl)(t_dir *dir, size_t file);       // get.acl()
+    void (*inode)(t_dir *dir, t_file *file, struct stat *st);
+    void (*bsize)(t_dir *dir, t_file *file, struct stat *st);
+    void (*access)(t_dir *dir, t_file *file, struct stat *st);
+    void (*links)(t_dir *dir, t_file *file, struct stat *st);
+    void (*user)(t_dir *dir, t_file *file, struct stat *st);
+    void (*grp)(t_dir *dir, t_file *file, struct stat *st);
+    void (*flags)(t_dir *dir, t_file *file, struct stat *st);
+    void (*size)(t_dir *dir, t_file *file, struct stat *st);
+    void (*time)(t_dir *dir, t_file *file, struct stat *st);
+    void (*name)(t_dir *dir, t_file *file, struct stat *st);
+    void (*suffix)(t_dir *dir, t_file *file, struct stat *st);
+    void (*arrow)(t_dir *dir, t_file *file, struct stat *st);
+    void (*attr)(t_dir *dir, t_file *file, struct stat *st);
+    void (*acl)(t_dir *dir, t_file *file, struct stat *st);
 } t_get;
 
 struct s_dir {
-    t_file *files;      // pointer to colection of files in next var
-    t_vector array;     // struct for manage array of files
-    t_offset off;       // offsets in current directory
-    t_info *info;       // access for other parametrs
-    bool has_bc;        // true if char/block file (device) in dir
-    DIR *dir;           // pointer to opened directory
+    char *name;             // current directory
+    t_file *files;          // pointer to colection of files in next var
+    t_vector array;         // struct for manage array of files
+    t_offset off;           // offsets in current directory
+    t_info *info;           // access for other parametrs
+    bool has_bc;            // true if char/block file (device) in dir
+    DIR *dir;               // pointer to opened directory
+    struct dirent *file;    // current file pointer
 };
 
 struct s_info {
-    t_get get;
-    t_print print;
     void (*write)(t_dir *dir);              // determines type of print
-    void (*read)(t_dir *dir);               // filter of hiden files
+    struct dirent *(*read)(t_dir *dir);     // filter of hiden files
     int (*cmp)(const void *, const void *); // compare function in sort
 
+    t_get get;
     bool output_dst;        // 0 - terminal | 1 - file or other process
     t_time_type time_type;  // data/time type for -[tlgno]
 };
