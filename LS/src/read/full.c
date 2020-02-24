@@ -1,6 +1,5 @@
 #include "uls.h"
 
-void full(t_dir *dir) {
-    // struct dirent *file;
-    // ...
+struct dirent *mx_full(t_dir *dir)  {
+    return readdir(dir->dir);
 }
