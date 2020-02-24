@@ -1,9 +1,6 @@
 #pragma once
 #include "uls.h"
 
-// -rw-r--r--  1        abalabin  4242   2268 Dec 19 15:38 Makefile
-// ACCESS      LINKS    LOGIN     GROUP  SIZE   TIME        ent->d_name
-
 typedef struct s_lengths {
     uint8_t inode;
     uint8_t bsize;
@@ -28,26 +25,38 @@ typedef struct s_printable {
     char *arrow;
     char *attr;
     char *acl;
-    t_lengths lengths;
     char suffix;
     char access[11];
     char name[255];
 } t_printable;
 
 typedef struct s_file {
+    uint64_t inode;
+    int64_t bsize;
+    uint16_t mode;
+    uint16_t links;
+    uint32_t uid;
+    uint32_t gid;
+    uint32_t flags;
+    int64_t size;
+    int32_t devid;
     struct timespec time;
-    // ...
+    // ... @
+    // ... e
+
+    t_lengths lengths;
     t_printable fields;
 } t_file;
 
 typedef struct s_offset {
-    // ...
-    size_t file_name;   // size of longest word in file vectors
-    int file_name_tabs; // tabs in longest word
-    int columns;        // number of columns in C out
-    int rows;           // number of rows in C out
-    int width;          // terminal width
-    int x;              // current position in x
+    uint8_t inode;          // size of longest inode
+    uint8_t bsize;          // size of longest block size
+    uint8_t file_name;      // size of longest word in file vectors
+    uint8_t file_name_tabs; // tabs in longest word
+    size_t columns;         // number of columns in C out
+    size_t rows;            // number of rows in C out
+    size_t width;           // terminal width
+    size_t x;               // current position in x
 } t_offset;
 
 /*
@@ -85,13 +94,14 @@ typedef struct s_get {
 } t_get;
 
 struct s_dir {
-    char *name;             // current directory
     t_file *files;          // pointer to colection of files in next var
     t_vector array;         // struct for manage array of files
     t_offset off;           // offsets in current directory
     t_info *info;           // access for other parametrs
     bool has_bc;            // true if char/block file (device) in dir
+
     DIR *dir;               // pointer to opened directory
+    char *name;             // current directory
     struct dirent *file;    // current file pointer
 };
 
