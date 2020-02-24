@@ -7,6 +7,6 @@ void mx_print_1(t_dir *dir) {
     for (size_t i = 0; i < dir->array.size; ++i) {
         dt = mx_at(&dir->array, i);
         dir->info->print.inode(dir, i);
-        mx_printstr((*dt)->fields.name, 1);
+        mx_printstr((*dt)->drnt->d_name, 1);
     }
 }

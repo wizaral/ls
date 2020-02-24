@@ -9,18 +9,18 @@ static int get_tabsin_word(size_t lword) {
 }
 
 static int get_colnum(t_offset off) {                                           // get number of cols i -C out
-    return off.term_width / ((int)off.lword_size + (8 - off.lword_size % 8));
+    return off.term_width / ((int)off.lname_len + (8 - off.lname_len % 8));
 }
 
 static int get_row(size_t vsize, t_offset off) {                                // get number of rows i -C out
     // return (vsize % off.colnums) ? vsize / off.colnums + 1 : vsize / off.colnums;
-    return (vsize / off.colnums) + (vsize % off.columns != 0);
+    return (vsize / off.colnums) + (vsize % off.colnums != 0);
 }
 
 static void init_data(t_dir *dir) {
     dir->off.colnums = get_colnum(dir->off);
     dir->off.rownums = get_row(dir->array.size, dir->off);
-    dir->off.tabs_in_lword = get_tabsin_word(dir->off.lword_size) + 1;
+    dir->off.tabs_in_lname_len = get_tabsin_word(dir->off.lname_len) + 1;
 }
 
 void mx_print_c(t_dir *dir) {
@@ -33,11 +33,11 @@ void mx_print_c(t_dir *dir) {
             dt = mx_at(&dir->array, j);                                          // take data from vector
             tabs_in_cword = 0;                                                   // init tabs_in_cword;
             if (j < dir->array.size) {                                           // check if we are out of vector or not
-                tabs_in_cword = get_tabsin_word(mx_strlen((*dt)->fields.name));  // get tabs in cword (current word)
-                mx_printstr((*dt)->fields.name, 1);                              // print name
+                tabs_in_cword = get_tabsin_word(mx_strlen((*dt)->drnt->d_name));  // get tabs in cword (current word)
+                mx_printstr((*dt)->drnt->d_name, 1);                              // print name
                 if (j + dir->off.rownums != dir->array.size)                     // check if this is last file in row so we dont print tabs
-                    print_n_tabs(dir->off.tabs_in_lword - tabs_in_cword ?        // print tabs depending on numb of tabs in lword and cword;
-                                 dir->off.tabs_in_lword - tabs_in_cword
+                    print_n_tabs(dir->off.tabs_in_lname_len - tabs_in_cword ?        // print tabs depending on numb of tabs in lword and cword;
+                                 dir->off.tabs_in_lname_len - tabs_in_cword
                                   : 1);
             }
         }

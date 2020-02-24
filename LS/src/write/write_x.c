@@ -18,27 +18,27 @@ static void print_n_tabs(int tabs) {
         mx_printstr("\t", 1);
 }
 
-static void print_tabs(size_t lword, size_t cword, t_offsets *of) {
+static void print_tabs(size_t lword, size_t cword, t_offset *of) {
     int tabs_inlword = get_tabsin_word(lword) + 1; // убрать в t_offsets надо будет и вызывать один раз
     int tabs_cword = get_tabsin_word(cword);
 
-    if (of->cnum >= of->cursize + tabs_inlword * 16) {
-        of->cursize += tabs_inlword * 8;
+    if (of->colnums >= of->curpos_in_term + tabs_inlword * 16) {
+        of->curpos_in_term += tabs_inlword * 8;
         print_n_tabs(lword - cword ? tabs_inlword - tabs_cword : 1);
     }
     else {
         mx_print_str("\n", 1);
-        of->cursize = 0;
+        of->curpos_in_term = 0;
     }
 }
 
-void print_x(t_info *info) {
+void print_x(t_dir *dir) {
     t_file **dt = NULL;
 
-    for (size_t i = 0; i < info->array->size; ++i) {
-        dt = mx_at(info->array, i);
-        mx_printstr((*dt)->name, 1);
-        if (i + 1 != info->array->size)
-            print_tabs(offsets->longest_word, mx_strlen((*dt)->name), offsets);
+    for (size_t i = 0; i < dir->array.size; ++i) {
+        dt = mx_at(&dir->array, i);
+        mx_printstr((*dt)->drnt->d_name, 1);
+        if (i + 1 != dir->array.size)
+            print_tabs(dir->off.lname_len, mx_strlen((*dt)->drnt->d_name), &dir->off);
     }
 }
