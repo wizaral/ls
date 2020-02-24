@@ -12,18 +12,21 @@ typedef struct s_lengths {
     uint8_t grp;
     uint8_t flags;
     uint8_t size;
+    uint8_t time;
+    uint8_t name;
 } t_lengths;
 
 typedef struct s_printable {
     char *inode;
     char *bsize;
-    char *access;
+    char access[11];
     char *links;
     char *user;
     char *grp;
     char *flags;
     char *size;
     char *time;
+    char name[256];
     char *arrow;
     char *attr;
     char *acl;
@@ -31,7 +34,6 @@ typedef struct s_printable {
 } t_printable;
 
 typedef struct s_file {
-    struct dirent *drnt;
     struct timespec time;
     // ...
     t_printable fields;
@@ -39,12 +41,12 @@ typedef struct s_file {
 
 typedef struct s_offset {
     // ...
-    size_t lword_size;      // size of longest work in file vectors
-    int tabs_in_lword;      // tabs in lword;
+    size_t lname_len;       // size of longest work in file vectors
+    int tabs_in_lname_len;  // tabs in lword;
     int colnums;            // number of columns in C out
     int rownums;            // number of rows in C out
     int term_width;         // terminal x;
-    int curpos;             // current position in x;
+    int curpos_in_term;     // current position in x;
 } t_offset;
 
 /*
@@ -80,23 +82,6 @@ typedef struct s_get {
     void (*attr)(t_dir *dir, size_t file);      // get.attr()
     void (*acl)(t_dir *dir, size_t file);       // get.acl()
 } t_get;
-
-typedef struct s_print {
-    void (*inode)(t_dir *dir, size_t file);     // print.inode()
-    void (*bsize)(t_dir *dir, size_t file);     // print.bsize()
-    void (*access)(t_dir *dir, size_t file);    // print.access()
-    void (*links)(t_dir *dir, size_t file);     // print.links()
-    void (*user)(t_dir *dir, size_t file);      // print.user()
-    void (*grp)(t_dir *dir, size_t file);       // print.grp()
-    void (*flags)(t_dir *dir, size_t file);     // print.flags()
-    void (*size)(t_dir *dir, size_t file);      // print.size()
-    void (*time)(t_dir *dir, size_t file);      // print.time()
-    void (*name)(t_dir *dir, size_t file);      // print.name()
-    void (*suffix)(t_dir *dir, size_t file);    // print.suffix()
-    void (*arrow)(t_dir *dir, size_t file);     // print.arrow()
-    void (*attr)(t_dir *dir, size_t file);      // print.attr()
-    void (*acl)(t_dir *dir, size_t file);       // print.acl()
-} t_print;
 
 struct s_dir {
     t_file *files;      // pointer to colection of files in next var
