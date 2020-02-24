@@ -14,7 +14,7 @@ static int get_colnum(t_offset off) {                                           
 
 static int get_row(size_t vsize, t_offset off) {                                // get number of rows i -C out
     // return (vsize % off.colnums) ? vsize / off.colnums + 1 : vsize / off.colnums;
-    return (vsize / off.colnums) + (vsize % off.colnums != 0);
+    return (vsize / off.colnums) + ((vsize % off.colnums) != 0);
 }
 
 static void init_data(t_dir *dir) {

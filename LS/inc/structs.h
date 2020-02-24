@@ -49,10 +49,16 @@ typedef struct s_file {
 } t_file;
 
 typedef struct s_offset {
-    uint8_t inode;          // size of longest inode
-    uint8_t bsize;          // size of longest block size
-    uint8_t file_name;      // size of longest word in file vectors
-    uint8_t file_name_tabs; // tabs in longest word
+    uint8_t inode;          // length of longest inode
+    uint8_t bsize;          // length of longest block size
+    uint8_t links;          // length of longest amount of links
+    uint8_t uid;            // length of longest user name/id
+    uint8_t gid;            // length of longest group name/id
+    uint8_t flags;          // length of longest inode
+    uint8_t size;           // length of longest size
+    uint8_t file_name;      // length of longest filename
+
+    uint8_t file_name_tabs; // tabs in longest filename
     size_t columns;         // number of columns in C out
     size_t rows;            // number of rows in C out
     size_t width;           // terminal width
