@@ -1,9 +1,16 @@
 #include "uls.h"
 #include <stdio.h>
 
+typedef struct s_ {
+    struct dirent *file;
+    struct passwd *pass;
+    struct group *grp;
+} t_;
+
 int main() {
-    t_vector *v = mx_create_vector(0, sizeof(struct passwd *));
-    char *cdir = "/Users/oafanasiev/Desktop/lsgit/tests/";
+    t_vector *v = mx_create_vector(0, sizeof(t_));
+    // char *cdir = "/Users/oafanasiev/Desktop/lsgit/tests/";
+    char *cdir = "/dev/";
     DIR *dir = opendir(cdir);
 
     struct dirent *file = NULL;
@@ -11,24 +18,32 @@ int main() {
     struct group *grp = NULL;
     struct stat ___stat;
     char *name = NULL;
+    t_ temp;
+    t_ *tt;
 
     if (v && dir) {
         for (file = readdir(dir); file; file = readdir(dir)) {
-            printf(":%s: ", file->d_name);
             name = mx_strjoin(cdir, file->d_name);
             lstat(name, &___stat);
 
             pass = getpwuid(___stat.st_uid);
             grp = getgrgid(___stat.st_gid);
 
-            if (pass)
-                printf(":%s: ", pass->pw_name);
+            // if (pass)
+            //     printf(":%s", pass->pw_name);
+            // else
+            //     printf(":FUCK");
 
-            if (grp)
-                printf(":%s:\n", grp->gr_name);
-            else
-                printf(":%i:\n", ___stat.st_gid);
-            // mx_push_backward(v, &pass);
+            // if (grp)
+            //     printf(":%s", grp->gr_name);
+            // else
+            //     printf(":%i", ___stat.st_gid);
+            temp.file = file;
+            temp.pass = pass;
+            temp.grp = grp;
+
+            mx_push_backward(v, &temp);
+            printf(":%s:\n", file->d_name);
 
             free(name);
         }
@@ -36,10 +51,22 @@ int main() {
 
         printf("==========================================================\n");
 
-        // for (size_t i = 0; i < v->size; ++i) {
-        //     pass = *(struct passwd **)mx_at(v, i);
-        //     printf(":%s:%s:\n", pass->pw_name, pass->pw_class);
-        // }
+        for (size_t i = 0; i < v->size; ++i) {
+            tt = mx_at(v, i);
+
+            // if (tt->pass)
+            //     printf(":%s", tt->pass->pw_name);
+            // else
+            //     printf(":FUCK");
+
+            // if (tt->grp)
+            //     printf(":%s", tt->grp->gr_name);
+            // else
+            //     printf(":SHIT");
+
+            // printf(":%s:\n", tt->file->d_name);
+            // // printf(":%s:%s:%s:\n", tt->pass->pw_name, tt->grp->gr_name, tt->file->d_name);
+        }
     }
     else {
         perror(NULL);
