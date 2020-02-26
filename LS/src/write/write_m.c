@@ -1,7 +1,7 @@
 #include "uls.h"
 
 // Тут несложно посчитаю как выводить когда будет структура offsets
-void mx_print_m(t_dir *dir) {
+void mx_write_m(t_dir *dir) {
     t_file **dt = NULL;
 
     dir->off.curpos_in_term = 0;

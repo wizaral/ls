@@ -32,7 +32,7 @@ static void print_tabs(size_t lword, size_t cword, t_offset *of) {
     }
 }
 
-void print_x(t_dir *dir) {
+void mx_write_x(t_dir *dir) {
     t_file **dt = NULL;
 
     for (size_t i = 0; i < dir->array.size; ++i) {

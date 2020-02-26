@@ -23,7 +23,7 @@ static void init_data(t_dir *dir) {
     dir->off.tabs_in_lname_len = get_tabsin_word(dir->off.lname_len) + 1;
 }
 
-void mx_print_c(t_dir *dir) {
+void mx_write_c(t_dir *dir) {
     t_file **dt = NULL;
     int tabs_in_cword = 0;
 

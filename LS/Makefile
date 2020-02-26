@@ -7,9 +7,6 @@ base = errors main parse
 get = access acl arrow attr bsize flags grp inode links name size suffix time \
 	user
 
-print = access acl arrow attr bsize flags grp inode links name size suffix    \
-	time user
-
 read = full hidden standart
 
 sort = $(addprefix compare_, access ascii change creation modification size)
