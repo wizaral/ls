@@ -17,7 +17,7 @@ static int get_tabsin_file(t_file *file, t_info *info) {
 // НАЗВАНИ ГОВОРЯЩЕЕ ЗА СЕБЯ
 static void print_n_tabs(int tabs) {        // тут короче лучше думаю не трогать принт н табс, я чёт выдумать как замутить немогу
     for (int i = 0; i < tabs; ++i)                   // print tabs depending on numb of tabs in lword and cword;
-        mx_printstr("\t", 1);
+        mx_printstrlen("\t", 1, 1);
 }
 
 static void print_tabs(size_t lword, size_t cword, t_offset *of) {
@@ -28,7 +28,7 @@ static void print_tabs(size_t lword, size_t cword, t_offset *of) {
         print_n_tabs(lword - cword ? of->file_name_tabs - tabs_cword : 1);
     }
     else {
-        mx_print_str("\n", 1);
+        mx_printstrlen("\n", 1, 1);
         of->x = 0;
     }
 }

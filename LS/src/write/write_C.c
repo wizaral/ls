@@ -28,7 +28,7 @@ static void print_n_tabs(uint8_t ltabs, uint8_t ctabs) {
     uint8_t tabs = ltabs - ctabs ? ltabs - ctabs : 1;
 
     for (int i = 0; i < tabs; ++i)                   // print tabs depending on numb of tabs in lword and cword;
-        mx_printstr("\t", 1);
+        mx_printstrlen("\t", 1, 1);
 }
 
 void mx_write_c(t_dir *dir) {
@@ -49,6 +49,6 @@ void mx_write_c(t_dir *dir) {
                     print_n_tabs(dir->off.file_name_tabs, tabs_in_cword);
             }
         }
-        mx_printstr("\n", 1);                                                     // go to new row;
+        mx_printstrlen("\n", 1, 1);                                               // go to new row;
     }
 }
