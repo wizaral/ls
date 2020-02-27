@@ -22,12 +22,12 @@ typedef struct s_printable {
     char *flags;
     char *size;
     char *time;
+    char *name;
     char *arrow;
     char *attr;
     char *acl;
     char suffix;
     char access[11];
-    char name[255];
 } t_printable;
 
 typedef struct s_file {
@@ -83,20 +83,20 @@ typedef struct s_info t_info;
 typedef struct s_dir t_dir;
 
 typedef struct s_get {
-    void (*inode)(t_dir *dir, t_file *file, struct stat *st);
-    void (*bsize)(t_dir *dir, t_file *file, struct stat *st);
-    void (*access)(t_dir *dir, t_file *file, struct stat *st);
-    void (*links)(t_dir *dir, t_file *file, struct stat *st);
-    void (*user)(t_dir *dir, t_file *file, struct stat *st);
-    void (*grp)(t_dir *dir, t_file *file, struct stat *st);
-    void (*flags)(t_dir *dir, t_file *file, struct stat *st);
-    void (*size)(t_dir *dir, t_file *file, struct stat *st);
-    void (*time)(t_dir *dir, t_file *file, struct stat *st);
-    void (*name)(t_dir *dir, t_file *file, struct stat *st);
-    void (*suffix)(t_dir *dir, t_file *file, struct stat *st);
-    void (*arrow)(t_dir *dir, t_file *file, struct stat *st);
-    void (*attr)(t_dir *dir, t_file *file, struct stat *st);
-    void (*acl)(t_dir *dir, t_file *file, struct stat *st);
+    void (*inode)(t_dir *, t_file *, struct stat *);
+    void (*bsize)(t_dir *, t_file *, struct stat *);
+    void (*access)(t_dir *, t_file *, struct stat *);
+    void (*links)(t_dir *, t_file *, struct stat *);
+    void (*user)(t_dir *, t_file *, struct stat *);
+    void (*grp)(t_dir *, t_file *, struct stat *);
+    void (*flags)(t_dir *, t_file *, struct stat *);
+    void (*size)(t_dir *, t_file *, struct stat *);
+    void (*time)(t_dir *, t_file *, struct stat *);
+    void (*name)(t_dir *, t_file *, struct stat *);
+    void (*suffix)(t_dir *, t_file *, struct stat *);
+    void (*arrow)(t_dir *, t_file *, struct stat *);
+    void (*attr)(t_dir *, t_file *, struct stat *);
+    void (*acl)(t_dir *, t_file *, struct stat *);
 } t_get;
 
 struct s_dir {
@@ -108,15 +108,17 @@ struct s_dir {
 
     DIR *dir;               // pointer to opened directory
     char *name;             // current directory
-    struct dirent *file;    // current file pointer
 };
 
 struct s_info {
-    void (*write)(t_dir *dir);              // determines type of print
-    struct dirent *(*read)(t_dir *dir);     // filter of hiden files
+    void (*write)(t_dir *);                 // determines type of print
+    struct dirent *(*read)(t_dir *);        // filter of hiden files
     int (*cmp)(const void *, const void *); // compare function in sort
 
-    t_get get;
+    t_get get;              // functions for getting files info
     bool output_dst;        // 0 - terminal | 1 - file or other process
     t_time_type time_type;  // data/time type for -[tlgno]
+
+    t_vector files;         // only files from arguments
+    t_vector directories;   // dirs from arguments
 };
