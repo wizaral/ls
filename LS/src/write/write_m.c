@@ -20,7 +20,7 @@ void mx_write_m(t_dir *dir) {
     for (size_t i = 0; i < dir->array.size; ++i) {
         dt = mx_at(&dir->array, i);
 
-        dir->off.x += (len = dt->lengths.name + dt->lengths.
+        dir->off.x += (len = dt->lengths.name + dt->lengths.inode
         + dt->lengths.bsize + (dir->info->get.suffix != zaglushka) + 2);
         write_data(dir, dt, len, dir->off.width < dir->off.x);                             // Выводит данные файла с новой строки или нет (не с новой)
     }
