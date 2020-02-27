@@ -41,11 +41,11 @@ void mx_write_c(t_dir *dir) {
         for (size_t j = i; j < dir->array.size; j += dir->off.rows) {             // walk of all elements of i row
             dt = mx_at(&dir->array, j);                                           // take data from vector
             if (j < dir->array.size) {                                            // check if we are out of vector or not
-                tabs_in_cword = get_tabsin_file(dt, dir->info);                             // get tabs in cword (current word)
-                mx_printstrlen(dt->fields.inode, dt->lengths.inode, 1);     // print inode
-                mx_printstrlen(dt->fields.bsize, dt->lengths.bsize, 1);     // print bsize
-                dir->info->print_name(dt);                                       // print name
-                mx_printchar(dt->fields.suffix, 1);                       // print suffix
+                tabs_in_cword = get_tabsin_file(dt, dir->info);                   // get tabs in cword (current word)
+                mx_printstrlen(dt->fields.inode, dt->lengths.inode, 1);           // print inode
+                mx_printstrlen(dt->fields.bsize, dt->lengths.bsize, 1);           // print bsize
+                dir->info->print_name(dt);                                        // print name
+                mx_printchar(dt->fields.suffix, 1);                               // print suffix
                 if (j + dir->off.rows != dir->array.size)                         // check if this is last file in row so we dont print tabs
                     print_n_tabs(dir->off.file_name_tabs, tabs_in_cword);
             }
