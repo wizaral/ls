@@ -81,11 +81,13 @@
 
 static void read_args(int ac, char **av, t_info *info) {
     // сорт аргов (да, так можно, я гуглил)
+    t_vector *flags = mx_create_vector(0, sizeof(char));
     mx_sort(av + 1, ac - 1, sizeof(char *), mx_strcmp);
 
-    // mx_parse(ac, av);        // как бы намекаю
+    mx_parse(info, ac, av, flags);        // как бы намекаю
     // ВОЗМОЖНО ЛУЧШЕ СНАЧАЛА СЧИТАТЬ ФЛАГИ, А ПОТОМ СОРТИРОВАТЬ ОСТАВШЕЕСЯ
     // тут дележка на два вектора + вывод ошибАк
+    mx_delete_vector(flags);
 }
 
 // тут сначала выводим файлы
@@ -104,7 +106,7 @@ int main(int ac, char **av) {
         t_info info = {};
 
         read_args(ac, av, &info);
-        process_args(info);
+        process_args(&info);
     }
     else
         mx_error_usage();

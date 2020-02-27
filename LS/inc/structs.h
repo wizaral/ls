@@ -120,7 +120,6 @@ struct s_info {
     bool output_dst;        // 0 - terminal | 1 - file or other process
     t_time_type time_type;  // data/time type for -[tlgno]
 
-    t_vector flags;         // flags vector
     t_vector files;         // only files from arguments
     t_vector directories;   // dirs from arguments
 };

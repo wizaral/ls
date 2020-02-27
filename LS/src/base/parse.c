@@ -45,7 +45,8 @@ static bool check_doubleminus(char *av) {
     return false;
 }
 
-static void mx_parse_flag(t_info *info, char *av, bool *dirparsed) {
+static void mx_parse_flag(t_info *info, char *av, bool *dirparsed
+                        , t_vector *flags) {
     if (av[0] != '-') {
         mx_parse_dir(info, av);
         *dirparsed = true;
@@ -58,18 +59,18 @@ static void mx_parse_flag(t_info *info, char *av, bool *dirparsed) {
 
     for (int i = 1; av[i]; ++i) {
         if (is_flag_exist(av[i])) // Проверяем флаг с [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] если есть добавляем
-            mx_push_backward(&info->flags, &av[i]);
+            mx_push_backward(flags, av[i]);
         else
             mx_nelegal(av[i]); // Выводи ошибку причём две illegal option а потом usage_error и ливаем с катки
     }
 }
 
-void mx_parse(t_info *info, int ac, char *av[]) {
+void mx_parse(t_info *info, int ac, char *av[], t_vector *flags) {
     bool dirparsed = false;
 
     for (int i = 1; i < ac; ++i) {
         if (dirparsed == false && mx_strchr(av[i], '-'))
-            mx_parse_flag(info, av[i], &dirparsed);
+            mx_parse_flag(info, av[i], &dirparsed, flags);
         else
             mx_parse_dir(info, av[i]);
     }

@@ -16,7 +16,7 @@
 #include <sys/types.h>
 #include <sys/xattr.h>
 
-void mx_parse(int argnum, char **argum);
+void mx_parse(t_info *info, int ac, char *av[], t_vector *flags);
 
 struct dirent *mx_full(t_dir *dir);
 struct dirent *mx_hidden(t_dir *dir);
