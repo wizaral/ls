@@ -2,7 +2,7 @@
 #include "uls.h"
 
 #define MX_USAGE "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"
-#define MX_FLAGS "ABCFGORSTU@abcdefghiklmnopqrstuvwx1"
+#define MX_FLAGS "ACFGORSTU@acefghilmnpqrstuvwx1"
 
 #define MX_DEFAULT      "\033[0m"           // NO COLOR
 #define MX_EXECUTE      "\033[0;31m"        // --x--x--x
