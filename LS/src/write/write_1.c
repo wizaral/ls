@@ -6,7 +6,9 @@ void mx_write_1(t_dir *dir) {
 
     for (size_t i = 0; i < dir->array.size; ++i) {
         dt = mx_at(&dir->array, i);
-        dir->info->print.inode(dir, i);
-        mx_printstr(dt->drnt->d_name, 1);
+        mx_printstrlen(dt->fields.inode, dt->lengths.inode, 1);
+        mx_printstrlen(dt->fields.bsize, dt->lengths.bsize, 1);
+        dir->info->print_name(dt);
+        mx_printchar(dt->fields.suffix, 1);  
     }
 }

@@ -12,10 +12,11 @@ static char *get_file_name(char *av) {
     return str;
 }
 
-static void mx_parse_dir(char *av) {                                    // АХТУНГ НОТ ПО АУДИТОР
+static void mx_parse_dir(t_info *info, char *av) {                                    // АХТУНГ НОТ ПО АУДИТОР
     DIR *dir = NULL;
 
     if ((dir = opendir(av)) != NULL) {
+        mx_push_backward(&info->directories, av);
         closedir(dir);
         return;
     }
@@ -28,11 +29,11 @@ static void mx_parse_dir(char *av) {                                    // АХ�
         // Бахнуть флажок шо эт файл чтобы не пытаться его открыть а просто вывести его доступы допустим в л флаге
         // Или не бахать флажок и сделать такую же проверку уже когда передаем юлсу его
         // Не кикать из вектора arg_dir эта папка вполе себе папка
+        mx_push_backward(&info->files, av);                   // Пушим файл в вектор файлов которые аргв
         return;
     }
     else
         // Вывести ошибку шо ебанько и uls: [name]: No such file or directory
-        // И кикнуть нахер с вектора arg_dir это неправильная папка и её открывать потом ненадо
         mx_error_nodir(av);
 }
 
@@ -44,9 +45,9 @@ static bool check_doubleminus(char *av) {
     return false;
 }
 
-static void mx_parse_flag(char *av, bool *dirparsed) {
+static void mx_parse_flag(t_info *info, char *av, bool *dirparsed) {
     if (av[0] != '-') {
-        mx_parse_dir(av);
+        mx_parse_dir(info, av);
         *dirparsed = true;
         return;
     }
@@ -63,12 +64,12 @@ static void mx_parse_flag(char *av, bool *dirparsed) {
     }
 }
 
-void mx_parse(int ac, char *av[]) {
+void mx_parse(t_info *info, int ac, char *av[]) {
     bool dirparsed = false;
 
     for (int i = 1; i < ac; ++i) {
         if (dirparsed == false && mx_strchr(av[i], '-'))
-            mx_parse_flag(av[i], &dirparsed);
+            mx_parse_flag(info, av[i], &dirparsed);
         else
             mx_parse_dir(av[i]);
     }
