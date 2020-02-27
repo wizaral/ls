@@ -58,11 +58,11 @@ typedef struct s_offset {
     uint8_t size;           // length of longest size
     uint8_t file_name;      // length of longest filename
 
-    uint8_t file_name_tabs; // tabs in longest filename
     size_t columns;         // number of columns in C out
     size_t rows;            // number of rows in C out
     size_t width;           // terminal width
     size_t x;               // current position in x
+    uint8_t file_name_tabs; // tabs in longest filename
 } t_offset;
 
 /*
@@ -100,14 +100,14 @@ typedef struct s_get {
 } t_get;
 
 struct s_dir {
+    DIR *dir;           // pointer to opened directory
+    char *name;         // current directory
+
+    t_info *info;       // access for other parametrs
     t_file *files;      // pointer to colection of files in next var
     t_vector array;     // struct for manage array of files
     t_offset off;       // offsets in current directory
-    t_info *info;       // access for other parametrs
     bool has_bc;        // true if char/block file (device) in dir
-
-    DIR *dir;           // pointer to opened directory
-    char *name;         // current directory
 };
 
 struct s_info {
