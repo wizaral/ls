@@ -31,7 +31,6 @@ static void print_n_tabs(uint8_t ltabs, uint8_t ctabs) {
         mx_printstr("\t", 1);
 }
 
-
 void mx_write_c(t_dir *dir) {
     t_file *dt = NULL;
     uint8_t tabs_in_cword = 0;

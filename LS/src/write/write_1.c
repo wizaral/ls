@@ -9,6 +9,7 @@ void mx_write_1(t_dir *dir) {
         mx_printstrlen(dt->fields.inode, dt->lengths.inode, 1);
         mx_printstrlen(dt->fields.bsize, dt->lengths.bsize, 1);
         dir->info->print_name(dt);
-        mx_printchar(dt->fields.suffix, 1);  
+        mx_printchar(dt->fields.suffix, 1);
+        mx_printchar('\n', 1);
     }
 }
