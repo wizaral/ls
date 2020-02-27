@@ -1,10 +1,8 @@
 #include "uls.h"
 
 static void write_data(t_dir *dir, t_file *file, int len, bool newline) {        // дабы по сути не дублировать код бахнул просто флаг
-    if (newline) {
-        mx_printstrlen("\n", 1, 1);
-        dir->off.x = len;
-    }
+    mx_printstrlen("\n", newline, 1);
+    newline ? (dir->off.x = len) : 0;
     mx_printstrlen(file->fields.inode, file->lengths.inode, 1);
     mx_printstrlen(file->fields.bsize, file->lengths.bsize, 1);
     dir->info->print_name(file);

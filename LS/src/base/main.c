@@ -1,5 +1,4 @@
 #include "uls.h"
-#include <stdio.h>
 
 // struct s_info {
     // t_vector arg_dir; // Вектор куда закидываются папки которые явлсяются аргументами

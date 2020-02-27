@@ -12,7 +12,7 @@ static char *get_file_name(char *av) {
     return str;
 }
 
-static void mx_parse_dir(t_info *info, char *av) {                                    // АХТУНГ НОТ ПО АУДИТОР
+static void mx_parse_dir(t_info *info, char *av) { // АХТУНГ НОТ ПО АУДИТОР
     DIR *dir = NULL;
 
     if ((dir = opendir(av)) != NULL) {
@@ -29,7 +29,7 @@ static void mx_parse_dir(t_info *info, char *av) {                              
         // Бахнуть флажок шо эт файл чтобы не пытаться его открыть а просто вывести его доступы допустим в л флаге
         // Или не бахать флажок и сделать такую же проверку уже когда передаем юлсу его
         // Не кикать из вектора arg_dir эта папка вполе себе папка
-        mx_push_backward(&info->files, av);                   // Пушим файл в вектор файлов которые аргв
+        mx_push_backward(&info->files, av); // Пушим файл в вектор файлов которые аргв
         return;
     }
     else
@@ -45,8 +45,8 @@ static bool check_doubleminus(char *av) {
     return false;
 }
 
-static void mx_parse_flag(t_info *info, char *av, bool *dirparsed
-                        , t_vector *flags) {
+static void mx_parse_flag(t_info *info, char *av,
+                          bool *dirparsed, t_vector *flags) {
     if (av[0] != '-') {
         mx_parse_dir(info, av);
         *dirparsed = true;
