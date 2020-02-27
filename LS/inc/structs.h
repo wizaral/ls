@@ -100,20 +100,21 @@ typedef struct s_get {
 } t_get;
 
 struct s_dir {
-    t_file *files;          // pointer to colection of files in next var
-    t_vector array;         // struct for manage array of files
-    t_offset off;           // offsets in current directory
-    t_info *info;           // access for other parametrs
-    bool has_bc;            // true if char/block file (device) in dir
+    t_file *files;      // pointer to colection of files in next var
+    t_vector array;     // struct for manage array of files
+    t_offset off;       // offsets in current directory
+    t_info *info;       // access for other parametrs
+    bool has_bc;        // true if char/block file (device) in dir
 
-    DIR *dir;               // pointer to opened directory
-    char *name;             // current directory
+    DIR *dir;           // pointer to opened directory
+    char *name;         // current directory
 };
 
 struct s_info {
     void (*write)(t_dir *);                 // determines type of print
     struct dirent *(*read)(t_dir *);        // filter of hiden files
     int (*cmp)(const void *, const void *); // compare function in sort
+    void (*print_name)(t_file *);           // out fname colored/normal
 
     t_get get;              // functions for getting files info
     bool output_dst;        // 0 - terminal | 1 - file or other process
