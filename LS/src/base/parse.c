@@ -58,7 +58,7 @@ static void mx_parse_flag(t_info *info, char *av, bool *dirparsed) {
 
     for (int i = 1; av[i]; ++i) {
         if (is_flag_exist(av[i])) // Проверяем флаг с [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] если есть добавляем
-            mx_printstr("Zaebumba!\n", 2);
+            mx_push_backward(&info->flags, &av[i]);
         else
             mx_nelegal(av[i]); // Выводи ошибку причём две illegal option а потом usage_error и ливаем с катки
     }
@@ -71,6 +71,6 @@ void mx_parse(t_info *info, int ac, char *av[]) {
         if (dirparsed == false && mx_strchr(av[i], '-'))
             mx_parse_flag(info, av[i], &dirparsed);
         else
-            mx_parse_dir(av[i]);
+            mx_parse_dir(info, av[i]);
     }
 }
