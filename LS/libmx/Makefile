@@ -44,7 +44,7 @@ RAW = $(addprefix algorithm/mx_, $(algorithm)) $(addprefix file/mx_, $(file)) \
 	$(addprefix flist/mx_, $(flist)) $(addprefix list/mx_, $(list))           \
 	$(addprefix memory/mx_, $(memory)) $(addprefix print/mx_, $(print))       \
 	$(addprefix queue/mx_, $(queue)) $(addprefix stack/mx_, $(stack))         \
-	$(addprefix string/mx_, $(string)) $(addprefix type/mx_, $(tree))         \
+	$(addprefix string/mx_, $(string)) $(addprefix tree/mx_, $(tree))         \
 	$(addprefix type/mx_, $(type)) $(addprefix utils/mx_, $(utils))           \
 	$(addprefix vector/mx_, $(vector))
 
