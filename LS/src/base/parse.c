@@ -59,7 +59,7 @@ static void mx_parse_flag(t_info *info, char *av,
 
     for (int i = 1; av[i]; ++i) {
         if (is_flag_exist(av[i])) // Проверяем флаг с [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] если есть добавляем
-            mx_push_backward(flags, av[i]);
+            mx_push_backward(flags, av + i);
         else
             mx_nelegal(av[i]); // Выводи ошибку причём две illegal option а потом usage_error и ливаем с катки
     }

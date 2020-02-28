@@ -18,3 +18,7 @@ void mx_nelegal(char flag) {
     mx_printchar('\n', 2);
     mx_error_usage();
 }
+
+void zaglushka(t_dir *d, t_file *f, struct stat *s) {
+    d = d + (int)f + (int)s;
+}

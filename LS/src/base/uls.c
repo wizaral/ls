@@ -2,7 +2,7 @@
 
 void get_info(t_dir *dir, struct dirent *file) {
     static struct stat st;
-    t_file file_info = {};
+    t_file file_info = {0};
     char *name = mx_strjoin(dir->name, file->d_name);
     void (**func)(t_dir *, t_file *, struct stat *) =
     (void (**)(t_dir *, t_file *, struct stat *))&dir->info->get;

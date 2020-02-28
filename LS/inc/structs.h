@@ -118,6 +118,7 @@ struct s_info {
 
     t_get get;              // functions for getting files info
     bool output_dst;        // 0 - terminal | 1 - file or other process
+    bool return_val;        // 0 - good | 1 - any error
     t_time_type time_type;  // data/time type for -[tlgno]
 
     t_vector files;         // only files from arguments

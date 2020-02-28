@@ -5,6 +5,8 @@ static inline void basic_perm(char *access, struct stat *st) {
     access[0] = S_ISLNK(st->st_mode) ? 'l' : access[0];
     access[0] = S_ISCHR(st->st_mode) ? 'c' : access[0];
     access[0] = S_ISBLK(st->st_mode) ? 'b' : access[0];
+    // p
+    // s
     access[1] = st->st_mode & S_IRUSR ? 'r' : '-';
     access[2] = st->st_mode & S_IWUSR ? 'w' : '-';
     access[3] = st->st_mode & S_IXUSR ? 'x' : '-';
@@ -18,5 +20,6 @@ static inline void basic_perm(char *access, struct stat *st) {
 }
 
 void mx_get_access(t_dir *dir, t_file *file, struct stat *st) {
-    basic_perm(&file->fields.access, st);
+    basic_perm(file->fields.access, st);
+    ++dir;  // for no warnings
 }

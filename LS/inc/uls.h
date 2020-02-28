@@ -1,6 +1,12 @@
 #pragma once
 
 #include <dirent.h>
+#include <grp.h>
+#include <pwd.h>
+#include <sys/ioctl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/xattr.h>
 
 #include "defines.h"
 #include "errors.h"
@@ -8,13 +14,7 @@
 #include "macro.h"
 #include "structs.h"
 
-#include <grp.h>
-#include <pwd.h>
 #include <sys/acl.h>
-#include <sys/ioctl.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <sys/xattr.h>
 
 void mx_parse(t_info *info, int ac, char **av, t_vector *flags);
 
@@ -34,3 +34,5 @@ void mx_write_xG(t_dir *dir);
 int mx_compare_ascii(const void *a, const void *b);
 int mx_compare_size(const void *a, const void *b);
 int mx_compare_time(const void *a, const void *b);
+
+void zaglushka(t_dir *d, t_file *f, struct stat *s);
