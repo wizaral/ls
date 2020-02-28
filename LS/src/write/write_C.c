@@ -1,17 +1,27 @@
 #include "uls.h"
 
+static int get_longest_size(t_offset *off, t_info *info) {
+    return off->file_name + off->inode + off->bsize
+           + (info->get.suffix != zaglushka);
+}
+static int get_file_size(t_file *file, t_info *info) {
+    return file->lengths.name + file->lengths.inode
+           + file->lengths.bsize + (info->get.suffix != zaglushka);
+}
+
 static int get_tabsin_file(t_file *file, t_info *info) {
     int count = 0;
-    int file_tabs = file->lengths.name + file->lengths.inode
-                  + file->lengths.bsize + (info->get.suffix != zaglushka);
+    int file_tabs = get_file_size(file, info);
 
     for (; file_tabs >= 8; file_tabs -= 8)
         ++count;
     return count;
 }
 
-static int get_colnum(t_offset off) {                                           // get number of cols i -C out
-    return off.width / ((int)off.file_name + (8 - off.file_name % 8));
+static int get_colnum(t_offset off, t_info *info) {                                           // get number of cols i -C out
+    int lognest_size = get_longest_size(&off, info);
+
+    return off.width / (lognest_size  + (8 - lognest_size % 8));
 }
 
 static int get_row(size_t vsize, t_offset off) {                                // get number of rows i -C out
@@ -20,7 +30,7 @@ static int get_row(size_t vsize, t_offset off) {                                
 }
 
 static void init_data(t_dir *dir) {
-    dir->off.columns = get_colnum(dir->off);
+    dir->off.columns = get_colnum(dir->off, dir->info);
     dir->off.rows = get_row(dir->array.size, dir->off);
 }
 
