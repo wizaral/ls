@@ -1,6 +1,8 @@
 #pragma once
 
 #include <dirent.h>
+#include <errno.h>
+#include <stdio.h>
 #include <grp.h>
 #include <pwd.h>
 #include <sys/ioctl.h>
@@ -16,7 +18,7 @@
 
 #include <sys/acl.h>
 
-void mx_parse(t_info *info, int ac, char **av, t_vector *flags);
+void mx_parse(t_info *info, int ac, char **av);
 
 struct dirent *mx_full(t_dir *dir);
 struct dirent *mx_hidden(t_dir *dir);
