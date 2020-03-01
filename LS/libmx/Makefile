@@ -56,7 +56,7 @@ OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(RAW)))
 
 WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc
-CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer -flto
+CFLAGS = -Ofast -march=native -fomit-frame-pointer -flto
 DFLAGS = -O0 -g3 -glldb -fsanitize=address
 
 all: install
@@ -69,15 +69,15 @@ $(OBJ_DIR):
 
 # install
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(WFLAGS) $(LFLAGS) -o $@ -c $<
+# 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) -o $@ -c $<
 
 # optimize
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
+# 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 # debug
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
 install: $(OBJ_DIR) $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
