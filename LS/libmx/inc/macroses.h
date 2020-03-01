@@ -10,3 +10,5 @@
 
 #define MX_MIN(x, y, type) (((type)x) < ((type)y) ? (x) : (y))
 #define MX_MAX(x, y, type) (((type)x) > ((type)y) ? (x) : (y))
+
+#define MX_STR(x) #x
