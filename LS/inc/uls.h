@@ -33,8 +33,16 @@ void mx_write_x(t_dir *dir);
 void mx_write_CG(t_dir *dir);
 void mx_write_xG(t_dir *dir);
 
+void mx_nocolor(t_file *file);
+void mx_color(t_file *file);
+
 int mx_compare_ascii(const void *a, const void *b);
 int mx_compare_size(const void *a, const void *b);
 int mx_compare_time(const void *a, const void *b);
 
 void zaglushka(t_dir *d, t_file *f, struct stat *s);
+
+void mx_get_access(t_dir *d, t_file *f, struct stat *s);
+void mx_get_name(t_dir *d, t_file *f, struct stat *s);
+void mx_get_suffix(t_dir *d, t_file *f, struct stat *s);
+void mx_get_time(t_dir *d, t_file *f, struct stat *s);

@@ -9,7 +9,6 @@ static inline char *get_file_name(char *av) {
 static void parse_file(t_info *info, char *av) {
     DIR *dir = NULL;
     struct stat st;
-    ++info;
 
     if (lstat(av, &st) == -1) {
         mx_printstr("ls: ", 2);
