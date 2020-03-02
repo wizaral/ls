@@ -1,15 +1,15 @@
 #include "uls.h"
 
 static inline void basic_perm(char *access, struct stat *st) {
-    access[0] = S_ISDIR(st->st_mode) ? 'd' : '-';
-    access[0] = S_ISLNK(st->st_mode) ? 'l' : access[0];
-    access[0] = S_ISCHR(st->st_mode) ? 'c' : access[0];
-    access[0] = S_ISBLK(st->st_mode) ? 'b' : access[0];
+    access[0] = MX_ISDIR(st->st_mode) ? 'd' : '-';
+    access[0] = MX_ISLNK(st->st_mode) ? 'l' : access[0];
+    access[0] = MX_ISCHR(st->st_mode) ? 'c' : access[0];
+    access[0] = MX_ISBLK(st->st_mode) ? 'b' : access[0];
     // p
     // s
     access[1] = st->st_mode & S_IRUSR ? 'r' : '-';
-    access[2] = st->st_mode & S_IWUSR ? 'w' : '-';
-    access[3] = st->st_mode & S_IXUSR ? 'x' : '-';
+    access[2] = st->st_mode & S_IWUSR ? 'w' : '-';          // НАДО БУДЕТ ЛИБО СВОИ ДЕФАЙНЫ
+    access[3] = st->st_mode & S_IXUSR ? 'x' : '-';          // ЛИБО НА ЧИСЛА ЗАМЕНИТЬ
     access[4] = st->st_mode & S_IRGRP ? 'r' : '-';
     access[5] = st->st_mode & S_IWGRP ? 'w' : '-';
     access[6] = st->st_mode & S_IXGRP ? 'x' : '-';
