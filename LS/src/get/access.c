@@ -1,6 +1,6 @@
 #include "uls.h"
 
-static inline void advanced_perm(t_dir *dir, t_file *file, struct stat *st) {
+static inline void advanced_perm(t_dir *dir, t_file *file) {
     acl_t acl;
     char *path = mx_strjoin(dir->name, "/");
 
@@ -21,8 +21,8 @@ static inline void basic_perm(char *access, struct stat *st) {
     access[0] = MX_ISLNK(st->st_mode) ? 'l' : access[0];
     access[0] = MX_ISCHR(st->st_mode) ? 'c' : access[0];
     access[0] = MX_ISBLK(st->st_mode) ? 'b' : access[0];
-    // p
-    // s
+    access[0] = MX_ISSOCK(st->st_mode) ? 's' : access[0];
+    access[0] = MX_ISFIFO(st->st_mode) ? 'p' : access[0];
     access[1] = st->st_mode & S_IRUSR ? 'r' : '-';
     access[2] = st->st_mode & S_IWUSR ? 'w' : '-';
     access[3] = st->st_mode & S_IXUSR ? 'x' : '-';
@@ -37,6 +37,6 @@ static inline void basic_perm(char *access, struct stat *st) {
 
 void mx_get_access(t_dir *dir, t_file *file, struct stat *st) {
     basic_perm(file->fields.access, st);
-    advanced_perm(dir, file, st);
+    advanced_perm(dir, file);
     ++dir;  // for no warnings
 }
