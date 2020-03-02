@@ -8,8 +8,8 @@ static inline void basic_perm(char *access, struct stat *st) {
     // p
     // s
     access[1] = st->st_mode & S_IRUSR ? 'r' : '-';
-    access[2] = st->st_mode & S_IWUSR ? 'w' : '-';          // НАДО БУДЕТ ЛИБО СВОИ ДЕФАЙНЫ
-    access[3] = st->st_mode & S_IXUSR ? 'x' : '-';          // ЛИБО НА ЧИСЛА ЗАМЕНИТЬ
+    access[2] = st->st_mode & S_IWUSR ? 'w' : '-';
+    access[3] = st->st_mode & S_IXUSR ? 'x' : '-';
     access[4] = st->st_mode & S_IRGRP ? 'r' : '-';
     access[5] = st->st_mode & S_IWGRP ? 'w' : '-';
     access[6] = st->st_mode & S_IXGRP ? 'x' : '-';
