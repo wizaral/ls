@@ -13,4 +13,5 @@ void mx_get_suffix(t_dir *d, t_file *f, struct stat *s) {
         f->fields.suffix = '%';
     else if (MX_ISFIFO(s->st_mode))
         f->fields.suffix = '|';
+    ++d;
 }

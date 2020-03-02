@@ -9,6 +9,8 @@ get = access acl arrow attr bsize flags grp inode links name size suffix time \
 
 read = full hidden standart
 
+print = name
+
 sort = $(addprefix compare_, ascii time size)
 
 write = $(addprefix write_, 1 C l m x)

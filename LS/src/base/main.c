@@ -35,10 +35,17 @@ void init_info(t_info *info) {
     info->output_dst = !isatty(1);
     info->write = info->output_dst ? mx_write_1 : mx_write_C;
     info->print_name = mx_nocolor;
-    info->directories = {MX_VECTOR_DEFAULT_SIZE, 0, sizeof(char *),
-    malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE)};
-    info->files = {MX_VECTOR_DEFAULT_SIZE, 0, sizeof(char *),
-    malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE)};
+    info->directories.cap = MX_VECTOR_DEFAULT_SIZE;
+    info->directories.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
+    info->directories.bytes = sizeof(char *);
+    info->directories.size = 0;
+
+    info->files.cap = MX_VECTOR_DEFAULT_SIZE;
+    info->files.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
+    info->files.bytes = sizeof(char *);
+    info->files.size = 0;
+
+    info->files.cap = MX_VECTOR_DEFAULT_SIZE;
     init_getters(&info->get);
 }
 
@@ -46,7 +53,7 @@ int main(int ac, char **av) {
     t_info info = {0};
 
     if (ac > 1) {
-        init_info(info);
+        init_info(&info);
         mx_parse(&info, ac, av);
         // process_args(&info);
     }

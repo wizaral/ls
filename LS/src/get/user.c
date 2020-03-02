@@ -15,7 +15,7 @@ void mx_get_user_name(t_dir *dir, t_file *file, struct stat *st) {
     size_t len = mx_strlen(pw->pw_name);
 
     file->uid = pw->pw_uid;
-    file->fields.user = mx_itoa(pw->pw_name);
+    file->fields.user = pw->pw_name;
     file->lengths.user = len;
     dir->off.uid = len;
 }
