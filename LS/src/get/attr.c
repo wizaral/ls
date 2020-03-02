@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_get_attr(t_dir *dir, t_file *file, struct stat *st) {
+void mx_get_attr(t_dir *dir, t_file *file, t_stat *st) {
     char buff[512];
     char *path = mx_strjoin(dir->name, "/");
 

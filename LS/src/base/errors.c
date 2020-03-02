@@ -13,6 +13,6 @@ void mx_nelegal(char flag) {
     mx_error_usage();
 }
 
-void zaglushka(t_dir *d, t_file *f, struct stat *s) {
+void zaglushka(t_dir *d, t_file *f, t_stat *s) {
     d = d + (int)f + (int)s;
 }

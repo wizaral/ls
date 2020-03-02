@@ -62,15 +62,15 @@ static void size_less_thousand(int64_t num, char *size) {
     size[3] = 'B';
 }
 
-char *mx_hr_size(int64_t st_size) {
+char *mx_human_size(t_dir *dir, t_file *file, t_stat *st) {
     char *size = mx_strnew(4);
     int pow = 0;
 
-    if (st_size < 1000)
-        size_less_thousand(st_size, size);
+    if (file->size < 1000)
+        size_less_thousand(file->size, size);
     else {
-        pow = mx_hr_get_pow(st_size);
-        size_more_thous(st_size, st_size / mx_pow(2, pow), pow, size);
+        pow = mx_hr_get_pow(file->size);
+        size_more_thous(file->size, file->size / mx_pow(2, pow), pow, size);
     }
     return size;
 }

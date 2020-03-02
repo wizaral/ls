@@ -1,11 +1,11 @@
 #include "uls.h"
 
-void get_info(t_dir *dir, struct dirent *file) {
-    static struct stat st;
+void get_info(t_dir *dir, t_dirent *file) {
+    static t_stat st;
     t_file file_info = {0};
     char *name = mx_strjoin(dir->name, file->d_name);
-    void (**func)(t_dir *, t_file *, struct stat *) =
-    (void (**)(t_dir *, t_file *, struct stat *))&dir->info->get;
+    void (**func)(t_dir *, t_file *, t_stat *) =
+    (void (**)(t_dir *, t_file *, t_stat *))&dir->info->get;
 
     lstat(name, &st);
     for (int i = 0; i < 14; ++i)
@@ -15,7 +15,7 @@ void get_info(t_dir *dir, struct dirent *file) {
 }
 
 void mx_uls(t_dir *dir, DIR *pdir) {
-    struct dirent *file = dir->info->read(pdir);
+    t_dirent *file = dir->info->read(pdir);
 
     for (; file; file = dir->info->read(pdir))
         get_info(dir, file);

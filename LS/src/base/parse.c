@@ -8,13 +8,15 @@ static inline char *get_file_name(char *av) {
 
 static void parse_file(t_info *info, char *av) {
     DIR *dir = NULL;
-    struct stat st;
+    t_stat st;
 
     if (lstat(av, &st) == -1) {
+        info->return_val = 1;
         mx_printstr("ls: ", 2);
         perror(av);
     }
     else if ((dir = opendir(av)) == NULL) {
+        info->return_val = 1;
         mx_printstr("ls: ", 2);
         perror(get_file_name(av));
     }
@@ -58,5 +60,7 @@ void mx_parse(t_info *info, int ac, char **av) {
         parse_file(info, av[i]);
 
     // парсинг флагов в функи
+    mx_check_flags(info, flags);
+
     mx_delete_vector(flags);
 }

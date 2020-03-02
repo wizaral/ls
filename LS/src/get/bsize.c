@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_get_bsize(t_dir *dir, t_file *file, struct stat *st) {
+void mx_get_bsize(t_dir *dir, t_file *file, t_stat *st) {
     char *bsize = mx_itoa(st->st_blksize);
     int bsize_size = mx_strlen(bsize);
 

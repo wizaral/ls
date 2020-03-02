@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_get_user_id(t_dir *dir, t_file *file, struct stat *st) {
+void mx_user_id(t_dir *dir, t_file *file, t_stat *st) {
     struct passwd *pw = getpwuid(st->st_uid);
     size_t len = mx_get_num_length(pw->pw_uid, 10);
 
@@ -10,7 +10,7 @@ void mx_get_user_id(t_dir *dir, t_file *file, struct stat *st) {
     dir->off.uid = len;
 }
 
-void mx_get_user_name(t_dir *dir, t_file *file, struct stat *st) {
+void mx_user(t_dir *dir, t_file *file, t_stat *st) {
     struct passwd *pw = getpwuid(st->st_uid);
     size_t len = mx_strlen(pw->pw_name);
 
@@ -20,7 +20,7 @@ void mx_get_user_name(t_dir *dir, t_file *file, struct stat *st) {
     dir->off.uid = len;
 }
 
-void mx_get_user_nothing(t_dir *dir, t_file *file, struct stat *st) {
+void mx_user_nothing(t_dir *dir, t_file *file, t_stat *st) {
     ++dir;
     ++file;
     ++st;

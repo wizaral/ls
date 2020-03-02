@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_get_group_id(t_dir *dir, t_file *file, struct stat *st) {
+void mx_group_id(t_dir *dir, t_file *file, t_stat *st) {
     struct group *gid = getgrgid(st->st_gid);
     int len = mx_get_num_length(gid->gr_gid, 10);
 
@@ -10,8 +10,7 @@ void mx_get_group_id(t_dir *dir, t_file *file, struct stat *st) {
     dir->off.gid = len;
 }
 
-
-void mx_get_group_name(t_dir *dir, t_file *file, struct stat *st) {
+void mx_group(t_dir *dir, t_file *file, t_stat *st) {
     struct group *gid = getgrgid(st->st_gid);
     int len = mx_strlen(gid->gr_name);
 
@@ -19,10 +18,4 @@ void mx_get_group_name(t_dir *dir, t_file *file, struct stat *st) {
     file->fields.grp = gid->gr_name;
     file->lengths.grp = len;
     dir->off.gid = len;
-}
-
-void mx_get_group_nothing(t_dir *dir, t_file *file, struct stat *st) {
-    ++dir;
-    ++file;
-    ++st;
 }

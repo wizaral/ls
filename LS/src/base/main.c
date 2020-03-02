@@ -12,7 +12,7 @@
 //     // фор чёта там
 // }
 
-static void init_getters(t_get *get) {
+static void init_getters(t_get *get, bool dst) {
     get->access = zaglushka;
     get->acl = zaglushka;
     get->attr = zaglushka;
@@ -21,10 +21,10 @@ static void init_getters(t_get *get) {
     get->grp = zaglushka;
     get->inode = zaglushka;
     get->links = zaglushka;
-    get->name = mx_get_name;
+    get->name = dst ? mx_not_printable : mx_only_printable;
     get->size = zaglushka;
-    get->suffix = mx_get_suffix;
-    get->time = mx_get_time;
+    get->suffix = zaglushka;
+    get->time = mx_time;
     get->user = zaglushka;
 }
 
@@ -43,7 +43,7 @@ static void init_info(t_info *info) {
     info->files.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
     info->files.bytes = sizeof(char *);
     info->files.size = 0;
-    init_getters(&info->get);
+    init_getters(&info->get, info->output_dst);
     errno = 0;
 }
 
