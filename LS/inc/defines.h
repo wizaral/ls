@@ -17,16 +17,4 @@
 #define MX_STICKYBIT    "\033[30;42m"       // -------wT(t)
 #define MX_NOTSTICKYBIT "\033[30;43m"       // -------w-
 
-#define MX_ISVTX        0001000
-#define MX_IRUSR        0000400
-#define MX_IWUSR        0000200
-#define MX_IXUSR        0000100
-#define MX_IRGRP        0000040
-#define MX_IWGRP        0000020
-#define MX_IXGRP        0000010
-#define MX_IROTH        0000004
-#define MX_IWOTH        0000002
-#define MX_IXOTH        0000001
-#define MX_ISTXT        MX_ISVTX
-
 #define MX_HALF_YEAR 15768000
