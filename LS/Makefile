@@ -2,10 +2,10 @@ CC = clang
 LIB = libmx.a
 NAME = uls
 
-base = errors main parse
+base = errors flags main parse
 
-get = access acl arrow attr bsize flags grp inode links name size suffix time \
-	user
+get = access acl arrow attr bsize flags1 flags2 grp inode links name size \
+	suffix time user
 
 read = full hidden standart
 

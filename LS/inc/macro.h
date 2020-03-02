@@ -16,3 +16,6 @@
 #define MX_MAJOR(x) (((x) >> 24) & 0xFF)
 
 #define MX_EXIST(x) mx_strchr(MX_FLAGS, x)
+#define MX_WRITE(x) mx_strchr("l1mCx", x)
+#define MX_LADDS(x) mx_strchr("ghnOT@e", x)
+#define MX_OTHER(x) mx_strchr("isGRr", x)
