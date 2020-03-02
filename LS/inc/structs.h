@@ -100,14 +100,15 @@ typedef struct s_get {
 } t_get;
 
 struct s_dir {
-    DIR *dir;           // pointer to opened directory
-    char *name;         // current directory
+    DIR *dir;               // pointer to opened directory
+    struct dirent *file;    // current file on reading
+    char *name;             // current directory
 
-    t_info *info;       // access for other parametrs
-    t_file *files;      // pointer to colection of files in next var
-    t_vector array;     // struct for manage array of files
-    t_offset off;       // offsets in current directory
-    bool has_bc;        // true if char/block file (device) in dir
+    t_info *info;           // access for other parametrs
+    t_file *files;          // pointer to colection of files in next var
+    t_vector array;         // struct for manage array of files
+    t_offset off;           // offsets in current directory
+    bool has_bc;            // true if char/block file (device) in dir
 };
 
 struct s_info {

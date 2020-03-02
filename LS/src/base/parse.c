@@ -25,28 +25,6 @@ static void parse_file(t_info *info, char *av) {
         else
             mx_push_backward(&info->directories, av);
     }
-
-    // if ((dir = opendir(av))) {
-    //     mx_push_backward(&info->directories, av);
-    //     closedir(dir);
-    //     return;
-    // }
-    // else if (access(av, F_OK) != -1) {
-    //     if (access(av, R_OK) != 0) {
-    //         mx_printstr("uls: ", 2);
-    //         mx_printstr(get_file_name(av), 2);
-    //         mx_printstr(": Permission denied\n", 2);
-    //     }
-    //     // Бахнуть флажок шо эт файл чтобы не пытаться его открыть а просто вывести его доступы допустим в л флаге
-    //     // Или не бахать флажок и сделать такую же проверку уже когда передаем юлсу его
-    //     // Не кикать из вектора arg_dir эта папка вполе себе папка
-    //     mx_push_backward(&info->files, av); // Пушим файл в вектор файлов которые аргв
-    //     return;
-    // }
-    // else {
-    //     mx_printstr("uls: ", 2);
-    //     perror(av);
-    // }
 }
 
 static inline bool check_doubleminus(char *av) {

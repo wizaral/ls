@@ -19,7 +19,6 @@ RAW = $(addprefix base/, $(base)) $(addprefix get/, $(get)) \
 	$(addprefix print/, $(print)) $(addprefix read/, $(read)) \
 	$(addprefix sort/, $(sort)) $(addprefix write/, $(write))
 
-
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
 LIB_DIR = ./libmx/

@@ -12,7 +12,7 @@
 //     // фор чёта там
 // }
 
-void init_getters(t_get *get) {
+static void init_getters(t_get *get) {
     get->access = zaglushka;
     get->acl = zaglushka;
     get->attr = zaglushka;
@@ -28,7 +28,7 @@ void init_getters(t_get *get) {
     get->user = zaglushka;
 }
 
-void init_info(t_info *info) {
+static void init_info(t_info *info) {
     info->read = mx_standart;
     info->cmp = mx_compare_ascii;
     info->time_type = modification;
@@ -39,14 +39,12 @@ void init_info(t_info *info) {
     info->directories.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
     info->directories.bytes = sizeof(char *);
     info->directories.size = 0;
-
     info->files.cap = MX_VECTOR_DEFAULT_SIZE;
     info->files.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
     info->files.bytes = sizeof(char *);
     info->files.size = 0;
-
-    info->files.cap = MX_VECTOR_DEFAULT_SIZE;
     init_getters(&info->get);
+    errno = 0;
 }
 
 int main(int ac, char **av) {
