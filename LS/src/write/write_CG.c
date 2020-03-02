@@ -34,7 +34,7 @@ static void print_n_spaces(t_dir *dir, t_file *file) {
         mx_printstrlen(" ", 1, 1);
 }
 
-void mx_write_cG(t_dir *dir) {
+void mx_write_CG(t_dir *dir) {
     t_file *dt = NULL;
 
     init_data(dir);
