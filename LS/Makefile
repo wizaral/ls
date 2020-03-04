@@ -2,16 +2,16 @@ CC = clang
 LIB = libmx.a
 NAME = uls
 
-base = errors flags1 flags2 main parse
+base = errors flags1 flags2 main parse proces_args uls
 
-get = access acl arrow attr bsize flags grp inode links name size suffix time \
-	user
+get = access acl arrow attr bsize dummy flags grp inode links name size       \
+	suffix time user
 
 read = full hidden standart
 
 sort = ascii time size
 
-write = 1 C CG l m name x xG
+write = 1 C CG l m name total x xG
 
 RAW = $(addprefix base/, $(base)) $(addprefix get/, $(get))                   \
 	$(addprefix read/, $(read)) $(addprefix sort/, $(sort))                   \

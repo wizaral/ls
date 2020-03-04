@@ -13,8 +13,6 @@ typedef struct s_offset t_offset;
 typedef struct s_lengths t_lengths;
 typedef struct s_printable t_printable;
 
-typedef enum e_time_type t_time_type;
-
 struct s_lengths {
     uint8_t inode;
     uint8_t bsize;
@@ -25,6 +23,10 @@ struct s_lengths {
     uint8_t size;
     uint8_t time;
     uint8_t name;
+    uint8_t suffix;
+    uint8_t arrow;
+    uint8_t attr;
+    uint8_t acl;
 };
 
 struct s_printable {
@@ -41,33 +43,31 @@ struct s_printable {
     char *attr;
     char *acl;
     char suffix;
-    char access[11];
-    // ... @
-    // ... e
+    char access[12];
 };
 
 struct s_file {
     t_printable fields;
     t_lengths lengths;
-    t_timespec time;
-    // maybe need something ?
+    t_timespec time;        // for sorting
+    int64_t size;           // for sorting
 };
 
 struct s_offset {
+    size_t columns;     // number of columns in C out
+    size_t rows;        // number of rows in C out
+    size_t width;       // terminal width
+    size_t x;           // current position in line
+    size_t name_tabs;   // tabs in longest filename
+
     uint8_t inode;      // length of longest inode
     uint8_t bsize;      // length of longest block size
     uint8_t links;      // length of longest amount of links
-    uint8_t uid;        // length of longest user name/id
-    uint8_t gid;        // length of longest group name/id
+    uint8_t user;       // length of longest user name/id
+    uint8_t grp;        // length of longest group name/id
     uint8_t flags;      // length of longest inode
     uint8_t size;       // length of longest size
-    uint8_t filename;   // length of longest filename
-
-    size_t columns;         // number of columns in C out
-    size_t rows;            // number of rows in C out
-    size_t width;           // terminal width
-    size_t x;               // current position in line
-    size_t filename_tabs;   // tabs in longest filename
+    uint8_t name;       // length of longest filename
 };
 
 /*
@@ -83,6 +83,8 @@ enum e_time_type {
     change = sizeof(t_timespec) * 2,
     creation = sizeof(t_timespec) * 3,
 };
+
+typedef enum e_time_type t_time_type;
 
 struct s_get {
     void (*inode)(t_info *, t_dir *, t_file *, t_stat *);
@@ -118,8 +120,9 @@ struct s_info {
     void (*write)(t_info *, t_dir *);       // determines type of print
     t_dirent *(*read)(DIR *);               // filter of hiden files
     int (*cmp)(const void *, const void *); // compare function in sort
+    void (*print_total)(t_info *, t_dir *); // print total bsize
     void (*print_name)(t_file *);           // out fname colored/normal
-    void (*foreach)(t_vector *, void (*)(void *));  // reverse or not
+    void (*foreach)(t_info *, t_file *, size_t, void (*)(t_info *, t_file *));
     void (*recursion)(t_info *, t_dir *);   // recursion in directories
 
     t_get get;              // functions for getting files info

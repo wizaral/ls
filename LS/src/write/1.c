@@ -1,15 +1,15 @@
 #include "uls.h"
 
-// Флаг 1, по сути тупо добавить ф-ции модификаторов тут даже считать ничё не надо
-void mx_write_1(t_dir *dir) {
-    t_file *dt = NULL;
+void print(t_info *info, t_file *file) {
+    t_file *pfile = file;
 
-    for (size_t i = 0; i < dir->array.size; ++i) {
-        dt = mx_at(&dir->array, i);
-        mx_printstrlen(dt->fields.inode, dt->lengths.inode, 1);
-        mx_printstrlen(dt->fields.bsize, dt->lengths.bsize, 1);
-        dir->info->print_name(dt);
-        mx_printstrlen(&dt->fields.suffix, dir->info->get.suffix != mx_dummy, 1);
-        mx_printchar('\n', 1);
-    }
+    mx_printstrlen(pfile->fields.inode, pfile->lengths.inode, 1);
+    mx_printstrlen(pfile->fields.bsize, pfile->lengths.bsize, 1);
+    info->print_name(pfile);
+    mx_printstrlen(&pfile->fields.suffix, pfile->lengths.suffix, 1);
+    mx_printchar('\n', 1);
+}
+
+void mx_write_1(t_info *info, t_dir *dir) {
+    info->foreach(info, (t_file *)dir->array.arr, dir->array.size, print);
 }

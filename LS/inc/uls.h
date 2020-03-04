@@ -20,13 +20,21 @@
 
 void mx_parse(t_info *info, int ac, char **av);
 void mx_check_flags(t_info *info, t_vector *flags);
+void mx_minimize_flags(t_info *info, t_get *get);
+void mx_process_args(t_info *info);
 
 void mx_uls(t_info *info, t_dir *dir);
 void mx_recursion(t_info *info, t_dir *dir);
 
-t_dirent *mx_full(t_dir *dir);      // -a
-t_dirent *mx_hidden(t_dir *dir);    // -A
-t_dirent *mx_standart(t_dir *dir);  // default
+void mx_foreach_file(t_info *info, t_file *arr, size_t size,
+                     void (*f)(t_info *, t_file *));
+
+void mx_foreach_file_reverse(t_info *info, t_file *arr, size_t size,
+                             void (*f)(t_info *, t_file *));
+
+t_dirent *mx_full(DIR *dir);        // -a
+t_dirent *mx_hidden(DIR *dir);      // -A
+t_dirent *mx_standart(DIR *dir);    // default
 
 void mx_write_1(t_info *info, t_dir *dir);  // -1
 void mx_write_C(t_info *info, t_dir *dir);  // -C
@@ -39,6 +47,9 @@ void mx_write_xG(t_info *info, t_dir *dir); // -x -G
 
 void mx_color(t_file *file);    // -G
 void mx_nocolor(t_file *file);  // default or to file
+
+void mx_total(t_info *info, t_dir *dir);    // -l | -s
+void mx_nototal(t_info *info, t_dir *dir);  // -m | default
 
 int mx_compare_ascii(const void *a, const void *b); // default
 int mx_compare_size(const void *a, const void *b);  // -S
@@ -80,3 +91,9 @@ void mx_attr(t_info *info, t_dir *dir, t_file *file, t_stat *st);               
 void mx_acl(t_info *info, t_dir *dir, t_file *file, t_stat *st);                // -e
 
 void mx_dummy(t_info *info, t_dir *dir, t_file *file, t_stat *st);             // do nothing
+
+void mx_check_compare(t_info *info, char flag);
+void mx_check_name(t_get *get, char flag);
+void mx_check_adds(t_info *info, t_get *get, char flag);
+void mx_check_other(t_info *info, char flag);
+void mx_minimize_flags(t_info *info, t_get *get);

@@ -18,21 +18,24 @@ static inline void check_write(t_info *info, char flag) {
         info->write = mx_write_x;
 }
 
-static inline void check_suffix(t_info *info, char flag) {
-    info->write = flag == 'F' ? mx_suffix_all : mx_suffix_dir;
+static inline void check_suffix(t_get *get, char flag) {
+    get->suffix = flag == 'F' ? mx_suffix_all : mx_suffix_dir;
 }
 
 static inline void check_time(t_info *info, char flag) {
     if (flag == 'c')
-        info->time = change;
+        info->time_type = change;
     else if (flag == 'U')
-        info->time = creation;
+        info->time_type = creation;
     else if (flag == 'u')
-        info->time = last_access;
+        info->time_type = last_access;
 }
 
 void mx_check_flags(t_info *info, t_vector *flags) {
+    // PRINT FLAGS
     // mx_printstrlen((char *)flags->arr, flags->size, 1);
+    // mx_printchar('\n', 1);
+
     for (size_t i = 0; i < flags->size; ++i) {
         char flag = flags->arr[i];
 
@@ -41,11 +44,11 @@ void mx_check_flags(t_info *info, t_vector *flags) {
         else if (MX_WRITE(flag))
             check_write(info, flag);
         else if (flag == 'F' || flag == 'p')
-            check_suffix(info, flag);
+            check_suffix(&info->get, flag);
         else if (flag == 'c' || flag == 'U' || flag == 'u')
             check_time(info, flag);
         else if (flag == 'f' || flag == 'S' || flag == 't')
-            mx_check_sort(info, flag);
+            mx_check_compare(info, flag);
         else if (flag == 'q' || flag == 'v' || flag == 'w')
             mx_check_name(&info->get, flag);
         else if (MX_LADDS(flag))
@@ -53,6 +56,6 @@ void mx_check_flags(t_info *info, t_vector *flags) {
         else if (MX_OTHER(flag))
             mx_check_other(info, flag);
         else
-            printf("WATAFAK is this: \"%c\"!!!\n", flag);   // delete before deploy
+            printf("WATAFAK IS THIS: \"%c\"!!!\n", flag);   // delete before deploy
     }
 }

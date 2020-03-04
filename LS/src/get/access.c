@@ -35,6 +35,7 @@ static inline void basic_perm(char *access, t_stat *st) {
     access[8] = str[1][st->st_mode & S_IWOTH];
     access[9] = str[2][st->st_mode & S_IXOTH];
     st->st_mode & S_ISTXT ? access[9] = 't' : 0;
+    access[11] = ' ';
 }
 
 void mx_access(t_info *info, t_dir *dir, t_file *file, t_stat *st) {

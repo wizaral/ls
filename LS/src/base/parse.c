@@ -23,9 +23,9 @@ static void parse_file(t_info *info, char *av) {
     else {
         closedir(dir);
         if (MX_ISREG(st.st_mode))
-            mx_push_backward(&info->files, av);
+            mx_push_backward(&info->files, &av);
         else
-            mx_push_backward(&info->directories, av);
+            mx_push_backward(&info->directories, &av);
     }
 }
 
@@ -56,13 +56,14 @@ void mx_parse(t_info *info, int ac, char **av) {
 
     for (bool flag = true; flag && i < ac && av[i][0] == '-'; ++i)
         flag = parse_flag(&flags, av[i]);
+
+    info->directories.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
+    info->files.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
+
     for (; i < ac; ++i)
         parse_file(info, av[i]);
 
-    mx_check_flags(info, &flags);    // парсинг флагов в функи
+    mx_check_flags(info, &flags);
+    mx_minimize_flags(info, &info->get);
     free(flags.arr);
-
-    // process_files();
-    // process_dirctories();
-
 }

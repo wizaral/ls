@@ -1,10 +1,11 @@
 #include "uls.h"
 
-void mx_check_sort(t_info *info, char flag) {
-    if (info->cmp != NULL) {        // мейби даже тут не скомпилит я хз еси шо))0)
+void mx_check_compare(t_info *info, char flag) {
+    if (info->cmp != NULL) {
         if (flag == 'f') {
-            info->cmp = NULL;       // may not compile. сверху бахни функу-затычку если шоя потом порешаю
+            info->cmp = NULL;
             info->read = mx_full;
+            info->foreach = mx_foreach_file;
         }
         else if (flag == 'S')
             info->cmp = mx_compare_size;
@@ -22,7 +23,8 @@ void mx_check_adds(t_info *info, t_get *get, char flag) {
         info->write = mx_write_l;
         if (flag == 'n' && get->user != mx_user_skip)
             get->user = mx_user_id;
-        get->user = mx_user_skip;
+        else
+            get->user = mx_user_skip;
     }
     else if (flag == 'O')
         get->flags = mx_file_flags;
@@ -39,18 +41,21 @@ void mx_check_adds(t_info *info, t_get *get, char flag) {
 void mx_check_other(t_info *info, char flag) {
     if (flag == 'i')
         info->get.inode = mx_inode;
-    else if (flag == 's')
+    else if (flag == 's') {
         info->get.bsize = mx_bsize;
+        info->print_total = mx_total;
+    }
     else if (flag == 'G')
         info->print_name = info->output_dst ? mx_nocolor : mx_color;
     else if (flag == 'r')
-        info->foreach = mx_foreach_vector_reverse;
+        info->foreach = info->cmp ? mx_foreach_file_reverse : mx_foreach_file;
     else
         info->recursion = mx_recursion;
 }
 
-void mx_minimize_flags(t_info *info) {
+void mx_minimize_flags(t_info *info, t_get *get) {
     if (info->write == mx_write_l) {
+        info->print_total = mx_total;
         get->access = mx_access;
         get->links = mx_links;
         get->user == mx_dummy ? get->user = mx_user_name : mx_dummy;
@@ -60,8 +65,13 @@ void mx_minimize_flags(t_info *info) {
         get->arrow = mx_arrow;
     }
     else {
-        get->access = get->links = get->user = get->grp = mx_dummy;
-        get->flags = get->size = get->time = get->arrow = mx_dummy;
-        get->attr = get->acl = mx_dummy;
+        get->access = get->links = get->user = get->grp = get->attr = mx_dummy;
+        get->flags = get->size = get->time = get->arrow = get->acl = mx_dummy;
     }
+    if (info->print_name == mx_color) {
+        info->write == mx_write_C ? info->write = mx_write_CG : mx_write_C;
+        info->write == mx_write_x ? info->write = mx_write_xG : mx_write_x;
+    }
+    if (info->write == mx_write_m || get->bsize == mx_dummy)
+        info->print_total = mx_nototal;
 }
