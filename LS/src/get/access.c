@@ -37,8 +37,8 @@ static inline void basic_perm(char *access, t_stat *st) {
     st->st_mode & S_ISTXT ? access[9] = 't' : 0;
 }
 
-void mx_access(t_dir *dir, t_file *file, t_stat *st) {
+void mx_access(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
     basic_perm(file->fields.access, st);
     advanced_perm(dir, file);
-    ++dir;  // for no warnings
+    ++info;
 }
