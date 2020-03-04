@@ -21,38 +21,62 @@
 void mx_parse(t_info *info, int ac, char **av);
 void mx_check_flags(t_info *info, t_vector *flags);
 
-t_dirent *mx_full(t_dir *dir);
-t_dirent *mx_hidden(t_dir *dir);
-t_dirent *mx_standart(t_dir *dir);
+void mx_uls(t_info *info, t_dir *dir);
+void mx_recursion(t_info *info, t_dir *dir);
 
-void mx_write_1(t_dir *dir);
-void mx_write_C(t_dir *dir);
-void mx_write_l(t_dir *dir);
-void mx_write_m(t_dir *dir);
-void mx_write_x(t_dir *dir);
+t_dirent *mx_full(t_dir *dir);      // -a
+t_dirent *mx_hidden(t_dir *dir);    // -A
+t_dirent *mx_standart(t_dir *dir);  // default
 
-void mx_write_CG(t_dir *dir);
-void mx_write_xG(t_dir *dir);
+void mx_write_1(t_info *info, t_dir *dir);  // -1
+void mx_write_C(t_info *info, t_dir *dir);  // -C
+void mx_write_l(t_info *info, t_dir *dir);  // -l
+void mx_write_m(t_info *info, t_dir *dir);  // -m
+void mx_write_x(t_info *info, t_dir *dir);  // -x
 
-void mx_color(t_file *file);
-void mx_nocolor(t_file *file);
+void mx_write_CG(t_info *info, t_dir *dir); // -C -G
+void mx_write_xG(t_info *info, t_dir *dir); // -x -G
 
-int mx_compare_ascii(const void *a, const void *b);
-int mx_compare_size(const void *a, const void *b);
-int mx_compare_time(const void *a, const void *b);
+void mx_color(t_file *file);    // -G
+void mx_nocolor(t_file *file);  // default or to file
 
-void mx_access(t_dir *d, t_file *f, t_stat *s);
-void mx_arrow(t_dir *dir, t_file *file, t_stat *st);
-void mx_group(t_dir *dir, t_file *file, t_stat *st);
-void mx_user(t_dir *dir, t_file *file, t_stat *st);
-void mx_suffix(t_dir *d, t_file *f, t_stat *s);
-void mx_time(t_dir *d, t_file *f, t_stat *s);
-void mx_time_full(t_dir *d, t_file *f, t_stat *s);
+int mx_compare_ascii(const void *a, const void *b); // default
+int mx_compare_size(const void *a, const void *b);  // -S
+int mx_compare_time(const void *a, const void *b);  // -t
 
-void mx_not_printable(t_dir *dir, t_file *file, t_stat *st);
-void mx_only_printable(t_dir *dir, t_file *file, t_stat *st);
+/*
+ * full list of getters
+ * all of them just creating string with some file information for print
+ * they can't update any structs of global state or current directory
+*/
 
-char *mx_human_size(t_dir *dir, t_file *file, t_stat *st);
-char *mx_size(t_dir *dir, t_file *file, t_stat *st);
+void mx_inode(t_info *info, t_dir *dir, t_file *file, t_stat *st);              // -i
+void mx_bsize(t_info *info, t_dir *dir, t_file *file, t_stat *st);              // -s
 
-void zaglushka(t_dir *d, t_file *f, t_stat *s);
+void mx_access(t_info *info, t_dir *dir, t_file *file, t_stat *st);             // -l
+void mx_links(t_info *info, t_dir *dir, t_file *file, t_stat *st);              // -l
+
+void mx_user_id(t_info *info, t_dir *dir, t_file *file, t_stat *st);            // -n(l)
+void mx_user_name(t_info *info, t_dir *dir, t_file *file, t_stat *st);          // -l
+void mx_user_skip(t_info *info, t_dir *dir, t_file *file, t_stat *st);          // -g(l)
+void mx_group(t_info *info, t_dir *dir, t_file *file, t_stat *st);              // -l
+
+void mx_file_flags(t_info *info, t_dir *dir, t_file *file, t_stat *st);         // -O -l
+
+void mx_size_h(t_info *info, t_dir *dir, t_file *file, t_stat *st);             // -h -l
+void mx_size_b(t_info *info, t_dir *dir, t_file *file, t_stat *st);             // -l
+
+void mx_time_short(t_info *info, t_dir *dir, t_file *file, t_stat *st);         // -l
+void mx_time_full(t_info *info, t_dir *dir, t_file *file, t_stat *st);          // -T -l
+
+void mx_not_printable(t_info *info, t_dir *dir, t_file *file, t_stat *st);      // -v -w
+void mx_only_printable(t_info *info, t_dir *dir, t_file *file, t_stat *st);     // -q
+
+void mx_suffix_all(t_info *info, t_dir *dir, t_file *file, t_stat *st);         // -F
+void mx_suffix_dir(t_info *info, t_dir *dir, t_file *file, t_stat *st);         // -p
+
+void mx_arrow(t_info *info, t_dir *dir, t_file *file, t_stat *st);              // -l
+void mx_attr(t_info *info, t_dir *dir, t_file *file, t_stat *st);               // -@
+void mx_acl(t_info *info, t_dir *dir, t_file *file, t_stat *st);                // -e
+
+void mx_dummy(t_info *info, t_dir *dir, t_file *file, t_stat *st);             // do nothing
