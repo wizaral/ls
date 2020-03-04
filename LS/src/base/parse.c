@@ -29,38 +29,40 @@ static void parse_file(t_info *info, char *av) {
     }
 }
 
-static inline bool check_doubleminus(char *av) {
+static inline void check_doubleminus(char *av) {
     if (av[2])
         mx_nelegal(av[1]);
-    return false;
 }
 
 static bool parse_flag(t_vector *flags, char *av) {
-    if (av[0] == '-' && av[1] == '-')
-        return check_doubleminus(av);
+    if (av[0] == '-' && av[1] == '-') {
+        check_doubleminus(av);
+        return false;
+    }
 
     for (int i = 1; av[i]; ++i) {
-        if (MX_EXIST(av[i])) // Проверяем флаг с [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuvwx1] если есть добавляем
+        if (MX_EXIST(av[i]))
             mx_push_backward(flags, av + i);
         else
-            mx_nelegal(av[i]); // Выводим ошибку причём две illegal option а потом usage_error и ливаем с катки
+            mx_nelegal(av[i]);
     }
     return true;
 }
 
 void mx_parse(t_info *info, int ac, char **av) {
-    t_vector *flags = mx_create_vector(0, sizeof(char));
-    bool flag = true;
+    t_vector flags = {MX_VECTOR_DEFAULT_SIZE, 0, sizeof(char),
+                      malloc(sizeof(char) * MX_VECTOR_DEFAULT_SIZE)};
     int i = 1;
 
-    for (; flag && i < ac && av[i][0] == '-'; ++i)
-        flag = parse_flag(flags, av[i]);
-
+    for (bool flag = true; flag && i < ac && av[i][0] == '-'; ++i)
+        flag = parse_flag(&flags, av[i]);
     for (; i < ac; ++i)
         parse_file(info, av[i]);
 
-    // парсинг флагов в функи
-    mx_check_flags(info, flags);
+    mx_check_flags(info, &flags);    // парсинг флагов в функи
+    free(flags.arr);
 
-    mx_delete_vector(flags);
+    // process_files();
+    // process_dirctories();
+
 }
