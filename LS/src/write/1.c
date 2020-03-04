@@ -9,7 +9,7 @@ void mx_write_1(t_dir *dir) {
         mx_printstrlen(dt->fields.inode, dt->lengths.inode, 1);
         mx_printstrlen(dt->fields.bsize, dt->lengths.bsize, 1);
         dir->info->print_name(dt);
-        mx_printstrlen(&dt->fields.suffix, dir->info->get.suffix != zaglushka, 1);
+        mx_printstrlen(&dt->fields.suffix, dir->info->get.suffix != mx_dummy, 1);
         mx_printchar('\n', 1);
     }
 }

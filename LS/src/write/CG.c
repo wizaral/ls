@@ -2,12 +2,12 @@
 
 static int get_longest_size(t_offset *off, t_info *info) {
     return off->file_name + off->inode + off->bsize
-           + (info->get.suffix != zaglushka);
+           + (info->get.suffix != mx_dummy);
 }
 
 static int get_file_size(t_file *file, t_info *info) {
     return file->lengths.name + file->lengths.inode
-           + file->lengths.bsize + (info->get.suffix != zaglushka);
+           + file->lengths.bsize + (info->get.suffix != mx_dummy);
 }
 
 static int get_colnum(t_offset off, t_info *info) {                                           // get number of cols i -C out

@@ -7,7 +7,7 @@
 static int get_tabsin_file(t_file *file, t_info *info) {
     int count = 0;
     int file_tabs = file->lengths.name + file->lengths.inode
-                  + file->lengths.bsize + (info->get.suffix != zaglushka);
+                  + file->lengths.bsize + (info->get.suffix != mx_dummy);
 
     for (; file_tabs >= 8; file_tabs -= 8)
         ++count;
@@ -17,10 +17,10 @@ static int get_tabsin_file(t_file *file, t_info *info) {
 static int get_data_len(t_dir *dir, t_file *file, bool longest) {
     if (longest)
         return dir->off.file_name + dir->off.inode + dir->off.bsize +
-               (dir->info->get.suffix != zaglushka);
+               (dir->info->get.suffix != mx_dummy);
 
     return file->lengths.name + file->lengths.inode + file->lengths.bsize 
-        + (dir->info->get.suffix != zaglushka);
+        + (dir->info->get.suffix != mx_dummy);
 }
 
 // НАЗВАНИ ГОВОРЯЩЕЕ ЗА СЕБЯ
