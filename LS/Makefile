@@ -2,22 +2,20 @@ CC = clang
 LIB = libmx.a
 NAME = uls
 
-base = errors flags main parse
+base = errors flags1 flags2 main parse
 
-get = access acl arrow attr bsize flags1 flags2 grp inode links name size \
-	suffix time user
+get = access acl arrow attr bsize flags grp inode links name size suffix time \
+	user
 
 read = full hidden standart
 
-print = name
+sort = ascii time size
 
-sort = $(addprefix compare_, ascii time size)
+write = 1 C CG l m name x xG
 
-write = $(addprefix write_, 1 C l m x)
-
-RAW = $(addprefix base/, $(base)) $(addprefix get/, $(get)) \
-	$(addprefix print/, $(print)) $(addprefix read/, $(read)) \
-	$(addprefix sort/, $(sort)) $(addprefix write/, $(write))
+RAW = $(addprefix base/, $(base)) $(addprefix get/, $(get))                   \
+	$(addprefix read/, $(read)) $(addprefix sort/, $(sort))                   \
+	$(addprefix write/, $(write))
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
@@ -35,20 +33,13 @@ DFLAGS = -O0 -g3 -glldb -fsanitize=address
 all: install
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR) $(OBJ_DIR)/base $(OBJ_DIR)/get $(OBJ_DIR)/print      \
-	$(OBJ_DIR)/read $(OBJ_DIR)/sort $(OBJ_DIR)/write
+	@mkdir -p $(OBJ_DIR) $(OBJ_DIR)/base $(OBJ_DIR)/get $(OBJ_DIR)/read       \
+	$(OBJ_DIR)/sort $(OBJ_DIR)/write
 
 $(LIB):
 	@make -sC $(LIB_DIR) -f Makefile install
 
 # install
-# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) -o $@ -c $<
-
-# $(NAME): $(OBJ_DIR) $(OBJ)
-# 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
-
-# optimize
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 # 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 

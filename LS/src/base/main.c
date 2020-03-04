@@ -12,29 +12,30 @@
 //     // фор чёта там
 // }
 
-static void init_getters(t_get *get, bool dst) {
-    get->access = zaglushka;
-    get->acl = zaglushka;
-    get->attr = zaglushka;
-    get->bsize = zaglushka;
-    get->flags = zaglushka;
-    get->grp = zaglushka;
-    get->inode = zaglushka;
-    get->links = zaglushka;
+static inline void init_getters(t_get *get, bool dst) {
+    get->access = mx_dummy;
+    get->acl = mx_dummy;
+    get->attr = mx_dummy;
+    get->bsize = mx_dummy;
+    get->flags = mx_dummy;
+    get->grp = mx_dummy;
+    get->inode = mx_dummy;
+    get->links = mx_dummy;
     get->name = dst ? mx_not_printable : mx_only_printable;
-    get->size = zaglushka;
-    get->suffix = zaglushka;
-    get->time = mx_time;
-    get->user = zaglushka;
+    get->size = mx_dummy;
+    get->suffix = mx_dummy;
+    get->time = mx_dummy;
+    get->user = mx_dummy;
 }
 
-static void init_info(t_info *info) {
+static inline void init_info(t_info *info) {
     info->read = mx_standart;
     info->cmp = mx_compare_ascii;
     info->time_type = modification;
     info->output_dst = !isatty(1);
     info->write = info->output_dst ? mx_write_1 : mx_write_C;
     info->print_name = mx_nocolor;
+    info->recursion = mx_uls;
     info->directories.cap = MX_VECTOR_DEFAULT_SIZE;
     info->directories.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
     info->directories.bytes = sizeof(char *);

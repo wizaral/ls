@@ -13,6 +13,9 @@ void mx_nelegal(char flag) {
     mx_error_usage();
 }
 
-void zaglushka(t_dir *d, t_file *f, t_stat *s) {
-    d = d + (int)f + (int)s;
+void mx_dummy(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
+    ++info;
+    ++dir;
+    ++file;
+    ++st;
 }

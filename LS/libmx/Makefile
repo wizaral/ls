@@ -69,10 +69,6 @@ $(OBJ_DIR):
 
 # install
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) -o $@ -c $<
-
-# optimize
-# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 # 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 # debug
