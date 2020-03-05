@@ -28,7 +28,7 @@ void mx_process_dir(t_info *info, char *name);
 
 void mx_uls(t_info *info, t_dir *dir);
 void mx_recursion(t_info *info, t_dir *dir);
-uint16_t mx_get_wc(t_info *info);
+uint16_t mx_winsize(t_info *info);
 
 t_dirent *mx_full(DIR *dir);        // -a
 t_dirent *mx_hidden(DIR *dir);      // -A

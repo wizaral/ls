@@ -35,7 +35,7 @@ static void print_inode(t_dir *dir, t_file *file) {
 static void init_data(t_info *info, t_dir *dir) {
     int len = get_longest_size(&dir->off, info);
 
-    dir->off.width = mx_get_ws(info);
+    dir->off.width = mx_winsize(info);
     dir->off.columns = dir->off.width / (len + (8 - len % 8));
     dir->off.rows = (dir->array.size / dir->off.columns)
                     + ((dir->array.size % dir->off.columns) != 0);
