@@ -5,6 +5,7 @@ void mx_nocolor(t_file *file) {
 }
 
 void mx_color(t_file *file) {
+    // part of changing color
     mx_printstrlen(file->fields.name, file->lengths.name, 1);
-    ++file;
+    // set default color back
 }

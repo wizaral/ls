@@ -15,11 +15,9 @@ static int get_tabs(int size) {
 
 static int get_data_len(t_info *info, t_dir *dir, t_file *file, bool longest) {
     if (longest)
-        return dir->off.name + dir->off.inode + (dir->off.inode != 0) + dir->off.bsize
-             + (dir->off.bsize != 0) + (info->get.suffix != mx_dummy);
+        return dir->off.name + dir->off.inode + (dir->off.inode != 0) + dir->off.bsize + (dir->off.bsize != 0) + (info->get.suffix != mx_dummy);
 
-    return file->lengths.name + file->lengths.inode + file->lengths.bsize 
-        + (info->get.suffix != mx_dummy);
+    return file->lengths.name + file->lengths.inode + file->lengths.bsize + (info->get.suffix != mx_dummy);
 }
 
 // НАЗВАНИ ГОВОРЯЩЕЕ ЗА СЕБЯ
@@ -35,8 +33,7 @@ static void print_tabs(t_info *info, t_dir *dir, t_file *dt) {
 
     if (dir->off.width >= dir->off.x + dir->off.name_tabs * 16) {
         dir->off.x += dir->off.name_tabs * 8;
-        print_n_tabs(full_len_longest - full_len_current
-                     ? dir->off.name_tabs - tabs_cword : 1);
+        print_n_tabs(full_len_longest - full_len_current ? dir->off.name_tabs - tabs_cword : 1);
     }
     else {
         mx_printstrlen("\n", 1, 1);

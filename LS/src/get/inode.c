@@ -1,7 +1,5 @@
 #include "uls.h"
 
-// по сути делает itoa, но с пробелом в конце строки
-
 void mx_inode(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
     int ino_len = mx_get_num_length(st->st_ino, 10);
 

@@ -1,19 +1,19 @@
 #include "uls.h"
 
-static inline void advanced_perm(t_dir *dir, t_file *file) {
-    acl_t acl;
-    char *path = mx_strjoin(dir->name, "/");
+// static inline void advanced_perm(t_dir *dir, t_file *file) {
+//     acl_t acl;
+//     char *path = mx_strjoin(dir->name, "/");
 
-    mx_strcat(path, dir->file->d_name);
-    acl = acl_get_file(path, ACL_TYPE_EXTENDED);
-    if (listxattr(path, NULL, 0, XATTR_NOFOLLOW) > 0)
-        file->fields.access[10] = '@';
-    if (acl) {
-        mx_strcat(file->fields.access, "+");
-        acl_free(acl);
-    }
-    mx_strdel(&path);
-}
+//     mx_strcat(path, dir->file->d_name);
+//     acl = acl_get_file(path, ACL_TYPE_EXTENDED);
+//     if (listxattr(path, NULL, 0, XATTR_NOFOLLOW) > 0)
+//         file->fields.access[10] = '@';
+//     if (acl) {
+//         mx_strcat(file->fields.access, "+");
+//         acl_free(acl);
+//     }
+//     mx_strdel(&path);
+// }
 
 static inline void basic_perm(char *access, t_stat *st) {
     static const char *str[] = {"-r", "-w", "-x"};
@@ -34,12 +34,14 @@ static inline void basic_perm(char *access, t_stat *st) {
     access[7] = str[0][st->st_mode & S_IROTH];
     access[8] = str[1][st->st_mode & S_IWOTH];
     access[9] = str[2][st->st_mode & S_IXOTH];
-    st->st_mode & S_ISTXT ? access[9] = 't' : 0;
+    // st->st_mode & S_ISTXT ? access[9] = 't' : 0;
+    access[10] = ' ';   // some code about @+ here or in next func
     access[11] = ' ';
 }
 
 void mx_access(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
     basic_perm(file->fields.access, st);
-    advanced_perm(dir, file);
+    // advanced_perm(dir, file);
+    ++dir;
     ++info;
 }

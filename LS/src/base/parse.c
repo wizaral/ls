@@ -29,14 +29,10 @@ static void parse_file(t_info *info, char *av) {
     }
 }
 
-static inline void check_doubleminus(char *av) {
-    if (av[2])
-        mx_nelegal(av[1]);
-}
-
 static bool parse_flag(t_vector *flags, char *av) {
     if (av[0] == '-' && av[1] == '-') {
-        check_doubleminus(av);
+        if (av[2] != '\0')
+            mx_nelegal(av[1]);
         return false;
     }
 
@@ -51,8 +47,7 @@ static bool parse_flag(t_vector *flags, char *av) {
 
 void mx_parse(t_info *info, int ac, char **av) {
     static const char *dot = ".";
-    t_vector flags = {MX_VECTOR_DEFAULT_SIZE, 0, sizeof(char),
-                      malloc(sizeof(char) * MX_VECTOR_DEFAULT_SIZE)};
+    t_vector flags = {MX_VECTOR_DEFAULT_SIZE, 0, sizeof(char), malloc(sizeof(char) * MX_VECTOR_DEFAULT_SIZE)};
     int i = 1;
     int check = 0;
 
@@ -61,11 +56,10 @@ void mx_parse(t_info *info, int ac, char **av) {
 
     info->directories.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
     info->files.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
-    check = i;
     mx_check_flags(info, &flags);
-    mx_minimize_flags(info, &info->get);
+    mx_compress_flags(info, &info->get);
 
-    for (; i < ac; ++i)
+    for (check = i; i < ac; ++i)
         parse_file(info, av[i]);
     if (info->directories.size == 0 && info->files.size == 0 && check == ac)
         mx_push_backward(&info->directories, &dot);

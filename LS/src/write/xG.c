@@ -4,13 +4,9 @@
 
 static int get_data_len(t_info *info, t_dir *dir, t_file *file, bool longest) {
     if (longest)
-        return dir->off.name + dir->off.inode + (dir->off.inode != 0) + dir->off.bsize
-             + (dir->off.bsize != 0) + (info->get.suffix != mx_dummy);
+        return dir->off.name + dir->off.inode + (dir->off.inode != 0) + dir->off.bsize + (dir->off.bsize != 0) + (info->get.suffix != mx_dummy);
 
-    return file->lengths.name
-         + file->lengths.inode + (file->lengths.inode != 0)
-         + file->lengths.bsize + (file->lengths.bsize != 0)
-         + (info->get.suffix != mx_dummy);
+    return file->lengths.name + file->lengths.inode + (file->lengths.inode != 0) + file->lengths.bsize + (file->lengths.bsize != 0) + (info->get.suffix != mx_dummy);
 }
 
 // НАЗВАНИ ГОВОРЯЩЕЕ ЗА СЕБЯ
