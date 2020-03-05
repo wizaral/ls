@@ -1,6 +1,6 @@
 #include "uls.h"
 
-uint16_t mx_get_ws(t_info *info) {
+uint16_t mx_winsize(t_info *info) {
     if (info->output_dst == 0) {
         struct winsize ws;
         int fd = open("/dev/tty", O_RDWR);
