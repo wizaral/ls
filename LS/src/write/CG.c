@@ -50,9 +50,9 @@ void mx_write_CG(t_info *info, t_dir *dir) {
                 mx_printstrlen(dt->fields.bsize, dt->lengths.bsize, 1);         // print bsize
                 info->print_name(dt);                                           // print name
                 mx_printstrlen(&dt->fields.suffix, dt->lengths.suffix, 1);      // print suffix
-                if (j + dir->off.rows <= dir->array.size)                       // check if this is last file in row so we dont print tabs 
+                if (j + dir->off.rows < dir->array.size)                       // check if this is last file in row so we dont print tabs 
                     print_n_spaces(dir->off.name_tabs,
-                    get_data_len(info, dir, dt, false), info);
+                                   get_data_len(info, dir, dt, false), info);
             }
         }
         mx_printstrlen("\n", 1, 1);                                             // go to new row;

@@ -20,9 +20,9 @@ static inline void check_write(t_info *info, char flag) {
         info->write = mx_write_1;
     else if (flag == 'm')
         info->write = mx_write_m;
-    else if (flag == 'C')
+    else if (flag == 'C' && info->write != mx_write_m)
         info->write = mx_write_C;
-    else if (flag == 'x')
+    else if (flag == 'x' && info->write != mx_write_m)
         info->write = mx_write_x;
 }
 

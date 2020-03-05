@@ -85,6 +85,7 @@ int mx_get_substr_index(const char *str, const char *sub);
 
 uint64_t mx_hex_to_nbr(const char *hex);
 char *mx_itoa(int number);
+char *mx_lltoa(int64_t number);
 char *mx_nbr_to_hex(uint64_t nbr);
 
 char *mx_replace_substr(const char *str, const char *sub, const char *replace);

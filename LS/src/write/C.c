@@ -50,7 +50,7 @@ void mx_write_C(t_info *info, t_dir *dir) {
                 mx_printstrlen(dt->fields.bsize, dt->lengths.bsize, 1);         // print bsize
                 info->print_name(dt);                                           // print name
                 mx_printstrlen(&dt->fields.suffix, dt->lengths.suffix, 1);                             // print suffix
-                if (j + dir->off.rows <= dir->array.size)                      // check if this is last file in row so we dont print tabs 
+                if (j + dir->off.rows < dir->array.size)                        // check if this is last file in row so we dont print tabs 
                     print_n_tabs(dir->off.name_tabs, tabs_in_cword);
             }
         }

@@ -9,5 +9,5 @@ uint16_t mx_winsize(t_info *info) {
         close(fd);
         return ws.ws_col;
     }
-    return 79;
+    return 80;
 }
