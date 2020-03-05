@@ -8,12 +8,6 @@
 
 // }
 
-static inline char *get_name_full(char *path, size_t plen,
-                                  char *name, size_t nlen) {
-    return mx_strcpy(mx_strcpy(mx_strcpy(mx_strnew(plen + nlen + 1), path)
-                                        + plen, "/") + 1, name) - 1 - plen;
-}
-
 static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
     static t_stat st;
     t_file file_info = {{0}, {0}, {0}, 0, 0};

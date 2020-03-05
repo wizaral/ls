@@ -31,7 +31,7 @@ static inline void accept_l(t_info *info, t_get *get) {
     get->arrow = mx_arrow;
 }
 
-void mx_minimize_flags(t_info *info, t_get *get) {
+void mx_compress_flags(t_info *info, t_get *get) {
     if (info->write == mx_write_l)
         accept_l(info, get);
     else {

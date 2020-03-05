@@ -21,14 +21,19 @@
 void mx_parse(t_info *info, int ac, char **av);
 void mx_check_flags(t_info *info, t_vector *flags);
 void mx_check_adds(t_info *info, t_get *get, char flag);
-void mx_minimize_flags(t_info *info, t_get *get);
+void mx_compress_flags(t_info *info, t_get *get);
 
 void mx_process_args(t_info *info);
 void mx_process_dir(t_info *info, char *name);
 
 void mx_uls(t_info *info, t_dir *dir);
 void mx_recursion(t_info *info, t_dir *dir);
+
+
+size_t mx_get_inode_bsize_len(t_offset *off);
+void mx_make_inode_bsize(t_offset *off, char *str, t_printable *print, t_lengths *len);
 uint16_t mx_winsize(t_info *info);
+char *mx_get_path_name(char *path, size_t plen, char *name, size_t nlen);
 
 t_dirent *mx_full(DIR *dir);        // -a
 t_dirent *mx_hidden(DIR *dir);      // -A

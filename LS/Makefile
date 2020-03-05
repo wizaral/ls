@@ -2,7 +2,7 @@ CC = clang
 LIB = libmx.a
 NAME = uls
 
-base = errors flags1 flags2 main parse proces_args uls
+base = errors check_flags compress_flags main parse proces_args uls
 
 get = access acl arrow attr bsize dummy flags grp inode links name size       \
 	suffix time user
@@ -11,11 +11,13 @@ read = full hidden standart
 
 sort = ascii time size ascii_reverse time_reverse size_reverse
 
+utils = inode_bsize path_name winsize
+
 write = 1 C CG l m name total winsize x xG
 
 RAW = $(addprefix base/, $(base)) $(addprefix get/, $(get))                   \
 	$(addprefix read/, $(read)) $(addprefix sort/, $(sort))                   \
-	$(addprefix write/, $(write))
+	$(addprefix write/, $(utils)) $(addprefix write/, $(write))
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
@@ -34,7 +36,7 @@ all: install
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR) $(OBJ_DIR)/base $(OBJ_DIR)/get $(OBJ_DIR)/read       \
-	$(OBJ_DIR)/sort $(OBJ_DIR)/write
+	$(OBJ_DIR)/sort $(OBJ_DIR)/utils $(OBJ_DIR)/write
 
 $(LIB):
 	@make -sC $(LIB_DIR) -f Makefile install
