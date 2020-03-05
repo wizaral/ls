@@ -49,8 +49,9 @@ struct s_printable {
 struct s_file {
     t_printable fields;
     t_lengths lengths;
-    t_timespec time;        // for sorting
-    int64_t size;           // for sorting
+    t_timespec time;
+    int64_t size;
+    uint16_t mode;
 };
 
 struct s_offset {
