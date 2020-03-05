@@ -74,7 +74,7 @@ void mx_check_flags(t_info *info, t_vector *flags) {
             mx_check_adds(info, &info->get, flg);
         else if (MX_OTHER(flg))
             check_other(info, flg);
-        else
-            printf("WATAFAK IS THIS: \"%c\"!!!\n", flg);   // delete before deploy
+        // else
+        //     printf("WATAFAK IS THIS: \"%c\"!!!\n", flg);   // delete before deploy
     }
 }
