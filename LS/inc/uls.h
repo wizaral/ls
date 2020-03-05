@@ -20,6 +20,7 @@
 
 void mx_parse(t_info *info, int ac, char **av);
 void mx_check_flags(t_info *info, t_vector *flags);
+void mx_check_adds(t_info *info, t_get *get, char flag);
 void mx_minimize_flags(t_info *info, t_get *get);
 
 void mx_process_args(t_info *info);
@@ -27,6 +28,7 @@ void mx_process_dir(t_info *info, char *name);
 
 void mx_uls(t_info *info, t_dir *dir);
 void mx_recursion(t_info *info, t_dir *dir);
+uint16_t mx_get_wc(t_info *info);
 
 t_dirent *mx_full(DIR *dir);        // -a
 t_dirent *mx_hidden(DIR *dir);      // -A
@@ -91,9 +93,3 @@ void mx_attr(t_info *info, t_dir *dir, t_file *file, t_stat *st);               
 void mx_acl(t_info *info, t_dir *dir, t_file *file, t_stat *st);                // -e
 
 void mx_dummy(t_info *info, t_dir *dir, t_file *file, t_stat *st);             // do nothing
-
-void mx_check_compare(t_info *info, char flag);
-void mx_check_name(t_get *get, char flag);
-void mx_check_adds(t_info *info, t_get *get, char flag);
-void mx_check_other(t_info *info, char flag);
-void mx_minimize_flags(t_info *info, t_get *get);
