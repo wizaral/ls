@@ -1,21 +1,5 @@
 #include "uls.h"
 
-void mx_foreach_file(t_info *info, t_file *arr, size_t size,
-                     void (*f)(t_info *, t_file *)) {
-    if (info && arr && size && f)
-        for (size_t i = 0; i < size; ++i)
-            f(info, arr + i);
-}
-
-void mx_foreach_file_reverse(t_info *info, t_file *arr, size_t size,
-                             void (*f)(t_info *, t_file *)) {
-    if (info && arr && size && f) {
-        for (size_t i = size - 1; i > 0; --i)
-            f(info, arr + i);
-        f(info, arr);
-    }
-}
-
 static inline void init_dir(t_dir *dir, char *name) {
     dir->dir = opendir(name);
     dir->name = name;
@@ -30,9 +14,15 @@ static inline void init_dir(t_dir *dir, char *name) {
     dir->has_bc = false;
 }
 
-void mx_process_args(t_info *info) {
+void mx_process_dir(t_info *info, char *name) {
     t_dir dir;
 
+    init_dir(&dir, name);
+    info->recursion(info, &dir);
+    closedir(dir.dir);
+}
+
+void mx_process_args(t_info *info) {
     // printf("F: %zu\n", info->files.size);
 
     // тут сначала выводим файлы
@@ -41,9 +31,6 @@ void mx_process_args(t_info *info) {
     // printf("D: %zu\n", info->directories.size);
 
     // потом запускаем для папок
-    for (size_t i = 0; i < info->directories.size; ++i) {
-        init_dir(&dir, *(char **)mx_at(&info->directories, i));
-        info->recursion(info, &dir);
-        closedir(dir.dir);
-    }
+    for (size_t i = 0; i < info->directories.size; ++i)
+        mx_process_dir(info, *(char **)mx_at(&info->directories, i));
 }

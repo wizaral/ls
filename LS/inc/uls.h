@@ -21,16 +21,12 @@
 void mx_parse(t_info *info, int ac, char **av);
 void mx_check_flags(t_info *info, t_vector *flags);
 void mx_minimize_flags(t_info *info, t_get *get);
+
 void mx_process_args(t_info *info);
+void mx_process_dir(t_info *info, char *name);
 
 void mx_uls(t_info *info, t_dir *dir);
 void mx_recursion(t_info *info, t_dir *dir);
-
-void mx_foreach_file(t_info *info, t_file *arr, size_t size,
-                     void (*f)(t_info *, t_file *));
-
-void mx_foreach_file_reverse(t_info *info, t_file *arr, size_t size,
-                             void (*f)(t_info *, t_file *));
 
 t_dirent *mx_full(DIR *dir);        // -a
 t_dirent *mx_hidden(DIR *dir);      // -A
@@ -54,6 +50,10 @@ void mx_nototal(t_info *info, t_dir *dir);  // -m | default
 int mx_compare_ascii(const void *a, const void *b); // default
 int mx_compare_size(const void *a, const void *b);  // -S
 int mx_compare_time(const void *a, const void *b);  // -t
+
+int mx_compare_ascii_r(const void *a, const void *b); // -r
+int mx_compare_size_r(const void *a, const void *b);  // -S -r
+int mx_compare_time_r(const void *a, const void *b);  // -t -r
 
 /*
  * full list of getters

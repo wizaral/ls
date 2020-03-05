@@ -37,25 +37,25 @@ void mx_check_flags(t_info *info, t_vector *flags) {
     // mx_printchar('\n', 1);
 
     for (size_t i = 0; i < flags->size; ++i) {
-        char flag = flags->arr[i];
+        char flg = flags->arr[i];
 
-        if (flag == 'a' || flag == 'A')
-            check_read(info, flag);
-        else if (MX_WRITE(flag))
-            check_write(info, flag);
-        else if (flag == 'F' || flag == 'p')
-            check_suffix(&info->get, flag);
-        else if (flag == 'c' || flag == 'U' || flag == 'u')
-            check_time(info, flag);
-        else if (flag == 'f' || flag == 'S' || flag == 't')
-            mx_check_compare(info, flag);
-        else if (flag == 'q' || flag == 'v' || flag == 'w')
-            mx_check_name(&info->get, flag);
-        else if (MX_LADDS(flag))
-            mx_check_adds(info, &info->get, flag);
-        else if (MX_OTHER(flag))
-            mx_check_other(info, flag);
+        if (flg == 'a' || flg == 'A')
+            check_read(info, flg);
+        else if (MX_WRITE(flg))
+            check_write(info, flg);
+        else if (flg == 'F' || flg == 'p')
+            check_suffix(&info->get, flg);
+        else if (flg == 'c' || flg == 'U' || flg == 'u')
+            check_time(info, flg);
+        else if (flg == 'f' || flg == 'S' || flg == 't')
+            mx_check_compare(info, flg);
+        else if (flg == 'q' || flg == 'v' || flg == 'w')
+            info->get.name = flg == 'q' ? mx_only_printable : mx_not_printable;
+        else if (MX_LADDS(flg))
+            mx_check_adds(info, &info->get, flg);
+        else if (MX_OTHER(flg))
+            mx_check_other(info, flg);
         else
-            printf("WATAFAK IS THIS: \"%c\"!!!\n", flag);   // delete before deploy
+            printf("WATAFAK IS THIS: \"%c\"!!!\n", flg);   // delete before deploy
     }
 }

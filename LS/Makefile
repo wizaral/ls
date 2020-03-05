@@ -9,9 +9,9 @@ get = access acl arrow attr bsize dummy flags grp inode links name size       \
 
 read = full hidden standart
 
-sort = ascii time size
+sort = ascii time size ascii_reverse time_reverse size_reverse
 
-write = 1 C CG l m name total x xG
+write = 1 C CG l m name total winsize x xG
 
 RAW = $(addprefix base/, $(base)) $(addprefix get/, $(get))                   \
 	$(addprefix read/, $(read)) $(addprefix sort/, $(sort))                   \

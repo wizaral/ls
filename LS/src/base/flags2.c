@@ -5,17 +5,12 @@ void mx_check_compare(t_info *info, char flag) {
         if (flag == 'f') {
             info->cmp = NULL;
             info->read = mx_full;
-            info->foreach = mx_foreach_file;
         }
         else if (flag == 'S')
             info->cmp = mx_compare_size;
         else if (info->cmp != mx_compare_size)
             info->cmp = mx_compare_time;
     }
-}
-
-void mx_check_name(t_get *get, char flag) {
-    get->name = flag == 'q' ? mx_only_printable : mx_not_printable;
 }
 
 void mx_check_adds(t_info *info, t_get *get, char flag) {
@@ -48,22 +43,25 @@ void mx_check_other(t_info *info, char flag) {
     else if (flag == 'G')
         info->print_name = info->output_dst ? mx_nocolor : mx_color;
     else if (flag == 'r')
-        info->foreach = info->cmp ? mx_foreach_file_reverse : mx_foreach_file;
+        info->reverse = info->cmp;
     else
         info->recursion = mx_recursion;
 }
 
+static inline void accept_l(t_info *info, t_get *get) {
+    info->print_total = mx_total;
+    get->access = mx_access;
+    get->links = mx_links;
+    get->user == mx_dummy ? get->user = mx_user_name : mx_dummy;
+    get->grp = mx_group;
+    get->size == mx_dummy ? get->size = mx_size_b : mx_dummy;
+    get->time == mx_dummy ? get->time = mx_time_short : mx_dummy;
+    get->arrow = mx_arrow;
+}
+
 void mx_minimize_flags(t_info *info, t_get *get) {
-    if (info->write == mx_write_l) {
-        info->print_total = mx_total;
-        get->access = mx_access;
-        get->links = mx_links;
-        get->user == mx_dummy ? get->user = mx_user_name : mx_dummy;
-        get->grp = mx_group;
-        get->size == mx_dummy ? get->size = mx_size_b : mx_dummy;
-        get->time == mx_dummy ? get->time = mx_time_short : mx_dummy;
-        get->arrow = mx_arrow;
-    }
+    if (info->write == mx_write_l)
+        accept_l(info, get);
     else {
         get->access = get->links = get->user = get->grp = get->attr = mx_dummy;
         get->flags = get->size = get->time = get->arrow = get->acl = mx_dummy;
@@ -74,4 +72,9 @@ void mx_minimize_flags(t_info *info, t_get *get) {
     }
     if (info->write == mx_write_m || get->bsize == mx_dummy)
         info->print_total = mx_nototal;
+    if (info->reverse) {
+        info->cmp == mx_compare_ascii ? info->cmp = mx_compare_ascii_r : NULL;
+        info->cmp == mx_compare_time ? info->cmp = mx_compare_time_r : NULL;
+        info->cmp == mx_compare_size ? info->cmp = mx_compare_size_r : NULL;
+    }
 }

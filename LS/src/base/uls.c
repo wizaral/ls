@@ -1,8 +1,8 @@
 #include "uls.h"
 
-// static bool check_block_char() {
-
-// }
+static bool check_block_char() {
+    return false;
+}
 
 // static void free_dir(t_dir *dir) {
 
@@ -29,7 +29,7 @@ void mx_uls(t_info *info, t_dir *dir) {
     t_dirent *(*read)(DIR *) = info->read;
     dir->file = read(dir->dir);
 
-    // dir->has_bc = check_block_char();
+    dir->has_bc = check_block_char();
     for (DIR *pdir = dir->dir; dir->file; dir->file = read(pdir))
         get_info(info, dir, dir->file);
 

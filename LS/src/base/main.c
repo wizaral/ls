@@ -23,10 +23,10 @@ static inline void init_info(t_info *info) {
     info->cmp = mx_compare_ascii;
     info->print_total = mx_nototal;
     info->print_name = mx_nocolor;
-    info->foreach = mx_foreach_file;
     info->recursion = mx_uls;
     info->time_type = modification;
     info->return_val = 0;
+    info->reverse = 0;
     info->directories.cap = MX_VECTOR_DEFAULT_SIZE;
     info->directories.bytes = sizeof(char *);
     info->directories.size = 0;

@@ -10,8 +10,7 @@ static void parse_file(t_info *info, char *av) {
     DIR *dir = NULL;
     t_stat st;
 
-    if (lstat(av, &st) == -1) {
-        info->return_val = 1;
+    if (lstat(av, &st) == -1 && (info->return_val = 1)) {
         mx_printstr("ls: ", 2);
         perror(av);
     }
@@ -22,7 +21,8 @@ static void parse_file(t_info *info, char *av) {
     }
     else {
         closedir(dir);
-        if (MX_ISREG(st.st_mode))
+        if (MX_ISREG(st.st_mode)
+            || (MX_ISLNK(st.st_mode) && info->write == mx_write_l))
             mx_push_backward(&info->files, &av);
         else
             mx_push_backward(&info->directories, &av);
@@ -59,11 +59,11 @@ void mx_parse(t_info *info, int ac, char **av) {
 
     info->directories.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
     info->files.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
+    mx_check_flags(info, &flags);
+    mx_minimize_flags(info, &info->get);
 
     for (; i < ac; ++i)
         parse_file(info, av[i]);
 
-    mx_check_flags(info, &flags);
-    mx_minimize_flags(info, &info->get);
     free(flags.arr);
 }

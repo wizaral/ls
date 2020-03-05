@@ -107,6 +107,7 @@ struct s_dir {
     DIR *dir;       // pointer to opened directory
     char *name;     // current directory
     size_t len;     // length of directory name
+    size_t total;   // total block count
 
     t_dirent *file; // current file on reading
     char *filename; // name of current file ["dirname/filename"]
@@ -122,12 +123,12 @@ struct s_info {
     int (*cmp)(const void *, const void *); // compare function in sort
     void (*print_total)(t_info *, t_dir *); // print total bsize
     void (*print_name)(t_file *);           // out fname colored/normal
-    void (*foreach)(t_info *, t_file *, size_t, void (*)(t_info *, t_file *));
     void (*recursion)(t_info *, t_dir *);   // recursion in directories
 
     t_get get;              // functions for getting files info
     bool output_dst;        // 0 - terminal | 1 - file or other process
     bool return_val;        // 0 - good | 1 - any error
+    bool reverse;           // 0 - normal | 1 - reversed
     t_time_type time_type;  // data/time type for -[tlgno]
 
     t_vector files;         // only files from arguments
