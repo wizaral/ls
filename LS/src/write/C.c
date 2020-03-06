@@ -15,7 +15,8 @@ static void init_data(t_info *info, t_dir *dir) {
                        ((len + (8 - len % 8)) ? (len + (8 - len % 8)) : 1);
     dir->off.rows = (dir->array.size /
                     (dir->off.columns ? dir->off.columns : 1))
-                  + ((dir->array.size % dir->off.columns) != 0);
+                  + ((dir->array.size
+                  % (dir->off.columns ? dir->off.columns : 1)) != 0);
     dir->off.name_tabs = mx_get_tabs(len) + 1;
 }
 
