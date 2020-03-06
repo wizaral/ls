@@ -5,6 +5,42 @@ zsh compare.sh <(ls -AF@eGisTOnh Makefile ../Makefile / /dev /dev/fd /tmp/ 2>&1)
 zsh compare.sh <(ls -privet 2>&1) <(./uls -privet 2>&1) "-privet"
 zsh compare.sh <(ls -1FiSra / 2>&1) <(./uls -1FiSra / 2>&1) "-1FiSra /"
 
+zsh compare.sh <(ls -1i 2>&1) <(./uls -1i 2>&1) "-1i"
+zsh compare.sh <(ls -li 2>&1) <(./uls -li 2>&1) "-li"
+zsh compare.sh <(ls -xi 2>&1) <(./uls -xi 2>&1) "-xi"
+zsh compare.sh <(ls -Ci 2>&1) <(./uls -Ci 2>&1) "-Ci"
+zsh compare.sh <(ls -mi 2>&1) <(./uls -mi 2>&1) "-mi"
+
+zsh compare.sh <(ls -1i / 2>&1) <(./uls -1i / 2>&1) "-1i /"
+zsh compare.sh <(ls -li / 2>&1) <(./uls -li / 2>&1) "-li /"
+zsh compare.sh <(ls -xi / 2>&1) <(./uls -xi / 2>&1) "-xi /"
+zsh compare.sh <(ls -Ci / 2>&1) <(./uls -Ci / 2>&1) "-Ci /"
+zsh compare.sh <(ls -mi / 2>&1) <(./uls -mi / 2>&1) "-mi /"
+
+zsh compare.sh <(ls -1s 2>&1) <(./uls -1s 2>&1) "-1s"
+zsh compare.sh <(ls -ls 2>&1) <(./uls -ls 2>&1) "-ls"
+zsh compare.sh <(ls -xs 2>&1) <(./uls -xs 2>&1) "-xs"
+zsh compare.sh <(ls -Cs 2>&1) <(./uls -Cs 2>&1) "-Cs"
+zsh compare.sh <(ls -ms 2>&1) <(./uls -ms 2>&1) "-ms"
+
+zsh compare.sh <(ls -1s / 2>&1) <(./uls -1s / 2>&1) "-1s /"
+zsh compare.sh <(ls -ls / 2>&1) <(./uls -ls / 2>&1) "-ls /"
+zsh compare.sh <(ls -xs / 2>&1) <(./uls -xs / 2>&1) "-xs /"
+zsh compare.sh <(ls -Cs / 2>&1) <(./uls -Cs / 2>&1) "-Cs /"
+zsh compare.sh <(ls -ms / 2>&1) <(./uls -ms / 2>&1) "-ms /"
+
+zsh compare.sh <(ls -1is 2>&1) <(./uls -1is 2>&1) "-1is"
+zsh compare.sh <(ls -lis 2>&1) <(./uls -lis 2>&1) "-lis"
+zsh compare.sh <(ls -xis 2>&1) <(./uls -xis 2>&1) "-xis"
+zsh compare.sh <(ls -Cis 2>&1) <(./uls -Cis 2>&1) "-Cis"
+zsh compare.sh <(ls -mis 2>&1) <(./uls -mis 2>&1) "-mis"
+
+zsh compare.sh <(ls -1is / 2>&1) <(./uls -1is / 2>&1) "-1is /"
+zsh compare.sh <(ls -lis / 2>&1) <(./uls -lis / 2>&1) "-lis /"
+zsh compare.sh <(ls -xis / 2>&1) <(./uls -xis / 2>&1) "-xis /"
+zsh compare.sh <(ls -Cis / 2>&1) <(./uls -Cis / 2>&1) "-Cis /"
+zsh compare.sh <(ls -mis / 2>&1) <(./uls -mis / 2>&1) "-mis /"
+
 zsh compare.sh <(ls -Aa 2>&1) <(./uls -Aa 2>&1) "-Aa"
 zsh compare.sh <(ls -aA 2>&1) <(./uls -aA 2>&1) "-aA"
 
