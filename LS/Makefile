@@ -42,18 +42,18 @@ $(LIB):
 	@make -sC $(LIB_DIR) -f Makefile install
 
 # install
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
-
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
-
-# debug
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+# 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 # $(NAME): $(OBJ_DIR) $(OBJ)
-# 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+# 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+
+# debug
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+
+$(NAME): $(OBJ_DIR) $(OBJ)
+	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 install: $(LIB) $(NAME)
 

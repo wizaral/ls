@@ -69,12 +69,12 @@ $(OBJ_DIR):
 	$(OBJ_DIR)/type $(OBJ_DIR)/utils $(OBJ_DIR)/vector
 
 # install
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
+# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+# 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 # debug
-# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@$(CC) -pipe $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
 install: $(OBJ_DIR) $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
