@@ -18,6 +18,7 @@
 
 #include <sys/acl.h>
 
+void mx_wrong(char flag);
 void mx_parse(t_info *info, int ac, char **av);
 void mx_check_flags(t_info *info, t_vector *flags);
 void mx_check_adds(t_info *info, t_get *get, char flag);

@@ -32,12 +32,12 @@ static void parse_file(t_info *info, char *av) {
 static bool parse_flag(t_vector *flags, char *av) {
     if (av[0] == '-' && av[1] == '-') {
         if (av[2] != '\0')
-            mx_nelegal(av[1]);
+            mx_wrong(av[1]);
         return false;
     }
 
     for (int i = 1; av[i]; ++i)
-        MX_EXIST(av[i]) ? mx_push_backward(flags, av + i) : mx_nelegal(av[i]);
+        MX_EXIST(av[i]) ? mx_push_backward(flags, av + i) : mx_wrong(av[i]);
     return true;
 }
 
