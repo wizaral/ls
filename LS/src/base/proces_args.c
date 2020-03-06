@@ -25,6 +25,11 @@ void mx_process_dir(t_info *info, char *name) {
         info->recursion(info, &dir);
         closedir(dir.dir);
     }
+    else {
+        info->return_val = 1;
+        mx_printstrlen("ls: ", 4, 2);
+        perror(name);
+    }
 }
 
 void mx_process_args(t_info *info) {
