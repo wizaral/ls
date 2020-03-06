@@ -49,7 +49,7 @@ void mx_recursion(t_info *info, t_dir *dir) {
     for (DIR *pdir = dir->dir; dir->file; dir->file = read(pdir))
         get_info(info, dir, dir->file);
 
-    mx_sort(dir->array.arr, dir->array.size, dir->array.bytes, info->cmp);
+    qsort(dir->array.arr, dir->array.size, dir->array.bytes, info->cmp);
     info->write(info, dir);
     // recursion magic
 
