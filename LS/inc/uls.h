@@ -31,6 +31,8 @@ void mx_recursion(t_info *info, t_dir *dir);
 
 size_t mx_get_inode_bsize_len(t_offset *off);
 void mx_make_inode_bsize(t_offset *off, char *str, t_printable *print, t_lengths *len);
+int mx_get_data_len(t_info *info, t_dir *dir, t_file *file, bool longest);
+int mx_get_tabs(int size);
 uint16_t mx_winsize(t_info *info);
 char *mx_get_path_name(char *path, size_t plen, char *name, size_t nlen);
 
