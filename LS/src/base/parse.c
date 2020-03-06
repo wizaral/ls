@@ -36,12 +36,8 @@ static bool parse_flag(t_vector *flags, char *av) {
         return false;
     }
 
-    for (int i = 1; av[i]; ++i) {
-        if (MX_EXIST(av[i]))
-            mx_push_backward(flags, av + i);
-        else
-            mx_nelegal(av[i]);
-    }
+    for (int i = 1; av[i]; ++i)
+        MX_EXIST(av[i]) ? mx_push_backward(flags, av + i) : mx_nelegal(av[i]);
     return true;
 }
 
