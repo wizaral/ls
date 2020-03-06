@@ -29,7 +29,7 @@ void mx_write_x(t_info *info, t_dir *dir) {
 
     dir->off.width = mx_winsize(info);
     dir->off.x = 0;
-    dir->off.name_tabs = mx_get_tabs(mx_get_data_len(info, dir, NULL, true)) + 1;
+    dir->off.name_tabs = mx_get_tabs(mx_get_data_len(info, dir, NULL, 1)) + 1;
     for (size_t i = 0; i < dir->array.size; ++i) {
         dt = mx_at(&dir->array, i);
         mx_memset(str, ' ', len);
