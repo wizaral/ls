@@ -41,6 +41,7 @@ void mx_compress_flags(t_info *info, t_get *get) {
     if (info->print_name == mx_color) {
         info->write == mx_write_C ? info->write = mx_write_CG : NULL;
         info->write == mx_write_x ? info->write = mx_write_xG : NULL;
+        info->get.access = mx_access;
     }
     if (info->write == mx_write_m || get->bsize == mx_dummy)
         info->print_total = mx_nototal;
