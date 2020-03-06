@@ -54,7 +54,7 @@ void mx_recursion(t_info *info, t_dir *dir) {
     // recursion magic
 
     t_file *end = (t_file *)(dir->array.arr + dir->array.size * dir->array.bytes);
-    for (t_file *i = dir->array.arr; i < end; ++i) {
+    for (t_file *i = (t_file *)dir->array.arr; i < end; ++i) {
         if (MX_ISDIR(i->mode) && mx_strcmp(i->fields.name, ".") && mx_strcmp(i->fields.name, "..")) {
             char *fullname = mx_get_path_name(dir->name, dir->len, i->fields.name, i->lengths.name);
             mx_process_dir(info, fullname);
