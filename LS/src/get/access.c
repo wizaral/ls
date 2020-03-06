@@ -16,9 +16,8 @@
 // }
 
 static inline void basic_perm(char *access, t_stat *st) {
-    static const char *str[] = {"-r", "-w", "-x"};
+    static const char *str[] = {"-r", "-w", "-x", "sS", "tT"};
 
-    access[0] = '-';
     MX_ISDIR(st->st_mode) ? (access[0] = 'd') : 0;
     MX_ISLNK(st->st_mode) ? (access[0] = 'l') : 0;
     MX_ISCHR(st->st_mode) ? (access[0] = 'c') : 0;
@@ -34,14 +33,17 @@ static inline void basic_perm(char *access, t_stat *st) {
     access[7] = str[0][(st->st_mode & S_IROTH) > 0];
     access[8] = str[1][(st->st_mode & S_IWOTH) > 0];
     access[9] = str[2][(st->st_mode & S_IXOTH) > 0];
-    // st->st_mode & S_ISTXT ? access[9] = 't' : 0;
-    access[10] = ' ';   // some code about @+ here or in next func
-    access[11] = ' ';
+    MX_ISUID(st->st_mode) ? (access[3] = str[3][access[3] == 'x']) : 0;
+    MX_ISGID(st->st_mode) ? (access[6] = str[3][access[6] == 'x']) : 0;
+    MX_ISVTX(st->st_mode) ? (access[9] = str[4][access[9] == 'x']) : 0;
 }
 
 void mx_access(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
+    file->fields.access[0] = '-';
+    file->fields.access[11] = ' ';
     basic_perm(file->fields.access, st);
-    // advanced_perm(dir, file);
-    ++dir;
+    // file->fields.access[10] = ' ';   // some code about @+
+    // advanced_perm(dir, file);        // some code about @+
     ++info;
+    ++dir;
 }

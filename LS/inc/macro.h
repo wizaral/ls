@@ -12,6 +12,10 @@
 #define MX_ISWHT(m)    (((m) & S_IFMT) == S_IFWHT)     // whiteout
 #endif
 
+#define MX_ISUID(m)    (((m) & S_ISUID) > 0)
+#define MX_ISGID(m)    (((m) & S_ISGID) > 0)
+#define MX_ISVTX(m)    (((m) & S_ISVTX) > 0)
+
 #define MX_MINOR(x) ((x) & 0xFFFFFF)
 #define MX_MAJOR(x) (((x) >> 24) & 0xFF)
 
