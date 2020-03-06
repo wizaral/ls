@@ -80,9 +80,9 @@ struct s_offset {
 
 enum e_time_type {
     last_access = 0,
-    modification = sizeof(t_timespec),
-    change = sizeof(t_timespec) * 2,
-    creation = sizeof(t_timespec) * 3,
+    modification = 1,
+    change = 2,
+    creation = 3,
 };
 
 typedef enum e_time_type t_time_type;

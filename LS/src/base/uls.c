@@ -20,7 +20,7 @@ static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
     lstat(dir->filename, &st);
     file_info.size = st.st_size;
     file_info.mode = st.st_mode;
-    mx_memcpy(&file_info.time, ((uint8_t *)&st.st_atimespec + info->time_type), sizeof(t_timespec));
+    mx_memcpy(&file_info.time, &st.st_atimespec + info->time_type, sizeof(t_timespec));
 
     for (int i = 0; i < 14; ++i)
         func[i](info, dir, &file_info, &st);    // check about NULLs
@@ -49,14 +49,17 @@ void mx_recursion(t_info *info, t_dir *dir) {
     for (DIR *pdir = dir->dir; dir->file; dir->file = read(pdir))
         get_info(info, dir, dir->file);
 
-    qsort(dir->array.arr, dir->array.size, dir->array.bytes, info->cmp);
+    mx_sort(dir->array.arr, dir->array.size, dir->array.bytes, info->cmp);
     info->write(info, dir);
-    // recursion magic
 
+    // recursion magic
     t_file *end = (t_file *)(dir->array.arr + dir->array.size * dir->array.bytes);
     for (t_file *i = (t_file *)dir->array.arr; i < end; ++i) {
         if (MX_ISDIR(i->mode) && mx_strcmp(i->fields.name, ".") && mx_strcmp(i->fields.name, "..")) {
             char *fullname = mx_get_path_name(dir->name, dir->len, i->fields.name, i->lengths.name);
+            mx_printchar('\n', 1);
+            mx_printstr(fullname, 1);
+            mx_printstrlen(":\n", 2, 1);
             mx_process_dir(info, fullname);
             free(fullname);
         }
