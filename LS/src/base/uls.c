@@ -23,7 +23,7 @@ static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
     mx_memcpy(&file_info.time, ((uint8_t *)&st.st_atimespec + info->time_type), sizeof(t_timespec));
 
     for (int i = 0; i < 14; ++i)
-        func[i](info, dir, &file_info, &st);
+        func[i](info, dir, &file_info, &st);    // check about NULLs
     mx_push_backward(&dir->array, &file_info);
     mx_strdel(&dir->filename);
 }
@@ -43,11 +43,11 @@ void mx_uls(t_info *info, t_dir *dir) {
 
 void mx_recursion(t_info *info, t_dir *dir) {
     t_dirent *(*read)(DIR *) = info->read;
-    t_dirent *file = read(dir->dir);
+    dir->file = read(dir->dir);
 
     // dir->has_bc = check_block_char();
-    for (DIR *pdir = dir->dir; file; file = read(pdir))
-        get_info(info, dir, file);
+    for (DIR *pdir = dir->dir; dir->file; dir->file = read(pdir))
+        get_info(info, dir, dir->file);
 
     mx_sort(dir->array.arr, dir->array.size, dir->array.bytes, info->cmp);
     info->write(info, dir);
