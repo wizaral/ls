@@ -11,7 +11,7 @@ read = full hidden standart
 
 sort = ascii time size ascii_reverse time_reverse size_reverse
 
-utils = inode_bsize path_name winsize
+utils = inode_bsize path_name winsize get_tabs get_data_len
 
 write = 1 C CG l m name total x xG
 
