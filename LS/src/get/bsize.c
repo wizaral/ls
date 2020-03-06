@@ -1,16 +1,11 @@
 #include "uls.h"
 
 void mx_bsize(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
-    // char *bsize = mx_itoa(st->st_blksize);
-    // int bsize_size = mx_strlen(bsize);
+    int bsize_len = mx_get_num_length(st->st_blocks, 10);
 
-    // file->bsize = st->st_blksize;
-    // file->fields.bsize = bsize;
-    // file->lengths.bsize = bsize_size;
-    // if (dir->off.bsize < bsize_size)
-    //     dir->off.bsize = bsize_size;
+    file->fields.bsize = mx_lltoa(st->st_blocks);
+    file->lengths.bsize = bsize_len;
+    if (dir->off.bsize < bsize_len)
+        dir->off.bsize = bsize_len;
     ++info;
-    ++dir;
-    ++file;
-    ++st;
 }
