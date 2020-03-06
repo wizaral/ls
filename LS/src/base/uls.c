@@ -14,7 +14,7 @@ static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
     void (**func)(t_info *, t_dir *, t_file *, t_stat *) =
         (void (**)(t_info *, t_dir *, t_file *, t_stat *))&info->get;
 
-    dir->filename = get_name_full(dir->name, dir->len,
+    dir->filename = mx_get_path_name(dir->name, dir->len,
                                 file->d_name, file->d_namlen);
 
     lstat(dir->filename, &st);
@@ -53,11 +53,13 @@ void mx_recursion(t_info *info, t_dir *dir) {
     info->write(info, dir);
     // recursion magic
 
-    uint8_t *end = dir->array.arr + dir->array.size * dir->array.bytes;
-    for (uint8_t *i = dir->array.arr; i < end; i += dir->array.bytes) {
-        t_file *file = (t_file *)i;
-        if (MX_ISDIR(file->mode) && !(file->fields.name[0] == '.' && (file->fields.name[1] == '\0' || (file->fields.name[1] == '.' && file->fields.name[2] == '\0'))))
-            mx_process_dir(info, get_name_full(dir->name, dir->len, file->fields.name, file->lengths.name));
+    t_file *end = (t_file *)(dir->array.arr + dir->array.size * dir->array.bytes);
+    for (t_file *i = dir->array.arr; i < end; ++i) {
+        if (MX_ISDIR(i->mode) && mx_strcmp(i->fields.name, ".") && mx_strcmp(i->fields.name, "..")) {
+            char *fullname = mx_get_path_name(dir->name, dir->len, i->fields.name, i->lengths.name);
+            mx_process_dir(info, fullname);
+            free(fullname);
+        }
     }
     // free_dir();
 }

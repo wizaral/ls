@@ -20,7 +20,6 @@ void mx_process_dir(t_info *info, char *name) {
     init_dir(&dir, name);
     info->recursion(info, &dir);
     closedir(dir.dir);
-    mx_realloc(name, 0);
 }
 
 void mx_process_args(t_info *info) {
