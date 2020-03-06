@@ -3,6 +3,7 @@ cp ../LS/uls .
 zsh compare.sh <(ls -nisTOGfFqh@e 2>&1) <(./uls -nisTOGfFqh@e 2>&1) "-nisTOGfFqh@e"
 zsh compare.sh <(ls -AF@eGisTOnh Makefile ../Makefile / /dev /dev/fd /tmp/ 2>&1) <(./uls -AF@eGisTOnh Makefile ../Makefile / /dev /dev/fd /tmp/ 2>&1) "-AF@eGisTOnh Makefile ../Makefile / /dev /dev/fd /tmp/"
 zsh compare.sh <(ls -privet 2>&1) <(./uls -privet 2>&1) "-privet"
+zsh compare.sh <(ls -1FiSra / 2>&1) <(./uls -1FiSra / 2>&1) "-1FiSra /"
 
 zsh compare.sh <(ls -Aa 2>&1) <(./uls -Aa 2>&1) "-Aa"
 zsh compare.sh <(ls -aA 2>&1) <(./uls -aA 2>&1) "-aA"
