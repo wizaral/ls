@@ -13,11 +13,11 @@ sort = ascii time size ascii_reverse time_reverse size_reverse
 
 utils = inode_bsize path_name winsize
 
-write = 1 C CG l m name total winsize x xG
+write = 1 C CG l m name total x xG
 
 RAW = $(addprefix base/, $(base)) $(addprefix get/, $(get))                   \
 	$(addprefix read/, $(read)) $(addprefix sort/, $(sort))                   \
-	$(addprefix write/, $(utils)) $(addprefix write/, $(write))
+	$(addprefix utils/, $(utils)) $(addprefix write/, $(write))
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/

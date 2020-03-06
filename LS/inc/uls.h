@@ -29,7 +29,6 @@ void mx_process_dir(t_info *info, char *name);
 void mx_uls(t_info *info, t_dir *dir);
 void mx_recursion(t_info *info, t_dir *dir);
 
-
 size_t mx_get_inode_bsize_len(t_offset *off);
 void mx_make_inode_bsize(t_offset *off, char *str, t_printable *print, t_lengths *len);
 uint16_t mx_winsize(t_info *info);
