@@ -51,28 +51,24 @@ static inline void check_other(t_info *info, char flag) {
 }
 
 void mx_check_flags(t_info *info, t_vector *flags) {
-    // PRINT FLAGS
-    // mx_printstrlen((char *)flags->arr, flags->size, 1);
-    // mx_printchar('\n', 1);
-
     for (size_t i = 0; i < flags->size; ++i) {
-        char flg = flags->arr[i];
+        char flag = flags->arr[i];
 
-        if ((flg == 'a' || flg == 'A') && info->read != mx_full)
-            info->read = flg == 'A' ? mx_hidden : mx_full;
-        else if (MX_WRITE(flg))
-            check_write(info, flg);
-        else if (flg == 'F' || flg == 'p')
-            info->get.suffix = flg == 'F' ? mx_suffix_all : mx_suffix_dir;
-        else if (flg == 'c' || flg == 'U' || flg == 'u')
-            check_time(info, flg);
-        else if (flg == 'f' || flg == 'S' || flg == 't')
-            check_compare(info, flg);
-        else if (flg == 'q' || flg == 'v' || flg == 'w')
-            info->get.name = flg == 'q' ? mx_only_printable : mx_not_printable;
-        else if (MX_LADDS(flg))
-            mx_check_adds(info, &info->get, flg);
-        else if (MX_OTHER(flg))
-            check_other(info, flg);
+        if ((flag == 'a' || flag == 'A') && info->read != mx_full)
+            info->read = flag == 'A' ? mx_hidden : mx_full;
+        else if (MX_WRITE(flag))
+            check_write(info, flag);
+        else if (flag == 'F' || flag == 'p')
+            info->get.suffix = flag == 'F' ? mx_suffix_all : mx_suffix_dir;
+        else if (flag == 'c' || flag == 'U' || flag == 'u')
+            check_time(info, flag);
+        else if (flag == 'f' || flag == 'S' || flag == 't')
+            check_compare(info, flag);
+        else if (MX_PRINT(flag))
+            mx_check_print(&info->get, flag);
+        else if (MX_LADDS(flag))
+            mx_check_adds(info, &info->get, flag);
+        else if (MX_OTHER(flag))
+            check_other(info, flag);
     }
 }

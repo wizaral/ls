@@ -1,5 +1,16 @@
 #include "uls.h"
 
+void mx_check_print(t_get *get, char flag) {
+    if (flag == 'q')
+        get->name = mx_only_printable;
+    else if (flag == 'B')
+        get->name = mx_octal_printable;
+    else if (flag == 'b')
+        get->name = mx_escape_printable;
+    else
+        get->name = mx_not_printable;
+}
+
 void mx_check_adds(t_info *info, t_get *get, char flag) {
     if (flag == 'g' || flag == 'n') {
         info->write = mx_write_l;
