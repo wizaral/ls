@@ -25,7 +25,7 @@ queue = clear_queue create_queue delete_queue dequeue enqueue foreach_queue   \
 stack = clear_stack create_stack delete_stack foreach_stack pop push top
 
 string = atoll atoull count_substr count_words del_extra_spaces del_strarr    \
-	get_char_index get_substr_index hex_to_nbr itoa lltoa nbr_to_hex          \
+	get_char_index get_substr_index hex_to_nbr lltoa nbr_to_hex               \
 	replace_substr str_reverse strcat strchr strcmp strcpy strdel strdup      \
 	strjoin strlen strncmp strncpy strndup strnew strsplit strstr strtrim     \
 	tolower toupper
