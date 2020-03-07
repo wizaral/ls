@@ -44,8 +44,8 @@ static bool parse_flag(t_vector *flags, char *av) {
 void mx_parse(t_info *info, int ac, char **av) {
     static const char *dot = ".";
     t_vector flags = {MX_VECTOR_DEFAULT_SIZE, 0, sizeof(char), malloc(sizeof(char) * MX_VECTOR_DEFAULT_SIZE)};
-    int i = 1;
     int check = 0;
+    int i = 1;
 
     for (bool flag = true; flag && i < ac && av[i][0] == '-'; ++i)
         flag = parse_flag(&flags, av[i]);
@@ -54,6 +54,9 @@ void mx_parse(t_info *info, int ac, char **av) {
     info->files.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
     mx_check_flags(info, &flags);
     mx_compress_flags(info, &info->get);
+
+    // test this !!
+    // mx_sort(av + i, ac - i, sizeof(char *), info->reverse ? mx_compare_argv_r : mx_compare_argv);
 
     for (check = i; i < ac; ++i)
         parse_file(info, av[i]);
