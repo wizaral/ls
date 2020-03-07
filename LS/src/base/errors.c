@@ -7,7 +7,7 @@ static inline void usage() {
 }
 
 void mx_wrong(char flag) {
-    mx_printstr("ls: illegal option -- ", 2);
+    mx_printstrlen("uls: illegal option -- ", 23, 2);
     mx_printchar(flag, 2);
     mx_printchar('\n', 2);
     usage();

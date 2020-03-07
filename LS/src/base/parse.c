@@ -11,12 +11,12 @@ static void parse_file(t_info *info, char *av) {
     t_stat st;
 
     if (lstat(av, &st) == -1 && (info->return_val = 1)) {
-        mx_printstr("ls: ", 2);
+        mx_printstrlen("uls: ", 5, 2);
         perror(av);
     }
     else if (MX_ISDIR(st.st_mode) && (dir = opendir(av)) == NULL) {
         info->return_val = 1;
-        mx_printstr("ls: ", 2);
+        mx_printstrlen("uls: ", 5, 2);
         perror(get_file_name(av));
     }
     else {

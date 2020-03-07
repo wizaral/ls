@@ -1,11 +1,12 @@
 #include "uls.h"
 
+// should placed in utils
 // static bool check_block_char(char *name) {
 //     return false;
 // }
 
+// should placed in utils
 // static void free_dir(t_dir *dir) {
-
 // }
 
 static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
@@ -43,16 +44,14 @@ void mx_uls(t_info *info, t_dir *dir) {
 
 void mx_recursion(t_info *info, t_dir *dir) {
     t_dirent *(*read)(DIR *) = info->read;
-    dir->file = read(dir->dir);
 
+    dir->file = read(dir->dir);
     // dir->has_bc = check_block_char();
     for (DIR *pdir = dir->dir; dir->file; dir->file = read(pdir))
         get_info(info, dir, dir->file);
-
     mx_sort(dir->array.arr, dir->array.size, dir->array.bytes, info->cmp);
     info->write(info, dir);
 
-    // recursion magic
     t_file *end = (t_file *)(dir->array.arr + dir->array.size * dir->array.bytes);
     for (t_file *i = (t_file *)dir->array.arr; i < end; ++i) {
         if (MX_ISDIR(i->mode) && mx_strcmp(i->fields.name, ".") && mx_strcmp(i->fields.name, "..")) {

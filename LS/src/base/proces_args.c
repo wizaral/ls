@@ -27,7 +27,7 @@ void mx_process_dir(t_info *info, char *name) {
     }
     else {
         info->return_val = 1;
-        mx_printstrlen("ls: ", 4, 2);
+        mx_printstrlen("uls: ", 5, 2);
         perror(name);
     }
 }
