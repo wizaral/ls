@@ -1,15 +1,15 @@
 #pragma once
 #include "uls.h"
 
-#define MX_ISBLK(m)    (((m) & S_IFMT) == S_IFBLK)     // block special
-#define MX_ISCHR(m)    (((m) & S_IFMT) == S_IFCHR)     // char special
-#define MX_ISDIR(m)    (((m) & S_IFMT) == S_IFDIR)     // directory
-#define MX_ISFIFO(m)   (((m) & S_IFMT) == S_IFIFO)     // fifo or socket
-#define MX_ISREG(m)    (((m) & S_IFMT) == S_IFREG)     // regular file
-#define MX_ISLNK(m)    (((m) & S_IFMT) == S_IFLNK)     // symbolic link
-#define MX_ISSOCK(m)   (((m) & S_IFMT) == S_IFSOCK)    // socket
+#define MX_ISBLK(x)    (((x) & S_IFMT) == S_IFBLK)     // block special
+#define MX_ISCHR(x)    (((x) & S_IFMT) == S_IFCHR)     // char special
+#define MX_ISDIR(x)    (((x) & S_IFMT) == S_IFDIR)     // directory
+#define MX_ISFIFO(x)   (((x) & S_IFMT) == S_IFIFO)     // fifo or socket
+#define MX_ISREG(x)    (((x) & S_IFMT) == S_IFREG)     // regular file
+#define MX_ISLNK(x)    (((x) & S_IFMT) == S_IFLNK)     // symbolic link
+#define MX_ISSOCK(x)   (((x) & S_IFMT) == S_IFSOCK)    // socket
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-#define MX_ISWHT(m)    (((m) & S_IFMT) == S_IFWHT)     // whiteout
+#define MX_ISWHT(x)    (((x) & S_IFMT) == S_IFWHT)     // whiteout
 #endif
 
 #define MX_ISUID(m)    (((m) & S_ISUID) > 0)
@@ -21,5 +21,10 @@
 
 #define MX_EXIST(x) mx_strchr(MX_FLAGS, x)
 #define MX_WRITE(x) mx_strchr("l1mCx", x)
+#define MX_PRINT(x) mx_strchr("Bbqvw", x)
 #define MX_LADDS(x) mx_strchr("ghnOT@e", x)
 #define MX_OTHER(x) mx_strchr("isGRr", x)
+
+#define MX_OCTAL(x) !(mx_isprint((x)) && (x) != '\"' && (x) != '\\')
+#define MX_ESCAPE(x) mx_strchr("\\\"\a\b\f\n\r\t\v", x)
+#define MX_GET_ESC(x) mx_get_char_index("\\\"\a\b\f\n\r\t\v", x)
