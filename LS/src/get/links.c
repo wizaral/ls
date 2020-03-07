@@ -1,15 +1,11 @@
 #include "uls.h"
 
 void mx_links(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
-    // char *lnum = mx_itoa(st->st_nlink);
-    // int len = mx_strlen(lnum);
+    int link_len = mx_get_num_length(st->st_nlink, 10);
 
-    // file->links = st->st_nlink;
-    // file->fields.links = lnum;
-    // file->lengths.links = len;
-    // dir->off.links = len;
+    file->fields.links = mx_lltoa(st->st_nlink);
+    file->lengths.links = link_len;
+    if (dir->off.links < link_len)
+        dir->off.links = link_len;
     ++info;
-    ++dir;
-    ++file;
-    ++st;
 }
