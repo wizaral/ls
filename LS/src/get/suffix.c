@@ -11,7 +11,7 @@ void mx_suffix_all(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
         file->fields.suffix = '%';
     else if (MX_ISFIFO(st->st_mode))
         file->fields.suffix = '|';
-    else if (st->st_mode & S_IXUSR)
+    else if (st->st_mode & (S_IXUSR | S_IXGRP | S_IXOTH))
         file->fields.suffix = '*';
     else
         file->fields.suffix = '\0';
