@@ -22,6 +22,7 @@ void mx_wrong(char flag);
 void mx_parse(t_info *info, int ac, char **av);
 void mx_check_flags(t_info *info, t_vector *flags);
 void mx_check_adds(t_info *info, t_get *get, char flag);
+void mx_check_print(t_get *get, char flag);
 void mx_compress_flags(t_info *info, t_get *get);
 
 void mx_process_args(t_info *info);
@@ -36,6 +37,10 @@ int mx_get_data_len(t_info *info, t_dir *dir, t_file *file, bool longest);
 int mx_get_tabs(int size);
 uint16_t mx_winsize(t_info *info);
 char *mx_get_path_name(char *path, size_t plen, char *name, size_t nlen);
+
+size_t mx_octal_off(const char *name, int len);
+size_t mx_octal_len(const char *name, int len);
+size_t mx_escape_len(const char *name, int len);
 
 t_dirent *mx_full(DIR *dir);        // -a
 t_dirent *mx_hidden(DIR *dir);      // -A
@@ -59,10 +64,12 @@ void mx_nototal(t_info *info, t_dir *dir);  // -m | default
 int mx_compare_ascii(const void *a, const void *b); // default
 int mx_compare_size(const void *a, const void *b);  // -S
 int mx_compare_time(const void *a, const void *b);  // -t
+int mx_compare_argv(const void *a, const void *b);  // default
 
 int mx_compare_ascii_r(const void *a, const void *b); // -r
 int mx_compare_size_r(const void *a, const void *b);  // -S -r
 int mx_compare_time_r(const void *a, const void *b);  // -t -r
+int mx_compare_argv_r(const void *a, const void *b);  // -r
 
 /*
  * full list of getters
@@ -91,6 +98,8 @@ void mx_time_full(t_info *info, t_dir *dir, t_file *file, t_stat *st);          
 
 void mx_not_printable(t_info *info, t_dir *dir, t_file *file, t_stat *st);      // -v -w
 void mx_only_printable(t_info *info, t_dir *dir, t_file *file, t_stat *st);     // -q
+void mx_octal_printable(t_info *info, t_dir *dir, t_file *file, t_stat *st);    // -B
+void mx_escape_printable(t_info *info, t_dir *dir, t_file *file, t_stat *st);   // -b
 
 void mx_suffix_all(t_info *info, t_dir *dir, t_file *file, t_stat *st);         // -F
 void mx_suffix_dir(t_info *info, t_dir *dir, t_file *file, t_stat *st);         // -p

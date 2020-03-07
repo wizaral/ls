@@ -108,7 +108,7 @@ struct s_dir {
     DIR *dir;       // pointer to opened directory
     char *name;     // current directory
     size_t len;     // length of directory name
-    size_t total;   // total block count
+    int64_t total;  // total block count
 
     t_dirent *file; // current file on reading
     char *filename; // name of current file ["dirname/filename"]
@@ -132,6 +132,6 @@ struct s_info {
     bool reverse;           // 0 - normal | 1 - reversed
     t_time_type time_type;  // data/time type for -[tlgno]
 
-    t_vector files;         // only files from arguments
+    t_vector files;         // files from arguments
     t_vector directories;   // dirs from arguments
 };
