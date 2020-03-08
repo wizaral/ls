@@ -1,11 +1,5 @@
 #include "uls.h"
 
-static inline char *get_file_name(char *av) {
-    for (char *temp = mx_strchr(av, '/'); temp; temp = mx_strchr(av, '/'))
-        av = temp + 1;
-    return av;
-}
-
 static void parse_file(t_info *info, char *av) {
     DIR *dir = NULL;
     t_stat st;
@@ -17,7 +11,7 @@ static void parse_file(t_info *info, char *av) {
     else if (MX_ISDIR(st.st_mode) && (dir = opendir(av)) == NULL) {
         info->return_val = 1;
         mx_printstrlen("uls: ", 5, 2);
-        perror(get_file_name(av));
+        perror(mx_get_file_name(av));
     }
     else {
         dir ? closedir(dir) : 0;
@@ -56,7 +50,7 @@ void mx_parse(t_info *info, int ac, char **av) {
     mx_compress_flags(info, &info->get);
 
     // test this !!
-    // mx_sort(av + i, ac - i, sizeof(char *), info->reverse ? mx_compare_argv_r : mx_compare_argv);
+    mx_sort(av + i, ac - i, sizeof(char *), info->reverse ? mx_compare_argv_r : mx_compare_argv);
 
     for (check = i; i < ac; ++i)
         parse_file(info, av[i]);
