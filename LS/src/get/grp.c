@@ -1,29 +1,17 @@
 #include "uls.h"
 
-void mx_group_id(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
-    // struct group *gid = getgrgid(st->st_gid);
-    // int len = mx_get_num_length(gid->gr_gid, 10);
-
-    // file->gid = gid->gr_gid;
-    // file->fields.grp = mx_itoa(gid->gr_gid);
-    // file->lengths.grp = len;
-    // dir->off.gid = len;
-    ++info;
-    ++dir;
-    ++file;
-    ++st;
-}
-
 void mx_group(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
-    // struct group *gid = getgrgid(st->st_gid);
-    // int len = mx_strlen(gid->gr_name);
+    struct group *grp = getgrgid(st->st_gid);
 
-    // file->gid = gid->gr_gid;
-    // file->fields.grp = gid->gr_name;
-    // file->lengths.grp = len;
-    // dir->off.gid = len;
+    if (grp) {
+        file->lengths.grp = mx_strlen(grp->gr_name);
+        file->fields.grp = mx_memdup(grp->gr_name, file->lengths.grp);
+    }
+    else {
+        file->lengths.grp = mx_unumlen(st->st_gid, 10);
+        file->fields.grp = mx_lltoa(st->st_gid);
+    }
+    if (dir->off.grp < file->lengths.grp)
+        dir->off.grp = file->lengths.grp;
     ++info;
-    ++dir;
-    ++file;
-    ++st;
 }
