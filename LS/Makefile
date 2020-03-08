@@ -9,7 +9,8 @@ get = access acl arrow attr bsize dummy flags grp inode links name size       \
 
 read = full hidden standart
 
-sort = ascii time size ascii_reverse time_reverse size_reverse
+sort = argv_reverse argv ascii_reverse ascii time_reverse time size_reverse   \
+	size
 
 utils = check_block_char get_data_len get_tabs inode_bsize octal path_name    \
 	winsize
