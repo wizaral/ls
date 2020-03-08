@@ -1,14 +1,18 @@
 #include "uls.h"
 
 void mx_attr(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
-    // char buff[512];
-    // char *path = mx_strjoin(dir->name, "/");
+    if (listxattr(dir->filename, NULL, 0, XATTR_NOFOLLOW) > 0) {
+        file->fields.attr = mx_strnew(1024);
+        listxattr(dir->filename, file->fields.attr, 1024, XATTR_NOFOLLOW);
 
-    // mx_strcat(path, dir->file->d_name);
-    // listxattr(path, buff, 512, XATTR_SHOWCOMPRESSION);
-    // file->fields.attr = mx_memdup(buff, 512);
+        // int l = getxattr(dir->filename, file->fields.attr, NULL, 1024, 1024, XATTR_NOFOLLOW);
+
+        // printf("%s : %i\n", file->fields.attr, l);
+
+        // haven't done
+        // need to concat l to attr. convert if -h flag
+    }
+
     ++info;
-    ++dir;
-    ++file;
     ++st;
 }

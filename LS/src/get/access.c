@@ -1,20 +1,5 @@
 #include "uls.h"
 
-// static inline void advanced_perm(t_dir *dir, t_file *file) {
-//     acl_t acl;
-//     char *path = mx_strjoin(dir->name, "/");
-
-//     mx_strcat(path, dir->file->d_name);
-//     acl = acl_get_file(path, ACL_TYPE_EXTENDED);
-//     if (listxattr(path, NULL, 0, XATTR_NOFOLLOW) > 0)
-//         file->fields.access[10] = '@';
-//     if (acl) {
-//         mx_strcat(file->fields.access, "+");
-//         acl_free(acl);
-//     }
-//     mx_strdel(&path);
-// }
-
 static inline void basic_perm(char *access, t_stat *st) {
     static const char *str[] = {"-r", "-w", "-x", "sS", "tT"};
 
@@ -38,12 +23,24 @@ static inline void basic_perm(char *access, t_stat *st) {
     MX_ISVTX(st->st_mode) ? (access[9] = str[4][access[9] == 'x']) : 0;
 }
 
+static char get_attr_acl(t_dir *dir) {
+    ssize_t attr = listxattr(dir->filename, NULL, 0, XATTR_NOFOLLOW);
+    acl_t acl = NULL;
+
+    if (attr > 0)
+        return '@';
+
+    if ((acl = acl_get_file(dir->filename, ACL_TYPE_EXTENDED))) {
+        acl_free(acl);
+        return '+';
+    }
+    return ' ';
+}
+
 void mx_access(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
     file->fields.access[0] = '-';
-    file->fields.access[11] = ' ';
     basic_perm(file->fields.access, st);
-    // file->fields.access[10] = ' ';   // some code about @+
-    // advanced_perm(dir, file);        // some code about @+
+    file->fields.access[10] = get_attr_acl(dir);
+    file->fields.access[11] = ' ';
     ++info;
-    ++dir;
 }
