@@ -21,10 +21,5 @@
 
 #define MX_EXIST(x) mx_strchr(MX_FLAGS, x)
 #define MX_WRITE(x) mx_strchr("l1mCx", x)
-#define MX_PRINT(x) mx_strchr("Bbqvw", x)
 #define MX_LADDS(x) mx_strchr("ghnOT@e", x)
 #define MX_OTHER(x) mx_strchr("isGRr", x)
-
-#define MX_OCTAL(x) !(mx_isprint((x)) && (x) != '\"' && (x) != '\\')
-#define MX_ESCAPE(x) mx_strchr("\\\"\a\b\f\n\r\t\v", x)
-#define MX_GET_ESC(x) mx_get_char_index("\\\"\a\b\f\n\r\t\v", x)

@@ -1,16 +1,5 @@
 #include "uls.h"
 
-void mx_check_print(t_get *get, char flag) {
-    if (flag == 'q')
-        get->name = mx_only_printable;
-    else if (flag == 'B')
-        get->name = mx_octal_printable;
-    else if (flag == 'b')
-        get->name = mx_escape_printable;
-    else
-        get->name = mx_not_printable;
-}
-
 void mx_check_adds(t_info *info, t_get *get, char flag) {
     if (flag == 'g' || flag == 'n') {
         info->write = mx_write_l;
@@ -54,7 +43,8 @@ void mx_compress_flags(t_info *info, t_get *get) {
         info->write == mx_write_x ? info->write = mx_write_xG : NULL;
         info->get.access = mx_access;
     }
-    if (info->write == mx_write_m || get->bsize == mx_dummy)
+    if ((get->bsize == mx_dummy && info->write != mx_write_l)
+        || info->write == mx_write_m)
         info->print_total = mx_nototal;
     if (info->reverse && info->cmp) {
         info->cmp == mx_compare_ascii ? info->cmp = mx_compare_ascii_r : NULL;
