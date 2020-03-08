@@ -23,7 +23,7 @@ static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
     mx_strdel(&dir->filename);
 }
 
-void mx_uls(t_info *info, t_dir *dir) {
+static inline void process(t_info *info, t_dir *dir) {
     t_dirent *(*read)(DIR *) = info->read;
 
     dir->file = read(dir->dir);
@@ -37,17 +37,12 @@ void mx_uls(t_info *info, t_dir *dir) {
     // free_dir();
 }
 
+void mx_uls(t_info *info, t_dir *dir) {
+    process(info, dir);
+}
+
 void mx_recursion(t_info *info, t_dir *dir) {
-    t_dirent *(*read)(DIR *) = info->read;
-
-    dir->file = read(dir->dir);
-    dir->has_bc = mx_check_block_char(dir->name);
-    for (DIR *pdir = dir->dir; dir->file; dir->file = read(pdir))
-        get_info(info, dir, dir->file);
-
-    mx_sort(dir->array.arr, dir->array.size, dir->array.bytes, info->cmp);
-    info->print_total(info, dir);
-    info->write(info, dir);
+    process(info, dir);
 
     t_file *end = (t_file *)(dir->array.arr + dir->array.size * dir->array.bytes);
     for (t_file *i = (t_file *)dir->array.arr; i < end; ++i) {
