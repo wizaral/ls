@@ -11,7 +11,6 @@
 #include <sys/xattr.h>
 
 #include "defines.h"
-#include "errors.h"
 #include "libmx.h"
 #include "macro.h"
 #include "structs.h"
@@ -22,7 +21,6 @@ void mx_wrong(char flag);
 void mx_parse(t_info *info, int ac, char **av);
 void mx_check_flags(t_info *info, t_vector *flags);
 void mx_check_adds(t_info *info, t_get *get, char flag);
-void mx_check_print(t_get *get, char flag);
 void mx_compress_flags(t_info *info, t_get *get);
 
 void mx_process_args(t_info *info);
@@ -31,12 +29,14 @@ void mx_process_dir(t_info *info, char *name);
 void mx_uls(t_info *info, t_dir *dir);
 void mx_recursion(t_info *info, t_dir *dir);
 
-size_t mx_get_inode_bsize_len(t_offset *off);
-void mx_make_inode_bsize(t_offset *off, char *str, t_printable *print, t_lengths *len);
+bool mx_check_block_char(const char *name);
 int mx_get_data_len(t_info *info, t_dir *dir, t_file *file, bool longest);
 int mx_get_tabs(int size);
-uint16_t mx_winsize(t_info *info);
+char *mx_get_file_name(char *av);
+size_t mx_get_inode_bsize_len(t_offset *off);
+void mx_make_inode_bsize(t_offset *off, char *str, t_printable *print, t_lengths *len);
 char *mx_get_path_name(char *path, size_t plen, char *name, size_t nlen);
+uint16_t mx_winsize(t_info *info);
 
 size_t mx_octal_off(const char *name, int len);
 size_t mx_octal_len(const char *name, int len);
