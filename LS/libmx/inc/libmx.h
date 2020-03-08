@@ -136,8 +136,8 @@ bool mx_isupper(int c);
 uint64_t mx_factorial(uint64_t n);
 void mx_foreach(void *arr, size_t size, size_t bytes, void (*f)(void *));
 
-int mx_get_num_length(int64_t num, uint32_t base);
-int mx_get_unum_length(uint64_t nbr, uint32_t base);
+int mx_numlen(int64_t num, uint32_t base);
+int mx_unumlen(uint64_t nbr, uint32_t base);
 bool mx_isprime(uint64_t num);
 
 double mx_pow(double n, uint32_t pow);

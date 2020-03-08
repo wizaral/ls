@@ -34,8 +34,8 @@ tree = create_tree
 
 type = isalpha isdigit ishex islower isprint isspace isupper
 
-utils = factorial foreach get_num_length get_unum_length isprime pow sigma    \
-	sqrt_natural sqrt sum_digits swap
+utils = factorial foreach isprime numlen pow sigma sqrt_natural sqrt          \
+	sum_digits swap unumlen
 
 vector = assign_vector at clear_vector copy_vector create_vector              \
 	delete_vector erase foreach_vector foreach_vector_reverse get_back        \
