@@ -1,8 +1,7 @@
 #include "uls.h"
 
-// НАЗВАНИ ГОВОРЯЩЕЕ ЗА СЕБЯ
-static void print_n_tabs(int tabs) {        // тут короче лучше думаю не трогать принт н табс, я чёт выдумать как замутить немогу
-    for (int i = 0; i < tabs; ++i)                   // print tabs depending on numb of tabs in lword and cword;
+static inline void print_n_tabs(int tabs) {
+    for (int i = 0; i < tabs; ++i)
         mx_printstrlen("\t", 1, 1);
 }
 
@@ -40,5 +39,5 @@ void mx_write_x(t_info *info, t_dir *dir) {
         if (i + 1 < dir->array.size)
             print_tabs(info, dir, dt);
     }
-    mx_printstrlen("\n", 1, 1);
+    mx_printchar('\n', 1);
 }

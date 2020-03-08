@@ -27,6 +27,6 @@ void mx_write_m(t_info *info, t_dir *dir) {
         if (i + 1 != dir->array.size)
             mx_printstrlen(", ", 2, 1);
         else
-            mx_printstrlen("\n", 1, 1);
+            mx_printchar('\n', 1);
     }
 }

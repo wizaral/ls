@@ -48,6 +48,6 @@ void mx_write_C(t_info *info, t_dir *dir) {
                 print(info, dir, dt, j);
             }
         }
-        mx_printstrlen("\n", 1, 1);                                             // go to new row;
+        mx_printchar('\n', 1);
     }
 }

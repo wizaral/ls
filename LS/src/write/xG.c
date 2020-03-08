@@ -1,8 +1,7 @@
 #include "uls.h"
 
-// НАЗВАНИ ГОВОРЯЩЕЕ ЗА СЕБЯ
-static void print_n_spaces(int spaces) {        // тут короче лучше думаю не трогать принт н табс, я чёт выдумать как замутить немогу
-    for (int i = 0; i < spaces; ++i)                   // print tabs depending on numb of tabs in lword and cword;
+static inline  void print_n_spaces(int spaces) {
+    for (int i = 0; i < spaces; ++i)
         mx_printstrlen(" ", 1, 1);
 }
 
@@ -36,5 +35,5 @@ void mx_write_xG(t_info *info, t_dir *dir) {
             print_spaces(mx_get_data_len(info, dir, dt, true),
                          mx_get_data_len(info, dir, dt, false), &dir->off);
     }
-    mx_printstrlen("\n", 1, 1);
+    mx_printchar('\n', 1);
 }

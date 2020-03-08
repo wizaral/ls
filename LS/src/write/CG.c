@@ -1,11 +1,10 @@
 #include "uls.h"
 
-static void print_n_spaces(uint8_t ltabs, uint8_t ctabs, t_info *info) {
+static inline void print_n_spaces(uint8_t ltabs, uint8_t ctabs) {
     uint8_t tabs = ltabs - ctabs;
-    info++;
 
     for (int i = 0; i < tabs; ++i)                   // print tabs depending on numb of tabs in lword and cword;
-        mx_printstrlen(" ", 1, 1);
+        mx_printchar(' ', 1);
 }
 
 static void init_data(t_info *info, t_dir *dir) {
@@ -39,9 +38,9 @@ void mx_write_CG(t_info *info, t_dir *dir) {
                 print_name_and_suffix(info, dt);
                 if (j + dir->off.rows < dir->array.size)                       // check if this is last file in row so we dont print tabs 
                     print_n_spaces(dir->off.name_tabs,
-                                   mx_get_data_len(info, dir, dt, 0), info);
+                                   mx_get_data_len(info, dir, dt, 0));
             }
         }
-        mx_printstrlen("\n", 1, 1);                                             // go to new row;
+        mx_printchar('\n', 1);
     }
 }
