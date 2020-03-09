@@ -3,8 +3,7 @@
 t_dirent *mx_hidden(DIR *dir) {
     t_dirent *drt = readdir(dir);
 
-    while (drt && drt->d_name[0] == '.' && (drt->d_name[1] == '\0'
-        || (drt->d_name[1] == '.' && drt->d_name[2] == '\0')))
-            drt = readdir(dir);
+    while (drt && MX_DOTS(drt->d_name))
+        drt = readdir(dir);
     return drt;
 }
