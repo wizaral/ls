@@ -88,20 +88,20 @@ enum e_time_type {
 typedef enum e_time_type t_time_type;
 
 struct s_get {
-    void (*inode)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*bsize)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*access)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*links)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*user)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*grp)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*flags)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*size)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*time)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*name)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*suffix)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*arrow)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*attr)(t_info *, t_dir *, t_file *, t_stat *);
-    void (*acl)(t_info *, t_dir *, t_file *, t_stat *);
+    void (*inode)(t_dir *, t_file *, t_stat *);
+    void (*bsize)(t_dir *, t_file *, t_stat *);
+    void (*access)(t_dir *, t_file *, t_stat *);
+    void (*links)(t_dir *, t_file *, t_stat *);
+    void (*user)(t_dir *, t_file *, t_stat *);
+    void (*grp)(t_dir *, t_file *, t_stat *);
+    void (*flags)(t_dir *, t_file *, t_stat *);
+    void (*size)(t_dir *, t_file *, t_stat *);
+    void (*time)(t_dir *, t_file *, t_stat *);
+    void (*name)(t_dir *, t_file *, t_stat *);
+    void (*suffix)(t_dir *, t_file *, t_stat *);
+    void (*arrow)(t_dir *, t_file *, t_stat *);
+    void (*attr)(t_dir *, t_file *, t_stat *);
+    void (*acl)(t_dir *, t_file *, t_stat *);
 };
 
 struct s_dir {
@@ -130,8 +130,9 @@ struct s_info {
     bool output_dst;        // 0 - terminal | 1 - file or other process
     bool return_val;        // 0 - good | 1 - any error
     bool reverse;           // 0 - normal | 1 - reversed
+    bool filedir;           // 0 - default | 1 - dir like file
     t_time_type time_type;  // data/time type for -[tlgno]
 
     t_vector files;         // files from arguments
-    t_vector directories;   // dirs from arguments
+    t_vector dirs;          // dirs from arguments
 };

@@ -1,7 +1,7 @@
 #include "uls.h"
 
-void mx_attr(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
-    if (listxattr(dir->filename, NULL, 0, XATTR_NOFOLLOW) > 0) {
+void mx_attr(t_dir *dir, t_file *file, t_stat *st) {
+    if (listxattr(dir->filename, NULL, 0, XATTR_NOFOLLOW) > 0 && ++st) {
         file->fields.attr = mx_strnew(1024);
         listxattr(dir->filename, file->fields.attr, 1024, XATTR_NOFOLLOW);
 
@@ -12,7 +12,4 @@ void mx_attr(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
         // haven't done
         // need to concat l to attr. convert if -h flag
     }
-
-    ++info;
-    ++st;
 }

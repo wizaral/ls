@@ -62,7 +62,7 @@
 //     size[3] = 'B';
 // }
 
-void mx_size_h(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
+void mx_size_h(t_dir *dir, t_file *file, t_stat *st) {
     // char *size = mx_strnew(4);
     // int pow = 0;
 
@@ -73,18 +73,17 @@ void mx_size_h(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
     //     size_more_thous(file->size, file->size / mx_pow(2, pow), pow, size);
     // }
     // return size;
-    ++info;
+
     ++dir;
     ++file;
     ++st;
 }
 
-void mx_size_b(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
+void mx_size_b(t_dir *dir, t_file *file, t_stat *st) {
     int size_len = mx_get_num_length(st->st_size, 10);
 
     file->fields.size = mx_lltoa(st->st_size);
     file->lengths.size = size_len;
     if (dir->off.size < size_len)
         dir->off.size = size_len;
-    ++info;
 }

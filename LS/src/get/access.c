@@ -7,8 +7,8 @@ static inline void basic_perm(char *access, t_stat *st) {
     MX_ISLNK(st->st_mode) ? (access[0] = 'l') : 0;
     MX_ISCHR(st->st_mode) ? (access[0] = 'c') : 0;
     MX_ISBLK(st->st_mode) ? (access[0] = 'b') : 0;
-    MX_ISSOCK(st->st_mode) ? (access[0] = 's') : 0;
-    MX_ISFIFO(st->st_mode) ? (access[0] = 'p') : 0;
+    MX_ISSCK(st->st_mode) ? (access[0] = 's') : 0;
+    MX_ISFIF(st->st_mode) ? (access[0] = 'p') : 0;
     access[1] = str[0][(st->st_mode & S_IRUSR) != 0];
     access[2] = str[1][(st->st_mode & S_IWUSR) != 0];
     access[3] = str[2][(st->st_mode & S_IXUSR) != 0];
@@ -37,10 +37,9 @@ static char get_attr_acl(t_dir *dir) {
     return ' ';
 }
 
-void mx_access(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
+void mx_access(t_dir *dir, t_file *file, t_stat *st) {
     file->fields.access[0] = '-';
     basic_perm(file->fields.access, st);
     file->fields.access[10] = get_attr_acl(dir);
     file->fields.access[11] = ' ';
-    ++info;
 }
