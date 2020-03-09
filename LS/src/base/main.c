@@ -27,9 +27,10 @@ static inline void init_info(t_info *info) {
     info->time_type = modification;
     info->return_val = 0;
     info->reverse = 0;
-    info->directories.cap = MX_VECTOR_DEFAULT_SIZE;
-    info->directories.bytes = sizeof(char *);
-    info->directories.size = 0;
+    info->filedir = 0;
+    info->dirs.cap = MX_VECTOR_DEFAULT_SIZE;
+    info->dirs.bytes = sizeof(char *);
+    info->dirs.size = 0;
     info->files.cap = MX_VECTOR_DEFAULT_SIZE;
     info->files.bytes = sizeof(char *);
     info->files.size = 0;
