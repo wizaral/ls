@@ -43,11 +43,13 @@ void mx_clear_vector(t_vector *v);
  * returns a pointer to element at location pos with bounds checking
  * returns a pointer to the first element in the container
  * returns a pointer to the last element in the container
+ * returns a pointer t0 empty data place after last element
  */
 
 void *mx_at(t_vector *v, size_t pos);
 void *mx_get_front(t_vector *v);
 void *mx_get_back(t_vector *v);
+void *mx_end(t_vector *v);
 
 /*
  * applies function f to every element of the container

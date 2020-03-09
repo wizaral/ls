@@ -38,7 +38,7 @@ utils = factorial foreach isprime numlen pow sigma sqrt_natural sqrt          \
 	sum_digits swap unumlen
 
 vector = assign_vector at clear_vector copy_vector create_vector              \
-	delete_vector erase foreach_vector foreach_vector_reverse get_back        \
+	delete_vector end erase foreach_vector foreach_vector_reverse get_back    \
 	get_front insert pop_backward push_backward reverse_vector
 
 RAW = $(addprefix algorithm/mx_, $(algorithm)) $(addprefix file/mx_, $(file)) \
