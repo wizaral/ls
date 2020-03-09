@@ -2,7 +2,7 @@ CC = clang
 LIB = libmx.a
 NAME = uls
 
-base = errors check_flags compress_flags main parse proces_args uls
+base = check_flags compress_flags main parse proces_args uls
 
 get = access acl arrow attr bsize dummy flags grp inode links name size       \
 	suffix time user
@@ -12,8 +12,8 @@ read = full hidden standart
 sort = argv_reverse argv ascii_reverse ascii time_reverse time size_reverse   \
 	size
 
-utils = check_block_char get_data_len get_tabs inode_bsize octal path_name    \
-	winsize
+utils = check_block_char errors get_data_len get_tabs inode_bsize octal       \
+	path_name winsize
 
 write = 1 C CG l m name total x xG
 
