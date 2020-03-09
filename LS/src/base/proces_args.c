@@ -42,19 +42,19 @@ void mx_process_args(t_info *info) {
 
     mx_printchar('\n', 1);  // если были файлы
 
-    // printf("D: %zu\n", info->directories.size);
+    // printf("D: %zu\n", info->dirs.size);
 
     // потом запускаем для папок
-    if (info->directories.size > 1) {
-        for (size_t i = 0; i < info->directories.size; ++i) {
-            dir_name = *(char **)mx_at(&info->directories, i);
+    if (info->dirs.size > 1) {
+        for (size_t i = 0; i < info->dirs.size; ++i) {
+            dir_name = *(char **)mx_at(&info->dirs, i);
             mx_printstr(dir_name, 1);
             mx_printstrlen(":\n", 2, 1);
             mx_process_dir(info, dir_name);
-            if (i + 1 != info->directories.size)
+            if (i + 1 != info->dirs.size)
                 mx_printchar('\n', 1);
         }
     }
-    else if (info->directories.size)
-        mx_process_dir(info, *(char **)mx_get_front(&info->directories));
+    else if (info->dirs.size)
+        mx_process_dir(info, *(char **)mx_get_front(&info->dirs));
 }
