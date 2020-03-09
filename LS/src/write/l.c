@@ -1,11 +1,11 @@
 #include "uls.h"
 
 static inline size_t get_len(t_info *info, t_offset *off) {
-    return off->inode + off->bsize + off->links + off->user
-        + off->grp + off->flags + off->size + (off->inode > 0)
-        + (off->bsize > 0) + (off->user > 0) + (off->user > 0)
-        + (off->flags > 0) + 12 + 1 + 2 + 1
-        + (info->get.time == mx_time_full ? 21 : 13);
+    return off->inode + (off->inode > 0) + off->bsize + (off->bsize > 0) + 12
+            + off->links + 1 + off->user + (off->user > 0) + (off->user > 0)
+            + off->grp + 2 + off->flags + (off->flags > 0) + off->size + 1
+            + (info->get.time == mx_time_full ? 21 : 13)
+            + (off->user == 0 && off->grp == 0) * 3;
 }
 
 static void create_str(t_offset *off, char *str,

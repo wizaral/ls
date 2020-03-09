@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_group(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
+void mx_grp_name(t_dir *dir, t_file *file, t_stat *st) {
     struct group *grp = getgrgid(st->st_gid);
 
     if (grp) {
@@ -13,5 +13,10 @@ void mx_group(t_info *info, t_dir *dir, t_file *file, t_stat *st) {
     }
     if (dir->off.grp < file->lengths.grp)
         dir->off.grp = file->lengths.grp;
-    ++info;
+}
+
+void mx_grp_skip(t_dir *dir, t_file *file, t_stat *st) {
+    ++dir;
+    ++file;
+    ++st;
 }
