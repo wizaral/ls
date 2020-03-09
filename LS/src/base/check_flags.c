@@ -46,8 +46,12 @@ static inline void check_other(t_info *info, char flag) {
         info->print_name = info->output_dst ? mx_nocolor : mx_color;
     else if (flag == 'r')
         info->reverse = info->cmp;
-    else
+    else if (flag == 'R' && info->filedir == 0)
         info->recursion = mx_recursion;
+    else {
+        info->recursion = mx_uls;
+        info->filedir = 0;
+    }
 }
 
 void mx_check_flags(t_info *info, t_vector *flags) {

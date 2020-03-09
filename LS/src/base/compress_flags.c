@@ -1,9 +1,11 @@
 #include "uls.h"
 
 void mx_check_adds(t_info *info, t_get *get, char flag) {
-    if (flag == 'g' || flag == 'n') {
+    if (flag == 'g' || flag == 'n' || flag == 'o') {
         info->write = mx_write_l;
-        if (flag == 'n' && get->user != mx_user_skip)
+        if (flag == 'o')
+            info->filedir = true;
+        else if (flag == 'n' && get->user != mx_user_skip)
             get->user = mx_user_id;
         else
             get->user = mx_user_skip;
