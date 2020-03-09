@@ -7,8 +7,8 @@
 static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
     static t_stat st;
     t_file file_info = {{0}, {0}, {0}, 0, 0};
-    void (**func)(t_info *, t_dir *, t_file *, t_stat *) =
-        (void (**)(t_info *, t_dir *, t_file *, t_stat *))&info->get;
+    void (**func)(t_dir *, t_file *, t_stat *) =
+        (void (**)(t_dir *, t_file *, t_stat *))&info->get;
 
     dir->filename = mx_get_path_name(dir->name, dir->len, file->d_name, file->d_namlen);
     lstat(dir->filename, &st);
@@ -18,7 +18,7 @@ static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
     mx_memcpy(&file_info.time, &st.st_atimespec + info->time_type, sizeof(t_timespec));
 
     for (int i = 0; i < 14; ++i)
-        func[i](info, dir, &file_info, &st);
+        func[i](dir, &file_info, &st);
     mx_push_backward(&dir->array, &file_info);
     mx_strdel(&dir->filename);
 }
@@ -34,20 +34,23 @@ static inline void process(t_info *info, t_dir *dir) {
     mx_sort(dir->array.arr, dir->array.size, dir->array.bytes, info->cmp);
     info->print_total(info, dir);
     info->write(info, dir);
-    // free_dir();
 }
 
 void mx_uls(t_info *info, t_dir *dir) {
     process(info, dir);
+    // free_dir();
 }
 
 void mx_recursion(t_info *info, t_dir *dir) {
-    process(info, dir);
+    t_file *end = NULL;
+    char fullname = NULL;
 
-    t_file *end = (t_file *)(dir->array.arr + dir->array.size * dir->array.bytes);
+    process(info, dir);
+    end = (t_file *)mx_end(&dir->array);
     for (t_file *i = (t_file *)dir->array.arr; i < end; ++i) {
-        if (MX_ISDIR(i->mode) && mx_strcmp(i->fields.name, ".") && mx_strcmp(i->fields.name, "..")) {
-            char *fullname = mx_get_path_name(dir->name, dir->len, i->fields.name, i->lengths.name);
+        if (MX_ISDIR(i->mode) && !MX_DOTS(i->fields.name)) {
+            fullname = mx_get_path_name(dir->name, dir->len, i->fields.name,
+                                        i->lengths.name);
             mx_printchar('\n', 1);
             mx_printstr(fullname, 1);
             mx_printstrlen(":\n", 2, 1);
