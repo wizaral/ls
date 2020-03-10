@@ -33,18 +33,24 @@ void mx_process_dir(t_info *info, char *name) {
     }
 }
 
+// static void process_files(t_info *info) {
+//     char **end = mx_end(&info->files);
+//     t_dir dir;
+
+//     dir.
+//     for (char **i = (char **)info->files.arr; i < end; ++i) {
+
+//     }
+
+//     mx_printchar('\n', 1);
+// }
+
 void mx_process_args(t_info *info) {
     char *dir_name = NULL;
-    // printf("F: %zu\n", info->files.size);
 
-    // тут сначала выводим файлы
-    // но не выводим))0)
+    // if (info->files.size > 0)
+    //     process_files(info);
 
-    mx_printchar('\n', 1);  // если были файлы
-
-    // printf("D: %zu\n", info->dirs.size);
-
-    // потом запускаем для папок
     if (info->dirs.size > 1) {
         for (size_t i = 0; i < info->dirs.size; ++i) {
             dir_name = *(char **)mx_at(&info->dirs, i);
