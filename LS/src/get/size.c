@@ -80,7 +80,7 @@ void mx_size_h(t_dir *dir, t_file *file, t_stat *st) {
 }
 
 void mx_size_b(t_dir *dir, t_file *file, t_stat *st) {
-    int size_len = mx_get_num_length(st->st_size, 10);
+    int size_len = mx_numlen(st->st_size, 10);
 
     file->fields.size = mx_lltoa(st->st_size);
     file->lengths.size = size_len;
