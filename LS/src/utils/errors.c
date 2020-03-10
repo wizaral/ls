@@ -3,7 +3,7 @@
 void mx_wrong_flag(char flag) {
     mx_printstrlen("uls: illegal option -- ", 23, 2);
     mx_printchar(flag, 2);
-    mx_printstrlen("\n" MX_USAGE "\n", mx_strlen("\n" MX_USAGE "\n"), 2);
+    mx_printstr("\n" MX_USAGE "\n", 2);
     exit(1);
 }
 
