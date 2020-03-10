@@ -12,8 +12,8 @@ read = full hidden standart
 sort = argv_reverse argv ascii_reverse ascii time_reverse time size_reverse   \
 	size
 
-utils = check_block_char errors get_data_len get_tabs inode_bsize octal       \
-	path_name winsize
+utils = check_block_char errors get_data_len get_tabs inode_bsize path_name   \
+	winsize
 
 write = 1 C CG l m name total x xG
 
