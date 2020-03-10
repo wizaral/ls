@@ -50,7 +50,7 @@ static inline void check_other(t_info *info, char flag) {
         info->recursion = mx_recursion;
     else {
         info->recursion = mx_uls;
-        info->filedir = 0;
+        info->filedir = 1;
     }
 }
 

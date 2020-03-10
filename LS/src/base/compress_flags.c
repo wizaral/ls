@@ -4,7 +4,7 @@ void mx_check_adds(t_info *info, t_get *get, char flag) {
     if (flag == 'g' || flag == 'n' || flag == 'o') {
         info->write = mx_write_l;
         if (flag == 'o')
-            info->filedir = true;
+            get->grp = mx_grp_skip;
         else if (flag == 'n' && get->user != mx_user_skip)
             get->user = mx_user_id;
         else
@@ -27,7 +27,7 @@ static inline void accept_l(t_info *info, t_get *get) {
     get->access = mx_access;
     get->links = mx_links;
     get->user == mx_dummy ? get->user = mx_user_name : NULL;
-    get->grp = mx_group;
+    get->grp == mx_dummy ? get->grp = mx_grp_name : NULL;
     get->size == mx_dummy ? get->size = mx_size_b : NULL;
     get->time == mx_dummy ? get->time = mx_time_short : NULL;
     get->arrow = mx_arrow;
