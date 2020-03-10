@@ -10,5 +10,5 @@ static inline char *make_dec(int64_t num, int length) {
 }
 
 char *mx_lltoa(int64_t nbr) {
-    return nbr ? make_dec(nbr, mx_get_num_length(nbr, 10)) : mx_strdup("0");
+    return nbr ? make_dec(nbr, mx_numlen(nbr, 10)) : mx_strdup("0");
 }
