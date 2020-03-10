@@ -1,8 +1,24 @@
 #include "uls.h"
 
-// should placed in utils
-// static void free_dir(t_dir *dir) {
-// }
+static void free_dir(t_dir *dir) {
+    t_file *end = mx_end(&dir->array);
+
+    for (t_file *i = (t_file *)dir->array.arr; i < end; ++i) {
+        i->fields.acl ? free(i->fields.acl) : (void)0;
+        i->fields.arrow ? free(i->fields.arrow) : (void)0;
+        i->fields.attr ? free(i->fields.attr) : (void)0;
+        i->fields.bsize ? free(i->fields.bsize) : (void)0;
+        i->fields.flags ? free(i->fields.flags) : (void)0;
+        i->fields.grp ? free(i->fields.grp) : (void)0;
+        i->fields.inode ? free(i->fields.inode) : (void)0;
+        i->fields.links ? free(i->fields.links) : (void)0;
+        i->fields.size ? free(i->fields.size) : (void)0;
+        i->fields.time ? free(i->fields.time) : (void)0;
+        i->fields.user ? free(i->fields.user) : (void)0;
+        free(i->fields.name);
+    }
+    free(dir->array.arr);
+}
 
 static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
     static t_stat st;
@@ -38,7 +54,7 @@ static inline void process(t_info *info, t_dir *dir) {
 
 void mx_uls(t_info *info, t_dir *dir) {
     process(info, dir);
-    // free_dir();
+    free_dir(dir);
 }
 
 void mx_recursion(t_info *info, t_dir *dir) {
@@ -58,5 +74,5 @@ void mx_recursion(t_info *info, t_dir *dir) {
             free(fullname);
         }
     }
-    // free_dir();
+    free_dir(dir);
 }
