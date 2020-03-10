@@ -5,15 +5,15 @@ static void parse_file(t_info *info, char *av) {
     t_stat st;
 
     if (lstat(av, &st) == -1)
-        mx_wrong_arg(info, av);
+        mx_wrong_argv(info, av);
     else if (MX_ISDIR(st.st_mode) && (dir = opendir(av)) == NULL)
-        mx_wrong_arg(info, mx_get_file_name(av));
+        mx_wrong_argv(info, mx_get_file_name(av));
     else {
         if (dir)
             closedir(dir);
-        if (MX_ISREG(st.st_mode)
-            || (MX_ISLNK(st.st_mode) && info->write == mx_write_l))
-            || (MX_ISDIR(st.st_mode) && info->filedir)
+        if (!MX_ISDIR(st.st_mode)
+            || (MX_ISLNK(st.st_mode) && info->write == mx_write_l)
+            || (MX_ISDIR(st.st_mode) && info->filedir))
             mx_push_backward(&info->files, &av);
         else
             mx_push_backward(&info->dirs, &av);
@@ -23,12 +23,16 @@ static void parse_file(t_info *info, char *av) {
 static bool parse_flag(t_vector *flags, char *av) {
     if (av[0] == '-' && av[1] == '-') {
         if (av[2] != '\0')
-            mx_wrong(av[1]);
+            mx_wrong_flag(av[1]);
         return false;
     }
 
-    for (int i = 1; av[i]; ++i)
-        MX_EXIST(av[i]) ? mx_push_backward(flags, av + i) : mx_wrong(av[i]);
+    for (int i = 1; av[i]; ++i) {
+        if (MX_EXIST(av[i]))
+            mx_push_backward(flags, av + i);
+        else
+            mx_wrong_flag(av[i]);
+    }
     return true;
 }
 
