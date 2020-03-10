@@ -3,9 +3,11 @@
 static inline size_t get_len(t_info *info, t_offset *off) {
     return off->inode + (off->inode > 0) + off->bsize + (off->bsize > 0) + 12
             + off->links + 1 + off->user + (off->user > 0) + (off->user > 0)
-            + off->grp + 2 + off->flags + (off->flags > 0) + off->size + 1
+            + off->grp + (off->grp > 0) + (off->grp > 0)
+            + off->flags + (off->flags > 0) + off->size + 1
             + (info->get.time == mx_time_full ? 21 : 13)
-            + (off->user == 0 && off->grp == 0) * 3;
+            + (off->user == 0 && off->grp == 0)
+            + (off->user == 0 && off->grp == 0);
 }
 
 static void create_str(t_offset *off, char *str,
@@ -20,10 +22,11 @@ static void create_str(t_offset *off, char *str,
     pos += 12;
     mx_memcpy(str + pos + off->links - len->links, print->links, len->links);
     pos += off->links + 1;
-    mx_memcpy(str + pos + off->user - len->user, print->user, len->user);
+    mx_memcpy(str + pos, print->user, len->user);
     pos += off->user + (off->user > 0) + (off->user > 0);
-    mx_memcpy(str + pos + off->grp - len->grp, print->grp, len->grp);
-    pos += off->grp + 2;
+    mx_memcpy(str + pos, print->grp, len->grp);
+    pos += off->grp + (off->grp > 0) + (off->user == 0 && off->grp == 0)
+            + (off->grp > 0) + (off->user == 0 && off->grp == 0);
     mx_memcpy(str + pos + off->flags - len->flags, print->flags, len->flags);
     pos += off->flags + (off->flags > 0);
     mx_memcpy(str + pos + off->size - len->size, print->size, len->size);

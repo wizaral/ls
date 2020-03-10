@@ -43,7 +43,7 @@ void mx_uls(t_info *info, t_dir *dir) {
 
 void mx_recursion(t_info *info, t_dir *dir) {
     t_file *end = NULL;
-    char fullname = NULL;
+    char *fullname = NULL;
 
     process(info, dir);
     end = (t_file *)mx_end(&dir->array);
