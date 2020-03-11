@@ -2,11 +2,11 @@
 
 void mx_pop_index(t_list *list, size_t index) {
     if (list && list->head) {
-        if (index <= 0)
+        if (index == 0)
             mx_pop_front(list);
-        else if (index >= list->size - 1)
+        else if (index == list->size - 1)
             mx_pop_back(list);
-        else {
+        else if (index < list->size) {
             t_list_node *del_node = NULL;
             t_list_node *prev_node = list->head;
 
