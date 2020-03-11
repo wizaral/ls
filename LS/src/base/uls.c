@@ -65,8 +65,8 @@ void mx_recursion(t_info *info, t_dir *dir) {
     end = (t_file *)mx_end(&dir->array);
     for (t_file *i = (t_file *)dir->array.arr; i < end; ++i) {
         if (MX_ISDIR(i->mode) && !MX_DOTS(i->fields.name)) {
-            fullname = mx_get_path_name(dir->name, dir->len, i->fields.name,
-                                        i->lengths.name);
+            fullname = mx_get_path_name(
+                dir->name, dir->len, i->fields.name, i->lengths.name);
             mx_printchar('\n', 1);
             mx_printstr(fullname, 1);
             mx_printstrlen(":\n", 2, 1);

@@ -49,9 +49,9 @@ void mx_parse(t_info *info, int ac, char **av) {
     info->files.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
     mx_check_flags(info, &flags);
     mx_compress_flags(info, &info->get);
-    mx_sort(av + i, ac - i, sizeof(char *),
-            info->reverse ? mx_compare_argv_r : mx_compare_argv);
-
+    if (info->cmp)
+        mx_sort(av + i, ac - i, sizeof(char *),
+                info->reverse ? mx_compare_argv_r : mx_compare_argv);
     for (check = i; i < ac; ++i)
         parse_file(info, av[i]);
     if (info->dirs.size == 0 && info->files.size == 0 && check == ac)
