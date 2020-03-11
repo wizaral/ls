@@ -1,11 +1,9 @@
 #include "uls.h"
 
-static inline size_t get_len(t_info *info, t_offset *off) {
+static inline size_t get_len(t_offset *off) {
     return off->inode + (off->inode > 0) + off->bsize + (off->bsize > 0) + 12
             + off->links + 1 + off->user + (off->user > 0) + (off->user > 0)
             + off->grp + (off->grp > 0) + (off->grp > 0)
-            + off->size + 1
-            + (info->get.time == mx_time_full ? 21 : 13)
             + (off->user == 0 && off->grp == 0)
             + (off->user == 0 && off->grp == 0);
 }
@@ -27,13 +25,19 @@ static void create_str(t_offset *off, char *str,
     mx_memcpy(str + pos, print->grp, len->grp);
     pos += off->grp + (off->grp > 0) + (off->user == 0 && off->grp == 0)
             + (off->grp > 0) + (off->user == 0 && off->grp == 0);
-    mx_memcpy(str + pos + off->size - len->size, print->size, len->size);
-    pos += off->size + 1;
-    mx_memcpy(str + pos, print->time, len->time);
+}
+
+static inline void print_size(t_dir *dir, t_file *file) {
+    size_t size = dir->off.size - file->lengths.size;
+    char space[size];
+
+    mx_memset(space, ' ', size);
+    mx_printstrlen(space, size, 1);
+    mx_printstrlen(file->fields.size, file->lengths.size, 1);
 }
 
 void mx_write_l(t_info *info, t_dir *dir) {
-    size_t len = get_len(info, &dir->off);
+    size_t len = get_len(&dir->off);
     char str[len];
     t_file *file;
 
@@ -42,6 +46,8 @@ void mx_write_l(t_info *info, t_dir *dir) {
         file = mx_at(&dir->array, i);
         create_str(&dir->off, str, &file->fields, &file->lengths);
         mx_printstrlen(str, len, 1);
+        print_size(dir, file);
+        mx_printstrlen(file->fields.time, info->time_len + 1, 1);
         info->print_name(file);
         mx_printstrlen(&file->fields.suffix, file->lengths.suffix, 1);
         mx_printstrlen(file->fields.arrow, file->lengths.arrow, 1);

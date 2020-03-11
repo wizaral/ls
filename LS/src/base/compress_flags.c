@@ -16,6 +16,7 @@ void mx_check_adds(t_info *info, t_get *get, char flag) {
 
 static inline void accept_l(t_info *info, t_get *get) {
     info->print_total = mx_total;
+    info->time_len = get->time == mx_time_full ? 20 : 12;
     get->access = mx_access;
     get->links = mx_links;
     get->user == mx_dummy ? get->user = mx_user_name : NULL;

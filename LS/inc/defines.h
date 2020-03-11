@@ -2,7 +2,7 @@
 #include "uls.h"
 
 #define MX_FLAGS "ACFGRSTUacdfgilmnopqrstuvwx1"
-#define MX_USAGE "usage: uls [-"MX_FLAGS"] [file ...]"
+#define MX_USAGE "usage: uls [-" MX_FLAGS "] [file ...]"
 
 #define MX_DEF "\033[0m"        // ----------       // default
 #define MX_EXE "\033[0;31m"     // ---x--x--x       // execute

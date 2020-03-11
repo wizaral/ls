@@ -20,7 +20,6 @@ struct s_lengths {
     uint8_t user;
     uint8_t grp;
     uint8_t size;
-    uint8_t time;
     uint8_t name;
     uint8_t suffix;
     uint8_t arrow;
@@ -120,6 +119,7 @@ struct s_info {
     bool return_val;        // 0 - good | 1 - any error
     bool reverse;           // 0 - normal | 1 - reversed
     bool filedir;           // 0 - default | 1 - dir like file
+    size_t time_len;        // length of time in -l format
     t_time_type time_type;  // data/time type for -[tlgno]
 
     t_vector files;         // files from arguments
