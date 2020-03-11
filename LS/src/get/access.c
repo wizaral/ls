@@ -1,7 +1,7 @@
 #include "uls.h"
 
 static inline void basic_perm(char *access, t_stat *st) {
-    static const char *str[] = {"-r", "-w", "-x", "sS", "tT"};
+    static const char *str[] = {"-r", "-w", "-x", "Ss", "Tt"};
 
     MX_ISDIR(st->st_mode) ? (access[0] = 'd') : 0;
     MX_ISLNK(st->st_mode) ? (access[0] = 'l') : 0;
