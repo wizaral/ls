@@ -19,14 +19,11 @@ struct s_lengths {
     uint8_t links;
     uint8_t user;
     uint8_t grp;
-    uint8_t flags;
     uint8_t size;
     uint8_t time;
     uint8_t name;
     uint8_t suffix;
     uint8_t arrow;
-    uint8_t attr;
-    uint8_t acl;
 };
 
 struct s_printable {
@@ -35,13 +32,10 @@ struct s_printable {
     char *links;
     char *user;
     char *grp;
-    char *flags;
     char *size;
     char *time;
     char *name;
     char *arrow;
-    char *attr;
-    char *acl;
     char suffix;
     char access[12];
 };
@@ -66,7 +60,6 @@ struct s_offset {
     uint8_t links;      // length of longest amount of links
     uint8_t user;       // length of longest user name/id
     uint8_t grp;        // length of longest group name/id
-    uint8_t flags;      // length of longest inode
     uint8_t size;       // length of longest size
     uint8_t name;       // length of longest filename
 };
@@ -94,14 +87,11 @@ struct s_get {
     void (*links)(t_dir *, t_file *, t_stat *);
     void (*user)(t_dir *, t_file *, t_stat *);
     void (*grp)(t_dir *, t_file *, t_stat *);
-    void (*flags)(t_dir *, t_file *, t_stat *);
     void (*size)(t_dir *, t_file *, t_stat *);
     void (*time)(t_dir *, t_file *, t_stat *);
     void (*name)(t_dir *, t_file *, t_stat *);
     void (*suffix)(t_dir *, t_file *, t_stat *);
     void (*arrow)(t_dir *, t_file *, t_stat *);
-    void (*attr)(t_dir *, t_file *, t_stat *);
-    void (*acl)(t_dir *, t_file *, t_stat *);
 };
 
 struct s_dir {
@@ -115,7 +105,6 @@ struct s_dir {
 
     t_vector array; // struct for manage array of files
     t_offset off;   // offsets in current directory
-    bool has_bc;    // true if char/block file (device) in dir
 };
 
 struct s_info {

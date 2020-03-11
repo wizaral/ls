@@ -1,7 +1,7 @@
 #pragma once
 #include "uls.h"
 
-#define MX_FLAGS "ACFGORSTU@acdefghilmnopqrstuvwx1"
+#define MX_FLAGS "ACFGRSTUacdfgilmnopqrstuvwx1"
 #define MX_USAGE "usage: uls [-"MX_FLAGS"] [file ...]"
 
 #define MX_DEF "\033[0m"        // ----------       // default

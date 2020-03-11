@@ -2,10 +2,7 @@
 
 static inline void init_getters(t_get *get, bool dst) {
     get->access = mx_dummy;
-    get->acl = mx_dummy;
-    get->attr = mx_dummy;
     get->bsize = mx_dummy;
-    get->flags = mx_dummy;
     get->grp = mx_dummy;
     get->inode = mx_dummy;
     get->links = mx_dummy;

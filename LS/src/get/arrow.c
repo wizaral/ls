@@ -2,7 +2,7 @@
 
 void mx_arrow(t_dir *dir, t_file *file, t_stat *st) {
     if (MX_ISLNK(st->st_mode)) {
-        size_t size = st->st_size ? MX_MIN(st->st_size, 256, int64_t) : 256;
+        size_t size = st->st_size ? MX_MIN(st->st_size, 255, int64_t) : 255;
         char buff[size + 1];
         ssize_t len = readlink(dir->filename, buff, size);
 

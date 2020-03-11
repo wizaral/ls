@@ -31,7 +31,6 @@ void mx_process_dir(t_info *info, char *name);
 void mx_uls(t_info *info, t_dir *dir);
 void mx_recursion(t_info *info, t_dir *dir);
 
-bool mx_check_block_char(const char *name);
 int mx_get_data_len(t_info *info, t_dir *dir, t_file *file, bool longest);
 int mx_get_tabs(int size);
 char *mx_get_file_name(char *av);
@@ -88,9 +87,6 @@ void mx_user_skip(t_dir *dir, t_file *file, t_stat *st);        // -g(l)
 void mx_grp_name(t_dir *dir, t_file *file, t_stat *st);         // -l
 void mx_grp_skip(t_dir *dir, t_file *file, t_stat *st);         // -o(l)
 
-void mx_file_flags(t_dir *dir, t_file *file, t_stat *st);       // -O -l
-
-void mx_size_h(t_dir *dir, t_file *file, t_stat *st);           // -h -l
 void mx_size_b(t_dir *dir, t_file *file, t_stat *st);           // -l
 
 void mx_time_short(t_dir *dir, t_file *file, t_stat *st);       // -l
@@ -103,7 +99,5 @@ void mx_suffix_all(t_dir *dir, t_file *file, t_stat *st);       // -F
 void mx_suffix_dir(t_dir *dir, t_file *file, t_stat *st);       // -p
 
 void mx_arrow(t_dir *dir, t_file *file, t_stat *st);            // -l
-void mx_attr(t_dir *dir, t_file *file, t_stat *st);             // -@
-void mx_acl(t_dir *dir, t_file *file, t_stat *st);              // -e
 
 void mx_dummy(t_dir *dir, t_file *file, t_stat *st);

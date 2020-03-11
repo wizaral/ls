@@ -4,7 +4,7 @@ static inline size_t get_len(t_info *info, t_offset *off) {
     return off->inode + (off->inode > 0) + off->bsize + (off->bsize > 0) + 12
             + off->links + 1 + off->user + (off->user > 0) + (off->user > 0)
             + off->grp + (off->grp > 0) + (off->grp > 0)
-            + off->flags + (off->flags > 0) + off->size + 1
+            + off->size + 1
             + (info->get.time == mx_time_full ? 21 : 13)
             + (off->user == 0 && off->grp == 0)
             + (off->user == 0 && off->grp == 0);
@@ -27,8 +27,6 @@ static void create_str(t_offset *off, char *str,
     mx_memcpy(str + pos, print->grp, len->grp);
     pos += off->grp + (off->grp > 0) + (off->user == 0 && off->grp == 0)
             + (off->grp > 0) + (off->user == 0 && off->grp == 0);
-    mx_memcpy(str + pos + off->flags - len->flags, print->flags, len->flags);
-    pos += off->flags + (off->flags > 0);
     mx_memcpy(str + pos + off->size - len->size, print->size, len->size);
     pos += off->size + 1;
     mx_memcpy(str + pos, print->time, len->time);
@@ -48,7 +46,5 @@ void mx_write_l(t_info *info, t_dir *dir) {
         mx_printstrlen(&file->fields.suffix, file->lengths.suffix, 1);
         mx_printstrlen(file->fields.arrow, file->lengths.arrow, 1);
         mx_printchar('\n', 1);
-        mx_printstrlen(file->fields.attr, file->lengths.attr, 1);
-        mx_printstrlen(file->fields.acl, file->lengths.acl, 1);
     }
 }

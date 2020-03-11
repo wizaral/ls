@@ -14,7 +14,6 @@ static inline void init_dir(t_dir *dir, char *name) {
         dir->array.size = 0;
         dir->array.arr = malloc(MX_VECTOR_DEFAULT_SIZE * sizeof(t_file));
         mx_memset(&dir->off, 0, sizeof(t_offset));
-        dir->has_bc = false;
     }
 }
 

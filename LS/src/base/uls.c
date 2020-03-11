@@ -4,11 +4,8 @@ static void free_dir(t_dir *dir) {
     t_file *end = mx_end(&dir->array);
 
     for (t_file *i = (t_file *)dir->array.arr; i < end; ++i) {
-        i->fields.acl ? free(i->fields.acl) : (void)0;
         i->fields.arrow ? free(i->fields.arrow) : (void)0;
-        i->fields.attr ? free(i->fields.attr) : (void)0;
         i->fields.bsize ? free(i->fields.bsize) : (void)0;
-        i->fields.flags ? free(i->fields.flags) : (void)0;
         i->fields.grp ? free(i->fields.grp) : (void)0;
         i->fields.inode ? free(i->fields.inode) : (void)0;
         i->fields.links ? free(i->fields.links) : (void)0;
@@ -33,7 +30,7 @@ static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
     file_info.mode = st.st_mode;
     mx_memcpy(&file_info.time, &st.st_atimespec + info->time_type, sizeof(t_timespec));
 
-    for (int i = 0; i < 14; ++i)
+    for (int i = 0; i < 11; ++i)
         func[i](dir, &file_info, &st);
     mx_push_backward(&dir->array, &file_info);
     mx_strdel(&dir->filename);
@@ -43,7 +40,6 @@ static inline void process(t_info *info, t_dir *dir) {
     t_dirent *(*read)(DIR *) = info->read;
 
     dir->file = read(dir->dir);
-    dir->has_bc = mx_check_block_char(dir->name);
     for (DIR *pdir = dir->dir; dir->file; dir->file = read(pdir))
         get_info(info, dir, dir->file);
 

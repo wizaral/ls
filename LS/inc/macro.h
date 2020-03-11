@@ -21,7 +21,7 @@
 
 #define MX_EXIST(x) mx_strchr(MX_FLAGS, x)
 #define MX_WRITE(x) mx_strchr("l1mCx", x)
-#define MX_LADDS(x) mx_strchr("ghnOT@eo", x)
+#define MX_LADDS(x) mx_strchr("gnTo", x)
 #define MX_OTHER(x) mx_strchr("isGRrd", x)
 
 #define MX_DOT1(x) ((x)[0] == '.' && (x)[1] == '\0')

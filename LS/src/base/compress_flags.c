@@ -10,16 +10,8 @@ void mx_check_adds(t_info *info, t_get *get, char flag) {
         else
             get->user = mx_user_skip;
     }
-    else if (flag == 'O')
-        get->flags = mx_file_flags;
-    else if (flag == 'h')
-        get->size = mx_size_h;
-    else if (flag == 'T')
-        get->time = mx_time_full;
-    else if (flag == '@')
-        get->attr = mx_attr;
     else
-        get->acl = mx_acl;
+        get->time = mx_time_full;
 }
 
 static inline void accept_l(t_info *info, t_get *get) {
@@ -37,8 +29,8 @@ void mx_compress_flags(t_info *info, t_get *get) {
     if (info->write == mx_write_l)
         accept_l(info, get);
     else {
-        get->access = get->links = get->user = get->grp = get->attr = mx_dummy;
-        get->flags = get->size = get->time = get->arrow = get->acl = mx_dummy;
+        get->access = get->links = get->user = get->grp = mx_dummy;
+        get->size = get->time = get->arrow = mx_dummy;
     }
     if (info->print_name == mx_color) {
         info->write == mx_write_C ? info->write = mx_write_CG : NULL;
