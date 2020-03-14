@@ -1,8 +1,6 @@
 #include "libmx.h"
 
-static inline char *make_dec(int64_t num, int len) {
-    char *str = mx_strnew(len);
-
+static inline char *make_dec(int64_t num, char *str, int len) {
     *str = num < 0 ? '-' : 0;
     for (int j = len - 1; j >= (num <= 0); --j) {
         str[j] = MX_ABS(num % 10) + 48;
@@ -11,6 +9,6 @@ static inline char *make_dec(int64_t num, int len) {
     return str;
 }
 
-char *mx_lltoa(int64_t nbr) {
-    return nbr ? make_dec(nbr, mx_numlen(nbr, 10)) : mx_strdup("0");
+char *mx_lltoa_s(int64_t nbr, char *str, int len) {
+    return nbr ? make_dec(nbr, str, len) : mx_memcpy(str, "0", 2);
 }
