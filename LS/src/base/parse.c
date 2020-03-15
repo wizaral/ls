@@ -1,23 +1,16 @@
 #include "uls.h"
 
 static void parse_file(t_info *info, char *av) {
-    DIR *dir = NULL;
     t_stat st;
 
     if (lstat(av, &st) == -1)
         mx_wrong_argv(info, av);
-    else if (MX_ISDIR(st.st_mode) && (dir = opendir(av)) == NULL)
-        mx_wrong_argv(info, mx_get_file_name(av));
-    else {
-        if (dir)
-            closedir(dir);
-        if (!MX_ISDIR(st.st_mode)
-            || (MX_ISLNK(st.st_mode) && info->write == mx_write_l)
-            || (MX_ISDIR(st.st_mode) && info->filedir))
-            mx_push_backward(&info->files, &av);
-        else
-            mx_push_backward(&info->dirs, &av);
-    }
+    else if (!MX_ISDIR(st.st_mode)
+        || (MX_ISLNK(st.st_mode) && info->write == mx_write_l)
+        || (MX_ISDIR(st.st_mode) && info->filedir))
+        mx_push_backward(&info->files, &av);
+    else
+        mx_push_backward(&info->dirs, &av);
 }
 
 static bool parse_flag(t_vector *flags, char *av) {
@@ -37,7 +30,7 @@ static bool parse_flag(t_vector *flags, char *av) {
 }
 
 void mx_parse(t_info *info, int ac, char **av) {
-    static const char *dot = ".";
+    const char *dot = ".";
     t_vector flags = {MX_VECTOR_DEFAULT_SIZE, 0, sizeof(char),
                         malloc(sizeof(char) * MX_VECTOR_DEFAULT_SIZE)};
     int check = 0;
