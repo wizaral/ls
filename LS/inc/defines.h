@@ -18,3 +18,6 @@
 #define MX_NSB "\033[30;43m"    // --------w-       // not sticky bit
 
 #define MX_HALF_YEAR 15768000
+
+#define MX_ACL_DEF ACL_TYPE_DEFAULT
+#define MX_ACL_EXT ACL_TYPE_EXTENDED
