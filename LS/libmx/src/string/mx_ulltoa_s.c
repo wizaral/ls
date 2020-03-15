@@ -9,5 +9,5 @@ static inline char *make_dec(uint64_t num, char *str, int len) {
 }
 
 char *mx_ulltoa_s(uint64_t nbr, char *str, int len) {
-    return nbr ? make_dec(nbr, str, len) : mx_memcpy(str, "0", 2);
+    return nbr ? make_dec(nbr, str, len) : mx_memset(str, '0', 1);
 }

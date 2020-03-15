@@ -1,8 +1,8 @@
 #include "libmx.h"
 
-uint64_t mx_hex_to_nbr(const char *hex) {
+uint64_t mx_htoull(const char *hex) {
     uint64_t result = 0;
-    uint64_t pow = 1;
+    uint32_t pow = 1;
 
     if (hex) {
         for (int64_t j = (int64_t)mx_strlen(hex) - 1; j >= 0; --j, pow *= 16) {

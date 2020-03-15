@@ -83,10 +83,9 @@ void mx_del_strarr(char ***arr);
 int mx_get_char_index(const char *str, char c);
 int mx_get_substr_index(const char *str, const char *sub);
 
-uint64_t mx_hex_to_nbr(const char *hex);
+uint64_t mx_htoull(const char *hex);
 char *mx_lltoa_s(int64_t nbr, char *str, int len);
 char *mx_lltoa(int64_t number);
-char *mx_nbr_to_hex(uint64_t nbr);
 
 char *mx_replace_substr(const char *str, const char *sub, const char *replace);
 void mx_str_reverse(char *s);
@@ -107,7 +106,7 @@ int mx_strncmp(const char *s1, const char *s2, int n);
 char *mx_strncpy(char *dst, const char *src, int len);
 char *mx_strndup(const char *str, size_t n);
 
-char *mx_strnew(const int size);
+char *mx_strnew(const int size, char c);
 char **mx_strsplit(const char *s, char c);
 
 char *mx_strstr(const char *haystack, const char *needle);
@@ -118,6 +117,8 @@ int mx_toupper(int c);
 
 char *mx_ulltoa_s(uint64_t nbr, char *str, int len);
 char *mx_ulltoa(uint64_t number);
+char *mx_ulltoh_s(uint64_t nbr, char *str, int len);
+char *mx_ulltoh(uint64_t nbr);
 
 /*
  * type
