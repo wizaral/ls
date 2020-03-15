@@ -2,7 +2,7 @@
 
 static inline void print_n_tabs(int tabs) {
     for (int i = 0; i < tabs; ++i)
-        mx_printstrlen("\t", 1, 1);
+        mx_printchar('\t', 1);
 }
 
 static void print_tabs(t_info *info, t_dir *dir, t_file *dt) {
@@ -16,7 +16,7 @@ static void print_tabs(t_info *info, t_dir *dir, t_file *dt) {
                     dir->off.name_tabs - tabs_cword : 1);
     }
     else {
-        mx_printstrlen("\n", 1, 1);
+        mx_printchar('\n', 1);
         dir->off.x = 0;
     }
 }

@@ -75,7 +75,7 @@ int mx_compare_argv_r(const void *a, const void *b);  // -r
  * full list of getters
  * all of them just creating string with some file information for print
  * they can't update any structs of global state, but do for current dir
-*/
+ */
 
 void mx_inode(t_dir *dir, t_file *file, t_stat *st);            // -i
 void mx_bsize(t_dir *dir, t_file *file, t_stat *st);            // -s

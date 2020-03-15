@@ -6,12 +6,14 @@ static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
     void (**func)(t_dir *, t_file *, t_stat *) =
         (void (**)(t_dir *, t_file *, t_stat *))&info->get;
 
-    dir->filename = mx_get_path_name(dir->name, dir->len, file->d_name, file->d_namlen);
+    dir->filename = mx_get_path_name(dir->name, dir->len,
+                                        file->d_name, file->d_namlen);
     lstat(dir->filename, &st);
     dir->total += st.st_blocks;
     file_info.size = st.st_size;
     file_info.mode = st.st_mode;
-    mx_memcpy(&file_info.time, &st.st_atimespec + info->time_type, sizeof(t_timespec));
+    mx_memcpy(&file_info.time, &st.st_atimespec + info->time_type,
+                sizeof(t_timespec));
 
     for (int i = 0; i < 11; ++i)
         func[i](dir, &file_info, &st);

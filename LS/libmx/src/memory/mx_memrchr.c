@@ -9,6 +9,5 @@ void *mx_memrchr(const void *s, int c, size_t n) {
         if (us[i] == c)
             return (void *)(us + i);
     }
-    // return *us == c ? (void *)s : NULL;      // return this if not compile
-    return (void *)((*us == c) * (uint64_t)s);
+    return *us == c ? (void *)s : NULL;
 }

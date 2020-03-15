@@ -2,7 +2,7 @@
 
 void mx_grp_id(t_dir *dir, t_file *file, t_stat *st) {
     file->lengths.grp = mx_unumlen(st->st_gid, 10);
-    file->fields.grp = mx_lltoa(st->st_gid);
+    file->fields.grp = mx_ulltoa(st->st_gid);
     if (dir->off.grp < file->lengths.grp)
         dir->off.grp = file->lengths.grp;
 }
@@ -16,7 +16,7 @@ void mx_grp_name(t_dir *dir, t_file *file, t_stat *st) {
     }
     else {
         file->lengths.grp = mx_unumlen(st->st_gid, 10);
-        file->fields.grp = mx_lltoa(st->st_gid);
+        file->fields.grp = mx_ulltoa(st->st_gid);
     }
     if (dir->off.grp < file->lengths.grp)
         dir->off.grp = file->lengths.grp;

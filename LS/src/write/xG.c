@@ -2,7 +2,7 @@
 
 static inline  void print_n_spaces(int spaces) {
     for (int i = 0; i < spaces; ++i)
-        mx_printstrlen(" ", 1, 1);
+        mx_printchar(' ', 1);
 }
 
 static void print_spaces(size_t full_len, size_t cfull_len, t_offset *of) {
@@ -11,7 +11,7 @@ static void print_spaces(size_t full_len, size_t cfull_len, t_offset *of) {
         print_n_spaces(full_len - cfull_len + 1);
     }
     else {
-        mx_printstrlen("\n", 1, 1);
+        mx_printchar('\n', 1);
         of->x = 0;
     }
 }

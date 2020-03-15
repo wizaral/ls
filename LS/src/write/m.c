@@ -4,7 +4,7 @@ static void calc_x(t_info *info, t_file *dt, int *len, t_dir *dir) {
     dir->off.x += (*len = dt->lengths.name + mx_get_inode_bsize_len(&dir->off)
                 + (info->get.suffix != mx_dummy) + 2);
     if (dir->off.x - mx_get_inode_bsize_len(&dir->off) > dir->off.width) {
-        mx_printstrlen("\n", 1, 1);
+        mx_printchar('\n', 1);
         dir->off.x = *len + 1;
     }
 }
