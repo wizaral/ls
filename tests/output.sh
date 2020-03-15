@@ -14,6 +14,12 @@ zsh compare.sh <(ls -lfFTisng / 2>&1) <(./uls -lfFTisng / 2>&1) "-lfFTisng /"
 zsh compare.sh <(ls -lfFTisno / 2>&1) <(./uls -lfFTisno / 2>&1) "-lfFTisno /"
 zsh compare.sh <(ls -lfFTisgno / 2>&1) <(./uls -lfFTisgno / 2>&1) "-lfFTisgno /"
 
+zsh compare.sh <(ls -l ../Makefile compare.sh output.sh errors.sh 2>&1) <(./uls -l ../Makefile compare.sh output.sh errors.sh 2>&1) "-l ../Makefile compare.sh output.sh errors.sh"
+zsh compare.sh <(ls -1 ../Makefile compare.sh output.sh errors.sh 2>&1) <(./uls -1 ../Makefile compare.sh output.sh errors.sh 2>&1) "-1 ../Makefile compare.sh output.sh errors.sh"
+zsh compare.sh <(ls -m ../Makefile compare.sh output.sh errors.sh 2>&1) <(./uls -m ../Makefile compare.sh output.sh errors.sh 2>&1) "-m ../Makefile compare.sh output.sh errors.sh"
+zsh compare.sh <(ls -x ../Makefile compare.sh output.sh errors.sh 2>&1) <(./uls -x ../Makefile compare.sh output.sh errors.sh 2>&1) "-x ../Makefile compare.sh output.sh errors.sh"
+zsh compare.sh <(ls -C ../Makefile compare.sh output.sh errors.sh 2>&1) <(./uls -C ../Makefile compare.sh output.sh errors.sh 2>&1) "-C ../Makefile compare.sh output.sh errors.sh"
+
 zsh compare.sh <(ls -1i 2>&1) <(./uls -1i 2>&1) "-1i"
 zsh compare.sh <(ls -li 2>&1) <(./uls -li 2>&1) "-li"
 zsh compare.sh <(ls -xi 2>&1) <(./uls -xi 2>&1) "-xi"
