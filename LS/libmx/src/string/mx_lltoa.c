@@ -1,7 +1,7 @@
 #include "libmx.h"
 
 static inline char *make_dec(int64_t num, int len) {
-    char *str = mx_strnew(len);
+    char *str = mx_strnew(len, '\0');
 
     *str = num < 0 ? '-' : 0;
     for (int j = len - 1; j >= (num <= 0); --j) {

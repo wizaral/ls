@@ -4,10 +4,10 @@ char *mx_replace_substr(const char *str, const char *sub, const char *replace) {
     if (str && sub && replace) {
         int len1 = mx_strlen(sub);
         int len2 = mx_strlen(replace);
-        int count = mx_count_substr(str, sub);
+        int cnt = mx_count_substr(str, sub);
 
-        if (count > 0) {
-            char *result = mx_strnew(mx_strlen(str) + (len2 - len1) * count);
+        if (cnt > 0) {
+            char *result = mx_strnew(mx_strlen(str) + (len2 - len1) * cnt, 0);
 
             for (int i = 0; *str; )
                 if (*str == *sub && mx_strncmp(str, sub, len1) == 0) {

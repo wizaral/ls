@@ -1,7 +1,7 @@
 #include "libmx.h"
 
 static inline char *make_dec(uint64_t num, int len) {
-    char *str = mx_strnew(len);
+    char *str = mx_strnew(len, '\0');
 
     for (int j = len - 1; j >= 0; --j) {
         str[j] = (num % 10) + 48;
