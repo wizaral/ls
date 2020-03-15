@@ -24,5 +24,4 @@
 
 # current project
 uls
-!cases.txt
-!flags.txt
+tests
