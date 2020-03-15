@@ -16,7 +16,7 @@
 |  `A` | List all entries except for . and ..                                   |
 |  `a` | Include directory entries whose names begin with a dot                 |
 |      |                                                                        |
-|  `F` | Print suffix after name: dir`/` exe`*` link`@` socket`=` whiteout`%` fifo`|` |
+|  `F` | Print suffix after name: dir`/` exe`*` link`@` socket`=` whiteout`%` fifo`\|` |
 |  `p` | Print suffix after name: directory`/`                                  |
 |      |                                                                        |
 |  `R` | Recursively list subdirectories encountered                            |
@@ -46,12 +46,12 @@
 
 |           Unidirectional order of flag rewriting          |
 |:---------------------------------------------------------:|
-|                    **`t ==> S ==> f`**                    |
-|                       **`R ==> d`**                       |
-|                       **`n ==> g`**                       |
-|                       **`n ==> o`**                       |
-|                       **`C ==> m`**                       |
-|                       **`x ==> m`**                       |
+|**`t ==> S ==> f`**                                        |
+|**`R ==> d`**                                              |
+|**`n ==> g`**                                              |
+|**`n ==> o`**                                              |
+|**`C ==> m`**                                              |
+|**`x ==> m`**                                              |
 
 ### Default flags by category
 
@@ -60,4 +60,4 @@
 \
 **`q` - default printing name to terminal**\
 **`v` - default printing name not to terminal**\
-**`w` - default printing name not to terminal**\
+**`w` - default printing name not to terminal**
