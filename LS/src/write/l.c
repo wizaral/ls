@@ -28,7 +28,7 @@ static void create_str(t_offset *off, char *str,
 }
 
 static inline void print_size(t_dir *dir, t_file *file) {
-    size_t size = dir->off.size - file->lengths.size;
+    size_t size = dir->off.size - file->lengths.size + 1;
     char space[size];
 
     mx_memset(space, ' ', size);
