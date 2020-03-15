@@ -3,6 +3,7 @@ cp ../LS/uls .
 zsh compare.sh <(ls -nisTGfFq 2>&1) <(./uls -nisTGfFq 2>&1) "-nisTGfFq"
 zsh compare.sh <(ls -AFGisTn / /bin /tmp/ 2>&1) <(./uls -AFGisTn / /bin /tmp/ 2>&1) "-AFGisTn / /bin /tmp/"
 zsh compare.sh <(ls -AFGisTn ../Makefile compare.sh output.sh errors.sh 2>&1) <(./uls -AFGisTn ../Makefile compare.sh output.sh errors.sh 2>&1) "-AFGisTn ../Makefile compare.sh output.sh errors.sh"
+zsh compare.sh <(ls -AFGisTn / 2>&1) <(./uls -AFGisTn / 2>&1) "-AFGisTn /"
 zsh compare.sh <(ls -privt 2>&1) <(./uls -privt 2>&1) "-privt"
 zsh compare.sh <(ls -1FiSra / 2>&1) <(./uls -1FiSra / 2>&1) "-1FiSra /"
 zsh compare.sh <(ls -lfFTis / 2>&1) <(./uls -lfFTis / 2>&1) "-lfFTis /"
