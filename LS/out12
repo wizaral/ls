@@ -1,0 +1,303 @@
+uls: close: Permission denied
+uls: ma: Permission denied
+uls: jabberd: Permission denied
+uls: backups: Permission denied
+uls: agentx: Permission denied
+uls: postfix: Permission denied
+uls: install: Permission denied
+uls: dmd: Operation not permitted
+uls: com.apple.LaunchServices.dv: Operation not permitted
+uls: dv: Operation not permitted
+uls: com.apple.lockoutagent: Operation not permitted
+uls: Store: Operation not permitted
+uls: SafariFamily: Operation not permitted
+uls: com.apple.nsurlsessiond: Operation not permitted
+uls: com.apple.SharedWebCredentials: Operation not permitted
+uls: com.apple.WebKit.WebContent.Sandbox: Operation not permitted
+uls: com.apple.WebKit.Networking.Sandbox: Operation not permitted
+uls: com.apple.QuickLook.thumbnailcache: Operation not permitted
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: dmd: Operation not permitted
+uls: com.apple.Spotlight: Permission denied
+uls: dv: Operation not permitted
+uls: com.apple.pluginkit: Permission denied
+uls: com.apple.lockoutagent: Operation not permitted
+uls: Store: Operation not permitted
+uls: com.apple.nsurlsessiond: Operation not permitted
+uls: com.apple.notificationcenter: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: com.apple.nsurlsessiond: Operation not permitted
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: 0: Operation not permitted
+uls: T: Permission denied
+uls: C: Operation not permitted
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: com.apple.revisiond.temp: Permission denied
+uls: com.apple.pluginkit: Permission denied
+uls: com.apple.Spotlight: Permission denied
+uls: com.apple.LaunchServices.dv: Operation not permitted
+uls: C: Permission denied
+uls: T: Permission denied
+uls: root: Permission denied
+uls: mqueue: Permission denied
+uls: cups: Permission denied
+uls: trace: Permission denied
+uls: saved: Permission denied
+uls: maildrop: Permission denied
+uls: incoming: Permission denied
+uls: hold: Permission denied
+uls: flush: Permission denied
+uls: deferred: Permission denied
+uls: defer: Permission denied
+uls: corrupt: Permission denied
+uls: bounce: Permission denied
+uls: active: Permission denied
+uls: public: Permission denied
+uls: private: Permission denied
+uls: Library: Permission denied
+uls: vmware-root_572-2999067484: Permission denied
+uls: vmware-root_3474-2697600301: Permission denied
+uls: vmware-root_144-566924974: Permission denied
+uls: vmware-root_143-1848970601: Permission denied
+uls: tmp: Permission denied
+uls: tabs: Permission denied
+uls: audit: Permission denied
+uls: mds: Permission denied
+uls: nearbyd: Permission denied
+uls: hidd: Permission denied
+uls: geod: Permission denied
+uls: datadetectors: Permission denied
+uls: com.apple.xpc.roleaccountd.staging: Permission denied
+uls: cmiodalassistants: Permission denied
+uls: securityagent: Permission denied
+uls: reportmemoryexception: Permission denied
+uls: nsurlsessiond: Permission denied
+uls: lockdown: Permission denied
+uls: Default: Permission denied
+uls: opendirectory: Permission denied
+uls: applepay: Permission denied
+uls: Spotlight-V100: Permission denied
+uls: timed: Permission denied
+uls: Library: Permission denied
+uls: locationd: Permission denied
+uls: Knowledge: Operation not permitted
+uls: fpsd: Permission denied
+uls: dhcpclient: Permission denied
+uls: Store: Operation not permitted
+uls: Setup: Permission denied
+uls: Spotlight: Permission denied
+uls: Sandbox: Permission denied
+uls: analyticsd: Permission denied
+uls: certs: Permission denied
+uls: .HFS+ Private Directory Data?: No such file or directory
+uls: com.apple.coresymbolicationd: Permission denied
+uls: .Spotlight-V100: Permission denied
+uls: close: Permission denied
+uls: ma: Permission denied
+uls: jabberd: Permission denied
+uls: backups: Permission denied
+uls: agentx: Permission denied
+uls: postfix: Permission denied
+uls: install: Permission denied
+uls: dmd: Operation not permitted
+uls: com.apple.LaunchServices.dv: Operation not permitted
+uls: dv: Operation not permitted
+uls: com.apple.lockoutagent: Operation not permitted
+uls: Store: Operation not permitted
+uls: SafariFamily: Operation not permitted
+uls: com.apple.nsurlsessiond: Operation not permitted
+uls: com.apple.SharedWebCredentials: Operation not permitted
+uls: com.apple.WebKit.WebContent.Sandbox: Operation not permitted
+uls: com.apple.WebKit.Networking.Sandbox: Operation not permitted
+uls: com.apple.QuickLook.thumbnailcache: Operation not permitted
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: dmd: Operation not permitted
+uls: com.apple.Spotlight: Permission denied
+uls: dv: Operation not permitted
+uls: com.apple.pluginkit: Permission denied
+uls: com.apple.lockoutagent: Operation not permitted
+uls: Store: Operation not permitted
+uls: com.apple.nsurlsessiond: Operation not permitted
+uls: com.apple.notificationcenter: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: com.apple.nsurlsessiond: Operation not permitted
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: 0: Operation not permitted
+uls: T: Permission denied
+uls: C: Operation not permitted
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: T: Permission denied
+uls: C: Permission denied
+uls: com.apple.revisiond.temp: Permission denied
+uls: com.apple.pluginkit: Permission denied
+uls: com.apple.Spotlight: Permission denied
+uls: com.apple.LaunchServices.dv: Operation not permitted
+uls: C: Permission denied
+uls: T: Permission denied
+uls: root: Permission denied
+uls: mqueue: Permission denied
+uls: cups: Permission denied
+uls: trace: Permission denied
+uls: saved: Permission denied
+uls: maildrop: Permission denied
+uls: incoming: Permission denied
+uls: hold: Permission denied
+uls: flush: Permission denied
+uls: deferred: Permission denied
+uls: defer: Permission denied
+uls: corrupt: Permission denied
+uls: bounce: Permission denied
+uls: active: Permission denied
+uls: public: Permission denied
+uls: private: Permission denied
+uls: Library: Permission denied
+uls: vmware-root_572-2999067484: Permission denied
+uls: vmware-root_3474-2697600301: Permission denied
+uls: vmware-root_144-566924974: Permission denied
+uls: vmware-root_143-1848970601: Permission denied
+uls: tmp: Permission denied
+uls: tabs: Permission denied
+uls: audit: Permission denied
+uls: mds: Permission denied
+uls: nearbyd: Permission denied
+uls: hidd: Permission denied
+uls: geod: Permission denied
+uls: datadetectors: Permission denied
+uls: com.apple.xpc.roleaccountd.staging: Permission denied
+uls: cmiodalassistants: Permission denied
+uls: securityagent: Permission denied
+uls: reportmemoryexception: Permission denied
+uls: nsurlsessiond: Permission denied
+uls: lockdown: Permission denied
+uls: Default: Permission denied
+uls: opendirectory: Permission denied
+uls: applepay: Permission denied
+uls: Spotlight-V100: Permission denied
+uls: timed: Permission denied
+uls: Library: Permission denied
+uls: locationd: Permission denied
+uls: Knowledge: Operation not permitted
+uls: fpsd: Permission denied
+uls: dhcpclient: Permission denied
+uls: Store: Operation not permitted
+uls: Setup: Permission denied
+uls: Spotlight: Permission denied
+uls: Sandbox: Permission denied
+uls: analyticsd: Permission denied
+uls: certs: Permission denied
+uls: .fseventsd: Permission denied
+uls: com.apple.iconservices.store: Permission denied
+uls: ApplePushService: Permission denied
+uls: Users: Permission denied
+uls: Data: Permission denied
+uls: ma: Permission denied
+uls: jabberd: Permission denied
+uls: install: Permission denied
+uls: backups: Permission denied
+uls: audit: Permission denied
+uls: agentx: Permission denied
+uls: postfix: Permission denied
+uls: root: Permission denied
+uls: mqueue: Permission denied
+uls: cups: Permission denied
+uls: trace: Permission denied
+uls: saved: Permission denied
+uls: public: Permission denied
+uls: private: Permission denied
+uls: maildrop: Permission denied
+uls: incoming: Permission denied
+uls: hold: Permission denied
+uls: flush: Permission denied
+uls: deferred: Permission denied
+uls: defer: Permission denied
+uls: corrupt: Permission denied
+uls: bounce: Permission denied
+uls: active: Permission denied
+uls: tmp: Permission denied
+uls: tabs: Permission denied
+uls: timed: Permission denied
+uls: securityagent: Permission denied
+uls: reportmemoryexception: Permission denied
+uls: nsurlsessiond: Permission denied
+uls: nearbyd: Permission denied
+uls: lockdown: Permission denied
+uls: locationd: Permission denied
+uls: hidd: Permission denied
+uls: geod: Permission denied
+uls: fpsd: Permission denied
+uls: diagnostics: Permission denied
+uls: datadetectors: Permission denied
+uls: com.apple.xpc.roleaccountd.staging: Permission denied
+uls: cmiodalassistants: Permission denied
+uls: applepay: Permission denied
+uls: analyticsd: Permission denied
+uls: Default: Permission denied
+uls: opendirectory: Permission denied
+uls: Store: Permission denied
+uls: certs: Permission denied
+uls: Users: Permission denied
+uls: Default: Permission denied
+uls: com.apple.coresymbolicationd: Permission denied
+uls: authserver: Permission denied
+uls: com.apple.iconservices.store: Permission denied
+uls: ApplePushService: Permission denied
+uls: Users: Permission denied
+uls: Data: Permission denied
+uls: 5: Not a directory
+uls: 3: Not a directory
+uls: 4: Not a directory
+uls: .fseventsd: Permission denied
