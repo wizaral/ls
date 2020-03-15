@@ -32,25 +32,48 @@ void mx_process_dir(t_info *info, char *name) {
     }
 }
 
-// static void process_files(t_info *info) {
-//     char **end = mx_end(&info->files);
-//     t_dir dir;
+static inline void get_info(t_info *info, t_dir *dir) {
+    static t_stat st;
+    t_file file_info = {{0}, {0}, {0}, 0, 0};
+    void (**func)(t_dir *, t_file *, t_stat *) =
+        (void (**)(t_dir *, t_file *, t_stat *))&info->get;
 
-//     dir.
-//     for (char **i = (char **)info->files.arr; i < end; ++i) {
+    lstat(dir->filename, &st);
+    file_info.size = st.st_size;
+    file_info.mode = st.st_mode;
+    mx_memcpy(&file_info.time, &st.st_atimespec + info->time_type, sizeof(t_timespec));
+    file_info.fields.name = dir->filename;
+    file_info.lengths.name = mx_strlen(dir->filename);
 
-//     }
+    for (int i = 1; i < 11; ++i)
+        func[i](dir, &file_info, &st);
+    mx_push_backward(&dir->array, &file_info);
+}
 
-//     mx_printchar('\n', 1);
-// }
+static void process_files(t_info *info) {
+    char **end = mx_end(&info->files);
+    t_dir dir = {0, 0, 0, 0, 0, 0, {MX_VECTOR_DEFAULT_SIZE, 0, sizeof(t_file),
+        malloc(sizeof(t_file) * MX_VECTOR_DEFAULT_SIZE)}, {0}};
+
+    for (char **i = (char **)info->files.arr; i < end; ++i) {
+        dir.filename = *i;
+        get_info(info, &dir);
+    }
+
+    mx_sort(dir.array.arr, dir.array.size, dir.array.bytes, info->cmp);
+    info->write(info, &dir);
+    mx_free_dir(&dir);
+}
 
 void mx_process_args(t_info *info) {
     char *dir_name = NULL;
 
-    // if (info->files.size > 0)
-    //     process_files(info);
+    if (info->files.size > 0)
+        process_files(info);
+    if (info->files.size && info->dirs.size)
+        mx_printchar('\n', 1);
 
-    if (info->dirs.size > 1) {
+    if (info->dirs.size > (info->files.size == 0)) {
         for (size_t i = 0; i < info->dirs.size; ++i) {
             dir_name = *(char **)mx_at(&info->dirs, i);
             mx_printstr(dir_name, 1);

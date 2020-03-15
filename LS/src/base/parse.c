@@ -1,7 +1,7 @@
 #include "uls.h"
 
 static void parse_file(t_info *info, char *av) {
-    t_stat st;
+    static t_stat st;
 
     if (lstat(av, &st) == -1)
         mx_wrong_argv(info, av);

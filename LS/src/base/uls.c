@@ -16,7 +16,7 @@ static void get_info(t_info *info, t_dir *dir, t_dirent *file) {
     for (int i = 0; i < 11; ++i)
         func[i](dir, &file_info, &st);
     mx_push_backward(&dir->array, &file_info);
-    mx_strdel(&dir->filename);
+    free(dir->filename);
 }
 
 static inline void process(t_info *info, t_dir *dir) {

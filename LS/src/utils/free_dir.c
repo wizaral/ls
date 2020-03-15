@@ -14,7 +14,7 @@ void mx_free_dir(t_dir *dir) {
         fields->size ? free(fields->size) : (void)0;
         fields->time ? free(fields->time) : (void)0;
         fields->user ? free(fields->user) : (void)0;
-        free(fields->name);
+        malloc_size(fields->name) ? free(fields->name) : (void)0;
     }
     free(dir->array.arr);
 }

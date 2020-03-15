@@ -80,6 +80,7 @@ enum e_time_type {
 typedef enum e_time_type t_time_type;
 
 struct s_get {
+    void (*name)(t_dir *, t_file *, t_stat *);
     void (*inode)(t_dir *, t_file *, t_stat *);
     void (*bsize)(t_dir *, t_file *, t_stat *);
     void (*access)(t_dir *, t_file *, t_stat *);
@@ -88,7 +89,6 @@ struct s_get {
     void (*grp)(t_dir *, t_file *, t_stat *);
     void (*size)(t_dir *, t_file *, t_stat *);
     void (*time)(t_dir *, t_file *, t_stat *);
-    void (*name)(t_dir *, t_file *, t_stat *);
     void (*suffix)(t_dir *, t_file *, t_stat *);
     void (*arrow)(t_dir *, t_file *, t_stat *);
 };
