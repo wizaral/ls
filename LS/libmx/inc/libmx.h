@@ -84,7 +84,7 @@ int mx_get_char_index(const char *str, char c);
 int mx_get_substr_index(const char *str, const char *sub);
 
 uint64_t mx_hex_to_nbr(const char *hex);
-char *mx_itoa(int number);
+char *mx_lltoa_s(int64_t nbr, char *str, int len);
 char *mx_lltoa(int64_t number);
 char *mx_nbr_to_hex(uint64_t nbr);
 
@@ -115,6 +115,9 @@ char *mx_strtrim(const char *str);
 
 int mx_tolower(int c);
 int mx_toupper(int c);
+
+char *mx_ulltoa_s(uint64_t nbr, char *str, int len);
+char *mx_ulltoa(uint64_t number);
 
 /*
  * type
