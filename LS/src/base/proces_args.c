@@ -44,6 +44,8 @@ static inline void get_info(t_info *info, t_dir *dir) {
     mx_memcpy(&file_info.time, &st.st_atimespec + info->time_type, sizeof(t_timespec));
     file_info.fields.name = dir->filename;
     file_info.lengths.name = mx_strlen(dir->filename);
+    if (dir->off.name < file_info.lengths.name)
+        dir->off.name = file_info.lengths.name;
 
     for (int i = 1; i < 11; ++i)
         func[i](dir, &file_info, &st);
