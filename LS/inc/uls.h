@@ -71,7 +71,7 @@ int mx_compare_argv_r(const void *a, const void *b);  // -r
 /*
  * full list of getters
  * all of them just creating string with some file information for print
- * they can't update any structs of global state or current directory
+ * they can't update any structs of global state, but do for current dir
 */
 
 void mx_inode(t_dir *dir, t_file *file, t_stat *st);            // -i
@@ -84,10 +84,11 @@ void mx_user_id(t_dir *dir, t_file *file, t_stat *st);          // -n(l)
 void mx_user_name(t_dir *dir, t_file *file, t_stat *st);        // -l
 void mx_user_skip(t_dir *dir, t_file *file, t_stat *st);        // -g(l)
 
+void mx_grp_id(t_dir *dir, t_file *file, t_stat *st);           // -n(l)
 void mx_grp_name(t_dir *dir, t_file *file, t_stat *st);         // -l
 void mx_grp_skip(t_dir *dir, t_file *file, t_stat *st);         // -o(l)
 
-void mx_size_b(t_dir *dir, t_file *file, t_stat *st);           // -l
+void mx_size(t_dir *dir, t_file *file, t_stat *st);             // -l
 
 void mx_time_short(t_dir *dir, t_file *file, t_stat *st);       // -l
 void mx_time_full(t_dir *dir, t_file *file, t_stat *st);        // -T -l
@@ -99,5 +100,4 @@ void mx_suffix_all(t_dir *dir, t_file *file, t_stat *st);       // -F
 void mx_suffix_dir(t_dir *dir, t_file *file, t_stat *st);       // -p
 
 void mx_arrow(t_dir *dir, t_file *file, t_stat *st);            // -l
-
 void mx_dummy(t_dir *dir, t_file *file, t_stat *st);

@@ -36,7 +36,7 @@ static void minor_major(t_dir *dir, t_file *file, t_stat *st) {
         dir->off.size = 8;
 }
 
-void mx_size_b(t_dir *dir, t_file *file, t_stat *st) {
+void mx_size(t_dir *dir, t_file *file, t_stat *st) {
     if (MX_ISCHR(st->st_mode) || MX_ISBLK(st->st_mode)) {
         minor_major(dir, file, st);
     }
