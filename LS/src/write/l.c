@@ -28,12 +28,12 @@ static void create_str(t_offset *off, char *str,
 }
 
 static inline void print_size(t_dir *dir, t_file *file) {
-    size_t size = dir->off.size - file->lengths.size + 1;
+    size_t size = dir->off.size - file->lengths.size;
     char space[size];
 
     mx_memset(space, ' ', size);
     mx_printstrlen(space, size, 1);
-    mx_printstrlen(file->fields.size, file->lengths.size, 1);
+    mx_printstr(file->fields.size, 1);
 }
 
 void mx_write_l(t_info *info, t_dir *dir) {
