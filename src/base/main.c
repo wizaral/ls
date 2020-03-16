@@ -26,7 +26,7 @@ static inline void init_info(t_info *info) {
     info->reverse = 0;
     info->filedir = 0;
     info->dirs.cap = MX_VECTOR_DEFAULT_SIZE;
-    info->dirs.bytes = sizeof(char *);
+    info->dirs.bytes = sizeof(t_file);
     info->dirs.size = 0;
     info->files.cap = MX_VECTOR_DEFAULT_SIZE;
     info->files.bytes = sizeof(char *);

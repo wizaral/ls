@@ -78,7 +78,7 @@ void mx_process_args(t_info *info) {
 
     if (info->dirs.size > (info->files.size == 0)) {
         for (size_t i = 0; i < info->dirs.size; ++i) {
-            dir_name = *(char **)mx_at(&info->dirs, i);
+            dir_name = ((t_file *)mx_at(&info->dirs, i))->fields.name;
             mx_printstr(dir_name, 1);
             mx_printstrlen(":\n", 2, 1);
             mx_process_dir(info, dir_name);
@@ -87,5 +87,5 @@ void mx_process_args(t_info *info) {
         }
     }
     else if (info->dirs.size)
-        mx_process_dir(info, *(char **)mx_get_front(&info->dirs));
+        mx_process_dir(info, ((t_file *)mx_at(&info->dirs, 0))->fields.name);
 }

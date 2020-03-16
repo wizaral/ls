@@ -7,10 +7,16 @@ static void parse_file(t_info *info, char *av) {
         mx_wrong_argv(info, av);
     else if ((!MX_ISDIR(st.st_mode) && !MX_ISLNK(st.st_mode))
         || (MX_ISLNK(st.st_mode) && info->write == mx_write_l)
-        || (MX_ISDIR(st.st_mode) && info->filedir))
+        || (MX_ISDIR(st.st_mode) && info->filedir)) {
         mx_push_backward(&info->files, &av);
-    else
-        mx_push_backward(&info->dirs, &av);
+    }
+    else {
+        t_file file = {{.name = av}, {0}, {0}, st.st_size, 0};
+
+        mx_memcpy(&file.time, &st.st_atimespec + info->time_type,
+                sizeof(t_timespec));
+        mx_push_backward(&info->dirs, &file);
+    }
 }
 
 static bool parse_flag(t_vector *flags, char *av) {
@@ -29,8 +35,19 @@ static bool parse_flag(t_vector *flags, char *av) {
     return true;
 }
 
+static inline void add_default_dir(t_info *info) {
+    static char *dot = ".";
+
+    if (info->filedir)
+        mx_push_backward(&info->files, &dot);
+    else {
+        t_file file = {{.name = dot}, {0}, {0}, 0, 0};
+
+        mx_push_backward(&info->dirs, &file);
+    }
+}
+
 void mx_parse(t_info *info, int ac, char **av) {
-    const char *dot = ".";
     t_vector flags = {MX_VECTOR_DEFAULT_SIZE, 0, sizeof(char),
                         malloc(sizeof(char) * MX_VECTOR_DEFAULT_SIZE)};
     int check = 0;
@@ -38,16 +55,17 @@ void mx_parse(t_info *info, int ac, char **av) {
 
     for (bool flag = true; flag && i < ac && av[i][0] == '-'; ++i)
         flag = parse_flag(&flags, av[i]);
-    info->dirs.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
+    info->dirs.arr = malloc(sizeof(t_file) * MX_VECTOR_DEFAULT_SIZE);
     info->files.arr = malloc(sizeof(char *) * MX_VECTOR_DEFAULT_SIZE);
     mx_check_flags(info, &flags);
     mx_compress_flags(info, &info->get);
+
     if (info->cmp)
-        mx_sort(av + i, ac - i, sizeof(char *),
-                info->reverse ? mx_compare_argv_r : mx_compare_argv);
+        mx_sort(av + i, ac - i, sizeof(char *), mx_compare_argv);
     for (check = i; i < ac; ++i)
         parse_file(info, av[i]);
+    mx_sort(info->dirs.arr, info->dirs.size, info->dirs.bytes, info->cmp);
     if (info->dirs.size == 0 && info->files.size == 0 && check == ac)
-        mx_push_backward(info->filedir ? &info->files : &info->dirs, &dot);
+        add_default_dir(info);
     free(flags.arr);
 }
