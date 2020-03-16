@@ -6,7 +6,7 @@
 
 # text editors
 *.dms
-*.sw*
+*.sw?
 *.vscode
 
 # preprocessing, object, assembly, debug
@@ -24,4 +24,3 @@
 
 # current project
 uls
-tests
