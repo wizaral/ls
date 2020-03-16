@@ -41,8 +41,7 @@ static inline void get_info(t_info *info, t_dir *dir) {
     lstat(dir->filename, &st);
     file_info.size = st.st_size;
     file_info.mode = st.st_mode;
-    mx_memcpy(&file_info.time, &st.st_atimespec + info->time_type,
-                sizeof(t_timespec));
+    file_info.time = *(&st.st_atimespec + info->time_type);
     file_info.fields.name = dir->filename;
     file_info.lengths.name = mx_strlen(dir->filename);
     if (dir->off.name < file_info.lengths.name)

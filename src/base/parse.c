@@ -13,8 +13,7 @@ static void parse_file(t_info *info, char *av) {
     else {
         t_file file = {{.name = av}, {0}, {0}, st.st_size, 0};
 
-        mx_memcpy(&file.time, &st.st_atimespec + info->time_type,
-                sizeof(t_timespec));
+        file.time = *(&st.st_atimespec + info->time_type);
         mx_push_backward(&info->dirs, &file);
     }
 }
