@@ -69,7 +69,6 @@ int mx_compare_argv(const void *a, const void *b);  // default
 int mx_compare_ascii_r(const void *a, const void *b); // -r
 int mx_compare_size_r(const void *a, const void *b);  // -S -r
 int mx_compare_time_r(const void *a, const void *b);  // -t -r
-int mx_compare_argv_r(const void *a, const void *b);  // -r
 
 /*
  * full list of getters

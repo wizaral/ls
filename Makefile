@@ -8,8 +8,7 @@ get = access arrow bsize dummy grp inode links name size suffix time user
 
 read = full hidden standart
 
-sort = argv_reverse argv ascii_reverse ascii time_reverse time size_reverse   \
-	size
+sort = argv ascii_reverse ascii time_reverse time size_reverse size
 
 utils = errors free_dir get_data_len get_tabs inode_bsize path_name winsize
 
