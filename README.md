@@ -13,7 +13,7 @@
 |**`m`**| List files across the page, separated by commas                       |
 |**`x`**| Multi-column output is produced with entries sorted across            |
 |       |                                                                       |
-|**`A`**| List all entries except for **.** and **..**                          |
+|**`A`**| List all entries except for **`.`** and **`..`**                      |
 |**`a`**| Include directory entries whose names begin with a dot                |
 |       |                                                                       |
 |**`F`**| Print suffix after name: dir`/` exe`*` link`@` socket`=` whiteout`%` fifo`\|`|
