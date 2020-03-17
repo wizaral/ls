@@ -30,11 +30,30 @@ static char get_attr_acl(t_dir *dir) {
     if (attr > 0)
         return '@';
 
+    // 1
     if ((acl = acl_get_file(dir->filename, MX_ACL_EXT | MX_ACL_DEF))
         || (acl = acl_get_link_np(dir->filename, MX_ACL_EXT))) {
         acl_free(acl);
         return '+';
     }
+
+    // 2
+    // if ((acl = acl_get_file(dir->filename, MX_ACL_EXT))) {
+    //     acl_free(acl);
+    //     return '+';
+    // }
+
+    // 3
+    // if ((acl = acl_get_file(dir->filename, MX_ACL_DEF))) {
+    //     acl_free(acl);
+    //     return '+';
+    // }
+
+    // 4
+    // if ((acl = acl_get_file(dir->filename, MX_ACL_EXT | MX_ACL_DEF))) {
+    //     acl_free(acl);
+    //     return '+';
+    // }
     return ' ';
 }
 
