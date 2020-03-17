@@ -7,6 +7,7 @@ static void parse_file(t_info *info, char *av) {
         mx_wrong_argv(info, av);
     else if ((!MX_ISDIR(st.st_mode) && !MX_ISLNK(st.st_mode))
         || (MX_ISLNK(st.st_mode) && info->write == mx_write_l)
+        || (MX_ISLNK(st.st_mode) && info->get.suffix != mx_dummy)
         || (MX_ISDIR(st.st_mode) && info->filedir)) {
         mx_push_backward(&info->files, &av);
     }
