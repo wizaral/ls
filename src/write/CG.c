@@ -13,7 +13,7 @@ static void init_data(t_info *info, t_dir *dir) {
     dir->off.width = mx_winsize(info);
     dir->off.columns = dir->off.width / (len + 1);
     dir->off.rows = (dir->array.size / dir->off.columns)
-                  + ((dir->array.size % dir->off.columns) != 0);
+                    + ((dir->array.size % dir->off.columns) != 0);
     dir->off.name_tabs = len + 1;
 }
 
