@@ -30,8 +30,7 @@ static char get_attr_acl(t_dir *dir) {
     if (attr > 0)
         return '@';
 
-    if ((acl = acl_get_file(dir->filename, ACL_TYPE_DEFAULT))
-        || (acl = acl_get_link_np(dir->filename, ACL_TYPE_EXTENDED))) {
+    if ((acl = acl_get_file(dir->filename, ACL_TYPE_EXTENDED))) {
         acl_free(acl);
         return '+';
     }
