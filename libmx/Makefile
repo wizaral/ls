@@ -95,10 +95,12 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@printf "$K$G COMPILING $Y[$M$(TARGET)$Y] $B$(<:$(SRC_DIR)%=%)$D\r"
 	@$(COMPILE) $(CFLAGS) -o $@ -c $<
 
-install: $(OBJ_DIR) $(OBJ)
+$(NAME): $(OBJ_DIR) $(OBJ)
 	@printf "$K$G ARCHIVING $Y[$M$(TARGET)$Y] $R$(NAME)$D\r"
 	@ar rcs $(NAME) $(OBJ)
 	@printf "$K"
+
+install: $(NAME)
 
 clean:
 	@$(RM) $(OBJ_DIR)
