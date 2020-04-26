@@ -1,5 +1,5 @@
 CC = clang
-LIB = libmx
+LIB = libmx.a
 NAME = uls
 
 base = check_flags compress_flags main parse proces_args uls
@@ -19,17 +19,20 @@ FILES = $(foreach dir, $(dirs), $($(dir):%=$(dir)/%))
 
 SRC_DIR = src/
 OBJ_DIR = obj/
+LIB_DIR = libmx/
 
 SRC = $(FILES:%=$(SRC_DIR)%.c)
 OBJ = $(FILES:%=$(OBJ_DIR)%.o)
-LIB_PATH = $(LIB:%=$(LIB)/%.a)
+LIB_PATH = $(LIB_DIR)$(LIB)
 
 WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc -Ilibmx/inc
 CFLAGS = -Ofast -march=native -fomit-frame-pointer -flto
-DFLAGS = -O0 -g3 -glldb -fsanitize=address -ftrapv
+DFLAGS = -O0 -g3 -glldb -ftrapv -fno-omit-frame-pointer -fsanitize=address
 
 COMPILE = $(CC) -pipe $(WFLAGS) $(LFLAGS)
+EXEC_IT = make -sf Makefile
+EXEC_LD = $(EXEC_IT) -C $(LIB_DIR)
 RM = /bin/rm -rf
 TARGET = build
 
@@ -87,7 +90,7 @@ build: check $(LIB) $(NAME)
 check:
 ifeq ($(TARGET),build)
 ifneq ($(findstring asan,$(DEBUG_LIB)),)
-	@make -sC $(LIB) -f Makefile uninstall
+	@$(EXEC_LD) uninstall
 	@$(RM) $(NAME)
 endif
 ifneq ($(or $(findstring asan,$(DEBUG_OBJ)), $(findstring asan,$(DEBUG_BIN))),)
@@ -95,7 +98,7 @@ ifneq ($(or $(findstring asan,$(DEBUG_OBJ)), $(findstring asan,$(DEBUG_BIN))),)
 endif
 else
 ifeq ($(findstring asan,$(DEBUG_LIB)),)
-	@make -sC $(LIB) -f Makefile uninstall
+	@$(EXEC_LD) uninstall
 	@$(RM) $(NAME)
 endif
 ifeq ($(and $(findstring asan,$(DEBUG_OBJ)), $(findstring asan,$(DEBUG_BIN))),)
@@ -107,7 +110,7 @@ $(OBJ_DIR):
 	@mkdir -p $@ $(foreach dir, $(dirs), $@/$(dir))
 
 $(LIB):
-	@make -sC $(LIB) -f Makefile $(TARGET)
+	@$(EXEC_LD) $(TARGET)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@printf "$K$G COMPILING $Y[$M$(TARGET)$Y] $B$(<:$(SRC_DIR)%=%)$D\r"
@@ -115,25 +118,23 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 $(NAME): $(OBJ_DIR) $(OBJ)
 	@printf "$K$G COMPILING $Y[$M$(TARGET)$Y] $R$(NAME)$D\r"
-	@$(COMPILE) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+	@$(COMPILE) $(CFLAGS) $(LIB_PATH) $(OBJ) -o $(NAME)
 	@printf "$K"
 
 # silent mode without printing LOGO
 install: check
-	@make -sC $(LIB) -f Makefile install
-	@make -s $(NAME)
+	@$(EXEC_LD) install
+	@$(EXEC_IT) $(NAME)
 
 clean:
-	@make -sC $(LIB) -f Makefile clean
+	@$(EXEC_LD) clean
 	@$(RM) $(OBJ_DIR)
 
 uninstall:
-	@make -sC $(LIB) -f Makefile uninstall
+	@$(EXEC_LD) uninstall
 	@$(RM) $(OBJ_DIR) $(NAME)
 
 # silent rebuild project
-reinstall: uninstall
-	@make -sC $(LIB) -f Makefile install
-	@make -s $(NAME)
+reinstall: uninstall install
 
-.PHONY: all build debug clean install uninstall reinstall $(LIB) $(NAME)
+.PHONY: all build debug clean install uninstall reinstall

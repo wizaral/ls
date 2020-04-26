@@ -38,7 +38,7 @@ OBJ = $(FILES:%=$(OBJ_DIR)%.o)
 WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc
 CFLAGS = -Ofast -march=native -fomit-frame-pointer -flto
-DFLAGS = -O0 -g3 -glldb -fsanitize=address -ftrapv
+DFLAGS = -O0 -g3 -glldb -ftrapv -fno-omit-frame-pointer -fsanitize=address
 
 COMPILE = $(CC) -pipe $(WFLAGS) $(LFLAGS)
 RM = /bin/rm -rf
