@@ -6,15 +6,18 @@
 
 # text editors
 *.dms
-*.sw?
+*.s[a-v][a-z]
+*.sw[a-p]
 *.vscode
 
 # preprocessing, object, assembly, debug
 *.[ios]
 *.dSYM
 
-# lib, out, exe
+# libs, executables
 *.a
+*.so
+*.dll
 *.out
 *.exe
 
