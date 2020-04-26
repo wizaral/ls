@@ -3,6 +3,9 @@
 ### Usage:
 **`./uls [-ACFGRSTUacdfgilmnopqrstuvwx1] [file ...]`**
 
+### Success build
+![rainbow](ls_rainbow.png)
+
 ### Flags-table:
 
 | Flag  | Description |
