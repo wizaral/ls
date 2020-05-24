@@ -35,12 +35,15 @@ OBJ_DIR = obj/
 SRC = $(FILES:%=$(SRC_DIR)%.c)
 OBJ = $(FILES:%=$(OBJ_DIR)%.o)
 
-WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
+WFLAGS = -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc
 CFLAGS = -Ofast -march=native -fomit-frame-pointer -flto
 DFLAGS = -O0 -g3 -glldb -ftrapv -fno-omit-frame-pointer -fsanitize=address
 
-COMPILE = $(CC) -pipe $(WFLAGS) $(LFLAGS)
+COMPILE = $(CC) -std=c11 -pipe $(WFLAGS) $(LFLAGS)
+PRINT = printf
+MKDIR = mkdir -p
+AR = ar rcs
 RM = /bin/rm -rf
 TARGET = build
 
@@ -62,43 +65,28 @@ debug: TARGET = debug
 debug: install
 
 build: install
-	@printf "$S╔═════════════════════════════════════════════\
-	══════════════════════════════════════════════════════╗\n\
-	║                                                       \
-	                                            ║\n\
-	║       $C██$M╗     $C██$M╗$C██████$M╗           \
-	$C██$M╗$C███████$M╗    $C██████$M╗ $C███████$M╗ \
-	$C█████$M╗ $C██████$M╗ $C██$M╗   $C██$M╗       $S║\n\
-	║       $C██$M║     $C██$M║$C██$M╔══$C██$M╗$F$Y▄ ██$G╗$Y▄$D    \
-	$C██$M║$C██$M╔════╝    $C██$M╔══$C██$M╗$C██$M╔════╝$C██\
-	$M╔══$C██$M╗$C██$M╔══$C██$M╗╚$C██$M╗ $C██$M╔╝       $S║\n\
-	║       $C██$M║     $C██$M║$C██████$M╔╝ $F$Y████$G╗$D    \
-	$C██$M║$C███████$M╗    $C██████$M╔╝$C█████$M╗  \
-	$C███████$M║$C██$M║  $C██$M║ ╚$C████$M╔╝        $S║\n\
-	║       $C██$M║     $C██$M║$C██$M╔══$C██$M╗$F$Y▀$G╚$Y██$G╔$Y▀$D    \
-	$C██$M║╚════$C██$M║    $C██$M╔══$C██$M╗$C██$M╔══╝  \
-	$C██$M╔══$C██$M║$C██$M║  $C██$M║  ╚$C██$M╔╝         $S║\n\
-	║       $C███████$M╗$C██$M║$C██████$M╔╝  $F$G╚═╝$D     \
-	$C██$M║$C███████$M║    $C██$M║  $C██$M║$C███████$M╗$C██$M║  \
-	$C██$M║$C██████$M╔╝   $C██$M║          $S║\n\
-	║       $M╚══════╝╚═╝╚═════╝           ╚═╝╚══════╝    \
-	╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝    ╚═╝          $S║\n\
-	║                                                       \
-	                                            ║\n\
-	╚════════════════════════════════════════════════════\
-	═══════════════════════════════════════════════╝\n$D"
+	@$(PRINT) "$S╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗\n\
+	║                                                                                                   ║\n\
+	║       $C██$M╗     $C██$M╗$C██████$M╗           $C██$M╗$C███████$M╗    $C██████$M╗ $C███████$M╗ $C█████$M╗ $C██████$M╗ $C██$M╗   $C██$M╗       $S║\n\
+	║       $C██$M║     $C██$M║$C██$M╔══$C██$M╗$F$Y▄ ██$G╗$Y▄$D    $C██$M║$C██$M╔════╝    $C██$M╔══$C██$M╗$C██$M╔════╝$C██$M╔══$C██$M╗$C██$M╔══$C██$M╗╚$C██$M╗ $C██$M╔╝       $S║\n\
+	║       $C██$M║     $C██$M║$C██████$M╔╝ $F$Y████$G╗$D    $C██$M║$C███████$M╗    $C██████$M╔╝$C█████$M╗  $C███████$M║$C██$M║  $C██$M║ ╚$C████$M╔╝        $S║\n\
+	║       $C██$M║     $C██$M║$C██$M╔══$C██$M╗$F$Y▀$G╚$Y██$G╔$Y▀$D    $C██$M║╚════$C██$M║    $C██$M╔══$C██$M╗$C██$M╔══╝  $C██$M╔══$C██$M║$C██$M║  $C██$M║  ╚$C██$M╔╝         $S║\n\
+	║       $C███████$M╗$C██$M║$C██████$M╔╝  $F$G╚═╝$D     $C██$M║$C███████$M║    $C██$M║  $C██$M║$C███████$M╗$C██$M║  $C██$M║$C██████$M╔╝   $C██$M║          $S║\n\
+	║       $M╚══════╝╚═╝╚═════╝           ╚═╝╚══════╝    ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝    ╚═╝          $S║\n\
+	║                                                                                                   ║\n\
+	╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝\n$D"
 
 $(OBJ_DIR):
-	@mkdir -p $@ $(foreach dir, $(dirs), $@/$(dir))
+	@$(MKDIR) $@ $(foreach dir, $(dirs), $@/$(dir))
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@printf "$K$G COMPILING $Y[$M$(TARGET)$Y] $B$(<:$(SRC_DIR)%=%)$D\r"
+	@$(PRINT) "$K$G COMPILING $Y[$M$(TARGET)$Y] $B$(<:$(SRC_DIR)%=%)$D\r"
 	@$(COMPILE) $(CFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@printf "$K$G ARCHIVING $Y[$M$(TARGET)$Y] $R$(NAME)$D\r"
-	@ar rcs $(NAME) $(OBJ)
-	@printf "$K"
+	@$(PRINT) "$K$G ARCHIVING $Y[$M$(TARGET)$Y] $R$(NAME)$D\r"
+	@$(AR) $(NAME) $(OBJ)
+	@$(PRINT) "$K"
 
 install: $(NAME)
 

@@ -1,5 +1,10 @@
 # uls
 
+### Instalation:
+**1. default mode: `make` or `make all` or `make build`**\
+**2. silent mode: `make install`**\
+**3. silent debug mode: `make debug`**
+
 ### Usage:
 **`./uls [-ACFGRSTUacdfgilmnopqrstuvwx1] [file ...]`**
 
@@ -9,7 +14,7 @@
 ### Flags-table:
 
 | Flag  | Description |
-|:-----:|:-:|
+|:-:|:-:|
 |**`1`**| Force output to be one entry per line |
 |**`C`**| Force multi-column output |
 |**`l`**| List in long format |
@@ -19,7 +24,7 @@
 |**`A`**| List all entries except for **`.`** and **`..`** |
 |**`a`**| Include directory entries whose names begin with a **`.`** |
 | | |
-|**`F`**| Print suffix after name: **`directory/`** **`executable*`** **`link@`** **`socket=`** **`whiteout%`** **`fifo\|`**|
+|**`F`**| Print suffix after name: **`directory/`** **`executable*`** **`link@`** **`socket=`** **`whiteout%`** **`fifo\|`** |
 |**`p`**| Print suffix after name: **`directory/`** |
 | | |
 |**`R`**| Recursively list subdirectories encountered |
@@ -41,7 +46,7 @@
 |**`o`**| Suppressed group, force long output |
 |**`s`**| Display the number of file system blocks actually used by each file |
 | | |
-|**`q`**| Print character **`?`** instead of non-printable characters in file names|
+|**`q`**| Print character **`?`** instead of non-printable characters in file names |
 |**`v`**| Force unedited printing of non-graphic characters |
 |**`w`**| Force raw printing of non-printable characters |
 | | |
@@ -49,15 +54,15 @@
 | | |
 
 | Unidirectional order of flag rewriting |
-|:---:|
-|**`t ==> S ==> f`** |
-|**`R ==> d`** |
-|**`l ==> n ==> g`** |
-|**`l ==> n ==> o`** |
-|**`C ==> m`** |
-|**`x ==> m`** |
-|**`A ==> a`** |
-|**`A ==> f`** |
+|:-:|
+|**`t ==> S ==> f`**|
+|**`R ==> d`**|
+|**`l ==> n ==> g`**|
+|**`l ==> n ==> o`**|
+|**`C ==> m`**|
+|**`x ==> m`**|
+|**`A ==> a`**|
+|**`A ==> f`**|
 
 ### Default flags by category
 

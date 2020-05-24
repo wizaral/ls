@@ -25,14 +25,16 @@ SRC = $(FILES:%=$(SRC_DIR)%.c)
 OBJ = $(FILES:%=$(OBJ_DIR)%.o)
 LIB_PATH = $(LIB_DIR)$(LIB)
 
-WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
+WFLAGS = -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc -Ilibmx/inc
 CFLAGS = -Ofast -march=native -fomit-frame-pointer -flto
 DFLAGS = -O0 -g3 -glldb -ftrapv -fno-omit-frame-pointer -fsanitize=address
 
-COMPILE = $(CC) -pipe $(WFLAGS) $(LFLAGS)
+COMPILE = $(CC) -std=c11 -pipe $(WFLAGS) $(LFLAGS)
 EXEC_IT = make -sf Makefile
 EXEC_LD = $(EXEC_IT) -C $(LIB_DIR)
+PRINT = printf
+MKDIR = mkdir -p
 RM = /bin/rm -rf
 TARGET = build
 
@@ -60,31 +62,16 @@ debug:
 	@make TARGET=debug CFLAGS='$(DFLAGS)' -s install
 
 build: check $(LIB) $(NAME)
-	@printf "$S╔═════════════════════════════════════════════\
-	══════════════════════════════════════════════════════╗\n\
-	║                                                       \
-	                                            ║\n\
-	║       $C██$M╗   $C██$M╗$C██$M╗     $C███████$M╗    \
-	$C██$M╗$C███████$M╗    $C██████$M╗ $C███████$M╗ \
-	$C█████$M╗ $C██████$M╗ $C██$M╗   $C██$M╗       $S║\n\
-	║       $C██$M║   $C██$M║$C██$M║     $C██$M╔════╝    \
-	$C██$M║$C██$M╔════╝    $C██$M╔══$C██$M╗$C██$M╔════╝$C██\
-	$M╔══$C██$M╗$C██$M╔══$C██$M╗╚$C██$M╗ $C██$M╔╝       $S║\n\
-	║       $C██$M║   $C██$M║$C██$M║     $C███████$M╗    \
-	$C██$M║$C███████$M╗    $C██████$M╔╝$C█████$M╗  \
-	$C███████$M║$C██$M║  $C██$M║ ╚$C████$M╔╝        $S║\n\
-	║       $C██$M║   $C██$M║$C██$M║     ╚════$C██$M║    \
-	$C██$M║╚════$C██$M║    $C██$M╔══$C██$M╗$C██$M╔══╝  \
-	$C██$M╔══$C██$M║$C██$M║  $C██$M║  ╚$C██$M╔╝         $S║\n\
-	║       $M╚$C██████$M╔╝$C███████$M╗$C███████$M║    \
-	$C██$M║$C███████$M║    $C██$M║  $C██$M║$C███████$M╗\
-	$C██$M║  $C██$M║$C██████$M╔╝   $C██$M║          $S║\n\
-	║       $M ╚═════╝ ╚══════╝╚══════╝    ╚═╝╚══════╝    \
-	╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝    ╚═╝          $S║\n\
-	║                                                       \
-	                                            ║\n\
-	╚════════════════════════════════════════════════════\
-	═══════════════════════════════════════════════╝\n$D"
+	@$(PRINT) "$S╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗\n\
+	║                                                                                                   ║\n\
+	║       $C██$M╗   $C██$M╗$C██$M╗     $C███████$M╗    $C██$M╗$C███████$M╗    $C██████$M╗ $C███████$M╗ $C█████$M╗ $C██████$M╗ $C██$M╗   $C██$M╗       $S║\n\
+	║       $C██$M║   $C██$M║$C██$M║     $C██$M╔════╝    $C██$M║$C██$M╔════╝    $C██$M╔══$C██$M╗$C██$M╔════╝$C██$M╔══$C██$M╗$C██$M╔══$C██$M╗╚$C██$M╗ $C██$M╔╝       $S║\n\
+	║       $C██$M║   $C██$M║$C██$M║     $C███████$M╗    $C██$M║$C███████$M╗    $C██████$M╔╝$C█████$M╗  $C███████$M║$C██$M║  $C██$M║ ╚$C████$M╔╝        $S║\n\
+	║       $C██$M║   $C██$M║$C██$M║     ╚════$C██$M║    $C██$M║╚════$C██$M║    $C██$M╔══$C██$M╗$C██$M╔══╝  $C██$M╔══$C██$M║$C██$M║  $C██$M║  ╚$C██$M╔╝         $S║\n\
+	║       $M╚$C██████$M╔╝$C███████$M╗$C███████$M║    $C██$M║$C███████$M║    $C██$M║  $C██$M║$C███████$M╗$C██$M║  $C██$M║$C██████$M╔╝   $C██$M║          $S║\n\
+	║       $M ╚═════╝ ╚══════╝╚══════╝    ╚═╝╚══════╝    ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝    ╚═╝          $S║\n\
+	║                                                                                                   ║\n\
+	╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝\n$D"
 
 # check debug level collision during this compilation
 check:
@@ -107,34 +94,34 @@ endif
 endif
 
 $(OBJ_DIR):
-	@mkdir -p $@ $(foreach dir, $(dirs), $@/$(dir))
+	@$(MKDIR) $@ $(foreach dir, $(dirs), $@/$(dir))
 
 $(LIB):
 	@$(EXEC_LD) $(TARGET)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@printf "$K$G COMPILING $Y[$M$(TARGET)$Y] $B$(<:$(SRC_DIR)%=%)$D\r"
+	@$(PRINT) "$K$G COMPILING $Y[$M$(TARGET)$Y] $B$(<:$(SRC_DIR)%=%)$D\r"
 	@$(COMPILE) $(CFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@printf "$K$G COMPILING $Y[$M$(TARGET)$Y] $R$(NAME)$D\r"
+	@$(PRINT) "$K$G COMPILING $Y[$M$(TARGET)$Y] $R$(NAME)$D\r"
 	@$(COMPILE) $(CFLAGS) $(LIB_PATH) $(OBJ) -o $(NAME)
-	@printf "$K"
+	@$(PRINT) "$K"
 
 # silent mode without printing LOGO
 install: check
-	@$(EXEC_LD) install
+	@$(EXEC_LD) $@
 	@$(EXEC_IT) $(NAME)
 
 clean:
-	@$(EXEC_LD) clean
+	@$(EXEC_LD) $@
 	@$(RM) $(OBJ_DIR)
 
 uninstall:
-	@$(EXEC_LD) uninstall
+	@$(EXEC_LD) $@
 	@$(RM) $(OBJ_DIR) $(NAME)
 
 # silent rebuild project
 reinstall: uninstall install
 
-.PHONY: all build debug clean install uninstall reinstall
+.PHONY: all build debug check clean install uninstall reinstall
