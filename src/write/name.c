@@ -1,24 +1,30 @@
 #include "uls.h"
 
 static inline void file(char *access) {
-    if (access[3] == 's')
+    if (access[3] == 's') {
         mx_printstrlen(MX_UIB, 8, 1);
-    else if (access[6] == 's')
+    }
+    else if (access[6] == 's') {
         mx_printstrlen(MX_GIB, 8, 1);
+    }
     else if (access[3] == 'x' || access[6] == 'x'
-        || access[9] == 'x' || access[9] == 't')
+        || access[9] == 'x' || access[9] == 't') {
         mx_printstrlen(MX_EXE, 7, 1);
+    }
 }
 
 static inline void dir(char *access) {
     if (access[8] == 'w') {
-        if (access[9] == 'T' || access[9] == 't')
+        if (access[9] == 'T' || access[9] == 't') {
             mx_printstrlen(MX_SKB, 8, 1);
-        else
+        }
+        else {
             mx_printstrlen(MX_NSB, 8, 1);
+        }
     }
-    else
+    else {
         mx_printstrlen(MX_DIR, 7, 1);
+    }
 }
 
 static inline void set_color(char *access) {

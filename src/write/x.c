@@ -1,8 +1,9 @@
 #include "uls.h"
 
 static inline void print_n_tabs(int tabs) {
-    for (int i = 0; i < tabs; ++i)
+    for (int i = 0; i < tabs; ++i) {
         mx_printchar('\t', 1);
+    }
 }
 
 static void print_tabs(t_info *info, t_dir *dir, t_file *dt) {
@@ -36,8 +37,10 @@ void mx_write_x(t_info *info, t_dir *dir) {
         mx_printstrlen(str, len, 1);
         info->print_name(dt);
         mx_printstrlen(&dt->fields.suffix, dt->lengths.suffix, 1);
-        if (i + 1 < dir->array.size)
+
+        if (i + 1 < dir->array.size) {
             print_tabs(info, dir, dt);
+        }
     }
     mx_printchar('\n', 1);
 }

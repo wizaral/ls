@@ -33,7 +33,7 @@ void mx_process_dir(t_info *info, char *name) {
 }
 
 static inline void get_info(t_info *info, t_dir *dir) {
-    static t_stat st;
+    t_stat st;
     t_file file_info = {{0}, {0}, {0}, 0, 0};
     void (**func)(t_dir *, t_file *, t_stat *) =
         (void (**)(t_dir *, t_file *, t_stat *))&info->get;

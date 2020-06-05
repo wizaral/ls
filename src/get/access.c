@@ -27,8 +27,9 @@ static char get_attr_acl(t_dir *dir) {
     ssize_t attr = listxattr(dir->filename, NULL, 0, XATTR_NOFOLLOW);
     acl_t acl = NULL;
 
-    if (attr > 0)
+    if (attr > 0) {
         return '@';
+    }
 
     if ((acl = acl_get_file(dir->filename, ACL_TYPE_EXTENDED))) {
         acl_free(acl);

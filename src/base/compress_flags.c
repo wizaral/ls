@@ -7,13 +7,16 @@ void mx_check_adds(t_info *info, t_get *get, char flag) {
             get->user != mx_user_skip ? get->user = mx_user_id : NULL;
             get->grp != mx_grp_skip ? get->grp = mx_grp_id : NULL;
         }
-        else if (flag == 'o')
+        else if (flag == 'o') {
             get->grp = mx_grp_skip;
-        else
+        }
+        else {
             get->user = mx_user_skip;
+        }
     }
-    else
+    else {
         get->time = mx_time_full;
+    }
 }
 
 static inline void accept_l(t_info *info, t_get *get) {
@@ -35,6 +38,7 @@ void mx_compress_flags(t_info *info, t_get *get) {
         get->access = get->links = get->user = get->grp = mx_dummy;
         get->size = get->time = get->arrow = mx_dummy;
     }
+
     if (info->print_name == mx_color) {
         info->write == mx_write_C ? info->write = mx_write_CG : NULL;
         info->write == mx_write_x ? info->write = mx_write_xG : NULL;

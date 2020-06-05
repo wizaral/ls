@@ -1,8 +1,8 @@
 #include "uls.h"
 
 void mx_nototal(t_info *info, t_dir *dir) {
-    ++info;
-    ++dir;
+    (void)info;
+    (void)dir;
 }
 
 void mx_total(t_info *info, t_dir *dir) {
@@ -11,5 +11,5 @@ void mx_total(t_info *info, t_dir *dir) {
         mx_printunum(dir->total, 1);
         mx_printchar('\n', 1);
     }
-    ++info;
+    (void)info;
 }

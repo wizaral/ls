@@ -6,48 +6,62 @@ static inline void check_compare(t_info *info, char flag) {
             info->cmp = NULL;
             info->read = mx_full;
         }
-        else if (flag == 'S')
+        else if (flag == 'S') {
             info->cmp = mx_compare_size;
-        else if (info->cmp != mx_compare_size)
+        }
+        else if (info->cmp != mx_compare_size) {
             info->cmp = mx_compare_time;
+        }
     }
 }
 
 static inline void check_write(t_info *info, char flag) {
-    if (flag == 'l')
+    if (flag == 'l') {
         info->write = mx_write_l;
-    else if (flag == '1')
+    }
+    else if (flag == '1') {
         info->write = mx_write_1;
-    else if (flag == 'm')
+    }
+    else if (flag == 'm') {
         info->write = mx_write_m;
-    else if (flag == 'C' && info->write != mx_write_m)
+    }
+    else if (flag == 'C' && info->write != mx_write_m) {
         info->write = mx_write_C;
-    else if (flag == 'x' && info->write != mx_write_m)
+    }
+    else if (flag == 'x' && info->write != mx_write_m) {
         info->write = mx_write_x;
+    }
 }
 
 static inline void check_time(t_info *info, char flag) {
-    if (flag == 'c')
+    if (flag == 'c') {
         info->time_type = change;
-    else if (flag == 'U')
+    }
+    else if (flag == 'U') {
         info->time_type = creation;
-    else if (flag == 'u')
+    }
+    else if (flag == 'u') {
         info->time_type = last_access;
+    }
 }
 
 static inline void check_other(t_info *info, char flag) {
-    if (flag == 'i')
+    if (flag == 'i') {
         info->get.inode = mx_inode;
+    }
     else if (flag == 's') {
         info->get.bsize = mx_bsize;
         info->print_total = mx_total;
     }
-    else if (flag == 'G')
+    else if (flag == 'G') {
         info->print_name = info->output_dst ? mx_nocolor : mx_color;
-    else if (flag == 'r')
+    }
+    else if (flag == 'r') {
         info->reverse = info->cmp;
-    else if (flag == 'R' && info->filedir == 0)
+    }
+    else if (flag == 'R' && info->filedir == 0) {
         info->recursion = mx_recursion;
+    }
     else {
         info->recursion = mx_uls;
         info->filedir = 1;

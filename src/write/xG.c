@@ -31,9 +31,10 @@ void mx_write_xG(t_info *info, t_dir *dir) {
         mx_printstrlen(str, len, 1);
         info->print_name(dt);
         mx_printstrlen(&dt->fields.suffix, dt->lengths.suffix, 1);  
-        if (i + 1 < dir->array.size)
+        if (i + 1 < dir->array.size) {
             print_spaces(mx_get_data_len(info, dir, dt, true),
-                         mx_get_data_len(info, dir, dt, false), &dir->off);
+                        mx_get_data_len(info, dir, dt, false), &dir->off);
+        }
     }
     mx_printchar('\n', 1);
 }

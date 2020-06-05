@@ -27,13 +27,17 @@ static inline void long_format(t_file *file, t_stat *st) {
 }
 
 static void minor_major(t_dir *dir, t_file *file, t_stat *st) {
-    if (MX_MINOR(st->st_rdev) < 256)
+    if (MX_MINOR(st->st_rdev) < 256) {
         short_format(file, st);
-    else
+    }
+    else {
         long_format(file, st);
+    }
+
     file->lengths.size = 8;
-    if (dir->off.size < 8)
+    if (dir->off.size < 8) {
         dir->off.size = 8;
+    }
 }
 
 void mx_size(t_dir *dir, t_file *file, t_stat *st) {
@@ -46,7 +50,9 @@ void mx_size(t_dir *dir, t_file *file, t_stat *st) {
 
         file->fields.size = mx_lltoa_s(st->st_size, str, size_len);
         file->lengths.size = size_len;
-        if (dir->off.size < size_len)
+
+        if (dir->off.size < size_len) {
             dir->off.size = size_len;
+        }
     }
 }

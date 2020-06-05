@@ -24,9 +24,8 @@ void mx_write_m(t_info *info, t_dir *dir) {
         mx_printstrlen(str, len_addition, 1);
         info->print_name(dt);
         mx_printstrlen(&dt->fields.suffix, dt->lengths.suffix, 1);
-        if (i + 1 != dir->array.size)
-            mx_printstrlen(", ", 2, 1);
-        else
-            mx_printchar('\n', 1);
+        i + 1 != dir->array.size
+            ? mx_printstrlen(", ", 2, 1)
+            : mx_printchar('\n', 1);
     }
 }

@@ -3,8 +3,9 @@
 static inline void print_n_spaces(uint8_t ltabs, uint8_t ctabs) {
     uint8_t tabs = ltabs - ctabs;
 
-    for (int i = 0; i < tabs; ++i)
+    for (int i = 0; i < tabs; ++i) {
         mx_printchar(' ', 1);
+    }
 }
 
 static void init_data(t_info *info, t_dir *dir) {
@@ -31,9 +32,10 @@ void mx_write_CG(t_info *info, t_dir *dir) {
             mx_printstrlen(str, len, 1);
             info->print_name(dt);
             mx_printstrlen(&dt->fields.suffix, dt->lengths.suffix, 1);
-            if (j + dir->off.rows < dir->array.size)
+            if (j + dir->off.rows < dir->array.size) {
                 print_n_spaces(dir->off.name_tabs,
                                 mx_get_data_len(info, dir, dt, 0));
+            }
         }
         mx_printchar('\n', 1);
     }

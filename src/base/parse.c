@@ -1,7 +1,7 @@
 #include "uls.h"
 
 static void parse_file(t_info *info, char *av) {
-    static t_stat st;
+    t_stat st;
 
     if (lstat(av, &st) == -1)
         mx_wrong_argv(info, av);
@@ -21,16 +21,22 @@ static void parse_file(t_info *info, char *av) {
 
 static bool parse_flag(t_vector *flags, char *av) {
     if (av[0] == '-' && av[1] == '-') {
-        if (av[2] != '\0')
+        if (av[2] != '\0') {
             mx_wrong_flag(av[1]);
+        }
         return false;
+    }
+    if (av[0] == '-' && av[1] == '\0') {
+        mx_wrong_flag(av[1]);
     }
 
     for (int i = 1; av[i]; ++i) {
-        if (MX_EXIST(av[i]))
+        if (MX_EXIST(av[i])) {
             mx_push_backward(flags, av + i);
-        else
+        }
+        else {
             mx_wrong_flag(av[i]);
+        }
     }
     return true;
 }
@@ -38,8 +44,9 @@ static bool parse_flag(t_vector *flags, char *av) {
 static inline void add_default_dir(t_info *info) {
     static char *dot = ".";
 
-    if (info->filedir)
+    if (info->filedir) {
         mx_push_backward(&info->files, &dot);
+    }
     else {
         t_file file = {{.name = dot}, {0}, {0}, 0, 0};
 
