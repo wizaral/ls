@@ -1,5 +1,4 @@
 #pragma once
-#include "uls.h"
 
 #define MX_ISBLK(x) (((x) & S_IFMT) == S_IFBLK)     // block special
 #define MX_ISCHR(x) (((x) & S_IFMT) == S_IFCHR)     // char special

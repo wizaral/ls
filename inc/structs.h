@@ -1,5 +1,4 @@
 #pragma once
-#include "uls.h"
 
 typedef struct stat t_stat;
 typedef struct dirent t_dirent;
