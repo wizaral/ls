@@ -1,47 +1,11 @@
 CC = clang
-LIB = libmx.a
 NAME = uls
 
-base = check_flags compress_flags main parse proces_args uls
+.DEFAULT_GOAL = all
 
-get = access arrow bsize dummy grp inode links name size suffix time user
-
-read = full hidden standart
-
-sort = argv ascii_reverse ascii time_reverse time size_reverse size
-
-utils = errors free_dir get_data_len get_tabs inode_bsize path_name winsize
-
-write = 1 C CG l m name total x xG
-
-dirs = base get read sort utils write
-FILES = $(foreach dir, $(dirs), $($(dir):%=$(dir)/%))
-
-SRC_DIR = src/
-OBJ_DIR = obj/
-LIB_DIR = libmx/
-
-SRC = $(FILES:%=$(SRC_DIR)%.c)
-OBJ = $(FILES:%=$(OBJ_DIR)%.o)
-LIB_PATH = $(LIB_DIR)$(LIB)
-
-WFLAGS = -Wall -Wextra -Werror -Wpedantic
-LFLAGS = -Iinc -Ilibmx/inc
-CFLAGS = -Ofast -march=native -fomit-frame-pointer -flto
-DFLAGS = -O0 -g3 -glldb -ftrapv -fno-omit-frame-pointer -fsanitize=address
-
-COMPILE = $(CC) -std=c11 -pipe $(WFLAGS) $(LFLAGS)
-EXEC_IT = make -sf Makefile
-EXEC_LD = $(EXEC_IT) -C $(LIB_DIR)
-PRINT = printf
 MKDIR = mkdir -p
-RM = /bin/rm -rf
-TARGET = build
-
-# checking about debugging in current project
-DEBUG_OBJ = $(shell nm $(OBJ) 2> /dev/null | grep -m1 asan)
-DEBUG_BIN = $(shell nm $(NAME) 2> /dev/null | grep -m1 asan)
-DEBUG_LIB = $(shell nm $(LIB_PATH) 2> /dev/null | grep -m1 asan)
+PRINT = printf
+RM = rm -rf
 
 R = \033[1;91m
 G = \033[1;92m
@@ -52,17 +16,93 @@ C = \033[1;96m
 S = \033[38;5;45;1m
 D = \033[0m
 F = \033[5m
-A = \033[A
 K = \033[K
 
-all: build
+WFLAGS = -Wall -Wextra -Werror -Wpedantic
+DFLAGS = -O0 -g3 -ftrapv -fstandalone-debug
 
-# recursion call this make with initialized variables
-debug:
-	@make TARGET=debug CFLAGS='$(DFLAGS)' -s install
+IFLAGS = -I$(INC_DIR)
+LFLAGS = # -L...
+lFLAGS = # -l...
 
-build: check $(LIB) $(NAME)
-	@$(PRINT) "$S╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗\n\
+COMPILE = $(CC) -std=c11 -pipe $(WFLAGS) $(IFLAGS)
+BUILD = $(COMPILE) $(LFLAGS) $(lFLAGS)
+
+SRC_DIR = src/
+OBJ_DIR = obj/
+INC_DIR = inc/
+
+SRC = $(wildcard $(SRC_DIR)**/*.c)
+DIRS = $(wildcard $(SRC_DIR)**)
+
+define DEPENDENCY_template # 1 - include path | 2 - link path | 3 - link name
+DEP_IFLAGS += $$(foreach f, $1, $$(f:%=-I%))
+DEP_LFLAGS += -L$2
+DEP_lFLAGS += -l$3
+endef
+
+define DEPENDENT_MAKE_template # 1 - name | 2 - directory
+.PHONY: $1
+
+MAKE_LIBS += $1
+BUILD_LIBS += $2/$1
+CLEAN_LIBS += clean_$(notdir $(basename $1))
+UNINSTALL_LIBS += uninstall_$(notdir $(basename $1))
+
+$1:
+	@$(MAKE) -sf Makefile -C $2
+
+clean_$(notdir $(basename $1)):
+	@$(MAKE) -sf Makefile -C $2 clean
+
+uninstall_$(notdir $(basename $1)):
+	@$(MAKE) -sf Makefile -C $2 uninstall
+endef
+
+define BUILD_template # 1 - target | 2 - flags
+ifeq ($1,default)
+NAME_$1 = $(NAME)
+else
+NAME_$1 = $(NAME)_$1
+endif
+
+BUILD_NAMES += $$(NAME_$1)
+OBJ_DIR_$1 = $(OBJ_DIR)$1/
+OBJ_DIRS_$1 = $$(DIRS:$(SRC_DIR)%=$$(OBJ_DIR_$1)%)
+OBJ_$1 = $(SRC:$(SRC_DIR)%.c=$$(OBJ_DIR_$1)%.o)
+
+$$(OBJ_DIR_$1):
+	@$(MKDIR) $$(OBJ_DIR) $$@ $$(OBJ_DIRS_$1)
+
+$$(OBJ_DIR_$1)%.o: $$(SRC_DIR)%.c
+	@$(PRINT) "$K$G COMPILING $Y[$M$1$Y] $B$$(<:$(SRC_DIR)%=%)$D\r"
+	@$(COMPILE) $2 $$(DEP_IFLAGS) -o $$@ -c $$<
+
+$$(NAME_$1): $$(OBJ_DIR_$1) $$(OBJ_$1) $$(BUILD_LIBS)
+	@$(PRINT) "$K$G COMPILING $Y[$M$1$Y] $R$$@$D\r"
+ifeq ($1,default)
+	@$(BUILD) $2 $$(DEP_IFLAGS) $$(DEP_LFLAGS) $$(DEP_lFLAGS) $$(OBJ_$1) -o $$@
+else
+	@$(BUILD) $2 $$(DEP_IFLAGS) $$(DEP_LFLAGS) $$(foreach f, $$(DEP_lFLAGS), $$(f:%=%_$1)) $$(OBJ_$1) -o $$@
+endif
+endef
+
+$(eval $(call DEPENDENCY_template,libmx/inc,libmx,mx))
+
+$(eval $(call DEPENDENT_MAKE_template,libmx.a,libmx))
+
+$(eval $(call BUILD_template,default,))
+$(eval $(call BUILD_template,release,-Ofast -march=native -flto))
+$(eval $(call BUILD_template,debug,$(DFLAGS)))
+$(eval $(call BUILD_template,debug_address,$(DFLAGS) -fsanitize=address -fno-sanitize=null -fno-sanitize=alignment))
+$(eval $(call BUILD_template,debug_undefined,$(DFLAGS) -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow))
+$(eval $(call BUILD_template,debug_address_undefined,$(DFLAGS) -fsanitize=address,undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment))
+$(eval $(call BUILD_template,debug_leak,$(DFLAGS) -fsanitize=address))
+$(eval $(call BUILD_template,debug_memory,$(DFLAGS) -fsanitize=memory))
+$(eval $(call BUILD_template,debug_thread,$(DFLAGS) -fsanitize=thread))
+
+all: $(MAKE_LIBS) $(BUILD_NAMES)
+	@$(PRINT) "$K$S╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗\n\
 	║                                                                                                   ║\n\
 	║       $C██$M╗   $C██$M╗$C██$M╗     $C███████$M╗    $C██$M╗$C███████$M╗    $C██████$M╗ $C███████$M╗ $C█████$M╗ $C██████$M╗ $C██$M╗   $C██$M╗       $S║\n\
 	║       $C██$M║   $C██$M║$C██$M║     $C██$M╔════╝    $C██$M║$C██$M╔════╝    $C██$M╔══$C██$M╗$C██$M╔════╝$C██$M╔══$C██$M╗$C██$M╔══$C██$M╗╚$C██$M╗ $C██$M╔╝       $S║\n\
@@ -73,55 +113,12 @@ build: check $(LIB) $(NAME)
 	║                                                                                                   ║\n\
 	╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝\n$D"
 
-# check debug level collision during this compilation
-check:
-ifeq ($(TARGET),build)
-ifneq ($(findstring asan,$(DEBUG_LIB)),)
-	@$(EXEC_LD) uninstall
-	@$(RM) $(NAME)
-endif
-ifneq ($(or $(findstring asan,$(DEBUG_OBJ)), $(findstring asan,$(DEBUG_BIN))),)
-	@$(RM) $(OBJ_DIR) $(NAME)
-endif
-else
-ifeq ($(findstring asan,$(DEBUG_LIB)),)
-	@$(EXEC_LD) uninstall
-	@$(RM) $(NAME)
-endif
-ifeq ($(and $(findstring asan,$(DEBUG_OBJ)), $(findstring asan,$(DEBUG_BIN))),)
-	@$(RM) $(OBJ_DIR) $(NAME)
-endif
-endif
-
-$(OBJ_DIR):
-	@$(MKDIR) $@ $(foreach dir, $(dirs), $@/$(dir))
-
-$(LIB):
-	@$(EXEC_LD) $(TARGET)
-
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(PRINT) "$K$G COMPILING $Y[$M$(TARGET)$Y] $B$(<:$(SRC_DIR)%=%)$D\r"
-	@$(COMPILE) $(CFLAGS) -o $@ -c $<
-
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@$(PRINT) "$K$G COMPILING $Y[$M$(TARGET)$Y] $R$(NAME)$D\r"
-	@$(COMPILE) $(CFLAGS) $(LIB_PATH) $(OBJ) -o $(NAME)
-	@$(PRINT) "$K"
-
-# silent mode without printing LOGO
-install: check
-	@$(EXEC_LD) $@
-	@$(EXEC_IT) $(NAME)
-
-clean:
-	@$(EXEC_LD) $@
+clean: $(CLEAN_LIBS)
 	@$(RM) $(OBJ_DIR)
 
-uninstall:
-	@$(EXEC_LD) $@
-	@$(RM) $(OBJ_DIR) $(NAME)
+uninstall: $(UNINSTALL_LIBS)
+	@$(RM) $(OBJ_DIR) $(BUILD_NAMES)
 
-# silent rebuild project
-reinstall: uninstall install
+reinstall: uninstall all
 
-.PHONY: all build debug check clean install uninstall reinstall
+.PHONY: all clean uninstall reinstall
