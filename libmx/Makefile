@@ -21,18 +21,20 @@ K = \033[K
 
 WFLAGS = -Wall -Wextra -Werror -Wpedantic
 DFLAGS = -O0 -g3 -ftrapv -fstandalone-debug
-HFLAGS = -I$(INC_DIR)
+IFLAGS = -I$(INC_DIR)
 
-COMPILE = $(CC) -std=c11 -pipe $(WFLAGS) $(HFLAGS)
+COMPILE = $(CC) -std=c11 -pipe $(WFLAGS) $(IFLAGS)
 
 SRC_DIR = src/
 OBJ_DIR = obj/
 INC_DIR = inc/
 
+HDR = $(wildcard $(INC_DIR)*.h)
 SRC = $(wildcard $(SRC_DIR)**/*.c)
 DIRS = $(wildcard $(SRC_DIR)**)
 
 define BUILD_template # 1 - target | 2 - flags
+
 ifeq ($1,default)
 NAME_$1 = $(NAME).a
 else
@@ -40,6 +42,7 @@ NAME_$1 = $(NAME)_$1.a
 endif
 
 BUILD_NAMES += $$(NAME_$1)
+
 OBJ_DIR_$1 = $(OBJ_DIR)$1/
 OBJ_DIRS_$1 = $$(DIRS:$(SRC_DIR)%=$$(OBJ_DIR_$1)%)
 OBJ_$1 = $(SRC:$(SRC_DIR)%.c=$$(OBJ_DIR_$1)%.o)
@@ -47,11 +50,11 @@ OBJ_$1 = $(SRC:$(SRC_DIR)%.c=$$(OBJ_DIR_$1)%.o)
 $$(OBJ_DIR_$1):
 	@$(MKDIR) $$(OBJ_DIR) $$@ $$(OBJ_DIRS_$1)
 
-$$(OBJ_DIR_$1)%.o: $$(SRC_DIR)%.c
+$$(OBJ_DIR_$1)%.o: $$(SRC_DIR)%.c $$(HDR)
 	@$(PRINT) "$K$G COMPILING $Y[$M$1$Y] $B$$(<:$(SRC_DIR)%=%)$D\r"
 	@$(COMPILE) $2 -o $$@ -c $$<
 
-$$(NAME_$1): $$(OBJ_DIR_$1) $$(OBJ_$1)
+$$(NAME_$1): $$(OBJ_DIR_$1) $$(OBJ_$1) $$(HDR)
 	@$(PRINT) "$K$G ARCHIVING $Y[$M$1$Y] $R$$@$D\r"
 	@$(AR) $$@ $$(OBJ_$1)
 endef

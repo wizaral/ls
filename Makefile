@@ -32,34 +32,38 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 INC_DIR = inc/
 
+HDR = $(wildcard $(INC_DIR)*.h)
 SRC = $(wildcard $(SRC_DIR)**/*.c)
 DIRS = $(wildcard $(SRC_DIR)**)
 
 define DEPENDENCY_template # 1 - include path | 2 - link path | 3 - link name
+
 DEP_IFLAGS += $$(foreach f, $1, $$(f:%=-I%))
 DEP_LFLAGS += -L$2
 DEP_lFLAGS += -l$3
 endef
 
 define DEPENDENT_MAKE_template # 1 - name | 2 - directory
-.PHONY: $1
 
-MAKE_LIBS += $1
-BUILD_LIBS += $2/$1
-CLEAN_LIBS += clean_$(notdir $(basename $1))
-UNINSTALL_LIBS += uninstall_$(notdir $(basename $1))
+.PHONY: $1 clean_$1 uninstall_$1
+
+MAKE_TARGETS += $1
+BUILD_TARGETS += $2/$1
+CLEAN_TARGETS += clean_$1
+UNINSTALL_TARGETS += uninstall_$1
 
 $1:
 	@$(MAKE) -sf Makefile -C $2
 
-clean_$(notdir $(basename $1)):
+clean_$1:
 	@$(MAKE) -sf Makefile -C $2 clean
 
-uninstall_$(notdir $(basename $1)):
+uninstall_$1:
 	@$(MAKE) -sf Makefile -C $2 uninstall
 endef
 
 define BUILD_template # 1 - target | 2 - flags
+
 ifeq ($1,default)
 NAME_$1 = $(NAME)
 else
@@ -67,6 +71,7 @@ NAME_$1 = $(NAME)_$1
 endif
 
 BUILD_NAMES += $$(NAME_$1)
+
 OBJ_DIR_$1 = $(OBJ_DIR)$1/
 OBJ_DIRS_$1 = $$(DIRS:$(SRC_DIR)%=$$(OBJ_DIR_$1)%)
 OBJ_$1 = $(SRC:$(SRC_DIR)%.c=$$(OBJ_DIR_$1)%.o)
@@ -74,11 +79,11 @@ OBJ_$1 = $(SRC:$(SRC_DIR)%.c=$$(OBJ_DIR_$1)%.o)
 $$(OBJ_DIR_$1):
 	@$(MKDIR) $$(OBJ_DIR) $$@ $$(OBJ_DIRS_$1)
 
-$$(OBJ_DIR_$1)%.o: $$(SRC_DIR)%.c
+$$(OBJ_DIR_$1)%.o: $$(SRC_DIR)%.c $$(HDR)
 	@$(PRINT) "$K$G COMPILING $Y[$M$1$Y] $B$$(<:$(SRC_DIR)%=%)$D\r"
 	@$(COMPILE) $2 $$(DEP_IFLAGS) -o $$@ -c $$<
 
-$$(NAME_$1): $$(OBJ_DIR_$1) $$(OBJ_$1) $$(BUILD_LIBS)
+$$(NAME_$1): $$(OBJ_DIR_$1) $$(OBJ_$1) $$(HDR) $$(BUILD_TARGETS)
 	@$(PRINT) "$K$G COMPILING $Y[$M$1$Y] $R$$@$D\r"
 ifeq ($1,default)
 	@$(BUILD) $2 $$(DEP_IFLAGS) $$(DEP_LFLAGS) $$(DEP_lFLAGS) $$(OBJ_$1) -o $$@
@@ -101,7 +106,7 @@ $(eval $(call BUILD_template,debug_leak,$(DFLAGS) -fsanitize=address))
 $(eval $(call BUILD_template,debug_memory,$(DFLAGS) -fsanitize=memory))
 $(eval $(call BUILD_template,debug_thread,$(DFLAGS) -fsanitize=thread))
 
-all: $(MAKE_LIBS) $(BUILD_NAMES)
+all: $(MAKE_TARGETS) $(BUILD_NAMES)
 	@$(PRINT) "$K$S╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗\n\
 	║                                                                                                   ║\n\
 	║       $C██$M╗   $C██$M╗$C██$M╗     $C███████$M╗    $C██$M╗$C███████$M╗    $C██████$M╗ $C███████$M╗ $C█████$M╗ $C██████$M╗ $C██$M╗   $C██$M╗       $S║\n\
@@ -113,10 +118,10 @@ all: $(MAKE_LIBS) $(BUILD_NAMES)
 	║                                                                                                   ║\n\
 	╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝\n$D"
 
-clean: $(CLEAN_LIBS)
+clean: $(CLEAN_TARGETS)
 	@$(RM) $(OBJ_DIR)
 
-uninstall: $(UNINSTALL_LIBS)
+uninstall: $(UNINSTALL_TARGETS)
 	@$(RM) $(OBJ_DIR) $(BUILD_NAMES)
 
 reinstall: uninstall all
