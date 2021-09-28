@@ -24,28 +24,32 @@ K = \033[K
 WFLAGS = -Wall -Wextra -Werror -Wpedantic
 # debug flags
 DFLAGS = -O0 -g3 -ftrapv -fstandalone-debug
-# include flags
-IFLAGS = -I$(INC_DIR)
-# link directory flags
-LFLAGS = # -L...
-# link library flags
-lFLAGS = # -l...
-
-# compilation of translation unit
-COMPILE = $(CC) -std=c11 -pipe $(WFLAGS) $(IFLAGS)
-# compilation of target
-BUILD = $(COMPILE) $(LFLAGS) $(lFLAGS)
 
 SRC_DIR = src/
-OBJ_DIR = obj/
 INC_DIR = inc/
+OBJ_DIR = obj/
 
-# collect headers
-HDR = $(wildcard $(INC_DIR)*.h)
-# collect source files
-SRC = $(wildcard $(SRC_DIR)**/*.c)
 # collect subdirectories in source directory
-DIRS = $(wildcard $(SRC_DIR)**)
+SRC_DIRS := $(wildcard $(SRC_DIR)**) $(SRC_DIR)
+# collect source files
+SRC := $(wildcard $(SRC_DIR)**/*.c) $(wildcard $(SRC_DIR)*.c)
+
+# collect subdirectories in header directory
+INC_DIRS := $(wildcard $(INC_DIR)**) $(INC_DIR)
+# collect header files
+HDR := $(wildcard $(INC_DIR)**/*.h) $(wildcard $(INC_DIR)*.h)
+
+# include flags
+IFLAGS := $(foreach f, $(INC_DIRS), $(f:%=-I%))
+# link directory flags
+LFLAGS := # -L...
+# link library flags
+lFLAGS := # -l...
+
+# compilation of translation unit
+COMPILE := $(CC) -std=c11 -pipe $(WFLAGS) $(IFLAGS)
+# compilation of target
+BUILD := $(COMPILE) $(LFLAGS) $(lFLAGS)
 
 # template for using libraries of depend makefiles
 define DEPENDENCY_template # 1 - include path | 2 - link path | 3 - link name
@@ -102,7 +106,7 @@ BUILD_NAMES += $$(NAME_$1)
 # create name of subdirectory for subdirectories with object files
 OBJ_DIR_$1 = $(OBJ_DIR)$1/
 # create names of subdirectories with object files
-OBJ_DIRS_$1 = $$(DIRS:$(SRC_DIR)%=$$(OBJ_DIR_$1)%)
+OBJ_DIRS_$1 = $$(SRC_DIRS:$(SRC_DIR)%=$$(OBJ_DIR_$1)%)
 # create names of object files
 OBJ_$1 = $(SRC:$(SRC_DIR)%.c=$$(OBJ_DIR_$1)%.o)
 
