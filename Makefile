@@ -115,7 +115,7 @@ $$(OBJ_DIR_$1)%.o: $$(SRC_DIR)%.c $$(HDR)
 	@$(PRINT) "$K$G COMPILING $Y[$M$1$Y] $B$$(<:$(SRC_DIR)%=%)$D\r"
 	@$(COMPILE) $2 $$(DEP_IFLAGS) -o $$@ -c $$<
 
-# rule for creating static library from object files
+# rule for creating executable from object files
 $$(NAME_$1): $$(OBJ_DIR_$1) $$(OBJ_$1) $$(HDR) $$(BUILD_TARGETS)
 	@$(PRINT) "$K$G COMPILING $Y[$M$1$Y] $R$$@$D\r"
 ifeq ($1,default)
