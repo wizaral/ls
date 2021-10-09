@@ -1,12 +1,10 @@
 # uls
 
 ### Instalation:
-**1. default mode: `make` or `make all` or `make build`**\
-**2. silent mode: `make install`**\
-**3. silent debug mode: `make debug`**
+**> `make`**
 
 ### Usage:
-**`./uls [-ACFGRSTUacdfgilmnopqrstuvwx1] [file ...]`**
+**> `./uls [-ACFGRSTUacdfgilmnopqrstuvwx1] [file ...]`**
 
 ### Success build
 ![rainbow](ls_rainbow.png)
